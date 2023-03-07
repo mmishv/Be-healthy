@@ -1,4 +1,5 @@
 package by.fpmibsu.be_healthy.entity;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

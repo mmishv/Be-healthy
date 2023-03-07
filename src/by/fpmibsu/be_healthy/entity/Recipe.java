@@ -1,23 +1,55 @@
 package by.fpmibsu.be_healthy.entity;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Recipe implements Serializable {
     private int id;
+    private ArrayList<Integer> userLikedId;
     private int authorId;
     private String title;
     private Date dateOfPublication;
     private int cookingTime;
     private ArrayList<RecipeCategory> categories;
     private ArrayList<Product> ingredients;
-
+    private String fullText;
+    File image;
     public int getId() {
         return id;
     }
 
+    public ArrayList<Integer> getUserLikedId() {
+        return userLikedId;
+    }
+
+    public void setUserLikedId(ArrayList<Integer> userLikedId) {
+        this.userLikedId = userLikedId;
+    }
+    public void addUserLikedId(int userId){
+        userLikedId.add(userId);
+    }
+    public Integer likesNumber(){
+        return userLikedId.size();
+    }
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFullText() {
+        return fullText;
+    }
+
+    public void setFullText(String fullText) {
+        this.fullText = fullText;
+    }
+
+    public File getImage() {
+        return image;
+    }
+
+    public void setImage(File image) {
+        this.image = image;
     }
 
     public int getAuthorId() {

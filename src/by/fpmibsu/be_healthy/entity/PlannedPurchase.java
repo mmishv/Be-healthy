@@ -8,7 +8,7 @@ public class PlannedPurchase implements Serializable {
     private int userId;
     private String title;
     private Date dateAdded;
-
+    boolean isDone;
     public int getId() {
         return id;
     }
@@ -39,5 +39,18 @@ public class PlannedPurchase implements Serializable {
 
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    @Override
+    public String toString() {
+        return "User id: " + userId +", date: "+dateAdded + "title: " + title;
     }
 }

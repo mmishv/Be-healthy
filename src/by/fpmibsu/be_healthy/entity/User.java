@@ -1,13 +1,25 @@
 package by.fpmibsu.be_healthy.entity;
+import java.io.File;
 import java.io.Serializable;
 public class User implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private String email;
+    private String login;
     private String password;
+    File avatar;
     public User() {
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public int getId() {
         return id;
     }
@@ -38,6 +50,15 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public File getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(File avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         return "First name: "+ firstName + ", last name: " + lastName + ", email: " + email;
