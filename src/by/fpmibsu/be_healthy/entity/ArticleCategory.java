@@ -1,6 +1,5 @@
-package by.fpmibsu.be_healthy.entity;
+package src.by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
-
 public class ArticleCategory implements Serializable {
     private int id;
     private String name;

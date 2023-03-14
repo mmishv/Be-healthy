@@ -1,4 +1,4 @@
-package by.fpmibsu.be_healthy.entity;
+package src.by.fpmibsu.be_healthy.entity;
 import java.io.File;
 import java.io.Serializable;
 public class User implements Serializable {

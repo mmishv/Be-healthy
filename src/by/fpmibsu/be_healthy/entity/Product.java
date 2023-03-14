@@ -1,4 +1,4 @@
-package by.fpmibsu.be_healthy.entity;
+package src.by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
 public class Product implements Serializable {
     private int id;
@@ -7,7 +7,6 @@ public class Product implements Serializable {
     private double fats;
     private double carbohydrates;
     private double calories;
-    public double quantity;
     private double unit;
     public int getId() {
         return id;
@@ -63,14 +62,6 @@ public class Product implements Serializable {
 
     public void setUnit(double unit) {
         this.unit = unit;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
     }
 
     @Override

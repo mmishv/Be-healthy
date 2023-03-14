@@ -1,6 +1,5 @@
-package by.fpmibsu.be_healthy.entity;
+package src.by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class ForumTopic implements Serializable {
@@ -8,22 +7,7 @@ public class ForumTopic implements Serializable {
     private int authorId;
     private String title;
     private String preview;
-    private double messageNumber;
-    private Date lastMessageDate;
 
-    public ArrayList<ForumMessage> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(ArrayList<ForumMessage> messages) {
-        this.messages = messages;
-    }
-    public void addMessage(ForumMessage newMessage){
-        messages.add(newMessage);
-        lastMessageDate = newMessage.getDateOfPublication();
-        messageNumber+=1;
-    }
-    private ArrayList<ForumMessage> messages;
     public int getId() {
         return id;
     }
@@ -56,25 +40,9 @@ public class ForumTopic implements Serializable {
         this.preview = preview;
     }
 
-    public Date getLastMessageDate() {
-        return lastMessageDate;
-    }
-
-    public void setLastMessageDate(Date lastMessageDate) {
-        this.lastMessageDate = lastMessageDate;
-    }
-
-    public double getMessageNumber() {
-        return messageNumber;
-    }
-
-    public void setMessageNumber(double messageNumber) {
-        this.messageNumber = messageNumber;
-    }
-
     @Override
     public String toString() {
-        return "Author: " + authorId + ", number of messages: " + messageNumber +
-                ", last message date: " + lastMessageDate;
+        return "Author: " + authorId + ", title: " + title +
+                ", preview: " + preview;
     }
 }
