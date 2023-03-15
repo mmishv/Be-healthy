@@ -1,12 +1,14 @@
 package src.by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class ForumTopic implements Serializable {
     private int id;
     private int authorId;
     private String title;
     private String preview;
+    private List<ForumMessage> messages;
 
     public int getId() {
         return id;
@@ -38,6 +40,14 @@ public class ForumTopic implements Serializable {
 
     public void setPreview(String preview) {
         this.preview = preview;
+    }
+
+    public List<ForumMessage> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<ForumMessage> messages) {
+        this.messages = messages;
     }
 
     @Override

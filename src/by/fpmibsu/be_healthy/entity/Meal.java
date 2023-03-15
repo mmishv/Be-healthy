@@ -6,7 +6,7 @@ public class Meal implements Serializable {
     private int diaryPageId;
     private String name;
     private Date timeOfMeal;
-
+    private List<MealProduct> products;
     public int getId() {
         return id;
     }
@@ -39,6 +39,13 @@ public class Meal implements Serializable {
         this.timeOfMeal = timeOfMeal;
     }
 
+    public List<MealProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<MealProduct> products) {
+        this.products = products;
+    }
 
     @Override
     public String toString() {

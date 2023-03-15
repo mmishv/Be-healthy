@@ -1,12 +1,15 @@
 package src.by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 public class Article implements Serializable {
     private int id;
     private int authorId;
     private String title;
     private String fulltext;
     private Date dateOfPublication;
+    private List<ArticleCategory> categories;
     public int getId() {
         return id;
     }
@@ -45,6 +48,14 @@ public class Article implements Serializable {
 
     public void setDateOfPublication(Date dateOfPublication) {
         this.dateOfPublication = dateOfPublication;
+    }
+
+    public List<ArticleCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<ArticleCategory> categories) {
+        this.categories = categories;
     }
 
     @Override

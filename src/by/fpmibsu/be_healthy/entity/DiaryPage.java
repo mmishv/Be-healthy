@@ -5,6 +5,7 @@ public class DiaryPage implements Serializable {
     private int id;
     private int userId;
     private Date dateOfDiaryPage;
+    private List<Meal> meals;
     public DiaryPage() {
     }
     public int getId() {
@@ -23,6 +24,22 @@ public class DiaryPage implements Serializable {
 
     public Date getDateOfDiary() {
         return dateOfDiaryPage;
+    }
+
+    public Date getDateOfDiaryPage() {
+        return dateOfDiaryPage;
+    }
+
+    public void setDateOfDiaryPage(Date dateOfDiaryPage) {
+        this.dateOfDiaryPage = dateOfDiaryPage;
+    }
+
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
     }
 
     public void setDateOfDiary(Date dateOfDiary) {

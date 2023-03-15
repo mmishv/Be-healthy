@@ -2,6 +2,7 @@ package src.by.fpmibsu.be_healthy.entity;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Recipe implements Serializable {
     private int id;
@@ -11,6 +12,9 @@ public class Recipe implements Serializable {
     private int cookingTime;
     private String text;
     File image;
+    private List<Ingredient> ingredients;
+    private List<RecipeCategory> categories;
+    private List<User> userLiked;
     public int getId() {
         return id;
     }
@@ -67,6 +71,13 @@ public class Recipe implements Serializable {
         this.cookingTime = cookingTime;
     }
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     @Override
     public String toString() {
