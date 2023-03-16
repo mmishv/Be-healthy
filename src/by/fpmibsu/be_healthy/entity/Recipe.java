@@ -14,7 +14,7 @@ public class Recipe implements Serializable {
     File image;
     private List<Ingredient> ingredients;
     private List<RecipeCategory> categories;
-    private List<User> userLiked;
+    private List<AuthorizedUser> authorizedUserLiked;
     public int getId() {
         return id;
     }

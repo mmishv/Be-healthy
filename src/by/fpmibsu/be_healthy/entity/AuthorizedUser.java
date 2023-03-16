@@ -3,18 +3,18 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
-public class User implements Serializable {
+public class AuthorizedUser implements Serializable {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
     private String login;
     private String password;
     private List<PlannedPurchase> purchases;
     File avatar;
-    public User() {
-    }
-
+    double weight;
+    int height;
+    int age;
+    double activity;
     public String getLogin() {
         return login;
     }
@@ -30,16 +30,10 @@ public class User implements Serializable {
         this.id = id;
     }
     public String getFirstName() {
-        return firstName;
+        return name;
     }
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.name = firstName;
     }
     public String getEmail() {
         return email;
@@ -70,9 +64,41 @@ public class User implements Serializable {
         this.purchases = purchases;
     }
 
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public double getActivity() {
+        return activity;
+    }
+
+    public void setActivity(int activity) {
+        this.activity = activity;
+    }
+
     @Override
     public String toString() {
-        return "First name: "+ firstName + ", last name: " + lastName + ", email: " + email;
+        return "Name: "+ name +", email: " + email;
     }
 
 }
