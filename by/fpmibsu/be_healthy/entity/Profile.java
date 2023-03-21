@@ -1,9 +1,8 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.File;
 import java.io.Serializable;
-import java.util.List;
 
-public class AuthorizedUser implements Serializable {
+public class Profile implements Serializable {
     private int id;
     private String name;
     private String email;

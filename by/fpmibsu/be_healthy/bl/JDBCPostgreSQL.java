@@ -1,17 +1,16 @@
-package by.fpmibsu.be_healthy;
+package by.fpmibsu.be_healthy.bl;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class JDBCPostgreSQLExample {
+public class JDBCPostgreSQL {
 
     static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/be_healthy";
     static final String USER = "postgres";
     static final String PASS = "78873483mmv";
 
-    public static void main(String[] argv) {
-
+    public Connection getConnection() {
         System.out.println("Testing connection to PostgreSQL JDBC");
 
         try {
@@ -19,7 +18,6 @@ public class JDBCPostgreSQLExample {
         } catch (ClassNotFoundException e) {
             System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
-            return;
         }
 
         System.out.println("PostgreSQL JDBC Driver successfully connected");
@@ -32,7 +30,6 @@ public class JDBCPostgreSQLExample {
         } catch (SQLException e) {
             System.out.println("Connection Failed");
             e.printStackTrace();
-            return;
         }
 
         if (connection != null) {
@@ -40,5 +37,6 @@ public class JDBCPostgreSQLExample {
         } else {
             System.out.println("Failed to make connection to database");
         }
+        return connection;
     }
 }
