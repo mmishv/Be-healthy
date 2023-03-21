@@ -2,8 +2,10 @@ package by.fpmibsu.be_healthy;
 
 import by.fpmibsu.be_healthy.dao.ArticleCategoryDao;
 import by.fpmibsu.be_healthy.dao.RecipeCategoryDao;
+import by.fpmibsu.be_healthy.dao.MealDao;
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
+import by.fpmibsu.be_healthy.entity.Meal;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -23,11 +25,16 @@ public class Test {
             //recipe_category_dao.create(temp1);
             List<ArticleCategory> article_categories =  new ArticleCategoryDao().getAll();
             List<RecipeCategory> recipe_categories =  new RecipeCategoryDao().getAll();
+            List<Meal> meals =  new MealDao().getAll();
             for (ArticleCategory e : article_categories) {
                 System.out.println(e);
             }
             System.out.println("----------------------------------");
             for (RecipeCategory e : recipe_categories) {
+                System.out.println(e);
+            }
+            System.out.println("----------------------------------");
+            for (Meal e : meals) {
                 System.out.println(e);
             }
         } catch (SQLException e) {
