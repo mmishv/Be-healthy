@@ -1,12 +1,14 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.*;
 public class Meal implements Serializable {
     private int id;
     private int diaryPageId;
     private String name;
-    private Date timeOfMeal;
+    private Time timeOfMeal;
     private List<MealProduct> products;
+    private int user_id;
     public int getId() {
         return id;
     }
@@ -31,11 +33,11 @@ public class Meal implements Serializable {
         this.name = name;
     }
 
-    public Date getTimeOfMeal() {
+    public Time getTimeOfMeal() {
         return timeOfMeal;
     }
 
-    public void setTimeOfMeal(Date timeOfMeal) {
+    public void setTimeOfMeal(Time timeOfMeal) {
         this.timeOfMeal = timeOfMeal;
     }
 
@@ -45,6 +47,14 @@ public class Meal implements Serializable {
 
     public void setProducts(List<MealProduct> products) {
         this.products = products;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     @Override
