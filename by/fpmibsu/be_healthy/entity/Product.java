@@ -1,4 +1,4 @@
-package src.by.fpmibsu.be_healthy.entity;
+package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
 public class Product implements Serializable {
     private int id;

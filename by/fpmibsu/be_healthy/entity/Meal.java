@@ -1,4 +1,4 @@
-package src.by.fpmibsu.be_healthy.entity;
+package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
 import java.util.*;
 public class Meal implements Serializable {

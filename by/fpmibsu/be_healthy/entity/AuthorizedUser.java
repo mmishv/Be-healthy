@@ -1,4 +1,4 @@
-package src.by.fpmibsu.be_healthy.entity;
+package by.fpmibsu.be_healthy.entity;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,6 @@ public class AuthorizedUser implements Serializable {
     private String email;
     private String login;
     private String password;
-    private List<PlannedPurchase> purchases;
     File avatar;
     double weight;
     int height;
@@ -54,14 +53,6 @@ public class AuthorizedUser implements Serializable {
 
     public void setAvatar(File avatar) {
         this.avatar = avatar;
-    }
-
-    public List<PlannedPurchase> getPurchases() {
-        return purchases;
-    }
-
-    public void setPurchases(List<PlannedPurchase> purchases) {
-        this.purchases = purchases;
     }
 
     public double getWeight() {

@@ -1,6 +1,5 @@
-package src.by.fpmibsu.be_healthy.entity;
+package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 public class ForumTopic implements Serializable {

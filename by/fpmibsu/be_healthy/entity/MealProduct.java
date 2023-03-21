@@ -1,4 +1,4 @@
-package src.by.fpmibsu.be_healthy.entity;
+package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
 public class MealProduct extends Product implements Serializable {
     private int meal_id;
