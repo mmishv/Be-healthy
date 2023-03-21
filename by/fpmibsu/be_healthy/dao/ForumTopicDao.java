@@ -2,31 +2,32 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.bl.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.ForumMessage;
+import by.fpmibsu.be_healthy.entity.ForumTopic;
 
 import java.io.File;
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>  {
+public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
     private Connection connection = getConnection();
     @Override
-    public List<ForumMessage> getAll() throws SQLException {
-        List<ForumMessage> projectList = new ArrayList<>();
-        String sql = "SELECT * FROM FORUM_MESSAGE";
+    public List<ForumTopic> getAll() throws SQLException {
+        List<ForumTopic> projectList = new ArrayList<>();
+        String sql = "SELECT * FROM FORUM_TOPIC";
         Statement statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                ForumMessage message = new ForumMessage();
-                message.setId(resultSet.getInt("ID"));
-                message.setAuthorId(resultSet.getInt("AUTHOR_ID"));
-                message.setText(resultSet.getAsciiStream("TEXT").toString());
-                message.setDateOfPublication(resultSet.getDate("DATE_OF_PUBLICATION"));
-                message.setAttachment((File) resultSet.getBlob("ATTACHMENT"));
-                projectList.add(message);
+                ForumTopic topic = new ForumTopic();
+                topic.setId(resultSet.getInt("ID"));
+                topic.setAuthorId(resultSet.getInt("AUTHOR_ID"));
+                topic.setTitle(resultSet.getString("TITLE"));
+                topic.setPreview(resultSet.getString("PREVIEW"));
+                topic.setMessages((List<ForumMessage>) resultSet.getArray("MESSAGES"));
+                projectList.add(topic);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,19 +43,19 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
     }
 
     @Override
-    public ForumMessage getEntityById(long id) throws SQLException {
+    public ForumTopic getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT * FROM FORUM_MESSAGE WHERE ID=?";
-        ForumMessage message = new ForumMessage();
+        String sql = "SELECT * FROM FORUM_TOPIC WHERE ID=?";
+        ForumTopic topic= new ForumTopic();
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            message.setId(resultSet.getInt("ID"));
-            message.setAuthorId(resultSet.getInt("AUTHOR_ID"));
-            message.setText(resultSet.getString("TEXT"));
-            message.setDateOfPublication(resultSet.getDate("DATE_OF_PUBLICATION"));
-            message.setAttachment((File) resultSet.getBlob("ATTACHMENT"));
+            topic.setId(resultSet.getInt("ID"));
+            topic.setAuthorId(resultSet.getInt("AUTHOR_ID"));
+            topic.setTitle(resultSet.getString("TITLE"));
+            topic.setPreview(resultSet.getString("PREVIEW"));
+            topic.setMessages((List<ForumMessage>) resultSet.getArray("MESSAGES"));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,19 +67,18 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
                 connection.close();
             }
         }
-        return message;
+        return topic;
     }
 
     @Override
-    public ForumMessage update(ForumMessage entity) throws SQLException {
+    public ForumTopic update(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE FORUM_MESSAGE SET TEXT=?, PUBLICATION_DATE=?, ATTACHMENT=? WHERE ID=?";
+        String sql = "UPDATE FORUM_TOPIC SET TITLE=?, PREVIEW=?, MESSAGES=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, entity.getText());
-            preparedStatement.setDate(2, (Date) entity.getDateOfPublication());
-            preparedStatement.setBlob(3, (Blob)entity.getAttachment());
-            preparedStatement.setLong(4, entity.getId());
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setString(2, entity.getPreview());
+            preparedStatement.setArray(3, (Array) entity.getMessages());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,9 +94,9 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
     }
 
     @Override
-    public void delete(ForumMessage entity) throws SQLException {
+    public void delete(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM FORUM_MESSAGE WHERE ID=?";
+        String sql = "DELETE FROM FORUM_TOPIC WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
@@ -114,16 +114,16 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
     }
 
     @Override
-    public void create(ForumMessage entity) throws SQLException {
+    public void create(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO FORUM_MESSAGE (ID, AUTHOR_ID, TEXT, DATE_OF_PUBLICATION, ATTACHMENT) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO FORUM_TOPIC (ID, AUTHOR_ID, TITLE, PREVIEW, MESSAGES) VALUES(?, ?, ?, ?, ?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, entity.getId());
             preparedStatement.setInt(2, entity.getAuthorId());
-            preparedStatement.setString(3, entity.getText());
-            preparedStatement.setDate(4, (Date) entity.getDateOfPublication());
-            preparedStatement.setBlob(5, (Blob) entity.getAttachment());
+            preparedStatement.setString(3, entity.getTitle());
+            preparedStatement.setString(4, entity.getPreview());
+            preparedStatement.setArray(5, (Array) entity.getMessages());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

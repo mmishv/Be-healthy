@@ -1,13 +1,7 @@
 package by.fpmibsu.be_healthy;
 
-import by.fpmibsu.be_healthy.dao.ArticleCategoryDao;
-import by.fpmibsu.be_healthy.dao.RecipeCategoryDao;
-import by.fpmibsu.be_healthy.dao.MealDao;
-import by.fpmibsu.be_healthy.dao.ForumMessageDao;
-import by.fpmibsu.be_healthy.entity.ArticleCategory;
-import by.fpmibsu.be_healthy.entity.RecipeCategory;
-import by.fpmibsu.be_healthy.entity.Meal;
-import by.fpmibsu.be_healthy.entity.ForumMessage;
+import by.fpmibsu.be_healthy.dao.*;
+import by.fpmibsu.be_healthy.entity.*;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -27,6 +21,12 @@ public class Test {
         temp_message.setId(1);
         temp_message.setAuthorId(123);
         temp_message.setText("Здравствуйте!");
+        ForumTopicDao forum_topic_dao = new ForumTopicDao();
+        ForumTopic temp_topic = new ForumTopic();
+        temp_topic.setId(1);
+        temp_topic.setAuthorId(123);
+        temp_topic.setTitle("Приветствие");
+        temp_topic.setPreview("!");
         try {
             //article_category_dao.create(temp);
             //recipe_category_dao.create(temp1);
@@ -34,6 +34,7 @@ public class Test {
             List<RecipeCategory> recipe_categories =  new RecipeCategoryDao().getAll();
             List<Meal> meals =  new MealDao().getAll();
             List<ForumMessage> messages =  new ForumMessageDao().getAll();
+            List<ForumTopic> topics =  new ForumTopicDao().getAll();
             for (ArticleCategory e : article_categories) {
                 System.out.println(e);
             }
@@ -47,6 +48,10 @@ public class Test {
             }
             System.out.println("----------------------------------");
             for (ForumMessage e : messages) {
+                System.out.println(e);
+            }
+            System.out.println("----------------------------------");
+            for (ForumTopic e : topics) {
                 System.out.println(e);
             }
         } catch (SQLException e) {
