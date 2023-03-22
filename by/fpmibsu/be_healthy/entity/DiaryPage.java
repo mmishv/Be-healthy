@@ -48,6 +48,6 @@ public class DiaryPage implements Serializable {
     }
     @Override
     public String toString() {
-        return "User: " + userId + ", date: " + dateOfDiaryPage;
+        return "Diary page id: "+id+", user: " + userId + ", date: " + dateOfDiaryPage;
     }
 }

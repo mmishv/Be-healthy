@@ -61,7 +61,7 @@ public class ForumMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "AuthorId: " + authorId + ", text: " + text +
+        return "Message author id: " + authorId + ", text: " + text +
                 ", date of publication: " + dateOfPublication;
     }
 }

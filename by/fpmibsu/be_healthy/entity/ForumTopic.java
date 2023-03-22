@@ -53,6 +53,6 @@ public class ForumTopic implements Serializable {
 
     @Override
     public String toString() {
-        return "Author: " + authorId + ", title: " + title;
+        return "Forum topic author id: " + authorId + ", title: " + title;
     }
 }

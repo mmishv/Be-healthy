@@ -3,6 +3,7 @@ package by.fpmibsu.be_healthy.dao;
 import by.fpmibsu.be_healthy.bl.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.ForumMessage;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.sql.*;
 import java.sql.Date;
@@ -24,7 +25,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
                 message.setId(resultSet.getInt("ID"));
                 message.setAuthorId(resultSet.getInt("USER_ID"));
                 message.setTopic_id(resultSet.getInt("TOPIC_ID"));
-                message.setText(resultSet.getAsciiStream("CONTENT_TEXT").toString());
+                message.setText(resultSet.getString("CONTENT_TEXT"));
                 message.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
                 message.setAttachment((File) resultSet.getBlob("ATTACHMENT"));
                 projectList.add(message);
@@ -124,9 +125,10 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
             preparedStatement.setInt(1, entity.getId());
             preparedStatement.setInt(2, entity.getAuthorId());
             preparedStatement.setInt(3, entity.getTopic_id());
-            preparedStatement.setDate(4, (Date) entity.getDateOfPublication());
+            preparedStatement.setDate(4, entity.getDateOfPublication());
             preparedStatement.setString(5, entity.getText());
-            preparedStatement.setBlob(6, (Blob) entity.getAttachment());
+            preparedStatement.setBinaryStream(6, null);
+            byte[] imgBytes = null;
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

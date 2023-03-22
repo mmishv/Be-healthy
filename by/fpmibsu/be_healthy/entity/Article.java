@@ -60,6 +60,6 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "Author: " + authorId + ", title: " + title  + ", date of publication: " + dateOfPublication;
+        return "Article author: " + authorId + ", title: " + title  + ", date of publication: " + dateOfPublication;
     }
 }

@@ -4,7 +4,10 @@ import by.fpmibsu.be_healthy.dao.*;
 import by.fpmibsu.be_healthy.entity.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
+
+import static java.sql.Date.valueOf;
 
 public class Test {
     public static void main(String[] args) {
@@ -12,28 +15,46 @@ public class Test {
         ArticleCategory temp = new ArticleCategory();
         temp.setId(3);
         temp.setName("Беременность");
+
         RecipeCategoryDao recipe_category_dao = new RecipeCategoryDao();
         RecipeCategory temp1 = new RecipeCategory();
         temp1.setId(1);
         temp1.setName("Десерты");
-        ForumMessageDao forum_message_dao = new ForumMessageDao();
-        ForumMessage temp_message = new ForumMessage();
-        temp_message.setId(1);
-        temp_message.setAuthorId(123);
-        temp_message.setText("Здравствуйте!");
+
         ForumTopicDao forum_topic_dao = new ForumTopicDao();
         ForumTopic temp_topic = new ForumTopic();
         temp_topic.setId(1);
-        temp_topic.setAuthorId(123);
+        temp_topic.setAuthorId(1);
+        temp_topic.setCreated_on(valueOf(LocalDate.now()));
         temp_topic.setTitle("Приветствие");
+
+        ForumMessageDao forum_message_dao = new ForumMessageDao();
+        ForumMessage temp_message = new ForumMessage();
+        temp_message.setId(1);
+        temp_message.setAuthorId(1);
+        temp_message.setDateOfPublication(valueOf(LocalDate.now()));
+        temp_message.setTopic_id(1);
+        temp_message.setText("Здравствуйте!");
+
+        DiaryPageDao diary_page_dao = new DiaryPageDao();
+        DiaryPage temp_page = new DiaryPage();
+        temp_page.setId(1);
+        temp_page.setUserId(1);
+        temp_page.setDateOfDiaryPage(valueOf(LocalDate.now()));
+
         try {
             //article_category_dao.create(temp);
             //recipe_category_dao.create(temp1);
-            List<ArticleCategory> article_categories =  new ArticleCategoryDao().getAll();
-            List<RecipeCategory> recipe_categories =  new RecipeCategoryDao().getAll();
+            //forum_topic_dao.create(temp_topic);
+            //forum_message_dao.create(temp_message);
+            //diary_page_dao.create(temp_page);
+
+            List<ArticleCategory> article_categories = new ArticleCategoryDao().getAll();
+            List<RecipeCategory> recipe_categories = new RecipeCategoryDao().getAll();
             List<Meal> meals =  new MealDao().getAll();
             List<ForumMessage> messages =  new ForumMessageDao().getAll();
             List<ForumTopic> topics =  new ForumTopicDao().getAll();
+            List<DiaryPage> pages =  new DiaryPageDao().getAll();
             for (ArticleCategory e : article_categories) {
                 System.out.println(e);
             }
@@ -51,6 +72,10 @@ public class Test {
             }
             System.out.println("----------------------------------");
             for (ForumTopic e : topics) {
+                System.out.println(e);
+            }
+            System.out.println("----------------------------------");
+            for (DiaryPage e : pages) {
                 System.out.println(e);
             }
         } catch (SQLException e) {
