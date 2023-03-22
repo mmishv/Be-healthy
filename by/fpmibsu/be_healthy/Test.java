@@ -26,7 +26,6 @@ public class Test {
         temp_topic.setId(1);
         temp_topic.setAuthorId(123);
         temp_topic.setTitle("Приветствие");
-        temp_topic.setPreview("!");
         try {
             //article_category_dao.create(temp);
             //recipe_category_dao.create(temp1);
