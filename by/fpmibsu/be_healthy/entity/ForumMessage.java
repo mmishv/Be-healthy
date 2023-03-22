@@ -1,11 +1,12 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.File;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class ForumMessage implements Serializable {
     private int id;
     private int authorId;
+    private int topic_id;
     private String text;
     private Date dateOfPublication;
     File attachment;
@@ -34,7 +35,7 @@ public class ForumMessage implements Serializable {
         this.text = text;
     }
 
-    public Date getDateOfPublication() {
+    public java.sql.Date getDateOfPublication() {
         return dateOfPublication;
     }
 
@@ -48,6 +49,14 @@ public class ForumMessage implements Serializable {
 
     public void setAttachment(File attachment) {
         this.attachment = attachment;
+    }
+
+    public int getTopic_id() {
+        return topic_id;
+    }
+
+    public void setTopic_id(int topic_id) {
+        this.topic_id = topic_id;
     }
 
     @Override
