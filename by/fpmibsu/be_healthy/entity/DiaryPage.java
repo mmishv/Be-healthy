@@ -1,6 +1,7 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
 import java.util.*;
+import java.sql.Date;
 public class DiaryPage implements Serializable {
     private int id;
     private int userId;
