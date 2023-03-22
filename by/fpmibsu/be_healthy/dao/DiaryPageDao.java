@@ -2,35 +2,45 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.bl.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.DiaryPage;
+import by.fpmibsu.be_healthy.entity.Meal;
 
 import java.io.File;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
-
 public class DiaryPageDao extends JDBCPostgreSQL implements Dao<DiaryPage>  {
     private Connection connection = getConnection();
     @Override
     public List<DiaryPage> getAll() throws SQLException {
         List<DiaryPage> projectList = new ArrayList<>();
         String sql = "SELECT * FROM DIARY_PAGE";
-        Statement statement = null;
+        Statement statement = null, inner_statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-
             while (resultSet.next()) {
                 DiaryPage page = new DiaryPage();
                 page.setId(resultSet.getInt("ID"));
                 page.setDateOfDiaryPage(resultSet.getDate("DATE"));
                 page.setUserId(resultSet.getInt("USER_ID"));
-                projectList.add(page);
+
+                inner_statement = connection.createStatement();
+                ResultSet mealIds = inner_statement.executeQuery("SELECT ID FROM MEAL WHERE PAGE_ID="
+                        + Integer.toString(resultSet.getInt("ID")));
+                List<Meal> mealsList = new ArrayList<>();
+                while (mealIds.next()) {
+                    mealsList.add(new MealDao().getEntityById(mealIds.getInt("ID")));
+                }
+                page.setMeals(mealsList);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (statement != null) {
                 statement.close();
+            }
+            if (inner_statement != null) {
+                inner_statement.close();
             }
             if (connection != null) {
                 connection.close();
@@ -42,6 +52,7 @@ public class DiaryPageDao extends JDBCPostgreSQL implements Dao<DiaryPage>  {
     @Override
     public DiaryPage getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
+        Statement inner_statement = null;
         String sql = "SELECT * FROM DIARY_PAGE WHERE ID=?";
         DiaryPage page = new DiaryPage();
         try {
@@ -51,12 +62,25 @@ public class DiaryPageDao extends JDBCPostgreSQL implements Dao<DiaryPage>  {
             page.setId(resultSet.getInt("ID"));
             page.setDateOfDiaryPage(resultSet.getDate("DATE"));
             page.setUserId(resultSet.getInt("USER_ID"));
+
+            inner_statement = connection.createStatement();
+            ResultSet mealIds = inner_statement.executeQuery("SELECT ID FROM MEAL WHERE PAGE_ID="
+                    + Integer.toString(resultSet.getInt("ID")));
+            List<Meal> mealsList = new ArrayList<>();
+            while (mealIds.next()) {
+                mealsList.add(new MealDao().getEntityById(mealIds.getInt("ID")));
+            }
+            page.setMeals(mealsList);
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
+            }
+            if (inner_statement != null) {
+                inner_statement.close();
             }
             if (connection != null) {
                 connection.close();
