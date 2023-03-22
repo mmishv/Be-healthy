@@ -25,8 +25,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 topic.setId(resultSet.getInt("ID"));
                 topic.setAuthorId(resultSet.getInt("AUTHOR_ID"));
                 topic.setTitle(resultSet.getString("TITLE"));
-                topic.setPreview(resultSet.getString("PREVIEW"));
-                topic.setMessages((List<ForumMessage>) resultSet.getArray("MESSAGES"));
+                topic.setCreated_on(resultSet.getDate("CREATED_ON"));
                 projectList.add(topic);
             }
         } catch (SQLException e) {
@@ -54,8 +53,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
             topic.setId(resultSet.getInt("ID"));
             topic.setAuthorId(resultSet.getInt("AUTHOR_ID"));
             topic.setTitle(resultSet.getString("TITLE"));
-            topic.setPreview(resultSet.getString("PREVIEW"));
-            topic.setMessages((List<ForumMessage>) resultSet.getArray("MESSAGES"));
+            topic.setCreated_on(resultSet.getDate("CREATED_ON"));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,12 +71,13 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
     @Override
     public ForumTopic update(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE FORUM_TOPIC SET TITLE=?, PREVIEW=?, MESSAGES=? WHERE ID=?";
+        String sql = "UPDATE FORUM_TOPIC SET TITLE=?, CREATED_ON=?, AUTHOR_ID=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setString(2, entity.getPreview());
-            preparedStatement.setArray(3, (Array) entity.getMessages());
+            preparedStatement.setDate(2, entity.getCreated_on());
+            preparedStatement.setInt(3,  entity.getAuthorId());
+            preparedStatement.setInt(4,  entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,14 +115,13 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
     @Override
     public void create(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO FORUM_TOPIC (ID, AUTHOR_ID, TITLE, PREVIEW, MESSAGES) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO FORUM_TOPIC (ID, TITLE, CREATED_ON, AUTHOR_ID) VALUES(?, ?, ?, ?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, entity.getId());
-            preparedStatement.setInt(2, entity.getAuthorId());
-            preparedStatement.setString(3, entity.getTitle());
-            preparedStatement.setString(4, entity.getPreview());
-            preparedStatement.setArray(5, (Array) entity.getMessages());
+            preparedStatement.setString(2, entity.getTitle());
+            preparedStatement.setDate(3, entity.getCreated_on());
+            preparedStatement.setInt(4,  entity.getAuthorId());
+            preparedStatement.setInt(1,  entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

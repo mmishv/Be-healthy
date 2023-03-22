@@ -1,13 +1,14 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 public class ForumTopic implements Serializable {
     private int id;
     private int authorId;
     private String title;
-    private String preview;
     private List<ForumMessage> messages;
+    private Date created_on;
 
     public int getId() {
         return id;
@@ -33,13 +34,6 @@ public class ForumTopic implements Serializable {
         this.title = title;
     }
 
-    public String getPreview() {
-        return preview;
-    }
-
-    public void setPreview(String preview) {
-        this.preview = preview;
-    }
 
     public List<ForumMessage> getMessages() {
         return messages;
@@ -49,9 +43,16 @@ public class ForumTopic implements Serializable {
         this.messages = messages;
     }
 
+    public Date getCreated_on() {
+        return created_on;
+    }
+
+    public void setCreated_on(Date created_on) {
+        this.created_on = created_on;
+    }
+
     @Override
     public String toString() {
-        return "Author: " + authorId + ", title: " + title +
-                ", preview: " + preview;
+        return "Author: " + authorId + ", title: " + title;
     }
 }

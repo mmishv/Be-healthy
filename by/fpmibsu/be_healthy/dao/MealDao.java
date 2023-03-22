@@ -65,7 +65,6 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
         }
         return meal;
     }
-
     @Override
     public Meal update(Meal entity) throws SQLException {
         PreparedStatement preparedStatement = null;
