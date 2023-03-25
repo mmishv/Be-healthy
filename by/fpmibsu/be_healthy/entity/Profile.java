@@ -1,6 +1,7 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 
 public class Profile implements Serializable {
     private int id;
@@ -8,11 +9,17 @@ public class Profile implements Serializable {
     private String email;
     private String login;
     private String password;
-    File avatar;
-    double weight;
-    int height;
-    int age;
-    double activity;
+    private File avatar;
+    private double weight;
+    private int height;
+    private int age;
+    private double activity;
+    private List<Article> written_articles;
+    private List<Recipe> liked_recipes;
+    private List<Recipe> written_recipes;
+    private List<ForumTopic> started_topics;
+    private List<ForumMessage> messages;
+    private List<DiaryPage> diaryPages;
     public String getLogin() {
         return login;
     }
@@ -84,6 +91,66 @@ public class Profile implements Serializable {
 
     public void setActivity(int activity) {
         this.activity = activity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setActivity(double activity) {
+        this.activity = activity;
+    }
+
+    public List<Article> getWritten_articles() {
+        return written_articles;
+    }
+
+    public void setWritten_articles(List<Article> written_articles) {
+        this.written_articles = written_articles;
+    }
+
+    public List<Recipe> getLiked_recipes() {
+        return liked_recipes;
+    }
+
+    public void setLiked_recipes(List<Recipe> liked_recipes) {
+        this.liked_recipes = liked_recipes;
+    }
+
+    public List<Recipe> getWritten_recipes() {
+        return written_recipes;
+    }
+
+    public void setWritten_recipes(List<Recipe> written_recipes) {
+        this.written_recipes = written_recipes;
+    }
+
+    public List<ForumTopic> getStarted_topics() {
+        return started_topics;
+    }
+
+    public void setStarted_topics(List<ForumTopic> started_topics) {
+        this.started_topics = started_topics;
+    }
+
+    public List<ForumMessage> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<ForumMessage> messages) {
+        this.messages = messages;
+    }
+
+    public List<DiaryPage> getDiaryPages() {
+        return diaryPages;
+    }
+
+    public void setDiaryPages(List<DiaryPage> diaryPages) {
+        this.diaryPages = diaryPages;
     }
 
     @Override

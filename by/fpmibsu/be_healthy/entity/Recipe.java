@@ -14,7 +14,7 @@ public class Recipe implements Serializable {
     File image;
     private List<Ingredient> ingredients;
     private List<RecipeCategory> categories;
-    private List<Profile> authorizedUserLiked;
+    private List<Profile> userLiked;
     public int getId() {
         return id;
     }
@@ -77,6 +77,22 @@ public class Recipe implements Serializable {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public List<RecipeCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<RecipeCategory> categories) {
+        this.categories = categories;
+    }
+
+    public List<Profile> getUserLiked() {
+        return userLiked;
+    }
+
+    public void setUserLiked(List<Profile> userLiked) {
+        this.userLiked = userLiked;
     }
 
     @Override
