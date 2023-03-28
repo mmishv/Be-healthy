@@ -6,20 +6,18 @@ import by.fpmibsu.be_healthy.entity.ForumMessage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>  {
     private Connection connection = getConnection();
     @Override
     public List<ForumMessage> getAll() throws SQLException {
-        List<ForumMessage> projectList = new ArrayList<>();
+        List<ForumMessage> messages = new ArrayList<>();
         String sql = "SELECT * FROM FORUM_MESSAGE";
         Statement statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-
             while (resultSet.next()) {
                 ForumMessage message = new ForumMessage();
                 message.setId(resultSet.getInt("ID"));
@@ -28,7 +26,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
                 message.setText(resultSet.getString("CONTENT_TEXT"));
                 message.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
                 message.setAttachment((File) resultSet.getBlob("ATTACHMENT"));
-                projectList.add(message);
+                messages.add(message);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,7 +38,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
                 connection.close();
             }
         }
-        return projectList;
+        return messages;
     }
 
     @Override
@@ -58,7 +56,6 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
             message.setText(resultSet.getAsciiStream("CONTENT_TEXT").toString());
             message.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
             message.setAttachment((File) resultSet.getBlob("ATTACHMENT"));
-            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -78,8 +75,8 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
         String sql = "UPDATE FORUM_MESSAGE SET PUBL_DATE=?, CONTENT_TEXT=?, ATTACHMENT=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(2, entity.getText());
             preparedStatement.setDate(1, entity.getDateOfPublication());
+            preparedStatement.setString(2, entity.getText());
             preparedStatement.setBlob(3, (Blob)entity.getAttachment());
             preparedStatement.setLong(4, entity.getId());
             preparedStatement.executeUpdate();
@@ -119,7 +116,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
     @Override
     public void create(ForumMessage entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO FORUM_MESSAGE (ID, USER_ID, TOPIC_ID, PUBL_DATE, CONTENT_TEXT, ATTACHMENT) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO FORUM_MESSAGE (ID, USER_ID, TOPIC_ID, PUBL_DATE, CONTENT_TEXT, ATTACHMENT) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, entity.getId());
@@ -127,8 +124,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
             preparedStatement.setInt(3, entity.getTopic_id());
             preparedStatement.setDate(4, entity.getDateOfPublication());
             preparedStatement.setString(5, entity.getText());
-            preparedStatement.setBinaryStream(6, null);
-            byte[] imgBytes = null;
+            preparedStatement.setBlob(6, (Blob)entity.getAttachment());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

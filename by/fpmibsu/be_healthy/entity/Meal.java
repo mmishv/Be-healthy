@@ -4,9 +4,9 @@ import java.sql.Time;
 import java.util.*;
 public class Meal implements Serializable {
     private int id;
-    private int diaryPageId;
     private String name;
     private Time timeOfMeal;
+    private Date dateOfMeal;
     private List<MealProduct> products;
     private int user_id;
     public int getId() {
@@ -15,14 +15,6 @@ public class Meal implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getDiaryPageId() {
-        return diaryPageId;
-    }
-
-    public void setDiaryPageId(int diaryPageId) {
-        this.diaryPageId = diaryPageId;
     }
 
     public String getName() {
@@ -57,9 +49,17 @@ public class Meal implements Serializable {
         this.user_id = user_id;
     }
 
+    public Date getDateOfMeal() {
+        return dateOfMeal;
+    }
+
+    public void setDateOfMeal(Date dateOfMeal) {
+        this.dateOfMeal = dateOfMeal;
+    }
+
     @Override
     public String toString() {
-        return "Meal page id: " + diaryPageId + ", name: "
+        return "Meal, name: "
                 + name+ ", time: " + timeOfMeal;
     }
 

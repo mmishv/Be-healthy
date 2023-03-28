@@ -9,7 +9,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
     private Connection connection = getConnection();
     @Override
     public List<RecipeCategory> getAll() throws SQLException {
-        List<RecipeCategory> projectList = new ArrayList<>();
+        List<RecipeCategory> categories = new ArrayList<>();
         String sql = "SELECT ID, NAME FROM RECIPE_CATEGORY";
         Statement statement = null;
         try {
@@ -20,7 +20,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
                 RecipeCategory category = new RecipeCategory();
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
-                projectList.add(category);
+                categories.add(category);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
                 connection.close();
             }
         }
-        return projectList;
+        return categories;
     }
     @Override
     public RecipeCategory getEntityById(long id) throws SQLException {
@@ -45,7 +45,6 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
             ResultSet resultSet = preparedStatement.executeQuery();
             category.setId(resultSet.getInt("ID"));
             category.setName(resultSet.getString("NAME"));
-            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

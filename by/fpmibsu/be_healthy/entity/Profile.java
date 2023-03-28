@@ -19,7 +19,7 @@ public class Profile implements Serializable {
     private List<Recipe> written_recipes;
     private List<ForumTopic> started_topics;
     private List<ForumMessage> messages;
-    private List<DiaryPage> diaryPages;
+    private List<Meal> meals;
     public String getLogin() {
         return login;
     }
@@ -145,12 +145,12 @@ public class Profile implements Serializable {
         this.messages = messages;
     }
 
-    public List<DiaryPage> getDiaryPages() {
-        return diaryPages;
+    public List<Meal> getMeals() {
+        return meals;
     }
 
-    public void setDiaryPages(List<DiaryPage> diaryPages) {
-        this.diaryPages = diaryPages;
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
     }
 
     @Override

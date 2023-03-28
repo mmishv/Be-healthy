@@ -9,7 +9,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
     private Connection connection = getConnection();
     @Override
     public List<ArticleCategory> getAll() throws SQLException {
-        List<ArticleCategory> projectList = new ArrayList<>();
+        List<ArticleCategory> categories = new ArrayList<>();
         String sql = "SELECT ID, NAME FROM ARTICLE_CATEGORY";
         Statement statement = null;
         try {
@@ -20,7 +20,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
                 ArticleCategory category = new ArticleCategory();
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
-                projectList.add(category);
+                categories.add(category);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
                 connection.close();
             }
         }
-        return projectList;
+        return categories;
     }
     @Override
     public ArticleCategory getEntityById(long id) throws SQLException {
@@ -45,7 +45,6 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
             ResultSet resultSet = preparedStatement.executeQuery();
             category.setId(resultSet.getInt("ID"));
             category.setName(resultSet.getString("NAME"));
-            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -13,9 +13,10 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
     private Connection connection = getConnection();
     @Override
     public List<ForumTopic> getAll() throws SQLException {
-        List<ForumTopic> projectList = new ArrayList<>();
+        List<ForumTopic> topics = new ArrayList<>();
         String sql = "SELECT * FROM FORUM_TOPIC";
         Statement statement = null;
+        PreparedStatement inner_statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -26,7 +27,25 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 topic.setAuthorId(resultSet.getInt("AUTHOR_ID"));
                 topic.setTitle(resultSet.getString("TITLE"));
                 topic.setCreated_on(resultSet.getDate("CREATED_ON"));
-                projectList.add(topic);
+
+                String inner_sql = "SELECT ID FROM FORUM_MESSAGE WHERE TOPIC_ID=?";
+                try {
+                inner_statement = connection.prepareStatement(inner_sql);
+                inner_statement.setInt(1, topic.getId());
+                ResultSet messagesIds = inner_statement.executeQuery();
+                List<ForumMessage> messages = new ArrayList<>();
+                while (messagesIds.next()){
+                    //messages.add(new ForumMessageDao().getEntityById(messagesIds.getInt("ID")));
+                }
+                topic.setMessages(messages);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }finally{
+                    if (inner_statement != null) {
+                        inner_statement.close();
+                    }
+                }
+                topics.add(topic);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,12 +57,12 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 connection.close();
             }
         }
-        return projectList;
+        return topics;
     }
 
     @Override
     public ForumTopic getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement = null, inner_statement = null;
         String sql = "SELECT * FROM FORUM_TOPIC WHERE ID=?";
         ForumTopic topic= new ForumTopic();
         try {
@@ -54,7 +73,24 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
             topic.setAuthorId(resultSet.getInt("AUTHOR_ID"));
             topic.setTitle(resultSet.getString("TITLE"));
             topic.setCreated_on(resultSet.getDate("CREATED_ON"));
-            preparedStatement.executeUpdate();
+
+            String inner_sql = "SELECT ID FROM FORUM_MESSAGE WHERE TOPIC_ID=?";
+            try{
+            inner_statement = connection.prepareStatement(inner_sql);
+            inner_statement.setInt(1, topic.getId());
+            ResultSet messagesIds = inner_statement.executeQuery();
+            List<ForumMessage> messages = new ArrayList<>();
+            while (messagesIds.next()){
+                messages.add(new ForumMessageDao().getEntityById(messagesIds.getInt("ID")));
+            }
+            topic.setMessages(messages);
+            } catch (SQLException e) {
+            e.printStackTrace();
+            }finally{
+                if (inner_statement != null) {
+                    inner_statement.close();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

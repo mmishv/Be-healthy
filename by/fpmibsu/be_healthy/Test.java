@@ -36,25 +36,18 @@ public class Test {
         temp_message.setTopic_id(1);
         temp_message.setText("Здравствуйте!");
 
-        DiaryPageDao diary_page_dao = new DiaryPageDao();
-        DiaryPage temp_page = new DiaryPage();
-        temp_page.setId(1);
-        temp_page.setUserId(1);
-        temp_page.setDateOfDiaryPage(valueOf(LocalDate.now()));
 
         try {
             //article_category_dao.create(temp);
             //recipe_category_dao.create(temp1);
             //forum_topic_dao.create(temp_topic);
             //forum_message_dao.create(temp_message);
-            //diary_page_dao.create(temp_page);
 
             List<ArticleCategory> article_categories = new ArticleCategoryDao().getAll();
             List<RecipeCategory> recipe_categories = new RecipeCategoryDao().getAll();
             List<Meal> meals =  new MealDao().getAll();
             List<ForumMessage> messages =  new ForumMessageDao().getAll();
             List<ForumTopic> topics =  new ForumTopicDao().getAll();
-            List<DiaryPage> pages =  new DiaryPageDao().getAll();
             for (ArticleCategory e : article_categories) {
                 System.out.println(e);
             }
@@ -72,10 +65,6 @@ public class Test {
             }
             System.out.println("----------------------------------");
             for (ForumTopic e : topics) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (DiaryPage e : pages) {
                 System.out.println(e);
             }
         } catch (SQLException e) {
