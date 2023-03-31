@@ -11,16 +11,16 @@ public class JDBCPostgreSQL {
     static final String PASS = "78873483mmv";
 
     public Connection getConnection() {
-        System.out.println("Testing connection to PostgreSQL JDBC");
+        //System.out.println("Testing connection to PostgreSQL JDBC");
 
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
+            //System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
         }
 
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
+       // System.out.println("PostgreSQL JDBC Driver successfully connected");
         Connection connection = null;
 
         try {
@@ -28,14 +28,14 @@ public class JDBCPostgreSQL {
                     .getConnection(DB_URL, USER, PASS);
 
         } catch (SQLException e) {
-            System.out.println("Connection Failed");
+            //System.out.println("Connection Failed");
             e.printStackTrace();
         }
 
         if (connection != null) {
-            System.out.println("You successfully connected to database now");
+            //System.out.println("You successfully connected to database now");
         } else {
-            System.out.println("Failed to make connection to database");
+            //System.out.println("Failed to make connection to database");
         }
         return connection;
     }

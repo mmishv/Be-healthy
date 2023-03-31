@@ -59,7 +59,7 @@ public class Meal implements Serializable {
 
     @Override
     public String toString() {
-        return "Meal, name: "
+        return "Meal name: "
                 + name+ ", time: " + timeOfMeal;
     }
 

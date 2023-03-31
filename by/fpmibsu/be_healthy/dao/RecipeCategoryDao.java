@@ -43,8 +43,10 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
             category.setId(resultSet.getInt("ID"));
             category.setName(resultSet.getString("NAME"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

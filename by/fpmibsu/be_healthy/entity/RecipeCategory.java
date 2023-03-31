@@ -23,6 +23,6 @@ public class RecipeCategory implements Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return "Recipe category "+name;
     }
 }

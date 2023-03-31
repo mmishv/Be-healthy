@@ -43,6 +43,14 @@ public class Test {
             //forum_topic_dao.create(temp_topic);
             //forum_message_dao.create(temp_message);
 
+            System.out.println("getEntityById(1) test:");
+            System.out.println(new ForumMessageDao().getEntityById(1));
+            System.out.println(new ArticleCategoryDao().getEntityById(1));
+            System.out.println(new RecipeCategoryDao().getEntityById(1));
+            System.out.println(new ForumTopicDao().getEntityById(1));
+            System.out.println(new MealDao().getEntityById(1));
+            System.out.println("----------------------------------");
+
             List<ArticleCategory> article_categories = new ArticleCategoryDao().getAll();
             List<RecipeCategory> recipe_categories = new RecipeCategoryDao().getAll();
             List<Meal> meals =  new MealDao().getAll();

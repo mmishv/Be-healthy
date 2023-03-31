@@ -35,7 +35,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 ResultSet messagesIds = inner_statement.executeQuery();
                 List<ForumMessage> messages = new ArrayList<>();
                 while (messagesIds.next()){
-                    //messages.add(new ForumMessageDao().getEntityById(messagesIds.getInt("ID")));
+                    messages.add(new ForumMessageDao().getEntityById(messagesIds.getInt("ID")));
                 }
                 topic.setMessages(messages);
                 } catch (SQLException e) {
@@ -69,6 +69,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
             topic.setId(resultSet.getInt("ID"));
             topic.setAuthorId(resultSet.getInt("AUTHOR_ID"));
             topic.setTitle(resultSet.getString("TITLE"));
@@ -90,6 +91,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 if (inner_statement != null) {
                     inner_statement.close();
                 }
+            }
             }
         } catch (SQLException e) {
             e.printStackTrace();

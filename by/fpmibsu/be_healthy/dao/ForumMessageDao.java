@@ -48,14 +48,16 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
         ForumMessage message = new ForumMessage();
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, id);
+            preparedStatement.setInt(1, (int)id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
             message.setId(resultSet.getInt("ID"));
             message.setAuthorId(resultSet.getInt("USER_ID"));
             message.setTopic_id(resultSet.getInt("TOPIC_ID"));
-            message.setText(resultSet.getAsciiStream("CONTENT_TEXT").toString());
+            message.setText(resultSet.getString("CONTENT_TEXT"));
             message.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
             message.setAttachment((File) resultSet.getBlob("ATTACHMENT"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

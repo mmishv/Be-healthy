@@ -22,6 +22,6 @@ public class ArticleCategory implements Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return "Article category "+name;
     }
 }

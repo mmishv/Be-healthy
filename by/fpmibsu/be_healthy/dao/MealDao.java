@@ -70,6 +70,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
             meal.setId(resultSet.getInt("ID"));
             meal.setUser_id(resultSet.getInt("USER_ID"));
             meal.setName(resultSet.getString("NAME"));
@@ -92,6 +93,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 if (inner_statement != null) {
                     inner_statement.close();
                 }
+            }
             }
         } catch (SQLException e) {
             e.printStackTrace();
