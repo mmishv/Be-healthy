@@ -6,8 +6,18 @@ public class Product implements Serializable {
     private double proteins;
     private double fats;
     private double carbohydrates;
-    private double calories;
-    private double unit;
+    private int calories;
+    private String unit;
+    public Product(){}
+    public Product(int i, String n, double p, double f, double c, int cal, String u){
+        id = i;
+        name = n;
+        proteins=p;
+        fats = f;
+        carbohydrates=c;
+        calories=cal;
+        unit = u;
+    }
     public int getId() {
         return id;
     }
@@ -48,19 +58,19 @@ public class Product implements Serializable {
         this.carbohydrates = carbohydrates;
     }
 
-    public double getCalories() {
+    public int getCalories() {
         return calories;
     }
 
-    public void setCalories(double calories) {
+    public void setCalories(int calories) {
         this.calories = calories;
     }
 
-    public double getUnit() {
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(double unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 

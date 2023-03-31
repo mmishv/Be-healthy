@@ -1,26 +1,33 @@
 package by.fpmibsu.be_healthy.dao;
+
+import by.fpmibsu.be_healthy.entity.MealProduct;
+import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
-import by.fpmibsu.be_healthy.entity.ArticleCategory;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCategory> {
+public class ProductDao extends JDBCPostgreSQL implements Dao<Product>{
     private Connection connection = getConnection();
     @Override
-    public List<ArticleCategory> getAll() throws SQLException {
-        List<ArticleCategory> categories = new ArrayList<>();
-        String sql = "SELECT ID, NAME FROM ARTICLE_CATEGORY";
+    public List<Product> getAll() throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM PRODUCT";
         Statement statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-
+            Product product = new Product();
             while (resultSet.next()) {
-                ArticleCategory category = new ArticleCategory();
-                category.setId(resultSet.getInt("ID"));
-                category.setName(resultSet.getString("NAME"));
-                categories.add(category);
+                product.setId(resultSet.getInt("ID"));
+                product.setName(resultSet.getString("NAME"));
+                product.setCarbohydrates(resultSet.getInt("CARBOHYDRATES"));
+                product.setFats(resultSet.getInt("FATS"));
+                product.setProteins(resultSet.getInt("PROTEINS"));
+                product.setCalories(resultSet.getInt("CALORIES"));
+                product.setUnit(resultSet.getString("UNIT"));
+                products.add(product);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,20 +39,25 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
                 connection.close();
             }
         }
-        return categories;
+        return products;
     }
     @Override
-    public ArticleCategory getEntityById(long id) throws SQLException {
+    public Product getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT ID, NAME FROM ARTICLE_CATEGORY WHERE ID=?";
-        ArticleCategory category = new ArticleCategory();
+        String sql = "SELECT * FROM PRODUCT WHERE ID=?";
+        Product product = new Product();
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
-            category.setId(resultSet.getInt("ID"));
-            category.setName(resultSet.getString("NAME"));
+                product.setId(resultSet.getInt("ID"));
+                product.setName(resultSet.getString("NAME"));
+                product.setCarbohydrates(resultSet.getInt("CARBOHYDRATES"));
+                product.setFats(resultSet.getInt("FATS"));
+                product.setProteins(resultSet.getInt("PROTEINS"));
+                product.setCalories(resultSet.getInt("CALORIES"));
+                product.setUnit(resultSet.getString("UNIT"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,18 +69,23 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
                 connection.close();
             }
         }
-        return category;
+        return product;
     }
 
     @Override
-    public boolean update(ArticleCategory entity) throws SQLException {
+    public boolean update(Product entity) throws SQLException {
         boolean success = true;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE ARTICLE_CATEGORY SET NAME=? WHERE ID=?";
+        String sql = "UPDATE PRODUCT SET NAME=?, CARBOHYDRATES=?, FATS=?, PROTEINS=?, CALORIES=?, UNIT=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setLong(2, entity.getId());
+            preparedStatement.setDouble(2, entity.getCarbohydrates());
+            preparedStatement.setDouble(3, entity.getFats());
+            preparedStatement.setDouble(4, entity.getProteins());
+            preparedStatement.setInt(5, entity.getCalories());
+            preparedStatement.setString(6, entity.getUnit());
+            preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,9 +102,9 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
     }
 
     @Override
-    public boolean delete(ArticleCategory entity) throws SQLException {
+    public boolean delete(Product entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM ARTICLE_CATEGORY WHERE ID=?";
+        String sql = "DELETE FROM PRODUCT WHERE ID=?";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -107,14 +124,19 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
         return success;
     }
     @Override
-    public boolean create(ArticleCategory entity) throws SQLException {
+    public boolean create(Product entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ARTICLE_CATEGORY (ID, NAME) VALUES(?, ?)";
+        String sql = "INSERT INTO PRODUCT (ID, NAME, CARBOHYDRATES, FATS, PROTEINS, CALORIES, UNIT) VALUES(?, ?, ?, ?, ?, ?, ?)";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setInt(1, entity.getId());
             preparedStatement.setString(2, entity.getName());
+            preparedStatement.setDouble(3, entity.getCarbohydrates());
+            preparedStatement.setDouble(4, entity.getFats());
+            preparedStatement.setDouble(5, entity.getProteins());
+            preparedStatement.setInt(6, entity.getCalories());
+            preparedStatement.setString(7, entity.getUnit());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

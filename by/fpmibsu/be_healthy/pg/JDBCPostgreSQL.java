@@ -1,4 +1,4 @@
-package by.fpmibsu.be_healthy.bl;
+package by.fpmibsu.be_healthy.pg;
 
 import java.sql.DriverManager;
 import java.sql.Connection;

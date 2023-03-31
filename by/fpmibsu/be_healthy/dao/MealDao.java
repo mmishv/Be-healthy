@@ -1,10 +1,8 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.bl.JDBCPostgreSQL;
-import by.fpmibsu.be_healthy.entity.ForumMessage;
+import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.entity.MealProduct;
-import by.fpmibsu.be_healthy.entity.Product;
 
 import java.sql.*;
 import java.util.*;
@@ -110,7 +108,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
     @Override
     public boolean update(Meal entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE MEAL SET NAME=?, MEAL_TIME=?, MEAL_DATE=?, USER_ID=? WHERE ID=?";
+        String sql = "UPDATE MEAL SET NAME=?, TIME=?, DATE=?, USER_ID=? WHERE ID=?";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);

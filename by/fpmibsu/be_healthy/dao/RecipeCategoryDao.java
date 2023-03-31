@@ -1,6 +1,5 @@
 package by.fpmibsu.be_healthy.dao;
-import by.fpmibsu.be_healthy.bl.JDBCPostgreSQL;
-import by.fpmibsu.be_healthy.entity.ArticleCategory;
+import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 
 import java.sql.*;

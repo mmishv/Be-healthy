@@ -1,10 +1,9 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.bl.JDBCPostgreSQL;
+import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.ForumMessage;
 import by.fpmibsu.be_healthy.entity.ForumTopic;
 
-import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
