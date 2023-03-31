@@ -4,7 +4,6 @@ import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.ForumMessage;
 
 import javax.sql.rowset.serial.SerialBlob;
-import java.io.File;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;

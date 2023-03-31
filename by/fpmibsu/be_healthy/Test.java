@@ -54,18 +54,54 @@ public class Test {
         temp_m_product.setMealProductId(1);
         temp_m_product.setQuantity(300);
         temp_m_product.setMeal_id(temp_meal.getId());
+
         var product_list = new ArrayList<MealProduct>();
         product_list.add(temp_m_product);
         temp_meal.setProducts(product_list);
 
+        Article temp_article = new Article();
+        temp_article.setId(1);
+        temp_article.setAuthorId(1);
+        temp_article.setDateOfPublication(valueOf(LocalDate.now()));
+        temp_article.setTitle("Бег по утрам: как начать?");
+        temp_article.setFulltext("Мы пока не располагаем такой информацией...");
+        var a_category_list = new ArrayList<ArticleCategory>();
+        a_category_list.add(temp_acat);
+        temp_article.setCategories(a_category_list);
+
+        Recipe temp_recipe = new Recipe();
+        temp_recipe.setId(1);
+        temp_recipe.setAuthorId(1);
+        temp_recipe.setTitle("Молочное молоко");
+        temp_recipe.setText("Нагрейте молоко до 30 градусов");
+        temp_recipe.setDateOfPublication(valueOf(LocalDate.now()));
+        temp_recipe.setCookingTime(5);
+        var r_category_list = new ArrayList<RecipeCategory>();
+        r_category_list.add(temp_rcat);
+        temp_recipe.setCategories(r_category_list);
+
+        Ingredient temp_ing = new Ingredient(temp_product);
+        temp_ing.setIngredientId(1);
+        temp_ing.setRecipe_id(1);
+        temp_ing.setQuantity(200);
+
+        var ing_list = new ArrayList<Ingredient>();
+        ing_list.add(temp_ing);
+        temp_recipe.setIngredients(ing_list);
+
+
         try {
-            //article_category_dao.create(temp);
-            //recipe_category_dao.create(temp1);
-            //forum_topic_dao.create(temp_topic);
-            //forum_message_dao.create(temp_message);
-            //meal_dao.create(temp_meal);
-            //product_dao.create(temp_product);
-            //m_product_dao.create(temp_m_product);
+            //new ArticleCategoryDao().create(temp_acat);
+            //new RecipeCategoryDao().create(temp_rcat);
+            //new ForumTopicDao().create(temp_topic);
+            //new ForumMessageDao().create(temp_message);
+            //new MealDao().create(temp_meal);
+            //new ProductDao().create(temp_product);
+            //new MealProductDao().create(temp_m_product);
+            //new ArticleDao().create(temp_article);
+            //new RecipeDao().create(temp_recipe);
+            //new IngredientDao().create(temp_ing);
+
 
             System.out.println("getEntityById(1) test:");
             System.out.println(new ForumMessageDao().update(temp_message));
@@ -75,7 +111,9 @@ public class Test {
             System.out.println(new ProductDao().update(temp_product));
             System.out.println(new MealProductDao().update(temp_m_product));
             System.out.println(new MealDao().update(temp_meal));
-
+            System.out.println(new ArticleDao().update(temp_article));
+            System.out.println(new RecipeDao().update(temp_recipe));
+            System.out.println(new IngredientDao().update(temp_ing));
 
             System.out.println("getEntityById(1) test:");
             System.out.println(new ForumMessageDao().getEntityById(1));
@@ -85,6 +123,9 @@ public class Test {
             System.out.println(new ProductDao().getEntityById(1));
             System.out.println(new MealProductDao().getEntityById(1));
             System.out.println(new MealDao().getEntityById(1));
+            System.out.println(new ArticleDao().getEntityById(1));
+            System.out.println(new RecipeDao().getEntityById(1));
+            System.out.println(new IngredientDao().getEntityById(1));
             System.out.println("----------------------------------");
 
             System.out.println("getAll() test:");
@@ -95,6 +136,9 @@ public class Test {
             List<Product> products =  new ProductDao().getAll();
             List<MealProduct> m_products =  new MealProductDao().getAll();
             List<Meal> meals =  new MealDao().getAll();
+            List<Article> articles =  new ArticleDao().getAll();
+            List<Recipe> recipes =  new RecipeDao().getAll();
+            List<Ingredient> ingredients =  new IngredientDao().getAll();
             for (ArticleCategory e : article_categories) {
                 System.out.println(e);
             }
@@ -122,6 +166,19 @@ public class Test {
             for (Meal e : meals) {
                 System.out.println(e);
             }
+            System.out.println("----------------------------------");
+            for (Article e : articles) {
+                System.out.println(e);
+            }
+            System.out.println("----------------------------------");
+            for (Recipe e : recipes) {
+                System.out.println(e);
+            }
+            System.out.println("----------------------------------");
+            for (Ingredient e : ingredients) {
+                System.out.println(e);
+            }
+            System.out.println("----------------------------------");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

@@ -11,10 +11,9 @@ public class Recipe implements Serializable {
     private Date dateOfPublication;
     private int cookingTime;
     private String text;
-    File image;
+    byte[] image;
     private List<Ingredient> ingredients;
     private List<RecipeCategory> categories;
-    private List<Profile> userLiked;
     public int getId() {
         return id;
     }
@@ -31,11 +30,11 @@ public class Recipe implements Serializable {
         this.text = text;
     }
 
-    public File getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(File image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -85,14 +84,6 @@ public class Recipe implements Serializable {
 
     public void setCategories(List<RecipeCategory> categories) {
         this.categories = categories;
-    }
-
-    public List<Profile> getUserLiked() {
-        return userLiked;
-    }
-
-    public void setUserLiked(List<Profile> userLiked) {
-        this.userLiked = userLiked;
     }
 
     @Override
