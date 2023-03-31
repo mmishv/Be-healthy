@@ -9,13 +9,12 @@ public class Profile implements Serializable {
     private String email;
     private String login;
     private String password;
-    private File avatar;
+    private byte[] avatar;
     private double weight;
     private int height;
     private int age;
     private double activity;
     private List<Article> written_articles;
-    private List<Recipe> liked_recipes;
     private List<Recipe> written_recipes;
     private List<ForumTopic> started_topics;
     private List<ForumMessage> messages;
@@ -53,11 +52,11 @@ public class Profile implements Serializable {
         this.password = password;
     }
 
-    public File getAvatar() {
+    public byte[] getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(File avatar) {
+    public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
 
@@ -111,14 +110,6 @@ public class Profile implements Serializable {
 
     public void setWritten_articles(List<Article> written_articles) {
         this.written_articles = written_articles;
-    }
-
-    public List<Recipe> getLiked_recipes() {
-        return liked_recipes;
-    }
-
-    public void setLiked_recipes(List<Recipe> liked_recipes) {
-        this.liked_recipes = liked_recipes;
     }
 
     public List<Recipe> getWritten_recipes() {

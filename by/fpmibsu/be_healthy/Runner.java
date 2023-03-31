@@ -11,7 +11,7 @@ import java.util.*;
 
 import static java.sql.Date.valueOf;
 
-public class Test {
+public class Runner {
     public static void main(String[] args) {
         ArticleCategory temp_acat = new ArticleCategory();
         temp_acat.setId(3);
