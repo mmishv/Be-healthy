@@ -20,17 +20,17 @@ public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct>{
     }
 
     @Override
-    public MealProduct update(MealProduct entity) throws SQLException {
-        return null;
+    public boolean update(MealProduct entity) throws SQLException {
+        return false;
     }
 
     @Override
-    public void delete(MealProduct entity) throws SQLException {
-
+    public boolean delete(MealProduct entity) throws SQLException {
+        return false;
     }
 
     @Override
-    public void create(MealProduct entity) throws SQLException {
-
+    public boolean create(MealProduct entity) throws SQLException {
+        return false;
     }
 }

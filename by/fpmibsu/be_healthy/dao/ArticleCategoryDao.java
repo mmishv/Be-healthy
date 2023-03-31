@@ -61,7 +61,8 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
     }
 
     @Override
-    public ArticleCategory update(ArticleCategory entity) throws SQLException {
+    public boolean update(ArticleCategory entity) throws SQLException {
+        boolean success = true;
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE ARTICLE_CATEGORY SET NAME=? WHERE ID=?";
         try {
@@ -71,6 +72,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -79,19 +81,21 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
                 connection.close();
             }
         }
-        return entity;
+        return success;
     }
 
     @Override
-    public void delete(ArticleCategory entity) throws SQLException {
+    public boolean delete(ArticleCategory entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "DELETE FROM ARTICLE_CATEGORY WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -100,11 +104,13 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
                 connection.close();
             }
         }
+        return success;
     }
     @Override
-    public void create(ArticleCategory entity) throws SQLException {
+    public boolean create(ArticleCategory entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO ARTICLE_CATEGORY (ID, NAME) VALUES(?, ?)";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
@@ -112,6 +118,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -120,5 +127,6 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
                 connection.close();
             }
         }
+        return success;
     }
 }

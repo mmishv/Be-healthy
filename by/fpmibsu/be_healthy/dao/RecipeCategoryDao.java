@@ -1,5 +1,6 @@
 package by.fpmibsu.be_healthy.dao;
 import by.fpmibsu.be_healthy.bl.JDBCPostgreSQL;
+import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 
 import java.sql.*;
@@ -61,7 +62,8 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
     }
 
     @Override
-    public RecipeCategory update(RecipeCategory entity) throws SQLException {
+    public boolean update(RecipeCategory entity) throws SQLException {
+        boolean success = true;
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE RECIPE_CATEGORY SET NAME=? WHERE ID=?";
         try {
@@ -71,6 +73,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -79,19 +82,21 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
                 connection.close();
             }
         }
-        return entity;
+        return success;
     }
 
     @Override
-    public void delete(RecipeCategory entity) throws SQLException {
+    public boolean delete(RecipeCategory entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "DELETE FROM RECIPE_CATEGORY WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -100,11 +105,13 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
                 connection.close();
             }
         }
+        return success;
     }
     @Override
-    public void create(RecipeCategory entity) throws SQLException {
+    public boolean create(RecipeCategory entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO RECIPE_CATEGORY (ID, NAME) VALUES(?, ?)";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
@@ -112,6 +119,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -120,5 +128,6 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
                 connection.close();
             }
         }
+        return success;
     }
 }

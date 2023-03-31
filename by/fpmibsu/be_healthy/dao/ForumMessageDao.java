@@ -72,9 +72,10 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
     }
 
     @Override
-    public ForumMessage update(ForumMessage entity) throws SQLException {
+    public boolean update(ForumMessage entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE FORUM_MESSAGE SET PUBL_DATE=?, CONTENT_TEXT=?, ATTACHMENT=? WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setDate(1, entity.getDateOfPublication());
@@ -84,6 +85,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -92,19 +94,21 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
                 connection.close();
             }
         }
-        return entity;
+        return success;
     }
 
     @Override
-    public void delete(ForumMessage entity) throws SQLException {
+    public boolean delete(ForumMessage entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "DELETE FROM FORUM_MESSAGE WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -113,10 +117,12 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
                 connection.close();
             }
         }
+        return success;
     }
 
     @Override
-    public void create(ForumMessage entity) throws SQLException {
+    public boolean create(ForumMessage entity) throws SQLException {
+        boolean success = true;
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO FORUM_MESSAGE (ID, USER_ID, TOPIC_ID, PUBL_DATE, CONTENT_TEXT, ATTACHMENT) VALUES (?, ?, ?, ?, ?, ?)";
         try {
@@ -130,6 +136,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -138,5 +145,6 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
                 connection.close();
             }
         }
+        return success;
     }
 }

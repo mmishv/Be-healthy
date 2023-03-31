@@ -108,9 +108,10 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
         return meal;
     }
     @Override
-    public Meal update(Meal entity) throws SQLException {
+    public boolean update(Meal entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE MEAL SET NAME=?, MEAL_TIME=?, MEAL_DATE=?, USER_ID=? WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
@@ -121,6 +122,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -129,19 +131,21 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 connection.close();
             }
         }
-        return entity;
+        return success;
     }
 
     @Override
-    public void delete(Meal entity) throws SQLException {
+    public boolean delete(Meal entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "DELETE FROM MEAL WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -150,12 +154,14 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 connection.close();
             }
         }
+        return success;
     }
 
     @Override
-    public void create(Meal entity) throws SQLException {
+    public boolean create(Meal entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO MEAL (ID, USER_ID, NAME, TIME, DATE) VALUES(?, ?, ?, ?, ?)";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, entity.getId());
@@ -175,5 +181,6 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 connection.close();
             }
         }
+        return success;
     }
 }

@@ -12,14 +12,14 @@ import static java.sql.Date.valueOf;
 public class Test {
     public static void main(String[] args) {
         ArticleCategoryDao article_category_dao = new ArticleCategoryDao();
-        ArticleCategory temp = new ArticleCategory();
-        temp.setId(3);
-        temp.setName("Беременность");
+        ArticleCategory temp_acat = new ArticleCategory();
+        temp_acat.setId(3);
+        temp_acat.setName("Беременность");
 
         RecipeCategoryDao recipe_category_dao = new RecipeCategoryDao();
-        RecipeCategory temp1 = new RecipeCategory();
-        temp1.setId(1);
-        temp1.setName("Десерты");
+        RecipeCategory temp_rcat = new RecipeCategory();
+        temp_rcat.setId(1);
+        temp_rcat.setName("Десерты");
 
         ForumTopicDao forum_topic_dao = new ForumTopicDao();
         ForumTopic temp_topic = new ForumTopic();
@@ -38,6 +38,12 @@ public class Test {
 
 
         try {
+            System.out.println("getEntityById(1) test:");
+            //System.out.println(new ForumMessageDao().update(temp_message));
+            System.out.println(new ArticleCategoryDao().update(temp_acat));
+            System.out.println(new RecipeCategoryDao().update(temp_rcat));
+            System.out.println(new ForumTopicDao().update(temp_topic));
+            // System.out.println(new MealDao().update(temp_meal));
             //article_category_dao.create(temp);
             //recipe_category_dao.create(temp1);
             //forum_topic_dao.create(temp_topic);
@@ -51,6 +57,7 @@ public class Test {
             System.out.println(new MealDao().getEntityById(1));
             System.out.println("----------------------------------");
 
+            System.out.println("getAll() test:");
             List<ArticleCategory> article_categories = new ArticleCategoryDao().getAll();
             List<RecipeCategory> recipe_categories = new RecipeCategoryDao().getAll();
             List<Meal> meals =  new MealDao().getAll();

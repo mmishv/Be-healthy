@@ -107,9 +107,10 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
     }
 
     @Override
-    public ForumTopic update(ForumTopic entity) throws SQLException {
+    public boolean update(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE FORUM_TOPIC SET TITLE=?, CREATED_ON=?, AUTHOR_ID=? WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getTitle());
@@ -119,6 +120,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -127,19 +129,21 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 connection.close();
             }
         }
-        return entity;
+        return success;
     }
 
     @Override
-    public void delete(ForumTopic entity) throws SQLException {
+    public boolean delete(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "DELETE FROM FORUM_TOPIC WHERE ID=?";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -148,12 +152,14 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 connection.close();
             }
         }
+        return success;
     }
 
     @Override
-    public void create(ForumTopic entity) throws SQLException {
+    public boolean create(ForumTopic entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO FORUM_TOPIC (ID, TITLE, CREATED_ON, AUTHOR_ID) VALUES(?, ?, ?, ?)";
+        boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(2, entity.getTitle());
@@ -163,6 +169,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            success = false;
         } finally {
             if (preparedStatement != null) {
                 preparedStatement.close();
@@ -171,5 +178,6 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic>  {
                 connection.close();
             }
         }
+        return success;
     }
 }
