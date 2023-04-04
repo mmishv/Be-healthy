@@ -89,6 +89,16 @@ public class Runner {
         ing_list.add(temp_ing);
         temp_recipe.setIngredients(ing_list);
 
+        Profile temp_profile = new Profile();
+        temp_profile.setId(2);
+        temp_profile.setName("Adam");
+        temp_profile.setEmail("adamsmith@gmail.com");
+        temp_profile.setLogin("adamsmith");
+        temp_profile.setPassword("1111");
+        temp_profile.setWeight(80);
+        temp_profile.setHeight(180);
+        temp_profile.setAge(30);
+        temp_profile.setActivity(1.1);
 
         try {
             //new ArticleCategoryDao().create(temp_acat);
@@ -101,7 +111,7 @@ public class Runner {
             //new ArticleDao().create(temp_article);
             //new RecipeDao().create(temp_recipe);
             //new IngredientDao().create(temp_ing);
-
+            //new ProfileDao().create(temp_profile);
 
             System.out.println("getEntityById(1) test:");
             System.out.println(new ForumMessageDao().update(temp_message));
@@ -114,6 +124,7 @@ public class Runner {
             System.out.println(new ArticleDao().update(temp_article));
             System.out.println(new RecipeDao().update(temp_recipe));
             System.out.println(new IngredientDao().update(temp_ing));
+            System.out.println(new ProfileDao().update(temp_profile));
 
             System.out.println("getEntityById(1) test:");
             System.out.println(new ForumMessageDao().getEntityById(1));
@@ -126,6 +137,7 @@ public class Runner {
             System.out.println(new ArticleDao().getEntityById(1));
             System.out.println(new RecipeDao().getEntityById(1));
             System.out.println(new IngredientDao().getEntityById(1));
+            System.out.println(new ProfileDao().getEntityById(1));
             System.out.println("----------------------------------");
 
             System.out.println("getAll() test:");
@@ -139,6 +151,8 @@ public class Runner {
             List<Article> articles =  new ArticleDao().getAll();
             List<Recipe> recipes =  new RecipeDao().getAll();
             List<Ingredient> ingredients =  new IngredientDao().getAll();
+            List<Profile> profiles =  new ProfileDao().getAll();
+
             for (ArticleCategory e : article_categories) {
                 System.out.println(e);
             }
@@ -176,6 +190,10 @@ public class Runner {
             }
             System.out.println("----------------------------------");
             for (Ingredient e : ingredients) {
+                System.out.println(e);
+            }
+            System.out.println("----------------------------------");
+            for (Profile e : profiles) {
                 System.out.println(e);
             }
             System.out.println("----------------------------------");

@@ -178,7 +178,7 @@ public class ForumMessageDao extends JDBCPostgreSQL implements Dao<ForumMessage>
     }
     List<ForumMessage> getMessagesByUserId(int id) throws SQLException {
         PreparedStatement statement = null;
-        String sql = "SELECT ID FROM FORUM_MESSAGE WHERE AUTHOR_ID=?";
+        String sql = "SELECT ID FROM FORUM_MESSAGE WHERE USER_ID=?";
         List<ForumMessage> messages = new ArrayList<>();
         try{
             statement = connection.prepareStatement(sql);

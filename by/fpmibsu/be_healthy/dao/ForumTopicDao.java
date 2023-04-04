@@ -146,7 +146,7 @@ public class ForumTopicDao extends JDBCPostgreSQL implements Dao<ForumTopic> {
     List<ForumTopic> getTopicsByAuthorId(int id) throws SQLException {
         PreparedStatement statement = null;
         List<ForumTopic> topics = new ArrayList<>();
-        String sql = "SELECT ID FROM FORUM_TOPICS WHERE AUTHOR_ID=?";
+        String sql = "SELECT ID FROM FORUM_TOPIC WHERE AUTHOR_ID=?";
         try{
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);

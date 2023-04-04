@@ -20,14 +20,14 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            Profile profile = new Profile();
             while (resultSet.next()) {
+                Profile profile = new Profile();
                 profile.setId(resultSet.getInt("ID"));
                 profile.setName(resultSet.getString("NAME"));
                 profile.setEmail(resultSet.getString("EMAIL"));
                 profile.setLogin(resultSet.getString("LOGIN"));
                 profile.setPassword(resultSet.getString("PASSWORD"));
-                var blob = resultSet.getBlob("PHOTO");
+                var blob = resultSet.getBlob("AVATAR");
                 if (blob != null)
                     profile.setAvatar(blob.getBytes(1l, (int) blob.length()));
 
@@ -58,7 +58,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     @Override
     public Profile getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "SELECT * FROM PRODUCT WHERE ID=?";
+        String sql = "SELECT * FROM PROFILE WHERE ID=?";
         Profile profile = new Profile();
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
                 profile.setEmail(resultSet.getString("EMAIL"));
                 profile.setLogin(resultSet.getString("LOGIN"));
                 profile.setPassword(resultSet.getString("PASSWORD"));
-                var blob = resultSet.getBlob("PHOTO");
+                var blob = resultSet.getBlob("AVATAR");
                 if (blob != null)
                     profile.setAvatar(blob.getBytes(1l, (int) blob.length()));
 
@@ -101,7 +101,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     public boolean update(Profile entity) throws SQLException {
         boolean success = true;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE PRODUCT SET NAME=?, AVATAR=?, WEIGHT=?, ACTIVITY_COEF=? WHERE ID=?";
+        String sql = "UPDATE PROFILE SET NAME=?, AVATAR=?, WEIGHT=?, ACTIVITY_COEF=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
@@ -128,7 +128,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     @Override
     public boolean delete(Profile entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM PRODUCT WHERE ID=?";
+        String sql = "DELETE FROM PROFILE WHERE ID=?";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -151,7 +151,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     @Override
     public boolean create(Profile entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO PRODUCT (ID, NAME,EMAIL, LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF, AVATAR, WEIGHT)" +
+        String sql = "INSERT INTO PROFILE (ID, NAME,EMAIL, LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF, AVATAR, WEIGHT)" +
                 " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         boolean success = true;
         try {
