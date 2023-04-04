@@ -1,21 +1,20 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Article;
-import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleDao extends JDBCPostgreSQL implements Dao<Article>  {
+public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
     private Connection connection = getConnection();
+
     @Override
     public List<Article> getAll() throws SQLException {
         List<Article> articles = new ArrayList<>();
         String sql = "SELECT * FROM ARTICLE";
         Statement statement = null;
-        PreparedStatement inner_statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -27,24 +26,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article>  {
                 article.setTitle(resultSet.getString("TITLE"));
                 article.setFulltext(resultSet.getString("FULL_TEXT"));
                 article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
-
-                String inner_sql = "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?";
-                try {
-                    inner_statement = connection.prepareStatement(inner_sql);
-                    inner_statement.setInt(1, article.getId());
-                    ResultSet messagesIds = inner_statement.executeQuery();
-                    List<ArticleCategory> categories = new ArrayList<>();
-                    while (messagesIds.next()){
-                        categories.add(new ArticleCategoryDao().getEntityById(messagesIds.getInt("ID")));
-                    }
-                    article.setCategories(categories);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }finally{
-                    if (inner_statement != null) {
-                        inner_statement.close();
-                    }
-                }
+                article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getAuthorId()));
                 articles.add(article);
             }
         } catch (SQLException e) {
@@ -62,37 +44,20 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article>  {
 
     @Override
     public Article getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null, inner_statement = null;
+        PreparedStatement preparedStatement = null;
         String sql = "SELECT * FROM ARTICLE WHERE ID=?";
-        Article article= new Article();
+        Article article = new Article();
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 article.setId(resultSet.getInt("ID"));
                 article.setAuthorId(resultSet.getInt("AUTHOR_ID"));
                 article.setTitle(resultSet.getString("TITLE"));
                 article.setFulltext(resultSet.getString("FULL_TEXT"));
                 article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
-
-                String inner_sql = "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?";
-                try {
-                    inner_statement = connection.prepareStatement(inner_sql);
-                    inner_statement.setInt(1, article.getId());
-                    ResultSet messagesIds = inner_statement.executeQuery();
-                    List<ArticleCategory> categories = new ArrayList<>();
-                    while (messagesIds.next()){
-                        categories.add(new ArticleCategoryDao().getEntityById(messagesIds.getInt("ID")));
-                    }
-                    article.setCategories(categories);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }finally{
-                    if (inner_statement != null) {
-                        inner_statement.close();
-                    }
-                }
+                article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getAuthorId()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,10 +81,10 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article>  {
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setDate(2,(Date) (entity.getDateOfPublication()));
+            preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
             preparedStatement.setString(3, entity.getFulltext());
-            preparedStatement.setInt(4,  entity.getAuthorId());
-            preparedStatement.setInt(5,  entity.getId());
+            preparedStatement.setInt(4, entity.getAuthorId());
+            preparedStatement.setInt(5, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -168,11 +133,11 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article>  {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, entity.getId());
             preparedStatement.setString(2, entity.getTitle());
-            preparedStatement.setDate(3,(Date) (entity.getDateOfPublication()));
+            preparedStatement.setDate(3, (Date) (entity.getDateOfPublication()));
             preparedStatement.setString(4, entity.getFulltext());
-            preparedStatement.setInt(5,  entity.getAuthorId());
+            preparedStatement.setInt(5, entity.getAuthorId());
             preparedStatement.executeUpdate();
-            for (var i: entity.getCategories()) {
+            for (var i : entity.getCategories()) {
                 String inner_sql = "INSERT INTO MM_CATEGORY_ARTICLE (ARTICLE_ID, CATEGORY_ID) VALUES(?, ?)";
                 try {
                     inner_statement = connection.prepareStatement(inner_sql);
@@ -181,7 +146,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article>  {
                     inner_statement.executeUpdate();
                 } catch (SQLException e) {
                     e.printStackTrace();
-                }finally{
+                } finally {
                     if (inner_statement != null) {
                         inner_statement.close();
                     }
@@ -199,5 +164,27 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article>  {
             }
         }
         return success;
+    }
+
+    List<Article> getWrittenArticlesByAuthorId(int id) throws SQLException {
+        PreparedStatement statement = null;
+        String sql = "SELECT ID FROM ARTICLE WHERE AUTHOR_ID=?";
+        List<Article> articles = new ArrayList<>();
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet articlesIds = statement.executeQuery();
+
+            while (articlesIds.next()) {
+                articles.add(new ArticleDao().getEntityById(articlesIds.getInt("ID")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return articles;
     }
 }

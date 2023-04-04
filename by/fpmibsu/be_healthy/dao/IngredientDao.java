@@ -1,6 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Ingredient;
+import by.fpmibsu.be_healthy.entity.MealProduct;
 import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
@@ -138,5 +139,25 @@ public class IngredientDao extends JDBCPostgreSQL implements Dao<Ingredient>{
             }
         }
         return success;
+    }
+    List<Ingredient> getIngredientsByRecipeId(int id) throws SQLException {
+        PreparedStatement statement = null;
+        List<Ingredient> ingredients = new ArrayList<>();
+        String inner_sql = "SELECT ID FROM INGREDIENT WHERE RECIPE_ID=?";
+        try {
+            statement = connection.prepareStatement(inner_sql);
+            statement.setInt(1, id);
+            ResultSet ingredientsIds = statement.executeQuery();
+            while (ingredientsIds.next()) {
+                ingredients.add(new IngredientDao().getEntityById(ingredientsIds.getInt("ID")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return ingredients;
     }
 }

@@ -1,4 +1,5 @@
 package by.fpmibsu.be_healthy.dao;
+
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 
@@ -7,6 +8,7 @@ import java.util.*;
 
 public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCategory> {
     private Connection connection = getConnection();
+
     @Override
     public List<RecipeCategory> getAll() throws SQLException {
         List<RecipeCategory> categories = new ArrayList<>();
@@ -34,6 +36,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
         }
         return categories;
     }
+
     @Override
     public RecipeCategory getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -43,9 +46,9 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-            category.setId(resultSet.getInt("ID"));
-            category.setName(resultSet.getString("NAME"));
+            if (resultSet.next()) {
+                category.setId(resultSet.getInt("ID"));
+                category.setName(resultSet.getString("NAME"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,6 +109,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
         }
         return success;
     }
+
     @Override
     public boolean create(RecipeCategory entity) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -128,5 +132,26 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
             }
         }
         return success;
+    }
+
+    List<RecipeCategory> getArticleCategoriesByArticleId(int id) throws SQLException {
+        PreparedStatement statement = null;
+        String inner_sql = "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?";
+        List<RecipeCategory> categories = new ArrayList<>();
+        try {
+            statement = connection.prepareStatement(inner_sql);
+            statement.setInt(1, id);
+            ResultSet categoriesIds = statement.executeQuery();
+            while (categoriesIds.next()) {
+                categories.add(new RecipeCategoryDao().getEntityById(categoriesIds.getInt("ID")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return categories;
     }
 }

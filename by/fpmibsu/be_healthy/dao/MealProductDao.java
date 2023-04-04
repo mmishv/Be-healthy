@@ -1,6 +1,5 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.MealProduct;
 
@@ -8,8 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct>{
+public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct> {
     private Connection connection = getConnection();
+
     @Override
     public List<MealProduct> getAll() throws SQLException {
         List<MealProduct> products = new ArrayList<>();
@@ -38,6 +38,7 @@ public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct>{
         }
         return products;
     }
+
     @Override
     public MealProduct getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -47,7 +48,7 @@ public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct>{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 product = new MealProduct(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
                 product.setMealProductId(resultSet.getInt("ID"));
                 product.setQuantity(resultSet.getInt("QUANTITY"));
@@ -114,6 +115,7 @@ public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct>{
         }
         return success;
     }
+
     @Override
     public boolean create(MealProduct entity) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -138,5 +140,26 @@ public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct>{
             }
         }
         return success;
+    }
+
+    List<MealProduct> getProductsByMealId(int id) throws SQLException {
+        PreparedStatement statement = null;
+        List<MealProduct> products = new ArrayList<>();
+        String inner_sql = "SELECT ID FROM MEAL_PRODUCT WHERE MEAL_ID=?";
+        try {
+            statement = connection.prepareStatement(inner_sql);
+            statement.setInt(1, id);
+            ResultSet productsIds = statement.executeQuery();
+            while (productsIds.next()) {
+                products.add(new MealProductDao().getEntityById(productsIds.getInt("ID")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return products;
     }
 }

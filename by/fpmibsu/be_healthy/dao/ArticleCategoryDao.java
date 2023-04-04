@@ -1,4 +1,5 @@
 package by.fpmibsu.be_healthy.dao;
+
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
 
@@ -7,6 +8,7 @@ import java.util.*;
 
 public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCategory> {
     private Connection connection = getConnection();
+
     @Override
     public List<ArticleCategory> getAll() throws SQLException {
         List<ArticleCategory> categories = new ArrayList<>();
@@ -34,6 +36,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
         }
         return categories;
     }
+
     @Override
     public ArticleCategory getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -43,9 +46,9 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-            category.setId(resultSet.getInt("ID"));
-            category.setName(resultSet.getString("NAME"));
+            if (resultSet.next()) {
+                category.setId(resultSet.getInt("ID"));
+                category.setName(resultSet.getString("NAME"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,6 +109,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
         }
         return success;
     }
+
     @Override
     public boolean create(ArticleCategory entity) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -128,5 +132,26 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
             }
         }
         return success;
+    }
+
+    List<ArticleCategory> getArticleCategoriesByArticleId(int id) throws SQLException {
+        PreparedStatement statement = null;
+        String inner_sql = "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?";
+        List<ArticleCategory> categories = new ArrayList<>();
+        try {
+            statement = connection.prepareStatement(inner_sql);
+            statement.setInt(1, id);
+            ResultSet categoriesIds = statement.executeQuery();
+            while (categoriesIds.next()) {
+                categories.add(new ArticleCategoryDao().getEntityById(categoriesIds.getInt("ID")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return categories;
     }
 }

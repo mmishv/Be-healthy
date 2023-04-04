@@ -2,7 +2,6 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.Meal;
-import by.fpmibsu.be_healthy.entity.MealProduct;
 
 import java.sql.*;
 import java.util.*;
@@ -10,6 +9,7 @@ import java.sql.Date;
 
 public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
     private Connection connection = getConnection();
+
     @Override
     public List<Meal> getAll() throws SQLException {
         List<Meal> meals = new ArrayList<>();
@@ -18,7 +18,6 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            PreparedStatement inner_statement = null;
             while (resultSet.next()) {
                 Meal meal = new Meal();
                 meal.setId(resultSet.getInt("ID"));
@@ -26,24 +25,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 meal.setName(resultSet.getString("NAME"));
                 meal.setTimeOfMeal(resultSet.getTime("TIME"));
                 meal.setDateOfMeal(resultSet.getDate("DATE"));
-
-                String inner_sql = "SELECT ID FROM MEAL_PRODUCT WHERE MEAL_ID=?";
-                try{
-                inner_statement = connection.prepareStatement(inner_sql);
-                inner_statement.setInt(1, meal.getId());
-                ResultSet messagesIds = inner_statement.executeQuery();
-                List<MealProduct> products = new ArrayList<>();
-                while (messagesIds.next()){
-                    products.add(new MealProductDao().getEntityById(messagesIds.getInt("ID")));
-                }
-                meal.setProducts(products);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }finally{
-                    if (inner_statement != null) {
-                        inner_statement.close();
-                    }
-                }
+                meal.setProducts(new MealProductDao().getProductsByMealId(meal.getId()));
                 meals.add(meal);
             }
         } catch (SQLException e) {
@@ -61,37 +43,20 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
 
     @Override
     public Meal getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null, inner_statement = null;
+        PreparedStatement preparedStatement = null;
         String sql = "SELECT * FROM MEAL WHERE ID=?";
         Meal meal = new Meal();
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-            meal.setId(resultSet.getInt("ID"));
-            meal.setUser_id(resultSet.getInt("USER_ID"));
-            meal.setName(resultSet.getString("NAME"));
-            meal.setTimeOfMeal(resultSet.getTime("TIME"));
-            meal.setDateOfMeal(resultSet.getTime("DATE"));
-
-            String inner_sql = "SELECT ID FROM MEAL_PRODUCT WHERE MEAL_ID=?";
-            try{
-                inner_statement = connection.prepareStatement(inner_sql);
-                inner_statement.setInt(1, meal.getId());
-                ResultSet messagesIds = inner_statement.executeQuery();
-                List<MealProduct> products = new ArrayList<>();
-                while (messagesIds.next()){
-                    products.add(new MealProductDao().getEntityById(messagesIds.getInt("ID")));
-                }
-                meal.setProducts(products);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }finally{
-                if (inner_statement != null) {
-                    inner_statement.close();
-                }
-            }
+            if (resultSet.next()) {
+                meal.setId(resultSet.getInt("ID"));
+                meal.setUser_id(resultSet.getInt("USER_ID"));
+                meal.setName(resultSet.getString("NAME"));
+                meal.setTimeOfMeal(resultSet.getTime("TIME"));
+                meal.setDateOfMeal(resultSet.getTime("DATE"));
+                meal.setProducts(new MealProductDao().getProductsByMealId(meal.getId()));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,6 +70,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
         }
         return meal;
     }
+
     @Override
     public boolean update(Meal entity) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -114,7 +80,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setTime(2, entity.getTimeOfMeal());
-            preparedStatement.setDate(3, (Date)entity.getDateOfMeal());
+            preparedStatement.setDate(3, (Date) entity.getDateOfMeal());
             preparedStatement.setLong(4, entity.getUser_id());
             preparedStatement.setLong(5, entity.getId());
             preparedStatement.executeUpdate();
@@ -166,7 +132,7 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
             preparedStatement.setInt(2, entity.getUser_id());
             preparedStatement.setString(3, entity.getName());
             preparedStatement.setTime(4, entity.getTimeOfMeal());
-            preparedStatement.setDate(5, (Date)entity.getDateOfMeal());
+            preparedStatement.setDate(5, (Date) entity.getDateOfMeal());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -180,5 +146,25 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
             }
         }
         return success;
+    }
+    List<Meal> getMealsByUserId(int id) throws SQLException {
+        PreparedStatement statement = null;
+        String sql = "SELECT ID FROM MEAL WHERE USER_ID=?";
+        List<Meal> meals = new ArrayList<>();
+        try{
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet mealsIds = statement.executeQuery();
+            while (mealsIds.next()){
+                meals.add(new MealDao().getEntityById(mealsIds.getInt("ID")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            if (statement != null) {
+                statement.close();
+            }
+        }
+        return meals;
     }
 }
