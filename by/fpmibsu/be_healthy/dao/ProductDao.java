@@ -18,8 +18,8 @@ public class ProductDao extends JDBCPostgreSQL implements Dao<Product>{
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            Product product = new Product();
             while (resultSet.next()) {
+                Product product = new Product();
                 product.setId(resultSet.getInt("ID"));
                 product.setName(resultSet.getString("NAME"));
                 product.setCarbohydrates(resultSet.getInt("CARBOHYDRATES"));
