@@ -1,4 +1,5 @@
-<%@ page import="java.util.Objects" %><%--
+<%@ page import="java.util.Objects" %>
+<%--
   Created by IntelliJ IDEA.
   User: Masha
   Date: 23.04.2023
@@ -122,19 +123,19 @@
       <div class="form-group row">
         <label for="height" class="col-sm-3 col-form-label">Рост:</label>
         <div class="col-sm-9">
-          <input class="form-control" id="height" placeholder="Рост, см" name="height">
+          <input type="number" class="form-control" id="height" placeholder="Рост, см" name="height" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="weight" class="col-sm-3 col-form-label">Вес:</label>
         <div class="col-sm-9">
-          <input class="form-control" id="weight" placeholder="Вес" name="weight">
+          <input type="number" class="form-control" id="weight" placeholder="Вес" name="weight" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="age" class="col-sm-3 col-form-label">Возраст:</label>
         <div class="col-sm-9">
-          <input class="form-control" id="age" placeholder="Возраст" name="age">
+          <input type="number" class="form-control" id="age" placeholder="Возраст" name="age" required>
         </div>
       </div>
       <div class="form-group row">
@@ -142,6 +143,8 @@
         <select id="activity" class="form-control col-sm-8" name="activity">
           <option value="1" selected>Без учета физ. нагрузки</option>
           <option value="1.2">Сидячий образ жизни</option>
+
+          Maria Mishina, [23.04.2023 23:34]
           <option value="1.375">Легкая активность(1-2 раза в неделю)</option>
           <option value="1.55">Умеренная активность (3-5 раз в неделю)</option>
           <option value="1.725">Высокая активность (более 5 раз в неделю)</option>
@@ -166,7 +169,6 @@
         </div>
       </div>
       <%
-        boolean is_valid = true;
         String sex="";
         double weight = 0, height=0, age=0, activity=0, goal=0, result =0;
         if (request.getParameter("age") != null && request.getParameter("weight") != null &&
@@ -180,10 +182,9 @@
           result = (Objects.equals(sex, "female"))? 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age :
                   88.36 + 13.4 * weight + 4.8 * height - 5.7 * age;
           result *= activity*goal;
-          result = (int)result;
       %>
       <tr>
-        <td> Результат: <%=result%></td>
+        <td> Результат: <%=(int)result%></td>
       </tr>
       <%}
       %>
