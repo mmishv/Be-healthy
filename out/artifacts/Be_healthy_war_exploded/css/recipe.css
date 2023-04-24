@@ -73,5 +73,5 @@
     width: fit-content;
     margin: 2% auto 0 !important;
     color: black !important;
-    font-weight: bold;
+    font-weight: bold !important;
 }

@@ -1,3 +1,7 @@
+package by.fpmibsu;
+
+import by.fpmibsu.be_healthy.entity.Recipe;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
