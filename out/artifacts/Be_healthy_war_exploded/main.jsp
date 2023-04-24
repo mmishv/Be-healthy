@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Be healthy</title>
+    <title>Главная</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="assets/favicon2.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
@@ -78,8 +78,6 @@
                 <select id="activity" class="form-control col-sm-8" name="activity">
                     <option value="1" selected>Без учета физ. нагрузки</option>
                     <option value="1.2">Сидячий образ жизни</option>
-
-                    Maria Mishina, [23.04.2023 23:34]
                     <option value="1.375">Легкая активность(1-2 раза в неделю)</option>
                     <option value="1.55">Умеренная активность (3-5 раз в неделю)</option>
                     <option value="1.725">Высокая активность (более 5 раз в неделю)</option>

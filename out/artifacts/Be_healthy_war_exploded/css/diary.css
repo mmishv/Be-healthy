@@ -1,65 +1,76 @@
-.page{
-display:flex;
-height: 100%;
+.page {
+    display: flex;
+    height: 100%;
 }
-#date{
-text-align-last: center;
-margin: 4vh auto 0 auto;
-display: flex;
-align-items: center;
-width:280px;
+
+#date {
+    text-align-last: center;
+    margin: 4vh auto 0 auto;
+    display: flex;
+    align-items: center;
+    width: 280px;
 }
-.meals-wrapper{
-display:flex;
-flex-wrap: wrap;
-justify-content: space-between;
-padding: 1%;
+
+.meals-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1%;
 }
-.meal{
-display:flex;
-flex-direction: column;
-background-color: #ffffffe3;
-margin: 2%;
-width: 28%;
-min-width: 240px;
-height: 15vw;
-min-height: 200px;
-border: solid 2px green;
-border-radius: 10px;
+
+.meal {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffffe3;
+    margin: 2%;
+    width: 28%;
+    min-width: 240px;
+    height: 15vw;
+    min-height: 200px;
+    border: solid 2px green;
+    border-radius: 10px;
 }
-.form-control{
-width: 200px !important;
-margin: 0 auto 0 auto;
+
+.form-control {
+    width: 200px !important;
+    margin: 0 auto 0 auto;
 }
-.bi{
-margin:0 !important;
+
+.bi {
+    margin: 0 !important;
 }
-.meal-name{
+
+.meal-name {
     text-align: center;
     border-bottom: solid 3px green;
     padding: 2%;
     font-weight: 500;
     border-radius: 10px;
 }
-.add-button{
-text-align: right;
+
+.add-button {
+    text-align: right;
 }
-.bi-plus{
-background-color: white;
-opacity:90%;
-color: #114630 !important;
+
+.bi-plus {
+    background-color: white;
+    opacity: 90%;
+    color: #114630 !important;
 }
-.total{
-background-color: #114630;
-opacity: 0.8;
+
+.total {
+    background-color: #114630;
+    opacity: 0.8;
 }
-.total-name{
-margin-top: 4vh;
-color: white;
-text-align: center;
-font-weight: 500;
+
+.total-name {
+    margin-top: 4vh;
+    color: white;
+    text-align: center;
+    font-weight: 500;
 }
-.progress{
+
+.progress {
     height: 1.8rem !important;
     margin: 5%;
 }

@@ -1,0 +1,21 @@
+.wrapper {
+    background-color: #fff;
+    opacity: 0.9;
+    margin: 3% 12.5% !important;
+    padding: 2% !important;
+    border-radius: 15px;
+}
+
+#ingredients-list {
+    justify-content: space-between;
+}
+
+.ing-button {
+    background-color: #114630;
+    color: white;
+    border-radius: 5px;
+}
+
+.col-form-label, .bold {
+    font-weight: bold !important;
+}

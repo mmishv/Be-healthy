@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/web/diary.jsp" value="file://$PROJECT_DIR$/web" />
         <entry key="file://$PROJECT_DIR$/web/main.jsp" value="file://$PROJECT_DIR$/web" />
+        <entry key="file://$PROJECT_DIR$/web/new_recipe.jsp" value="file://$PROJECT_DIR$/web" />
       </map>
     </option>
   </component>
