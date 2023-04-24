@@ -65,3 +65,13 @@
     margin-left: 5%;
     font-weight: 600;
 }
+
+.add-button {
+    display: block !important;
+    text-align: center;
+    background-color: white !important;
+    width: fit-content;
+    margin: 2% auto 0 !important;
+    color: black !important;
+    font-weight: bold;
+}

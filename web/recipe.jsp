@@ -50,87 +50,88 @@
             <li class="list-group-item">Для мультиварки</li>
         </ul>
     </div>
-    <div class="recipe-wrapper col-sm-10">
-        <div class="card">
-            <img src="./assets/recipes/recipe1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Нисуаз</h5>
-                <div class="description">Описание</div>
-            </div>
-            <div class="card-body">
-                <!--          <a href="#" class="btn btn-primary">Посмотреть рецепт</a>-->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                    Посмотреть рецепт
-                </button>
-            </div>
+    <div class="col-sm-10">
+        <button type="button" class="btn add-button" onclick="createRecipe()">Добавить рецепт</button>
+        <div class="recipe-wrapper">
+            <div class="card">
+                <img src="./assets/recipes/recipe1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Нисуаз</h5>
+                    <div class="description">Описание</div>
+                </div>
+                <div class="card-body">
+                    <!--          <a href="#" class="btn btn-primary">Посмотреть рецепт</a>-->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                        Посмотреть рецепт
+                    </button>
+                </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLongTitle">Нисуаз</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="./assets/recipes/recipe1.jpg" class="modal-img">
-                            <div class="general-info">
-                                <div id="author">Автор:</div>
-                                <div id="cooking-time">Время приготовления:</div>
-                                <div id="recipe-category">Категории:</div>
-                                <div id="ingredients">Ингредиенты:</div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLongTitle">Нисуаз</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
-                            <div id="recipe-text">
-                                1. Нарезаем ломтиками 5–6 анчоусов, разминаем вилкой 250 г консервированного тунца.<br>
-                                2. Варим вкрутую 2 перепелиных яйца и вместе с 2 помидорами режем дольками. <br>
-                                3. Рубим пополам 100 г маслин без косточек. Или оставляем их целыми. <br>
-                                4. Заправку смешиваем из 5 ст. л. оливкового масла, 1 ст. л. дижонской горчицы, 3
-                                зубчиков чеснока, щепотки соли и перца.<br>
-                                5. Выкладываем в тарелку салат, кладем кусочки рыбы, яиц и томатов, поливаем соусом,
-                                украшаем маслинами.<br>
+                            <div class="modal-body">
+                                <img src="./assets/recipes/recipe1.jpg" class="modal-img">
+                                <div class="general-info">
+                                    <div id="author">Автор:</div>
+                                    <div id="cooking-time">Время приготовления:</div>
+                                    <div id="recipe-category">Категории:</div>
+                                    <div id="ingredients">Ингредиенты:</div>
+                                </div>
+                                <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
+                                <div id="recipe-text">
+                                    1. Нарезаем ломтиками 5–6 анчоусов, разминаем вилкой 250 г консервированного
+                                    тунца.<br>
+                                    2. Варим вкрутую 2 перепелиных яйца и вместе с 2 помидорами режем дольками. <br>
+                                    3. Рубим пополам 100 г маслин без косточек. Или оставляем их целыми. <br>
+                                    4. Заправку смешиваем из 5 ст. л. оливкового масла, 1 ст. л. дижонской горчицы, 3
+                                    зубчиков чеснока, щепотки соли и перца.<br>
+                                    5. Выкладываем в тарелку салат, кладем кусочки рыбы, яиц и томатов, поливаем соусом,
+                                    украшаем маслинами.<br>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-        <div class="card">
-            <img src="./assets/recipes/recipe3.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Цезарь</h5>
-                <div class="description">Один из любимейших!</div>
             </div>
-            <div class="card-body">
-                <a href="#" class="btn btn-primary">Посмотреть рецепт</a>
+            <div class="card">
+                <img src="./assets/recipes/recipe3.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Цезарь</h5>
+                    <div class="description">Один из любимейших!</div>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Посмотреть рецепт</a>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <img src="./assets/recipes/recipe2.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Кобб-салат</h5>
-                <div class="description">Описание</div>
-            </div>
-            <div class="card-body">
-                <a href="#" class="btn btn-primary">Посмотреть рецепт</a>
+            <div class="card">
+                <img src="./assets/recipes/recipe2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Кобб-салат</h5>
+                    <div class="description">Описание</div>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Посмотреть рецепт</a>
+                </div>
             </div>
         </div>
     </div>
-
-    <%--    <div class="add-button">--%>
-    <%--        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" color="#114630" fill="currentColor"--%>
-    <%--             class="bi bi-plus" viewBox="0 0 16 16">--%>
-    <%--            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>--%>
-    <%--        </svg>--%>
-    <%--    </div>--%>
-
 </div>
+<script>
+    function createRecipe() {
+        document.location.href = "new_recipe.jsp";
+    }
+</script>
 </body>
 </html>

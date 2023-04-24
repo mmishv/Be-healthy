@@ -57,52 +57,66 @@
     </div>
     <div class="form-group row">
         <div class="col-sm-4 bold">Ингредиенты:</div>
-        <div class="col-sm-8 row" id="ingredients-list">
-            <select id="ingredient1" class="form-control col-sm-7">
-            </select>
-            <input type="number" class="form-control col-sm-2" placeholder="кол-во" required>
-            <button class="col-sm-1 ing-button" onclick="addIngredient(this)">+</button>
+        <div class="col-sm-8" id="ingredients-list">
+            <div class="row ingredient-option">
+                <select id="ingredient1" class="form-control col-sm-7"></select>
+                <input type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                <button class="col-sm-1 ing-button" onclick="addIngredient(this)">+</button>
+            </div>
         </div>
     </div>
     <div class="form-group row">
-        <label for="recipe-photo" class="col-sm-4">Фото рецепта:</label>
+        <label for="recipe-photo" class="col-sm-4 bold">Фото рецепта:</label>
         <div class="col-sm-8">
             <input type="file" class="form-control-file" id="recipe-photo">
         </div>
     </div>
     <div class="form-group row">
-        <label for="recipe-description" class="col-sm-4">Описание рецепта:</label>
+        <label for="recipe-description" class="col-sm-4 bold">Описание рецепта:</label>
         <textarea class="form-control col-sm-8" id="recipe-description" rows="5"></textarea>
     </div>
     <div class="form-group row">
-        <button type="submit" class="btn btn-primary" style="background-color:#114630 !important;">
+        <button type="submit" class="btn btn-primary"
+                style="background-color:#114630 !important; border: #114630 !important;">
             Добавить
         </button>
-        <button type="reset" class="btn btn-primary"
+        <button type="reset" class="btn btn-primary" onclick="goToRecipes()"
                 style="background-color: #00000000; border: solid 2px #114630; color: #114630">
-            <a href="recipe.jsp" style="color: #114630;">Вернуться к рецептам</a>
+            Вернуться к рецептам
         </button>
     </div>
 
 </div>
 <script>
     function addIngredient(e) {
-        e.style.backgroundColor = '#114630a8';
-        e.innerHTML = '-';
-        e.disabled = true;
-        let selectField = document.createElement('select');
-        selectField.className = "form-control col-sm-7";
-        let inputField = document.createElement('input');
-        inputField.className = "form-control col-sm-2";
-        inputField.type = "number";
-        inputField.placeholder = "кол-во";
-        let button = document.createElement('button');
-        button.className = "col-sm-1 ing-button";
-        button.innerHTML = '+';
-        button.addEventListener('click', () => addIngredient(button))
-        document.getElementById('ingredients-list').appendChild(selectField);
-        document.getElementById('ingredients-list').appendChild(inputField);
-        document.getElementById('ingredients-list').appendChild(button);
+        if (e.classList.contains('disabled')) {
+            e.parentElement.remove();
+        } else {
+            e.classList.add('disabled');
+            e.style.backgroundColor = '#114630a8';
+            e.innerHTML = '-';
+            let selectField = document.createElement('select');
+            selectField.className = "form-control col-sm-7";
+            let inputField = document.createElement('input');
+            inputField.className = "form-control col-sm-2";
+            inputField.type = "number";
+            inputField.placeholder = "кол-во";
+            let button = document.createElement('button');
+            button.className = "col-sm-1 ing-button";
+            button.innerHTML = '+';
+            button.addEventListener('click', () => addIngredient(button));
+            let container = document.createElement('div');
+            container.classList.add('row');
+            container.appendChild(selectField);
+            container.appendChild(inputField);
+            container.appendChild(button);
+            container.classList.add('ingredient-option');
+            document.getElementById('ingredients-list').appendChild(container);
+        }
+    }
+
+    function goToRecipes() {
+        document.location.href = "recipe.jsp";
     }
 </script>
 </body>

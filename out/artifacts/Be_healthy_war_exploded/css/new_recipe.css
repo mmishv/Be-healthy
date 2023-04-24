@@ -1,13 +1,9 @@
 .wrapper {
     background-color: #fff;
-    opacity: 0.9;
+    opacity: 0.95;
     margin: 3% 12.5% !important;
     padding: 2% !important;
-    border-radius: 15px;
-}
-
-#ingredients-list {
-    justify-content: space-between;
+    border-radius: 10px;
 }
 
 .ing-button {
@@ -18,4 +14,13 @@
 
 .col-form-label, .bold {
     font-weight: bold !important;
+}
+
+.btn.btn-primary {
+    margin-right: 5px;
+}
+
+.ingredient-option {
+    width: 100%;
+    justify-content: space-between;
 }
