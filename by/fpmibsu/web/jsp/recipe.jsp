@@ -11,10 +11,10 @@
     <meta charset="utf-8">
     <title>Рецепты</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/favicon2.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/recipe.css">
-    <link rel="stylesheet" href="css/air-datepicker.css">
+    <link rel="icon" href="../assets/favicon2.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/recipe.css">
+    <link rel="stylesheet" href="../css/air-datepicker.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -54,7 +54,7 @@
         <button type="button" class="btn add-button" onclick="createRecipe()">Добавить рецепт</button>
         <div class="recipe-wrapper">
             <div class="card">
-                <img src="./assets/recipes/recipe1.jpg" class="card-img-top" alt="...">
+                <img src="../assets/recipes/recipe1.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Нисуаз</h5>
                     <div class="description">Описание</div>
@@ -78,7 +78,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="./assets/recipes/recipe1.jpg" class="modal-img">
+                                <img src="../assets/recipes/recipe1.jpg" class="modal-img">
                                 <div class="general-info">
                                     <div id="author">Автор:</div>
                                     <div id="cooking-time">Время приготовления:</div>
@@ -106,7 +106,7 @@
 
             </div>
             <div class="card">
-                <img src="./assets/recipes/recipe3.jpg" class="card-img-top" alt="...">
+                <img src="../assets/recipes/recipe3.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Цезарь</h5>
                     <div class="description">Один из любимейших!</div>
@@ -116,7 +116,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="./assets/recipes/recipe2.jpg" class="card-img-top" alt="...">
+                <img src="../assets/recipes/recipe2.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Кобб-салат</h5>
                     <div class="description">Описание</div>

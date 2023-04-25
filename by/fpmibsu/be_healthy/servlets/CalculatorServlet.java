@@ -1,4 +1,4 @@
-package by.fpmibsu;
+package by.fpmibsu.be_healthy.servlets;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
 

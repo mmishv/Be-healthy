@@ -10,10 +10,10 @@
 <head>
     <title>Be healthy</title>
     <style>
-        <%@include file="css/style.css"%>
+        <%@include file="../css/style.css"%>
     </style>
 </head>
 <body>
-<jsp:include page="html/index.html"/>
+<jsp:include page="../html/index.html"/>
 </body>
 </html>

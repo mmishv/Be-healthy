@@ -11,8 +11,8 @@
     <meta charset="utf-8">
     <title>Be healthy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/favicon2.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="../assets/favicon2.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -30,7 +30,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#" style="padding:0px;">
-                <img src="assets/logo.png" style="width:100px; height: auto">
+                <img src="../assets/logo.png" style="width:100px; height: auto">
             </a>
         </div>
 
@@ -38,7 +38,7 @@
             <ul class="nav navbar-nav mx-auto" style="width: 100%; justify-content: space-around">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="main.jsp">
+                    <a class="nav-link active" href="../jsp/main.jsp">
                         <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">-->
                         <!--                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>-->
                         <!--                    </svg>-->
@@ -54,13 +54,13 @@
                         Дневник</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="product.jsp">Продукты</a>
+                    <a class="nav-link" href="../jsp/product.jsp">Продукты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="recipe.jsp">Рецепты</a>
+                    <a class="nav-link" href="../jsp/recipe.jsp">Рецепты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="forum.jsp">Форум</a>
+                    <a class="nav-link" href="../jsp/forum.jsp">Форум</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
