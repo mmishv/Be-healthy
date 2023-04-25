@@ -4,9 +4,11 @@ import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
 import javax.sql.rowset.serial.SerialBlob;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import  java.util.Base64;
 
 public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     private Connection connection = getConnection();
@@ -29,9 +31,12 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
                 recipe.setText(resultSet.getString("DESCRIPTION"));
                 recipe.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
                 recipe.setCookingTime(resultSet.getInt("COOKING_TIME"));
-                var blob = resultSet.getBlob("PHOTO");
-                if (blob != null)
-                    recipe.setImage(blob.getBytes(1l, (int) blob.length()));
+                recipe.setImage(resultSet.getBytes("PHOTO"));
+
+                byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
+                String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
+                recipe.setBase64image(base64encoded);
+
                 recipe.setCategories(new RecipeCategoryDao().getArticleCategoriesByArticleId(recipe.getAuthorId()));
                 recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
                 recipes.add(recipe);
@@ -65,9 +70,12 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
                 recipe.setText(resultSet.getString("DESCRIPTION"));
                 recipe.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
                 recipe.setCookingTime(resultSet.getInt("COOKING_TIME"));
-                var blob = resultSet.getBlob("PHOTO");
-                if (blob != null)
-                    recipe.setImage(blob.getBytes(1l, (int) blob.length()));
+                recipe.setImage(resultSet.getBytes("PHOTO"));
+
+                byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
+                String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
+                recipe.setBase64image(base64encoded);
+
                 recipe.setCategories(new RecipeCategoryDao().getArticleCategoriesByArticleId(recipe.getAuthorId()));
                 recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
             }
@@ -95,8 +103,8 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
             preparedStatement.setInt(3, entity.getCookingTime());
             preparedStatement.setString(4, entity.getText());
-            preparedStatement.setBlob(5,
-                    entity.getImage() != null ? new SerialBlob(entity.getImage()) : null);
+            preparedStatement.setBytes(5,
+                    entity.getImage() != null ? entity.getImage(): null);
             preparedStatement.setInt(6, entity.getAuthorId());
             preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();

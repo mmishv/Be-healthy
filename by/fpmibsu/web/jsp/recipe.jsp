@@ -55,14 +55,11 @@
         <button type="button" class="btn add-button" onclick="createRecipe()">Добавить рецепт</button>
         <div class="recipe-wrapper">
 <%               ArrayList<Recipe> recipes = (ArrayList<Recipe>) request.getAttribute("recipes");
-                for (Recipe recipe : recipes){%>
-<%--    <%
-        ArrayList<Integer> ints = new ArrayList<>();
-        ints.add(5);
-        for (int i=0; i<10; i++){}
-    %>--%>
+                for (Recipe recipe : recipes){
+                    String img = recipe.getBase64image();
+%>
             <div class="card">
-                <img src="../assets/recipes/recipe1.jpg" class="card-img-top" alt="...">
+                <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
                 <div class="card-body">
                     <h5 class="card-title"><%=recipe.getTitle()%></h5>
                 </div>
@@ -72,7 +69,6 @@
                     </button>
                 </div>
 
-                <!-- Modal -->
                 <div class="modal fade" id="exampleModalLong<%=recipe.getId()%>" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -84,7 +80,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img src="../assets/recipes/recipe1.jpg" class="modal-img">
+                                <img src="data:image/jpeg;base64,${recipe.getBase64image()}" class="modal-img">
                                 <div class="general-info">
                                     <div id="author<%=recipe.getId()%>">Автор: <%=recipe.getAuthorId()%></div>
                                     <div id="cooking-time<%=recipe.getId()%>">Время приготовления: <%=recipe.getCookingTime()%></div>

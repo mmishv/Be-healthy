@@ -1,4 +1,7 @@
 package by.fpmibsu.be_healthy.entity;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Lob;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +14,10 @@ public class Recipe implements Serializable {
     private Date dateOfPublication;
     private int cookingTime;
     private String text;
+    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     byte[] image;
+    String base64image;
     private List<Ingredient> ingredients;
     private List<RecipeCategory> categories;
     public int getId() {
@@ -90,5 +96,13 @@ public class Recipe implements Serializable {
     public String toString() {
         return "Author: " + authorId + ", title: " + title  + ", date of publication: "
                 + dateOfPublication + ", cooking time: " + cookingTime;
+    }
+
+    public String getBase64image() {
+        return base64image;
+    }
+
+    public void setBase64image(String base64image) {
+        this.base64image = base64image;
     }
 }
