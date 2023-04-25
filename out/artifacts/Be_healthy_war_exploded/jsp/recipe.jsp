@@ -60,7 +60,6 @@
 %>
             <div class="card">
                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
-
                 <div class="card-body">
                     <h5 class="card-title"><%=recipe.getTitle()%></h5>
                 </div>
@@ -70,7 +69,6 @@
                     </button>
                 </div>
 
-                <!-- Modal -->
                 <div class="modal fade" id="exampleModalLong<%=recipe.getId()%>" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">

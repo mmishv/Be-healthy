@@ -39,13 +39,13 @@ public class Runner {
         temp_message.setText("Здравствуйте!");
 
         Product temp_product = new Product();
-        temp_product.setId(1);
-        temp_product.setName("молоко 3.2%");
-        temp_product.setCarbohydrates(4.7);
-        temp_product.setFats(3.2);
-        temp_product.setProteins(3);
-        temp_product.setCalories(60);
-        temp_product.setUnit("мл");
+        temp_product.setId(2);
+        temp_product.setName("Кофе молотый");
+        temp_product.setCarbohydrates(4.1);
+        temp_product.setFats(14.4);
+        temp_product.setProteins(13.9);
+        temp_product.setCalories(202);
+        temp_product.setUnit("г.");
 
         Meal temp_meal = new Meal();
         temp_meal.setId(1);
@@ -74,14 +74,30 @@ public class Runner {
         temp_article.setCategories(a_category_list);
 
         Recipe temp_recipe = new Recipe();
-        temp_recipe.setId(1);
+        temp_recipe.setId(2);
         temp_recipe.setAuthorId(1);
-        temp_recipe.setTitle("Молочное молоко");
-        temp_recipe.setText("Нагрейте молоко до 30 градусов");
+        temp_recipe.setTitle("Бодрящий кофе");
+        temp_recipe.setText("""
+                1. Включить кофемашину и подождать, пока загорится индикатор готовности.
+                                
+                2. Если кофемашина оснащена кофемолкой, положить в неё столовую ложку с горкой кофейных зёрен.
+                                
+                3. Если кофеварка – рожковая, отмерить 7–11 г молотого кофе (мерной ёмкостью или чайной ложкой, в 1 чайной ложке – 3 г). Темпером утрамбовать кофе в рожке, прилагая усилие не менее 20 кг.
+                                
+                4. Установить рожок в кофеварку.
+                                
+                5. Подогреть большую толстостенную чашку (к примеру, бокал для латте) для кофе и другую – горячей воды.
+                                
+                6. Установить чашку для эспрессо в лоток для сбора капель, время приготовления кофе – 25–30 секунд.
+                                
+                7. Во вторую чашку набрать горячей воды (ориентировочная температура – от +90 до +92 °C).
+                                
+                8. Смешать ингредиенты. Добавить сахар по вкусу.
+                """);
         temp_recipe.setDateOfPublication(valueOf(LocalDate.now()));
-        temp_recipe.setCookingTime(5);
+        temp_recipe.setCookingTime(10);
         try {
-            temp_recipe.setImage(Files.readAllBytes(Paths.get("C:\\Users\\Masha\\IdeaProjects\\Be-healthy\\by\\fpmibsu\\web\\assets\\recipes\\молоко.jpg")));
+            temp_recipe.setImage(Files.readAllBytes(Paths.get("C:\\Users\\Masha\\Pictures\\calorie_calc\\кофе.jpg")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -90,9 +106,9 @@ public class Runner {
         temp_recipe.setCategories(r_category_list);
 
         Ingredient temp_ing = new Ingredient(temp_product);
-        temp_ing.setIngredientId(1);
-        temp_ing.setRecipe_id(1);
-        temp_ing.setQuantity(200);
+        temp_ing.setIngredientId(2);
+        temp_ing.setRecipe_id(2);
+        temp_ing.setQuantity(10);
 
         var ing_list = new ArrayList<Ingredient>();
         ing_list.add(temp_ing);
@@ -122,7 +138,7 @@ public class Runner {
             //new IngredientDao().create(temp_ing);
             //new ProfileDao().create(temp_profile);
 
-            new RecipeDao().update(temp_recipe);
+            // new RecipeDao().update(temp_recipe);
 
             System.out.println("getEntityById(1) test:");
             System.out.println(new ForumMessageDao().update(temp_message));

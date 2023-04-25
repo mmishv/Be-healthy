@@ -158,8 +158,8 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.setDate(3, (Date) (entity.getDateOfPublication()));
             preparedStatement.setInt(4, entity.getCookingTime());
             preparedStatement.setString(5, entity.getText());
-            preparedStatement.setBlob(6,
-                    entity.getImage() != null ? new SerialBlob(entity.getImage()) : null);
+            preparedStatement.setBytes(6,
+                    entity.getImage() != null ? entity.getImage(): null);
             preparedStatement.setInt(7, entity.getAuthorId());
             preparedStatement.executeUpdate();
             for (var i : entity.getCategories()) {
