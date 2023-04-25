@@ -11,16 +11,16 @@ public class JDBCPostgreSQL {
     static final String PASS = "78873483mmv";
 
     public Connection getConnection() {
-        //System.out.println("Testing connection to PostgreSQL JDBC");
+        System.out.println("Testing connection to PostgreSQL JDBC");
 
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            //System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
+            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
             e.printStackTrace();
         }
 
-       // System.out.println("PostgreSQL JDBC Driver successfully connected");
+        System.out.println("PostgreSQL JDBC Driver successfully connected");
         Connection connection = null;
 
         try {

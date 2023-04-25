@@ -14,4 +14,15 @@
         <servlet-name>main</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RecipesMainServlet</servlet-name>
+        <servlet-class>servlets.RecipesMainServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RecipesMainServlet</servlet-name>
+        <url-pattern>/recipes</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -3,6 +3,10 @@ package by.fpmibsu.be_healthy;
 import by.fpmibsu.be_healthy.dao.*;
 import by.fpmibsu.be_healthy.entity.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -76,6 +80,11 @@ public class Runner {
         temp_recipe.setText("Нагрейте молоко до 30 градусов");
         temp_recipe.setDateOfPublication(valueOf(LocalDate.now()));
         temp_recipe.setCookingTime(5);
+        try {
+            temp_recipe.setImage(Files.readAllBytes(Paths.get("C:\\Users\\Masha\\IdeaProjects\\Be-healthy\\by\\fpmibsu\\web\\assets\\recipes\\молоко.jpg")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         var r_category_list = new ArrayList<RecipeCategory>();
         r_category_list.add(temp_rcat);
         temp_recipe.setCategories(r_category_list);
@@ -112,6 +121,8 @@ public class Runner {
             //new RecipeDao().create(temp_recipe);
             //new IngredientDao().create(temp_ing);
             //new ProfileDao().create(temp_profile);
+
+            new RecipeDao().update(temp_recipe);
 
             System.out.println("getEntityById(1) test:");
             System.out.println(new ForumMessageDao().update(temp_message));

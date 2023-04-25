@@ -57,7 +57,7 @@
                     <a class="nav-link" href="../jsp/product.jsp">Продукты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../jsp/recipe.jsp">Рецепты</a>
+                    <a class="nav-link" href="recipes">Рецепты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../jsp/forum.jsp">Форум</a>

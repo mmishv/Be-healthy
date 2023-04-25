@@ -1,4 +1,5 @@
-<%--
+<%@ page import="by.fpmibsu.be_healthy.entity.Recipe" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 24.04.2023
@@ -53,6 +54,58 @@
     <div class="col-sm-10">
         <button type="button" class="btn add-button" onclick="createRecipe()">Добавить рецепт</button>
         <div class="recipe-wrapper">
+<%               ArrayList<Recipe> recipes = (ArrayList<Recipe>) request.getAttribute("recipes");
+                for (Recipe recipe : recipes){%>
+<%--    <%
+        ArrayList<Integer> ints = new ArrayList<>();
+        ints.add(5);
+        for (int i=0; i<10; i++){}
+    %>--%>
+            <div class="card">
+                <img src="../assets/recipes/recipe1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%=recipe.getTitle()%></h5>
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                        Посмотреть рецепт
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong<%=recipe.getId()%>" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLongTitle<%=recipe.getId()%>"><%=recipe.getTitle()%></h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="../assets/recipes/recipe1.jpg" class="modal-img">
+                                <div class="general-info">
+                                    <div id="author<%=recipe.getId()%>">Автор: <%=recipe.getAuthorId()%></div>
+                                    <div id="cooking-time<%=recipe.getId()%>">Время приготовления: <%=recipe.getCookingTime()%></div>
+                                    <div id="recipe-category<%=recipe.getId()%>">Категории:</div>
+                                    <div id="ingredients<%=recipe.getId()%>">Ингредиенты:</div>
+                                </div>
+                                <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
+                                <div id="recipe-text<%=recipe.getId()%>">
+                                    <%=recipe.getText()%><br>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%
+                }
+            %>
             <div class="card">
                 <img src="../assets/recipes/recipe1.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -130,7 +183,7 @@
 </div>
 <script>
     function createRecipe() {
-        document.location.href = "new_recipe.jsp";
+        document.location.href = "jsp/new_recipe.jsp";
     }
 </script>
 </body>
