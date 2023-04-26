@@ -88,7 +88,7 @@
                                     <div id="ingredients<%=recipe.getId()%>">Ингредиенты:</div>
                                 </div>
                                 <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
-                                <div id="recipe-text<%=recipe.getId()%>">
+                                <div id="recipe-text<%=recipe.getId()%>" class="recipe-text">
                                     <%=recipe.getText()%><br>
                                 </div>
                             </div>

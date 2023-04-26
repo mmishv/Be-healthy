@@ -59,6 +59,10 @@
     object-fit: cover;
     object-position: center;
 }
+.recipe-text{
+    white-space: pre-line !important;
+    text-align: left;
+}
 
 .general-info {
     display: inline-block;
