@@ -63,18 +63,17 @@
                     <h5 class="card-title"><%=recipe.getTitle()%></h5>
                 </div>
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong<%=recipe.getId()%>"
-                    onclick="showRecipe(<%=recipe.getId()%>)">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%=recipe.getId()%>">
                         Посмотреть рецепт
                     </button>
                 </div>
 
-                <div class="modal fade" id="exampleModalLong<%=recipe.getId()%>" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalLongTitle<%=recipe.getId()%>" aria-hidden="true">
+                <div class="modal fade" id="<%=recipe.getId()%>" tabindex="-1" role="dialog"
+                     aria-labelledby="<%=recipe.getId()%>" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLongTitle<%=recipe.getId()%>"><%=recipe.getTitle()%></h4>
+                                <h4 class="modal-title" id="<%=recipe.getId()%>"><%=recipe.getTitle()%></h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -108,9 +107,6 @@
 <script>
     function createRecipe() {
         document.location.href = "jsp/new_recipe.jsp";
-    }
-    function showRecipe(id) {
-        document.getElementById(id).classList.toggle("show");
     }
 </script>
 </body>
