@@ -1,0 +1,31 @@
+package by.fpmibsu.be_healthy.services;
+
+import by.fpmibsu.be_healthy.entity.Profile;
+import by.fpmibsu.be_healthy.dao.ProfileDao;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public class ProfileService {
+    public List<Profile> getAll() throws SQLException {
+        return new ProfileDao().getAll();
+    }
+
+
+    public Profile getEntityById(long id) throws SQLException {
+        return new ProfileDao().getEntityById(id);
+    }
+
+
+    public boolean update(Profile entity) throws SQLException {
+        return new ProfileDao().update(entity);
+    }
+
+    public boolean delete(Profile entity) throws SQLException {
+        return new ProfileDao().delete(entity);
+    }
+
+    public boolean create(Profile entity) throws SQLException {
+        return new ProfileDao().create(entity);
+    }
+}
