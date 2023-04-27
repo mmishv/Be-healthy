@@ -1,5 +1,7 @@
 <%@ page import="by.fpmibsu.be_healthy.entity.Recipe" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
+<%--
   Created by IntelliJ IDEA.
   User: user
   Date: 24.04.2023
@@ -54,8 +56,11 @@
     <div class="col-sm-10">
         <button type="button" class="btn add-button" onclick="createRecipe()">Добавить рецепт</button>
         <div class="recipe-wrapper">
-<%               ArrayList<Recipe> recipes = (ArrayList<Recipe>) request.getAttribute("recipes");
-                for (Recipe recipe : recipes){
+<%              ArrayList<String> recipes = (ArrayList<String>) request.getAttribute("recipes");
+                Recipe recipe;
+               // ArrayList<Recipe> recipes = (ArrayList<Recipe>) request.getAttribute("recipes");
+                for (String r : recipes){
+                    recipe = new ObjectMapper().readValue(r, Recipe.class);
 %>
             <div class="card">
                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">

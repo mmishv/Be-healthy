@@ -25,8 +25,8 @@
           <root url="file://$MODULE_DIR$/Be-healthy/out/artifacts/Be_healthy_war_exploded" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$" />
         </sourceRoots>
       </configuration>
@@ -40,8 +40,8 @@
           <root url="file://$MODULE_DIR$/Be-healthy/web" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$" />
         </sourceRoots>
       </configuration>
@@ -60,19 +60,8 @@
     <content url="file://$MODULE_DIR$/out" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/by/fpmibsu/be_healthy/lib/postgresql-42.6.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" exported="" name="jakarta.servlet.api" level="project" />
     <orderEntry type="library" exported="" name="javax.servlet.api" level="application" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.72" level="application_server_libraries" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Maven: jakarta.servlet:jakarta.servlet-api:5.0.0" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
@@ -82,6 +71,49 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="hibernate.core" level="project" />
+    <orderEntry type="library" exported="" name="hibernate.core" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="fasterxml.jackson.core.databind" type="repository">
+        <properties maven-id="com.fasterxml.jackson.core:jackson-databind:2.15.0" />
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0-javadoc.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0-javadoc.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/jackson-databind-2.15.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/jackson-core-2.15.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/jackson-annotations-2.15.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
