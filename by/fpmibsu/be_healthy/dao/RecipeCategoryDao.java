@@ -134,7 +134,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
         return success;
     }
 
-    List<RecipeCategory> getArticleCategoriesByArticleId(int id) throws SQLException {
+    public List<RecipeCategory> getRecipeCategoriesByArticleId(int id) throws SQLException {
         PreparedStatement statement = null;
         String inner_sql = "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?";
         List<RecipeCategory> categories = new ArrayList<>();

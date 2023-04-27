@@ -142,7 +142,7 @@ public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct> {
         return success;
     }
 
-    List<MealProduct> getProductsByMealId(int id) throws SQLException {
+    public List<MealProduct> getProductsByMealId(int id) throws SQLException {
         PreparedStatement statement = null;
         List<MealProduct> products = new ArrayList<>();
         String inner_sql = "SELECT ID FROM MEAL_PRODUCT WHERE MEAL_ID=?";

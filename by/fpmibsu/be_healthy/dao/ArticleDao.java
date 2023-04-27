@@ -166,7 +166,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
         return success;
     }
 
-    List<Article> getWrittenArticlesByAuthorId(int id) throws SQLException {
+    public List<Article> getWrittenArticlesByAuthorId(int id) throws SQLException {
         PreparedStatement statement = null;
         String sql = "SELECT ID FROM ARTICLE WHERE AUTHOR_ID=?";
         List<Article> articles = new ArrayList<>();

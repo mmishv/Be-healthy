@@ -140,7 +140,7 @@ public class IngredientDao extends JDBCPostgreSQL implements Dao<Ingredient>{
         }
         return success;
     }
-    List<Ingredient> getIngredientsByRecipeId(int id) throws SQLException {
+     public List<Ingredient> getIngredientsByRecipeId(int id) throws SQLException {
         PreparedStatement statement = null;
         List<Ingredient> ingredients = new ArrayList<>();
         String inner_sql = "SELECT ID FROM INGREDIENT WHERE RECIPE_ID=?";

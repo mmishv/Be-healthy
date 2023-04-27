@@ -3,12 +3,11 @@ package by.fpmibsu.be_healthy.dao;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
-import javax.sql.rowset.serial.SerialBlob;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import  java.util.Base64;
+import java.util.Base64;
 
 public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     private Connection connection = getConnection();
@@ -37,7 +36,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
                 String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
                 recipe.setBase64image(base64encoded);
 
-                recipe.setCategories(new RecipeCategoryDao().getArticleCategoriesByArticleId(recipe.getAuthorId()));
+                recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByArticleId(recipe.getAuthorId()));
                 recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
                 recipes.add(recipe);
             }
@@ -76,7 +75,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
                 String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
                 recipe.setBase64image(base64encoded);
 
-                recipe.setCategories(new RecipeCategoryDao().getArticleCategoriesByArticleId(recipe.getAuthorId()));
+                recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByArticleId(recipe.getAuthorId()));
                 recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
             }
         } catch (SQLException e) {
@@ -104,7 +103,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.setInt(3, entity.getCookingTime());
             preparedStatement.setString(4, entity.getText());
             preparedStatement.setBytes(5,
-                    entity.getImage() != null ? entity.getImage(): null);
+                    entity.getImage() != null ? entity.getImage() : null);
             preparedStatement.setInt(6, entity.getAuthorId());
             preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();
@@ -159,7 +158,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.setInt(4, entity.getCookingTime());
             preparedStatement.setString(5, entity.getText());
             preparedStatement.setBytes(6,
-                    entity.getImage() != null ? entity.getImage(): null);
+                    entity.getImage() != null ? entity.getImage() : null);
             preparedStatement.setInt(7, entity.getAuthorId());
             preparedStatement.executeUpdate();
             for (var i : entity.getCategories()) {
@@ -190,20 +189,21 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         }
         return success;
     }
-    List<Recipe> getWrittenRecipesByUserId(int id) throws SQLException {
+
+    public List<Recipe> getWrittenRecipesByUserId(int id) throws SQLException {
         PreparedStatement statement = null;
-        String sql  = "SELECT ID FROM RECIPE WHERE AUTHOR_ID=?";
+        String sql = "SELECT ID FROM RECIPE WHERE AUTHOR_ID=?";
         List<Recipe> recipes = new ArrayList<>();
-        try{
+        try {
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet recipesIds = statement.executeQuery();
-            while (recipesIds.next()){
+            while (recipesIds.next()) {
                 recipes.add(new RecipeDao().getEntityById(recipesIds.getInt("ID")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             if (statement != null) {
                 statement.close();
             }
