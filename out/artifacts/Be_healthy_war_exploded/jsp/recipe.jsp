@@ -61,10 +61,11 @@
                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
                 <div class="card-body">
                     <h5 class="card-title"><%=recipe.getTitle()%></h5>
+                    <h6 class="card-title"><%=recipe.getAuthorId()%> Екатерина</h6>
+                    <h6 class="card-title"><%=recipe.getCookingTime()%> минут</h6>
                 </div>
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%=recipe.getId()%>"
-                    <%--onclick="showRecipe(<%=recipe.getId()%>)"--%>>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%=recipe.getId()%>">
                         Посмотреть рецепт
                     </button>
                 </div>
@@ -108,9 +109,6 @@
 <script>
     function createRecipe() {
         document.location.href = "jsp/new_recipe.jsp";
-    }
-    function showRecipe(id) {
-        document.getElementById(id).classList.toggle("show");
     }
 </script>
 </body>
