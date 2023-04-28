@@ -1,6 +1,9 @@
 <%@ page import="by.fpmibsu.be_healthy.entity.Recipe" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
+<%@ page import="by.fpmibsu.be_healthy.services.ProfileService" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="by.fpmibsu.be_healthy.entity.RecipeCategory" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -58,15 +61,20 @@
         <div class="recipe-wrapper">
 <%              ArrayList<String> recipes = (ArrayList<String>) request.getAttribute("recipes");
                 Recipe recipe;
-               // ArrayList<Recipe> recipes = (ArrayList<Recipe>) request.getAttribute("recipes");
+                String name;
                 for (String r : recipes){
                     recipe = new ObjectMapper().readValue(r, Recipe.class);
+                    try {
+                        name = new ProfileService().getEntityById(recipe.getId()).getFirstName();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
 %>
             <div class="card">
                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
                 <div class="card-body">
                     <h5 class="card-title"><%=recipe.getTitle()%></h5>
-                    <h6 class="card-title"><%=recipe.getAuthorId()%> Екатерина</h6>
+                    <h6 class="card-title"><%=name%></h6>
                     <h6 class="card-title"><%=recipe.getCookingTime()%> минут</h6>
                 </div>
                 <div class="card-body">
@@ -88,9 +96,26 @@
                             <div class="modal-body">
                                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
                                 <div class="general-info">
-                                    <div id="author<%=recipe.getId()%>">Автор: <%=recipe.getAuthorId()%></div>
-                                    <div id="cooking-time<%=recipe.getId()%>">Время приготовления: <%=recipe.getCookingTime()%></div>
-                                    <div id="recipe-category<%=recipe.getId()%>">Категории:</div>
+                                    <div class="author<%=recipe.getId()%>">Автор: <%=name%></div>
+                                    <div class="cooking-time<%=recipe.getId()%>">Время приготовления: <%=recipe.getCookingTime()%>  минут</div>
+                                    <div class="recipe-category<%=recipe.getId()%> " style="display: inline">Категории: </div>
+                                    <%
+                                        String category;
+                                        int n = recipe.getCategories().size();
+                                        for (RecipeCategory cat : recipe.getCategories()){
+                                            category = cat.getName().toLowerCase();
+                                            if (--n!=0){
+                                    %>
+                                    <div class="category" style="display: inline"> <%= category %>, </div>
+                                    <%
+                                        }
+                                            else{
+                                    %>
+                                    <div class="category" style="display: inline"> <%= category %></div>
+                                    <%
+                                            }
+                                        }
+                                    %>
                                     <div id="ingredients<%=recipe.getId()%>">Ингредиенты:</div>
                                 </div>
                                 <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
