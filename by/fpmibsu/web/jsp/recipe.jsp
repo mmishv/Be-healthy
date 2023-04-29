@@ -41,19 +41,16 @@
 <div class="page-recipe">
     <div class="categories col-sm-2">
         <ul class="list-group">
-            <li class="list-group-item">Выпечка</li>
-            <li class="list-group-item">Гарниры</li>
-            <li class="list-group-item">Первые блюда</li>
-            <li class="list-group-item">Вторые блюда</li>
-            <li class="list-group-item">Закуски</li>
-            <li class="list-group-item">Салаты</li>
-            <li class="list-group-item">Завтраки</li>
-            <li class="list-group-item">Десерты</li>
-            <li class="list-group-item">Напитки</li>
-            <li class="list-group-item">Мясо</li>
-            <li class="list-group-item">Морепродукты</li>
-            <li class="list-group-item">Для микроволновки</li>
-            <li class="list-group-item">Для мультиварки</li>
+            <%
+                ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
+                String cat_name;
+                for (String r : categories){
+                     cat_name= new ObjectMapper().readValue(r, RecipeCategory.class).getName();
+            %>
+            <li class="list-group-item"><%=cat_name%></li>
+            <%
+                }
+            %>
         </ul>
     </div>
     <div class="col-sm-10">
