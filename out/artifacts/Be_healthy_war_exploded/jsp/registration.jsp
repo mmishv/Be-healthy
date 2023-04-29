@@ -44,34 +44,41 @@
 </div>
 <div>
     <div class="form-wrapper">
-        <h4>Вход</h4>
-        <div class="form-group row">
-            <label for="DropdownFormLogin1" class="col-sm-4">Логин</label>
-            <input type="text" class="form-control col-sm-8" id="DropdownFormLogin1">
-        </div>
-        <div class="form-group row">
-            <label for="DropdownFormPassword1" class="col-sm-4">Пароль</label>
-            <input type="password" class="form-control col-sm-8" id="DropdownFormPassword1">
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <button type="submit" class="btn btn-primary btn-black">Войти</button>
-        </div>
-        <h4>Регистрация</h4>
-        <div class="form-group row">
-            <label for="DropdownFormLogin2" class="col-sm-4">Логин</label>
-            <input type="text" class="form-control col-sm-8" id="DropdownFormLogin2">
-        </div>
-        <div class="form-group row">
-            <label for="DropdownFormPassword2" class="col-sm-4">Пароль</label>
-            <input type="password" class="form-control col-sm-8" id="DropdownFormPassword2">
-        </div>
-        <div class="form-group row">
-            <label for="DropdownFormPassword2-repeat" class="col-sm-4">Подтвердите пароль</label>
-            <input type="password" class="form-control col-sm-8" id="DropdownFormPassword2-repeat">
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <button type="submit" class="btn btn-primary btn-black">Зарегистрироваться</button>
-        </div>
+        <form method="GET">
+            <fieldset class="form-group">
+                <h4>Вход</h4>
+                <div class="form-group row">
+                    <label for="DropdownFormLogin1" class="col-sm-4">Логин</label>
+                    <input type="text" class="form-control col-sm-8" name="login" id="DropdownFormLogin1">
+                </div>
+                <div class="form-group row">
+                    <label for="DropdownFormPassword1" class="col-sm-4">Пароль</label>
+                    <input type="password" class="form-control col-sm-8" name="password" id="DropdownFormPassword1">
+                </div>
+            </fieldset>
+            <div style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn btn-primary btn-black">Войти</button>
+            </div>
+        </form>
+        <form method="GET">
+            <fieldset class="form-group">
+                <h4>Регистрация</h4>
+                <div class="form-group row">
+                    <label for="DropdownFormLogin2" class="col-sm-4">Логин</label>
+                    <input type="text" class="form-control col-sm-8" name="reg_login" id="DropdownFormLogin2">
+                </div>
+                <div class="form-group row">
+                    <label for="DropdownFormPassword2" class="col-sm-4">Пароль</label>
+                    <input type="password" class="form-control col-sm-8" name="reg_password1" id="DropdownFormPassword2">
+                </div>
+                <div class="form-group row">
+                    <label for="DropdownFormPassword2-repeat" class="col-sm-4">Подтвердите пароль</label>
+                    <input type="password" class="form-control col-sm-8" name="reg_password2" id="DropdownFormPassword2-repeat">
+                </div>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-primary btn-black">Зарегистрироваться</button>
+                </div>
+            </fieldset>
         </form>
     </div>
 </div>
