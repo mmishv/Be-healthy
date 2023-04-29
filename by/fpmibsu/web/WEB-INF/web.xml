@@ -25,6 +25,33 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>product</servlet-name>
+        <jsp-file>/jsp/product.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>product</servlet-name>
+        <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>forum</servlet-name>
+        <jsp-file>/jsp/forum.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>forum</servlet-name>
+        <url-pattern>/forum</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>diary</servlet-name>
+        <jsp-file>/jsp/diary.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>diary</servlet-name>
+        <url-pattern>/diary</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>RecipesMainServlet</servlet-name>
         <servlet-class>servlets.RecipesMainServlet</servlet-class>
     </servlet>

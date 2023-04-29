@@ -44,11 +44,8 @@
             <%
                 ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
                 String cat_name;
-                int nn = 2;
                 for (String r : categories){
                      cat_name= new ObjectMapper().readValue(r, RecipeCategory.class).getName();
-                     if (--nn==0)
-                         break;
             %>
             <li class="list-group-item"><%=cat_name%></li>
             <%
