@@ -16,6 +16,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>registration</servlet-name>
+        <jsp-file>/jsp/registration.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registration</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>RecipesMainServlet</servlet-name>
         <servlet-class>servlets.RecipesMainServlet</servlet-class>
     </servlet>
