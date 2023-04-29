@@ -38,14 +38,14 @@
             <ul class="nav navbar-nav mx-auto" style="width: 100%; justify-content: space-around">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="../jsp/main.jsp">
+                    <a class="nav-link active" href="main">
                         <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">-->
                         <!--                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>-->
                         <!--                    </svg>-->
                         Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="diary.jsp">
+                    <a class="nav-link" href="diary">
                         <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">-->
                         <!--                        <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>-->
                         <!--                        <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>-->
@@ -54,48 +54,16 @@
                         Дневник</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../jsp/product.jsp">Продукты</a>
+                    <a class="nav-link" href="product">Продукты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="recipes">Рецепты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../jsp/forum.jsp">Форум</a>
+                    <a class="nav-link" href="forum">Форум</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">Профиль</a>
-                    <form class="dropdown-menu dropdown-menu-right p-4" aria-labelledby="dropdownMenuButton"
-                          id="profile-form">
-                        <h4>Вход</h4>
-                        <div class="form-group row">
-                            <label for="DropdownFormLogin1" class="col-sm-4">Логин</label>
-                            <input type="text" class="form-control col-sm-8" id="DropdownFormLogin1">
-                        </div>
-                        <div class="form-group row">
-                            <label for="DropdownFormPassword1" class="col-sm-4">Пароль</label>
-                            <input type="password" class="form-control col-sm-8" id="DropdownFormPassword1">
-                        </div>
-                        <div style="display: flex; justify-content: flex-end;">
-                            <button type="submit" class="btn btn-primary btn-black">Войти</button>
-                        </div>
-                        <h4>Регистрация</h4>
-                        <div class="form-group row">
-                            <label for="DropdownFormLogin2" class="col-sm-4">Логин</label>
-                            <input type="text" class="form-control col-sm-8" id="DropdownFormLogin2">
-                        </div>
-                        <div class="form-group row">
-                            <label for="DropdownFormPassword2" class="col-sm-4">Пароль</label>
-                            <input type="password" class="form-control col-sm-8" id="DropdownFormPassword2">
-                        </div>
-                        <div class="form-group row">
-                            <label for="DropdownFormPassword2-repeat" class="col-sm-4">Подтвердите пароль</label>
-                            <input type="password" class="form-control col-sm-8" id="DropdownFormPassword2-repeat">
-                        </div>
-                        <div style="display: flex; justify-content: flex-end;">
-                            <button type="submit" class="btn btn-primary btn-black">Зарегистрироваться</button>
-                        </div>
-                    </form>
+                    <a class="nav-link" href="registration">Профиль</a>
                 </li>
 
             </ul>

@@ -112,3 +112,13 @@ h4 {
     background-color: black !important;
     border: solid 2px black !important;
 }
+
+.form-wrapper {
+    width: 650px;
+    margin: 3% auto 0 auto;
+    position: relative;
+    padding: 2% 3%;
+    background-color: #114630;
+    color: white;
+    border-radius: 10px;
+}
