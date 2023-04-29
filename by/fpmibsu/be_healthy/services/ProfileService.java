@@ -28,4 +28,7 @@ public class ProfileService {
     public boolean create(Profile entity) throws SQLException {
         return new ProfileDao().create(entity);
     }
+    public boolean isProfileExist(String login, String password) throws SQLException{
+        return new ProfileDao().isProfileExist(login, password);
+    }
 }
