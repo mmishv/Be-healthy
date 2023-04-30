@@ -107,19 +107,21 @@ public class Recipe implements Serializable {
         this.base64image = base64image;
     }
 
-    public HashMap<String, Integer> getKBJU(){
-        HashMap<String, Integer> kbju = new HashMap<>();
-        int k = 0, b=0, j=0, u=0;
+    public HashMap<String, Double> getKBJU(){
+        HashMap<String, Double> kbju = new HashMap<>();
+        double k = 0, b=0, j=0, u=0, kol=0;
         for (Ingredient i: getIngredients()){
+            kol+=i.getQuantity();
             k+=i.getQuantity()*i.getCalories();
             b+=i.getQuantity()*i.getProteins();
             j+=i.getQuantity()*i.getFats();
             u+=i.getQuantity()*i.getCarbohydrates();
         }
-        kbju.put("k", k);
-        kbju.put("b", b);
-        kbju.put("j", j);
-        kbju.put("u", u);
+        double coef = kol/100;
+        kbju.put("k", k/coef);
+        kbju.put("b", b/coef);
+        kbju.put("j", j/coef);
+        kbju.put("u", u/coef);
         return kbju;
     }
 }
