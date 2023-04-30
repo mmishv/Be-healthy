@@ -77,6 +77,17 @@
     <servlet-mapping>
         <servlet-name>RecipesMainServlet</servlet-name>
         <url-pattern>/recipes</url-pattern>
+
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>create_recipe</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.CreateRecipeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>create_recipe</servlet-name>
+        <url-pattern>/create_recipe</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -87,6 +98,16 @@
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/profile</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CreateRecipeFilter</filter-name>
+        <filter-class>by.fpmibsu.be_healthy.servlets.CreateRecipeFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CreateRecipeFilter</filter-name>
+        <url-pattern>/create_recipe</url-pattern>
     </filter-mapping>
 
     <servlet>

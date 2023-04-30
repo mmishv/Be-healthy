@@ -56,7 +56,7 @@
     </div>
     <div class="col-sm-10">
         <button type="button" class="btn add-button">
-            <a href="new_recipe">Добавить рецепт</a></button>
+            <a href="create_recipe">Добавить рецепт</a></button>
         <div class="recipe-wrapper">
             <% ArrayList<String> recipes = (ArrayList<String>) request.getAttribute("recipes");
                 Recipe recipe;
