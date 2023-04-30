@@ -99,6 +99,24 @@
                             <div class="modal-body">
                                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
                                 <div class="general-info">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" class="col-md-3">К</th>
+                                            <th scope="col" class="col-md-3">Б</th>
+                                            <th scope="col" class="col-md-3">Ж</th>
+                                            <th scope="col" class="col-md-3">У</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>10</td>
+                                            <td>15</td>
+                                            <td>20</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                     <div class="author<%=recipe.getId()%>">Автор: <%=name%>
                                     </div>
                                     <div class="cooking-time<%=recipe.getId()%>">Время
