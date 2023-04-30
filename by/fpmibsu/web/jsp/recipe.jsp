@@ -124,8 +124,38 @@
                                             }
                                         }
                                     %>
-                                    <div id="ingredients<%=recipe.getId()%>">Ингредиенты:</div>
+                                    <%--                                    <div id="ingredients<%=recipe.getId()%>">Ингредиенты:</div>--%>
                                 </div>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col" class="col-md-7">Ингредиент</th>
+                                        <th scope="col" class="col-md-2">Количество</th>
+                                        <th scope="col" class="col-md-3">Мера измерения</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Ингредиент1</td>
+                                        <td style="text-align: center;">10</td>
+                                        <td style="text-align: center;">г</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Ингредиент2</td>
+                                        <td style="text-align: center;">15</td>
+                                        <td style="text-align: center;">г</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Ингредиент3</td>
+                                        <td style="text-align: center;">15</td>
+                                        <td style="text-align: center;">мл</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                                 <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
                                 <div id="recipe-text<%=recipe.getId()%>" class="recipe-text">
                                     <%=recipe.getText()%><br>
