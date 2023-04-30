@@ -16,6 +16,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>main0</servlet-name>
+        <jsp-file>/jsp/main.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>main0</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>registration</servlet-name>
         <jsp-file>/jsp/registration.jsp</jsp-file>
     </servlet>
@@ -53,12 +62,32 @@
 
     <servlet>
         <servlet-name>RecipesMainServlet</servlet-name>
-        <servlet-class>servlets.RecipesMainServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.RecipesMainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>RecipesMainServlet</servlet-name>
         <url-pattern>/recipes</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>by.fpmibsu.be_healthy.servlets.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/profile</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
 </web-app>
