@@ -5,6 +5,7 @@ import javax.persistence.Lob;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class Recipe implements Serializable {
@@ -104,5 +105,23 @@ public class Recipe implements Serializable {
 
     public void setBase64image(String base64image) {
         this.base64image = base64image;
+    }
+
+    public HashMap<String, Double> getKBJU(){
+        HashMap<String, Double> kbju = new HashMap<>();
+        double k = 0, b=0, j=0, u=0, kol=0;
+        for (Ingredient i: getIngredients()){
+            kol+=i.getQuantity();
+            k+=i.getQuantity()*i.getCalories();
+            b+=i.getQuantity()*i.getProteins();
+            j+=i.getQuantity()*i.getFats();
+            u+=i.getQuantity()*i.getCarbohydrates();
+        }
+        double coef = kol/100;
+        kbju.put("k", k/coef);
+        kbju.put("b", b/coef);
+        kbju.put("j", j/coef);
+        kbju.put("u", u/coef);
+        return kbju;
     }
 }
