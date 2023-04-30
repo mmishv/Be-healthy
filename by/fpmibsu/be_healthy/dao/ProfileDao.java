@@ -201,6 +201,24 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         }
         return false;
     }
+    public boolean isLoginAvailable(String login) throws SQLException {
+
+        String sql = "SELECT * FROM PROFILE WHERE LOGIN=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return true;
+    }
     public boolean register(String login, String password) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)";
