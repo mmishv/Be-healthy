@@ -34,4 +34,7 @@ public class ProfileService {
     public boolean register(String login, String password) throws SQLException {
         return new ProfileDao().register(login, password);
     }
+    public boolean isLoginAvailable(String login) throws SQLException {
+        return new ProfileDao().isLoginAvailable(login);
+    }
 }
