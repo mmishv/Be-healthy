@@ -4,6 +4,7 @@
 <%@ page import="by.fpmibsu.be_healthy.services.ProfileService" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.RecipeCategory" %>
+<%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -64,7 +65,7 @@
                 for (String r : recipes) {
                     recipe = new ObjectMapper().readValue(r, Recipe.class);
                     try {
-                        name = new ProfileService().getEntityById(recipe.getId()).getFirstName();
+                        name = new ProfileService().getEntityById(recipe.getId()).getLogin();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -124,8 +125,31 @@
                                             }
                                         }
                                     %>
-                                    <div id="ingredients<%=recipe.getId()%>">Ингредиенты:</div>
                                 </div>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col" class="col-md-7">Ингредиент</th>
+                                        <th scope="col" class="col-md-2">Количество</th>
+                                        <th scope="col" class="col-md-3">Мера измерения</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%
+                                        for (Ingredient i : recipe.getIngredients()) {
+                                    %>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td><%=i.getName()%></td>
+                                        <td style="text-align: center;"><%=i.getQuantity()%></td>
+                                        <td style="text-align: center;"><%=i.getUnit()%></td>
+                                    </tr>
+                                    </tbody>
+                                    <%
+                                        }
+                                    %>
+                                </table>
                                 <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
                                 <div id="recipe-text<%=recipe.getId()%>" class="recipe-text">
                                     <%=recipe.getText()%><br>
