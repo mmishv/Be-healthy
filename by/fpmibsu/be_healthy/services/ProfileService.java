@@ -31,4 +31,7 @@ public class ProfileService {
     public boolean isProfileExist(String login, String password) throws SQLException{
         return new ProfileDao().isProfileExist(login, password);
     }
+    public boolean register(String login, String password) throws SQLException {
+        return new ProfileDao().register(login, password);
+    }
 }

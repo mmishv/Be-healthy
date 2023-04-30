@@ -201,4 +201,26 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         }
         return false;
     }
+    public boolean register(String login, String password) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        String sql = "INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)";
+        boolean success = true;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            success = false;
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return success;
+    }
 }
