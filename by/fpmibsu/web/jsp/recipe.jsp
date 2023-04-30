@@ -44,10 +44,11 @@
             <%
                 ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
                 String cat_name;
-                for (String r : categories){
-                     cat_name= new ObjectMapper().readValue(r, RecipeCategory.class).getName();
+                for (String r : categories) {
+                    cat_name = new ObjectMapper().readValue(r, RecipeCategory.class).getName();
             %>
-            <li class="list-group-item"><%=cat_name%></li>
+            <li class="list-group-item"><%=cat_name%>
+            </li>
             <%
                 }
             %>
@@ -56,26 +57,29 @@
     <div class="col-sm-10">
         <button type="button" class="btn add-button" onclick="createRecipe()">Добавить рецепт</button>
         <div class="recipe-wrapper">
-<%              ArrayList<String> recipes = (ArrayList<String>) request.getAttribute("recipes");
+            <% ArrayList<String> recipes = (ArrayList<String>) request.getAttribute("recipes");
                 Recipe recipe;
                 String name;
-                for (String r : recipes){
+                for (String r : recipes) {
                     recipe = new ObjectMapper().readValue(r, Recipe.class);
                     try {
                         name = new ProfileService().getEntityById(recipe.getId()).getFirstName();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-%>
+            %>
             <div class="card">
                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title"><%=recipe.getTitle()%></h5>
-                    <h6 class="card-title"><%=name%></h6>
+                    <h5 class="card-title"><%=recipe.getTitle()%>
+                    </h5>
+                    <h6 class="card-title"><%=name%>
+                    </h6>
                     <h6 class="card-title"><%=recipe.getCookingTime()%> минут</h6>
                 </div>
                 <div class="card-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%=recipe.getId()%>">
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#<%=recipe.getId()%>">
                         Посмотреть рецепт
                     </button>
                 </div>
@@ -85,7 +89,8 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="<%=recipe.getId()%>"><%=recipe.getTitle()%></h4>
+                                <h4 class="modal-title" id="<%=recipe.getId()%>"><%=recipe.getTitle()%>
+                                </h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -93,22 +98,27 @@
                             <div class="modal-body">
                                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
                                 <div class="general-info">
-                                    <div class="author<%=recipe.getId()%>">Автор: <%=name%></div>
-                                    <div class="cooking-time<%=recipe.getId()%>">Время приготовления: <%=recipe.getCookingTime()%>  минут</div>
-                                    <div class="recipe-category<%=recipe.getId()%> " style="display: inline">Категории: </div>
+                                    <div class="author<%=recipe.getId()%>">Автор: <%=name%>
+                                    </div>
+                                    <div class="cooking-time<%=recipe.getId()%>">Время
+                                        приготовления: <%=recipe.getCookingTime()%>  минут
+                                    </div>
+                                    <div class="recipe-category<%=recipe.getId()%> " style="display: inline">
+                                        Категории:
+                                    </div>
                                     <%
                                         String category;
                                         int n = recipe.getCategories().size();
-                                        for (RecipeCategory cat : recipe.getCategories()){
+                                        for (RecipeCategory cat : recipe.getCategories()) {
                                             category = cat.getName().toLowerCase();
-                                            if (--n!=0){
+                                            if (--n != 0) {
                                     %>
-                                    <div class="category" style="display: inline"> <%= category %>, </div>
+                                    <div class="category" style="display: inline"><%= category %>,</div>
                                     <%
-                                        }
-                                            else{
+                                    } else {
                                     %>
-                                    <div class="category" style="display: inline"> <%= category %></div>
+                                    <div class="category" style="display: inline"><%= category %>
+                                    </div>
                                     <%
                                             }
                                         }

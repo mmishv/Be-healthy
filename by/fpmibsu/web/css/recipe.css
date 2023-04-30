@@ -78,7 +78,34 @@
     text-align: center;
     background-color: white !important;
     width: fit-content;
-    margin: 2% auto 0 !important;
+    margin: 3vh auto 0 !important;
     color: black !important;
     font-weight: bold !important;
+}
+
+.add-button a {
+    color: black !important;
+}
+
+.add-button a:hover {
+    color: black !important;
+    text-decoration: none;
+}
+
+.pagination {
+    position: absolute;
+    right: 5%;
+    top: 3vh !important;
+    margin-bottom: 0;
+}
+
+.pagination .page-item .page-link {
+    color: #fff !important;
+    background-color: #114630 !important;
+    border: 1px solid #dee2e64d !important;
+    opacity: 0.8;
+}
+
+.pagination .page-item .page-link:active {
+    background-color: #137d51 !important;
 }
