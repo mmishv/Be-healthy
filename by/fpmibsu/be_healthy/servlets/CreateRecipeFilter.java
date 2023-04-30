@@ -49,10 +49,9 @@ public class CreateRecipeFilter implements Filter {
     private void move(final HttpServletRequest req, final HttpServletResponse res, boolean isLogged)
             throws ServletException, IOException {
         if (!isLogged)
-            req.getRequestDispatcher("/jsp/registration.jsp").forward(req, res);
-        else{
+            res.sendRedirect("http://localhost:8081/profile");
+        else
             req.getRequestDispatcher("/create_recipe").forward(req, res);
-        }
     }
     @Override
     public void destroy() {
