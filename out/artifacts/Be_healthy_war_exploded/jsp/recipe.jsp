@@ -5,6 +5,8 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.RecipeCategory" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.math.BigDecimal" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -64,6 +66,7 @@
                 String name;
                 for (String r : recipes) {
                     recipe = new ObjectMapper().readValue(r, Recipe.class);
+                    HashMap<String, BigDecimal> kbju = recipe.getKBJU();
                     try {
                         name = new ProfileService().getEntityById(recipe.getId()).getLogin();
                     } catch (SQLException e) {
@@ -100,6 +103,24 @@
                             <div class="modal-body">
                                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
                                 <div class="general-info">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col" class="col-md-3">К</th>
+                                            <th scope="col" class="col-md-3">Б</th>
+                                            <th scope="col" class="col-md-3">Ж</th>
+                                            <th scope="col" class="col-md-3">У</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><%=kbju.get("k")%></td>
+                                            <td><%=kbju.get("b")%></td>
+                                            <td><%=kbju.get("j")%></td>
+                                            <td><%=kbju.get("u")%></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                     <div class="author<%=recipe.getId()%>">Автор: <%=name%>
                                     </div>
                                     <div class="cooking-time<%=recipe.getId()%>">Время
@@ -137,10 +158,11 @@
                                     </thead>
                                     <tbody>
                                     <%
+                                        int cnt=1;
                                         for (Ingredient i : recipe.getIngredients()) {
                                     %>
                                     <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row"><%=cnt++%></th>
                                         <td><%=i.getName()%></td>
                                         <td style="text-align: center;"><%=i.getQuantity()%></td>
                                         <td style="text-align: center;"><%=i.getUnit()%></td>

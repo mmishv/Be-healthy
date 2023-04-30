@@ -5,6 +5,8 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.RecipeCategory" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.math.BigDecimal" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -64,6 +66,7 @@
                 String name;
                 for (String r : recipes) {
                     recipe = new ObjectMapper().readValue(r, Recipe.class);
+                    HashMap<String, BigDecimal> kbju = recipe.getKBJU();
                     try {
                         name = new ProfileService().getEntityById(recipe.getId()).getLogin();
                     } catch (SQLException e) {
@@ -111,10 +114,10 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>5</td>
-                                            <td>10</td>
-                                            <td>15</td>
-                                            <td>20</td>
+                                            <td><%=kbju.get("k")%></td>
+                                            <td><%=kbju.get("b")%></td>
+                                            <td><%=kbju.get("j")%></td>
+                                            <td><%=kbju.get("u")%></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -155,10 +158,11 @@
                                     </thead>
                                     <tbody>
                                     <%
+                                        int cnt=1;
                                         for (Ingredient i : recipe.getIngredients()) {
                                     %>
                                     <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row"><%=cnt++%></th>
                                         <td><%=i.getName()%></td>
                                         <td style="text-align: center;"><%=i.getQuantity()%></td>
                                         <td style="text-align: center;"><%=i.getUnit()%></td>

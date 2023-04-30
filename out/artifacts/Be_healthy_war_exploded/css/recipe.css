@@ -125,3 +125,19 @@ tbody {
 .table td, .table th {
     padding: 0.5rem 0.75rem !important;
 }
+
+.general-info {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 2%;
+    width: 40%;
+}
+
+.general-info table {
+    font-size: smaller;
+}
+
+.general-info td, .general-info th {
+    text-align: center;
+    border: 2px solid #dee2e6;
+}
