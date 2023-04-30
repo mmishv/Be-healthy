@@ -61,6 +61,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>new_recipe</servlet-name>
+        <jsp-file>/jsp/new_recipe.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>new_recipe</servlet-name>
+        <url-pattern>/new_recipe</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>RecipesMainServlet</servlet-name>
         <servlet-class>by.fpmibsu.be_healthy.servlets.RecipesMainServlet</servlet-class>
     </servlet>

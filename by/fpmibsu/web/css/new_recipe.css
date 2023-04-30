@@ -24,3 +24,18 @@
     width: 100%;
     justify-content: space-between;
 }
+
+.back-btn {
+    background-color: #00000000 !important;
+    border: solid 2px #114630 !important;
+    color: #114630 !important;
+}
+
+.back-btn a {
+    color: #114630 !important;
+}
+
+.back-btn a:hover {
+    color: #114630 !important;
+    text-decoration: none !important;
+}

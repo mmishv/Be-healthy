@@ -55,7 +55,8 @@
         </ul>
     </div>
     <div class="col-sm-10">
-        <button type="button" class="btn add-button" onclick="createRecipe()">Добавить рецепт</button>
+        <button type="button" class="btn add-button">
+            <a href="new_recipe">Добавить рецепт</a></button>
         <div class="recipe-wrapper">
             <% ArrayList<String> recipes = (ArrayList<String>) request.getAttribute("recipes");
                 Recipe recipe;
@@ -143,10 +144,5 @@
         </div>
     </div>
 </div>
-<script>
-    function createRecipe() {
-        document.location.href = "jsp/new_recipe.jsp";
-    }
-</script>
 </body>
 </html>

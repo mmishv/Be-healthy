@@ -89,7 +89,7 @@
 
 .add-button a:hover {
     color: black !important;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .pagination {

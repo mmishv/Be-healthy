@@ -80,9 +80,8 @@
                 style="background-color:#114630 !important; border: #114630 !important;">
             Добавить
         </button>
-        <button type="reset" class="btn btn-primary" onclick="goToRecipes()"
-                style="background-color: #00000000; border: solid 2px #114630; color: #114630">
-            Вернуться к рецептам
+        <button class="btn btn-primary back-btn">
+            <a href="recipe">Вернуться к рецептам</a>
         </button>
     </div>
 
@@ -113,10 +112,6 @@
             container.classList.add('ingredient-option');
             document.getElementById('ingredients-list').appendChild(container);
         }
-    }
-
-    function goToRecipes() {
-        document.location.href = "recipe.jsp";
     }
 </script>
 </body>
