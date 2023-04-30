@@ -81,7 +81,7 @@
             Добавить
         </button>
         <button class="btn btn-primary back-btn">
-            <a href="recipe">Вернуться к рецептам</a>
+            <a href="recipes">Вернуться к рецептам</a>
         </button>
     </div>
 

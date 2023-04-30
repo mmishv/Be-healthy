@@ -26,9 +26,9 @@
 }
 
 .back-btn {
-    background-color: #00000000;
-    border: solid 2px #114630;
-    color: #114630;
+    background-color: #00000000 !important;
+    border: solid 2px #114630 !important;
+    color: #114630 !important;
 }
 
 .back-btn a {
