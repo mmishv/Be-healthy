@@ -33,53 +33,19 @@
 </div>
 <div class="mixer col-sm-5">
     <h3 style="text-align: center; margin-bottom: 5%;">Микшер рецептов</h3>
-    <div class="product-inf d-flex center">
-        <div class="col-sm-7">
-            <input class="form-control product" placeholder="Продукт">
+    <div id="products">
+        <div class="product-inf d-flex center">
+            <input class="col-sm-6 form-control product" placeholder="продукт">
+            <input class="col-sm-2 form-control quantity" placeholder="Кол-во">
+            <select class="form-control col-sm-2 measure">
+                <option selected>шт.</option>
+                <option>ч.л.</option>
+                <option>ст.л.</option>
+                <option>г</option>
+                <option>мл</option>
+            </select>
+            <button class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
         </div>
-        <div class="col-sm-2">
-            <input class="form-control quantity" placeholder="Кол-во">
-        </div>
-        <select class="form-control col-sm-2 measure">
-            <option selected>шт.</option>
-            <option>кг</option>
-            <option>г</option>
-            <option>л</option>
-        </select>
-    </div>
-    <div class="product-inf d-flex center">
-        <div class="col-sm-7">
-            <input class="form-control product" placeholder="Продукт">
-        </div>
-        <div class="col-sm-2">
-            <input class="form-control quantity" placeholder="Кол-во">
-        </div>
-        <select class="form-control col-sm-2 measure">
-            <option selected>шт.</option>
-            <option>кг</option>
-            <option>г</option>
-            <option>л</option>
-        </select>
-    </div>
-    <div class="product-inf d-flex center">
-        <div class="col-sm-7">
-            <input class="form-control product" placeholder="Продукт">
-        </div>
-        <div class="col-sm-2">
-            <input class="form-control quantity" placeholder="Кол-во">
-        </div>
-        <select class="form-control col-sm-2 measure">
-            <option selected>шт.</option>
-            <option>кг</option>
-            <option>г</option>
-            <option>л</option>
-        </select>
-    </div>
-    <div class="add-button btn btn-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color="#114630" fill="currentColor"
-             class="bi bi-plus" viewBox="0 0 16 16">
-            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
     </div>
     <div style="display: flex; justify-content: flex-end;">
         <button type="submit" class="btn btn-primary btn-black">Подобрать</button>
