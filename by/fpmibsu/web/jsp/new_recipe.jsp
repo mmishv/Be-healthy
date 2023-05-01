@@ -1,4 +1,9 @@
-<%--
+<%@ page import="by.fpmibsu.be_healthy.entity.RecipeCategory" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
+<%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
+<%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %>
+<%@ page import="by.fpmibsu.be_healthy.entity.Product" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 24.04.2023
@@ -6,6 +11,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -31,50 +37,69 @@
 <div class="background">
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
-<div class="wrapper col-sm-9" style="margin: auto;">
-    <div class="form-group row">
-        <label for="recipe-title" class="col-sm-4 col-form-label">Название: </label>
-        <div class="col-sm-8">
-            <input class="form-control" id="recipe-title" placeholder="Например, оладьи" required>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="recipe-cooking-time" class="col-sm-4 col-form-label">Время приготовления, мин: </label>
-        <div class="col-sm-8">
-            <input type="number" class="form-control" id="recipe-cooking-time" placeholder="Например, 30" required>
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-4 bold">Категории:</div>
-        <div class="col-sm-8 row" style="margin: 0;">
-            <div class="form-check col-sm-6">
-                <input class="form-check-input" type="checkbox" value="" id="category1">
-                <label class="form-check-label" for="category1">
-                    Default checkbox
-                </label>
+<%  ArrayList<RecipeCategory> cats = new ObjectMapper().readValue(request.getAttribute("categories").toString(),
+                                new TypeReference<ArrayList<RecipeCategory>>() {});
+    ArrayList<Product> prods = new ObjectMapper().readValue(request.getAttribute("products").toString(),
+            new TypeReference<ArrayList<Product>>() {});
+    request.setAttribute("categories", cats);
+    request.setAttribute("products", prods);
+%>
+<form method="POST" action="register">
+    <fieldset class="form-group">
+        <div class="wrapper col-sm-9" style="margin: auto;">
+            <div class="form-group row">
+                <label for="recipe-title" class="col-sm-4 col-form-label">Название: </label>
+                <div class="col-sm-8">
+                    <input class="form-control" id="recipe-title" placeholder="Например, оладьи" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="recipe-cooking-time" class="col-sm-4 col-form-label">Время приготовления, мин: </label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="recipe-cooking-time" placeholder="Например, 30" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4 bold">Категории:</div>
+                <div class="col-sm-8 row" style="margin: 0;">
+                <c:forEach items="${categories}" var="category">
+                   <br/>
+                    <div class="form-check col-sm-6">
+                        <input class="form-check-input" type="checkbox" value="" id="category1">
+                        <label class="form-check-label" for="category1">
+                        <c:out value="${category.name}"/>
+                        </label>
+                    </div>
+                </c:forEach>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4 bold">Ингредиенты:</div>
+                <div class="col-sm-8" id="ingredients-list">
+                    <div class="row ingredient-option">
+                        <select id="ingredient1" class="form-control col-sm-7">
+                            <c:forEach items="${products}" var="product">
+                            <option value="${product.id}"><c:out value="${product.name}"/></option>
+                            </c:forEach>
+                        </select>
+                        <input type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <button class="col-sm-1 ing-button" onclick="addIngredient(this)">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="recipe-photo" class="col-sm-4 bold">Фото рецепта:</label>
+                <div class="col-sm-8">
+                    <input type="file" class="form-control-file" id="recipe-photo">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="recipe-description" class="col-sm-4 bold">Описание рецепта:</label>
+                <textarea class="form-control col-sm-8" id="recipe-description" rows="5"></textarea>
             </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-4 bold">Ингредиенты:</div>
-        <div class="col-sm-8" id="ingredients-list">
-            <div class="row ingredient-option">
-                <select id="ingredient1" class="form-control col-sm-7"></select>
-                <input type="number" class="form-control col-sm-2" placeholder="кол-во" required>
-                <button class="col-sm-1 ing-button" onclick="addIngredient(this)">+</button>
-            </div>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="recipe-photo" class="col-sm-4 bold">Фото рецепта:</label>
-        <div class="col-sm-8">
-            <input type="file" class="form-control-file" id="recipe-photo">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="recipe-description" class="col-sm-4 bold">Описание рецепта:</label>
-        <textarea class="form-control col-sm-8" id="recipe-description" rows="5"></textarea>
-    </div>
+    </fieldset>
+</form>
     <div class="form-group row">
         <button type="submit" class="btn btn-primary"
                 style="background-color:#114630 !important; border: #114630 !important;">

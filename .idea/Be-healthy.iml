@@ -117,5 +117,6 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="javax.servlet.jsp.jstl.api" level="application" />
     <orderEntry type="library" exported="" name="taglibs.standard" level="application" />
+    <orderEntry type="library" name="jstl" level="application" />
   </component>
 </module>
