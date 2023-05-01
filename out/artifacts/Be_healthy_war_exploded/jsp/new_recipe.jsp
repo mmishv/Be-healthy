@@ -37,10 +37,12 @@
 <div class="background">
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
-<%  ArrayList<RecipeCategory> cats = new ObjectMapper().readValue(request.getAttribute("categories").toString(),
-                                new TypeReference<ArrayList<RecipeCategory>>() {});
+<% ArrayList<RecipeCategory> cats = new ObjectMapper().readValue(request.getAttribute("categories").toString(),
+        new TypeReference<ArrayList<RecipeCategory>>() {
+        });
     ArrayList<Product> prods = new ObjectMapper().readValue(request.getAttribute("products").toString(),
-            new TypeReference<ArrayList<Product>>() {});
+            new TypeReference<ArrayList<Product>>() {
+            });
     request.setAttribute("categories", cats);
     request.setAttribute("products", prods);
 %>
@@ -56,30 +58,31 @@
             <div class="form-group row">
                 <label for="recipe-cooking-time" class="col-sm-4 col-form-label">Время приготовления, мин: </label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="recipe-cooking-time" placeholder="Например, 30" required>
+                    <input type="number" class="form-control" id="recipe-cooking-time" placeholder="Например, 30"
+                           required>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-4 bold">Категории:</div>
                 <div class="col-sm-8 row" style="margin: 0;">
-                <c:forEach items="${categories}" var="category">
-                   <br/>
-                    <div class="form-check col-sm-6">
-                        <input class="form-check-input" type="checkbox" value="" id="category1">
-                        <label class="form-check-label" for="category1">
-                        <c:out value="${category.name}"/>
-                        </label>
-                    </div>
-                </c:forEach>
+                    <c:forEach items="${categories}" var="category">
+                        <br/>
+                        <div class="form-check col-sm-6">
+                            <input class="form-check-input" type="checkbox" value="" id="category1">
+                            <label class="form-check-label" for="category1">
+                                <c:out value="${category.name}"/>
+                            </label>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-4 bold">Ингредиенты:</div>
-                <div class="col-sm-8" id="ingredients-list" >
+                <div class="col-sm-8" id="ingredients-list">
                     <div class="row ingredient-option" id="ing-option1">
                         <select id="ingredient1" class="form-control col-sm-6">
                             <c:forEach items="${products}" var="product">
-                            <option value="${product.id}"><c:out value="${product.name}"/></option>
+                                <option value="${product.id}"><c:out value="${product.name}"/></option>
                             </c:forEach>
                         </select>
                         <input id="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
@@ -107,25 +110,25 @@
         </div>
     </fieldset>
 </form>
-    <div class="form-group row">
-        <button type="submit" class="btn btn-primary"
-                style="background-color:#114630 !important; border: #114630 !important;">
-            Добавить
-        </button>
-        <button class="btn btn-primary back-btn">
-            <a href="recipes">Вернуться к рецептам</a>
-        </button>
-    </div>
+<div class="form-group row">
+    <button type="submit" class="btn btn-primary"
+            style="background-color:#114630 !important; border: #114630 !important;">
+        Добавить
+    </button>
+    <button class="btn btn-primary back-btn">
+        <a href="recipes">Вернуться к рецептам</a>
+    </button>
+</div>
 
 </div>
 <script>
     var counter = 2;
+
     function addIngredient(e) {
         if (e.classList.contains('disabled')) {
             e.parentElement.remove();
-        }
-        else {
-            let container =  e.parentElement.cloneNode(true);
+        } else {
+            let container = e.parentElement.cloneNode(true);
             container.id = "ing-option" + counter;
             let ch = container.children;
             ch[0].id = "ingredient" + counter;

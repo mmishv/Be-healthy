@@ -1,27 +1,32 @@
-.mixer{
+.mixer {
     color: white;
     background-color: #114630;
     opacity: 0.8;
     height: 100%;
     padding: 2% 0;
 }
-.product-inf{
+
+.product-inf {
     justify-content: space-between;
     margin: 1%;
 }
-.col-sm-2, .col-sm-7{
+
+.col-sm-2, .col-sm-7 {
     padding: 7px 5px !important;
 }
-select.col-sm-2{
+
+select.col-sm-2 {
     padding: 0 !important;
     margin: 5px !important;
 }
-.btn{
+
+.btn {
     background-color: white !important;
     border: none !important;
     margin: 5px auto 0 5px;
 }
-.btn.btn-black{
+
+.btn.btn-black {
     background-color: black !important;
     margin: 2% 0 0 0 !important;
 }
@@ -32,7 +37,7 @@ select.col-sm-2{
     border-radius: 5px;
 }
 
-input{
+input {
     height: fit-content;
     align-self: center;
 }

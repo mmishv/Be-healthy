@@ -34,10 +34,10 @@
 <div class="mixer col-sm-5">
     <h3 style="text-align: center; margin-bottom: 5%;">Микшер рецептов</h3>
     <div id="products">
-        <div class="product-inf d-flex center">
-            <input class="col-sm-6 form-control product" placeholder="продукт">
-            <input class="col-sm-2 form-control quantity" placeholder="Кол-во">
-            <select class="form-control col-sm-2 measure">
+        <div class="product-inf d-flex center" id="product-inf1">
+            <input class="col-sm-6 form-control" id="product1" placeholder="продукт">
+            <input class="col-sm-2 form-control" id=quantity1" placeholder="кол-во">
+            <select class="form-control col-sm-2" id="measure1">
                 <option selected>шт.</option>
                 <option>ч.л.</option>
                 <option>ст.л.</option>
@@ -52,42 +52,24 @@
     </div>
 </div>
 <script>
+    var counter = 2;
+
     function addProduct(e) {
         if (e.classList.contains('disabled')) {
             e.parentElement.remove();
         } else {
+            let container = e.parentElement.cloneNode(true);
+            container.id = "product-inf" + counter;
+            let ch = container.children;
+            ch[0].id = "product" + counter;
+            ch[1].id = "quantity" + counter;
+            ch[1].value = '';
+            ch[2].id = "measure" + counter;
+            counter++;
+            document.getElementById('products').appendChild(container);
             e.classList.add('disabled');
             e.style.backgroundColor = '#114630a8';
             e.innerHTML = '-';
-            let inputField1 = document.createElement('input');
-            inputField1.className = "col-sm-6 form-control product";
-            inputField1.placeholder = "Продукт";
-            let inputField2 = document.createElement('input');
-            inputField2.className = "col-sm-2 form-control quantity";
-            inputField2.type = "number";
-            inputField2.placeholder = "кол-во";
-            let selectField = document.createElement('select');
-            selectField.className = "form-control col-sm-2 measure";
-            let options = ['шт.','ч.л.','ст.л.','г','мл'];
-            for(let i = 0; i < options.length; i++){
-                let opt = document.createElement('option');
-                opt.innerHTML = options[i];
-                if(i == 0)
-                    opt.selected = true;
-                selectField.appendChild(opt);
-            }
-            let button = document.createElement('button');
-            button.className = "col-sm-1 ing-button";
-            button.innerHTML = '+';
-            button.addEventListener('click', () => addProduct(button));
-            let container = document.createElement('div');
-            container.classList.add('row');
-            container.appendChild(inputField1);
-            container.appendChild(inputField2);
-            container.appendChild(selectField);
-            container.appendChild(button);
-            container.className = 'product-inf d-flex center';
-            document.getElementById('products').appendChild(container);
         }
     }
 </script>
