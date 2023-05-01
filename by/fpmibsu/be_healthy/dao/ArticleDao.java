@@ -13,7 +13,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
     @Override
     public List<Article> getAll() throws SQLException {
         List<Article> articles = new ArrayList<>();
-        String sql = "SELECT * FROM ARTICLE";
+        String sql = "SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC";
         Statement statement = null;
         try {
             statement = connection.createStatement();

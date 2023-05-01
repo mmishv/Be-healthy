@@ -12,7 +12,7 @@ public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCat
     @Override
     public List<ArticleCategory> getAll() throws SQLException {
         List<ArticleCategory> categories = new ArrayList<>();
-        String sql = "SELECT ID, NAME FROM ARTICLE_CATEGORY";
+        String sql = "SELECT ID, NAME FROM ARTICLE_CATEGORY ORDER BY NAME";
         Statement statement = null;
         try {
             statement = connection.createStatement();

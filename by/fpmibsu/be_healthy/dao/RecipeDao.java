@@ -15,7 +15,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     @Override
     public List<Recipe> getAll() throws SQLException {
         List<Recipe> recipes = new ArrayList<>();
-        String sql = "SELECT * FROM RECIPE";
+        String sql = "SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC";
         Statement statement = null;
         PreparedStatement inner_statement = null;
         try {

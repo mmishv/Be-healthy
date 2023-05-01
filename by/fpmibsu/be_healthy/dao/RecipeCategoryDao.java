@@ -12,7 +12,7 @@ public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCateg
     @Override
     public List<RecipeCategory> getAll() throws SQLException {
         List<RecipeCategory> categories = new ArrayList<>();
-        String sql = "SELECT ID, NAME FROM RECIPE_CATEGORY";
+        String sql = "SELECT ID, NAME FROM RECIPE_CATEGORY ORDER BY NAME";
         Statement statement = null;
         try {
             statement = connection.createStatement();

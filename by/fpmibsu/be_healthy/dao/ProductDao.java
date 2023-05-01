@@ -13,7 +13,7 @@ public class ProductDao extends JDBCPostgreSQL implements Dao<Product>{
     @Override
     public List<Product> getAll() throws SQLException {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM PRODUCT";
+        String sql = "SELECT * FROM PRODUCT ORDER BY NAME";
         Statement statement = null;
         try {
             statement = connection.createStatement();
