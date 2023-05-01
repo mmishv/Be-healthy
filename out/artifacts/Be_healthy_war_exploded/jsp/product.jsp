@@ -33,57 +33,63 @@
 </div>
 <div class="mixer col-sm-5">
     <h3 style="text-align: center; margin-bottom: 5%;">Микшер рецептов</h3>
-    <div class="product-inf d-flex center">
-        <div class="col-sm-7">
-            <input class="form-control product" placeholder="Продукт">
+    <div id="products">
+        <div class="product-inf d-flex center">
+            <input class="col-sm-6 form-control product" placeholder="Продукт">
+            <input class="col-sm-2 form-control quantity" placeholder="кол-во">
+            <select class="form-control col-sm-2 measure">
+                <option selected>шт.</option>
+                <option>ч.л.</option>
+                <option>ст.л.</option>
+                <option>г</option>
+                <option>мл</option>
+            </select>
+            <button class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
         </div>
-        <div class="col-sm-2">
-            <input class="form-control quantity" placeholder="Кол-во">
-        </div>
-        <select class="form-control col-sm-2 measure">
-            <option selected>шт.</option>
-            <option>кг</option>
-            <option>г</option>
-            <option>л</option>
-        </select>
-    </div>
-    <div class="product-inf d-flex center">
-        <div class="col-sm-7">
-            <input class="form-control product" placeholder="Продукт">
-        </div>
-        <div class="col-sm-2">
-            <input class="form-control quantity" placeholder="Кол-во">
-        </div>
-        <select class="form-control col-sm-2 measure">
-            <option selected>шт.</option>
-            <option>кг</option>
-            <option>г</option>
-            <option>л</option>
-        </select>
-    </div>
-    <div class="product-inf d-flex center">
-        <div class="col-sm-7">
-            <input class="form-control product" placeholder="Продукт">
-        </div>
-        <div class="col-sm-2">
-            <input class="form-control quantity" placeholder="Кол-во">
-        </div>
-        <select class="form-control col-sm-2 measure">
-            <option selected>шт.</option>
-            <option>кг</option>
-            <option>г</option>
-            <option>л</option>
-        </select>
-    </div>
-    <div class="add-button btn btn-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color="#114630" fill="currentColor"
-             class="bi bi-plus" viewBox="0 0 16 16">
-            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
     </div>
     <div style="display: flex; justify-content: flex-end;">
         <button type="submit" class="btn btn-primary btn-black">Подобрать</button>
     </div>
 </div>
+<script>
+    function addProduct(e) {
+        if (e.classList.contains('disabled')) {
+            e.parentElement.remove();
+        } else {
+            e.classList.add('disabled');
+            e.style.backgroundColor = '#114630a8';
+            e.innerHTML = '-';
+            let inputField1 = document.createElement('input');
+            inputField1.className = "col-sm-6 form-control product";
+            inputField1.placeholder = "Продукт";
+            let inputField2 = document.createElement('input');
+            inputField2.className = "col-sm-2 form-control quantity";
+            inputField2.type = "number";
+            inputField2.placeholder = "кол-во";
+            let selectField = document.createElement('select');
+            selectField.className = "form-control col-sm-2 measure";
+            let options = ['шт.','ч.л.','ст.л.','г','мл'];
+            for(let i = 0; i < options.length; i++){
+                let opt = document.createElement('option');
+                opt.innerHTML = options[i];
+                if(i == 0)
+                    opt.selected = true;
+                selectField.appendChild(opt);
+            }
+            let button = document.createElement('button');
+            button.className = "col-sm-1 ing-button";
+            button.innerHTML = '+';
+            button.addEventListener('click', () => addProduct(button));
+            let container = document.createElement('div');
+            container.classList.add('row');
+            container.appendChild(inputField1);
+            container.appendChild(inputField2);
+            container.appendChild(selectField);
+            container.appendChild(button);
+            container.className = 'product-inf d-flex center';
+            document.getElementById('products').appendChild(container);
+        }
+    }
+</script>
 </body>
 </html>
