@@ -82,8 +82,8 @@
                             <option value="${product.id}"><c:out value="${product.name}"/></option>
                             </c:forEach>
                         </select>
-                        <input type="number" class="form-control col-sm-2" placeholder="кол-во" required>
-                        <select class="form-control col-sm-2">
+                        <input id="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <select id="measure1" class="form-control col-sm-2">
                             <option selected>шт.</option>
                             <option>ч.л.</option>
                             <option>ст.л.</option>
@@ -129,12 +129,15 @@
             e.innerHTML = '-';
             let selectField1 = document.createElement('select');
             selectField1.className = "form-control col-sm-6";
+            selectField1.id = "ingredient" + i;
             let inputField = document.createElement('input');
             inputField.className = "form-control col-sm-2";
             inputField.type = "number";
             inputField.placeholder = "кол-во";
+            inputField.id = "quantity" + i;
             let selectField2 = document.createElement('select');
             selectField2.className = "form-control col-sm-2";
+            selectField2.id = "measure" + i;
             let options = ['шт.','ч.л.','ст.л.','г','мл'];
             for(let i = 0; i < options.length; i++){
                 let opt = document.createElement('option');
