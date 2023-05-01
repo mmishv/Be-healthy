@@ -2,12 +2,13 @@
     color: white;
     background-color: #114630;
     opacity: 0.8;
-    height: 100vh;
-    padding-top: 2%;
+    height: 100%;
+    padding: 2% 0;
 }
 
 .product-inf {
     justify-content: space-between;
+    margin: 1%;
 }
 
 .col-sm-2, .col-sm-7 {
@@ -27,5 +28,16 @@ select.col-sm-2 {
 
 .btn.btn-black {
     background-color: black !important;
-    margin: 0;
+    margin: 2% 0 0 0 !important;
+}
+
+.ing-button {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+input {
+    height: fit-content;
+    align-self: center;
 }
