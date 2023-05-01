@@ -2,8 +2,11 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.dao.RecipeCategoryDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeCategoryService {
@@ -30,5 +33,15 @@ public class RecipeCategoryService {
 
     public List<RecipeCategory> getRecipeCategoriesByArticleId(int id) throws SQLException {
         return new RecipeCategoryDao().getRecipeCategoriesByArticleId(id);
+    }
+
+    public ArrayList<String> getAllJSON() throws JsonProcessingException, SQLException {
+        ArrayList<RecipeCategory> categories = new ArrayList<>();
+        categories = (ArrayList<RecipeCategory>) new RecipeCategoryService().getAll();
+        ArrayList<String> json_cat = new ArrayList<>();
+        for (var c: categories){
+            json_cat.add(new ObjectMapper().writeValueAsString(c));
+        }
+        return json_cat;
     }
 }
