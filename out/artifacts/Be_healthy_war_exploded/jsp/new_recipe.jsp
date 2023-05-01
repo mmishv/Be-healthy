@@ -75,7 +75,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-4 bold">Ингредиенты:</div>
-                <div class="col-sm-8" id="ingredients-list">
+                <div class="col-sm-8" id="ingredients-list" >
                     <div class="row ingredient-option" id="ing-option1">
                         <select id="ingredient1" class="form-control col-sm-6">
                             <c:forEach items="${products}" var="product">
@@ -129,15 +129,15 @@
             e.innerHTML = '-';
             let selectField1 = document.createElement('select');
             selectField1.className = "form-control col-sm-6";
-            selectField1.id = "ingredient" + i;
+            selectField1.id = "ingredient" + counter;
             let inputField = document.createElement('input');
             inputField.className = "form-control col-sm-2";
             inputField.type = "number";
             inputField.placeholder = "кол-во";
-            inputField.id = "quantity" + i;
+            inputField.id = "quantity" + counter;
             let selectField2 = document.createElement('select');
             selectField2.className = "form-control col-sm-2";
-            selectField2.id = "measure" + i;
+            selectField2.id = "measure" + counter;
             let options = ['шт.','ч.л.','ст.л.','г','мл'];
             for(let i = 0; i < options.length; i++){
                 let opt = document.createElement('option');
@@ -153,8 +153,8 @@
             let container = document.createElement('div');
             container.appendChild(selectField1);
             container.appendChild(inputField);
-            container.appendChild(button);
             container.appendChild(selectField2);
+            container.appendChild(button);
             container.className = "row ingredient-option";
             container.id = "ing-option" + counter;
             counter++;
