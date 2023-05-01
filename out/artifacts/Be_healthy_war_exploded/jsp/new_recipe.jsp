@@ -76,13 +76,20 @@
             <div class="form-group row">
                 <div class="col-sm-4 bold">Ингредиенты:</div>
                 <div class="col-sm-8" id="ingredients-list">
-                    <div class="row ingredient-option">
-                        <select id="ingredient1" class="form-control col-sm-7">
+                    <div class="row ingredient-option" id="ing-option1">
+                        <select id="ingredient1" class="form-control col-sm-6">
                             <c:forEach items="${products}" var="product">
                             <option value="${product.id}"><c:out value="${product.name}"/></option>
                             </c:forEach>
                         </select>
                         <input type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <select class="form-control col-sm-2">
+                            <option selected>шт.</option>
+                            <option>ч.л.</option>
+                            <option>ст.л.</option>
+                            <option>г</option>
+                            <option>мл</option>
+                        </select>
                         <button class="col-sm-1 ing-button" onclick="addIngredient(this)">+</button>
                     </div>
                 </div>
@@ -112,6 +119,7 @@
 
 </div>
 <script>
+    var counter = 2;
     function addIngredient(e) {
         if (e.classList.contains('disabled')) {
             e.parentElement.remove();
@@ -119,22 +127,34 @@
             e.classList.add('disabled');
             e.style.backgroundColor = '#114630a8';
             e.innerHTML = '-';
-            let selectField = document.createElement('select');
-            selectField.className = "form-control col-sm-7";
+            let selectField1 = document.createElement('select');
+            selectField1.className = "form-control col-sm-6";
             let inputField = document.createElement('input');
             inputField.className = "form-control col-sm-2";
             inputField.type = "number";
             inputField.placeholder = "кол-во";
+            let selectField2 = document.createElement('select');
+            selectField2.className = "form-control col-sm-2";
+            let options = ['шт.','ч.л.','ст.л.','г','мл'];
+            for(let i = 0; i < options.length; i++){
+                let opt = document.createElement('option');
+                opt.innerHTML = options[i];
+                if(i == 0)
+                    opt.selected = true;
+                selectField2.appendChild(opt);
+            }
             let button = document.createElement('button');
             button.className = "col-sm-1 ing-button";
             button.innerHTML = '+';
             button.addEventListener('click', () => addIngredient(button));
             let container = document.createElement('div');
-            container.classList.add('row');
-            container.appendChild(selectField);
+            container.appendChild(selectField1);
             container.appendChild(inputField);
             container.appendChild(button);
-            container.classList.add('ingredient-option');
+            container.appendChild(selectField2);
+            container.className = "row ingredient-option";
+            container.id = "ing-option" + counter;
+            counter++;
             document.getElementById('ingredients-list').appendChild(container);
         }
     }
