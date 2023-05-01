@@ -123,42 +123,20 @@
     function addIngredient(e) {
         if (e.classList.contains('disabled')) {
             e.parentElement.remove();
-        } else {
+        }
+        else {
+            let container =  e.parentElement.cloneNode(true);
+            container.id = "ing-option" + counter;
+            let ch = container.children;
+            ch[0].id = "ingredient" + counter;
+            ch[1].id = "quantity" + counter;
+            ch[1].value = '';
+            ch[2].id = "measure" + counter;
+            counter++;
+            document.getElementById('ingredients-list').appendChild(container);
             e.classList.add('disabled');
             e.style.backgroundColor = '#114630a8';
             e.innerHTML = '-';
-            let selectField1 = document.createElement('select');
-            selectField1.className = "form-control col-sm-6";
-            selectField1.id = "ingredient" + counter;
-            let inputField = document.createElement('input');
-            inputField.className = "form-control col-sm-2";
-            inputField.type = "number";
-            inputField.placeholder = "кол-во";
-            inputField.id = "quantity" + counter;
-            let selectField2 = document.createElement('select');
-            selectField2.className = "form-control col-sm-2";
-            selectField2.id = "measure" + counter;
-            let options = ['шт.','ч.л.','ст.л.','г','мл'];
-            for(let i = 0; i < options.length; i++){
-                let opt = document.createElement('option');
-                opt.innerHTML = options[i];
-                if(i == 0)
-                    opt.selected = true;
-                selectField2.appendChild(opt);
-            }
-            let button = document.createElement('button');
-            button.className = "col-sm-1 ing-button";
-            button.innerHTML = '+';
-            button.addEventListener('click', () => addIngredient(button));
-            let container = document.createElement('div');
-            container.appendChild(selectField1);
-            container.appendChild(inputField);
-            container.appendChild(selectField2);
-            container.appendChild(button);
-            container.className = "row ingredient-option";
-            container.id = "ing-option" + counter;
-            counter++;
-            document.getElementById('ingredients-list').appendChild(container);
         }
     }
 </script>
