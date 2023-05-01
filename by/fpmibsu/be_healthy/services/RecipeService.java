@@ -36,13 +36,7 @@ public class RecipeService {
         return new RecipeDao().getWrittenRecipesByUserId(id);
     }
 
-    public ArrayList<String> getAllJSON() throws JsonProcessingException, SQLException {
-        ArrayList<Recipe> recipes = new ArrayList<>();
-        recipes = (ArrayList<Recipe>) new RecipeService().getAll();
-        ArrayList<String> json_rec = new ArrayList<>();
-        for (var r: recipes){
-            json_rec.add(new ObjectMapper().writeValueAsString(r));
-        }
-        return json_rec;
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new RecipeService().getAll());
     }
 }

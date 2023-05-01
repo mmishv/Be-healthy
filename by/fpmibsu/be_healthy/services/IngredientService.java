@@ -36,13 +36,7 @@ public class IngredientService {
     public List<Ingredient> getIngredientsByRecipeId(int id) throws SQLException {
         return new IngredientDao().getIngredientsByRecipeId(id);
     }
-    public ArrayList<String> getAllJSON() throws JsonProcessingException, SQLException {
-        ArrayList<Ingredient> ing = new ArrayList<>();
-        ing = (ArrayList<Ingredient>) new IngredientService().getAll();
-        ArrayList<String> json_ing = new ArrayList<>();
-        for (var i: ing){
-            json_ing.add(new ObjectMapper().writeValueAsString(i));
-        }
-        return json_ing;
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new IngredientService().getAll());
     }
 }

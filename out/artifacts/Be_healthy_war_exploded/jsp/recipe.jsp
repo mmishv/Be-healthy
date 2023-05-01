@@ -7,6 +7,7 @@
 <%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.math.BigDecimal" %>
+<%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -45,10 +46,12 @@
     <div class="categories col-sm-2">
         <ul class="list-group">
             <%
-                ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
+                ArrayList<RecipeCategory> categories =
+                        new ObjectMapper().readValue(request.getAttribute("categories").toString(),
+                                new TypeReference<ArrayList<RecipeCategory>>() {});
                 String cat_name;
-                for (String r : categories) {
-                    cat_name = new ObjectMapper().readValue(r, RecipeCategory.class).getName();
+                for (RecipeCategory cat : categories) {
+                    cat_name = cat.getName();
             %>
             <li class="list-group-item"><%=cat_name%>
             </li>
@@ -61,11 +64,10 @@
         <button type="button" class="btn add-button">
             <a href="create_recipe">Добавить рецепт</a></button>
         <div class="recipe-wrapper">
-            <% ArrayList<String> recipes = (ArrayList<String>) request.getAttribute("recipes");
-                Recipe recipe;
+            <% ArrayList<Recipe> recipes = new ObjectMapper().readValue(request.getAttribute("recipes").toString(),
+                    new TypeReference<ArrayList<Recipe>>() {});
                 String name;
-                for (String r : recipes) {
-                    recipe = new ObjectMapper().readValue(r, Recipe.class);
+                for (Recipe recipe : recipes) {
                     HashMap<String, BigDecimal> kbju = recipe.getKBJU();
                     try {
                         name = new ProfileService().getEntityById(recipe.getId()).getLogin();

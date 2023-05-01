@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.Article;
 import by.fpmibsu.be_healthy.dao.ArticleDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,5 +33,9 @@ public class ArticleService {
 
     public List<Article> getWrittenArticlesByAuthorId(int id) throws SQLException {
         return new ArticleDao().getWrittenArticlesByAuthorId(id);
+    }
+
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new ArticleService().getAll());
     }
 }

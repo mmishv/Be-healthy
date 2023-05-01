@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.dao.ArticleCategoryDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,5 +33,9 @@ public class ArticleCategoryService {
 
     public List<ArticleCategory> getArticleCategoriesByArticleId(int id) throws SQLException {
         return new ArticleCategoryDao().getArticleCategoriesByArticleId(id);
+    }
+
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new ArticleCategoryService().getAll());
     }
 }

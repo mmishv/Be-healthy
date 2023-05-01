@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.ForumTopic;
 import by.fpmibsu.be_healthy.dao.ForumTopicDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,5 +33,9 @@ public class ForumTopicService {
 
     public List<ForumTopic> getTopicsByAuthorId(int id) throws SQLException {
         return new ForumTopicDao().getTopicsByAuthorId(id);
+    }
+
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new ForumTopicService().getAll());
     }
 }

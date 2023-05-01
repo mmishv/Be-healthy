@@ -2,8 +2,12 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.dao.ProfileDao;
+import by.fpmibsu.be_healthy.entity.Recipe;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileService {
@@ -36,5 +40,8 @@ public class ProfileService {
     }
     public boolean isLoginAvailable(String login) throws SQLException {
         return new ProfileDao().isLoginAvailable(login);
+    }
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new ProfileService().getAll());
     }
 }

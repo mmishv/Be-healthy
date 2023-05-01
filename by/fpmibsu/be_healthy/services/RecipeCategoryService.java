@@ -35,13 +35,7 @@ public class RecipeCategoryService {
         return new RecipeCategoryDao().getRecipeCategoriesByArticleId(id);
     }
 
-    public ArrayList<String> getAllJSON() throws JsonProcessingException, SQLException {
-        ArrayList<RecipeCategory> categories = new ArrayList<>();
-        categories = (ArrayList<RecipeCategory>) new RecipeCategoryService().getAll();
-        ArrayList<String> json_cat = new ArrayList<>();
-        for (var c: categories){
-            json_cat.add(new ObjectMapper().writeValueAsString(c));
-        }
-        return json_cat;
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new RecipeCategoryService().getAll());
     }
 }

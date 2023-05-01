@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.MealProduct;
 import by.fpmibsu.be_healthy.dao.MealProductDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,5 +33,9 @@ public class MealProductService {
 
     public List<MealProduct> getProductsByMealId(int id) throws SQLException {
         return new MealProductDao().getProductsByMealId(id);
+    }
+
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new MealProductService().getAll());
     }
 }

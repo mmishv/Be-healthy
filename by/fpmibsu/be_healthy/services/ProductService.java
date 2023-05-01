@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.dao.ProductDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,5 +29,9 @@ public class ProductService {
 
     public boolean create(Product entity) throws SQLException {
         return new ProductDao().create(entity);
+    }
+
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new ProductService().getAll());
     }
 }

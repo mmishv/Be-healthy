@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.ForumMessage;
 import by.fpmibsu.be_healthy.dao.ForumMessageDao;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -29,5 +31,9 @@ public class ForumMessageService {
 
     public List<ForumMessage> getMessagesByUserId(int id) throws SQLException {
         return new ForumMessageDao().getMessagesByUserId(id);
+    }
+
+    public String getAllJSON() throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new ForumMessageService().getAll());
     }
 }
