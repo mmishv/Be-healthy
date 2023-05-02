@@ -4,16 +4,11 @@ import by.fpmibsu.be_healthy.entity.Ingredient;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.services.*;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -57,13 +52,12 @@ public class CreateRecipeServlet extends HttpServlet {
             text = request.getParameter("text");
             //image = Files.readAllBytes(new File(request.getParameter("image")).toPath());
             int cnt = 1;
-            String str = ""+cnt;
-            while (request.getParameter("ingredient" + str) != null) {
+            while (request.getParameter("ingredient" + cnt) != null) {
                 Ingredient ing = new Ingredient();
                 ing.setId(Integer.parseInt(request.getParameter("ingredient" + String.valueOf(cnt))));
                 ing.setQuantity(Integer.parseInt(request.getParameter("quantity" + String.valueOf(cnt))));
+                ingredients.add(ing);
                 cnt++;
-                str=""+cnt;
             }
             try {
                 authorId = new ProfileService().getIdByLogin((String) request.getSession().getAttribute("login"));
@@ -85,5 +79,6 @@ public class CreateRecipeServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        response.sendRedirect("http://localhost:8081/recipes");
     }
 }

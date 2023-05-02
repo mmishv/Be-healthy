@@ -70,7 +70,7 @@
                 for (Recipe recipe : recipes) {
                     HashMap<String, BigDecimal> kbju = recipe.getKBJU();
                     try {
-                        name = new ProfileService().getEntityById(recipe.getId()).getLogin();
+                        name = new ProfileService().getEntityById(recipe.getAuthorId()).getLogin();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
