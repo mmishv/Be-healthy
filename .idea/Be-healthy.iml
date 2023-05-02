@@ -60,7 +60,6 @@
     <content url="file://$MODULE_DIR$/out" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="javax.servlet.api" level="application" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.72" level="application_server_libraries" />
     <orderEntry type="module-library" exported="">
       <library>
@@ -121,22 +120,11 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/commons-fileupload-1.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/javax.servlet-api-4.0.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/commons-io-20030203.000550.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="commons-io-20030203.000550" level="project" />
-    <orderEntry type="library" name="commons-fileupload-1.5" level="project" />
   </component>
 </module>

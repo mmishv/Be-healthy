@@ -9,8 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -50,7 +49,10 @@ public class CreateRecipeServlet extends HttpServlet {
                 categories.add(cat);
             }
             text = request.getParameter("text");
-            //image = Files.readAllBytes(new File(request.getParameter("image")).toPath());
+            Part filePart = request.getPart("image");
+            InputStream fileContent = filePart.getInputStream();
+            image = new byte[fileContent.available()];
+            fileContent.read(image);
             int cnt = 1;
             while (request.getParameter("ingredient" + cnt) != null) {
                 Ingredient ing = new Ingredient();
@@ -68,8 +70,7 @@ public class CreateRecipeServlet extends HttpServlet {
             recipe.setTitle(title);
             recipe.setCookingTime(cookingTime);
             recipe.setText(text);
-            recipe.setImage(Files.readAllBytes(Paths.get("C:\\Users\\Masha\\Pictures\\calorie_calc\\салат.jpg")));
-            //recipe.setImage(image);
+            recipe.setImage(image);
             recipe.setAuthorId(authorId);
             recipe.setIngredients(ingredients);
             recipe.setCategories(categories);
