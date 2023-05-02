@@ -117,6 +117,26 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="javax.servlet.jsp.jstl.api" level="application" />
     <orderEntry type="library" exported="" name="taglibs.standard" level="application" />
-    <orderEntry type="library" name="jstl" level="application" />
+    <orderEntry type="library" exported="" name="jstl" level="application" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/commons-fileupload-1.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/commons-io-20030203.000550.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="commons-io-20030203.000550" level="project" />
+    <orderEntry type="library" name="commons-fileupload-1.5" level="project" />
   </component>
 </module>

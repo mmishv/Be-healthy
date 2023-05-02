@@ -46,19 +46,19 @@
     request.setAttribute("categories", cats);
     request.setAttribute("products", prods);
 %>
-<form method="POST" action="register">
+<form method="POST" action="create_recipe" enctype="multipart/form-data">
     <fieldset class="form-group">
         <div class="wrapper col-sm-9" style="margin: auto;">
             <div class="form-group row">
                 <label for="recipe-title" class="col-sm-4 col-form-label">Название: </label>
                 <div class="col-sm-8">
-                    <input class="form-control" id="recipe-title" placeholder="Например, оладьи" required>
+                    <input class="form-control" name="title" id="recipe-title" placeholder="Например, оладьи" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="recipe-cooking-time" class="col-sm-4 col-form-label">Время приготовления, мин: </label>
+                <label for="cooking-time" class="col-sm-4 col-form-label">Время приготовления, мин: </label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="recipe-cooking-time" placeholder="Например, 30"
+                    <input type="number" class="form-control" id="cooking-time" name="cooking-time" placeholder="Например, 30"
                            required>
                 </div>
             </div>
@@ -68,8 +68,8 @@
                     <c:forEach items="${categories}" var="category">
                         <br/>
                         <div class="form-check col-sm-6">
-                            <input class="form-check-input" type="checkbox" value="" id="category1">
-                            <label class="form-check-label" for="category1">
+                            <input class="form-check-input" type="checkbox" name="categories" value="${category.id}" id="${category.id}">
+                            <label class="form-check-label" for="${category.id}">
                                 <c:out value="${category.name}"/>
                             </label>
                         </div>
@@ -80,13 +80,13 @@
                 <div class="col-sm-4 bold">Ингредиенты:</div>
                 <div class="col-sm-8" id="ingredients-list">
                     <div class="row ingredient-option" id="ing-option1">
-                        <select id="ingredient1" class="form-control col-sm-6">
+                        <select id="ingredient1" name="ingredient1" class="form-control col-sm-6" required>
                             <c:forEach items="${products}" var="product">
                                 <option value="${product.id}"><c:out value="${product.name}"/></option>
                             </c:forEach>
                         </select>
-                        <input id="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
-                        <select id="measure1" class="form-control col-sm-2">
+                        <input id="quantity1" name="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <select id="measure1" name="measure1" class="form-control col-sm-2">
                             <option selected>шт.</option>
                             <option>ч.л.</option>
                             <option>ст.л.</option>
@@ -100,27 +100,25 @@
             <div class="form-group row">
                 <label for="recipe-photo" class="col-sm-4 bold">Фото рецепта:</label>
                 <div class="col-sm-8">
-                    <input type="file" class="form-control-file" id="recipe-photo">
+                    <input type="file" name="image" class="form-control-file" id="recipe-photo" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="recipe-description" class="col-sm-4 bold">Описание рецепта:</label>
-                <textarea class="form-control col-sm-8" id="recipe-description" rows="5"></textarea>
+                <textarea class="form-control col-sm-8" name="text" id="recipe-description" rows="5" required></textarea>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-primary"
+                        style="background-color:#114630 !important; border: #114630 !important;">
+                    Добавить
+                </button>
+                <button class="btn btn-primary back-btn">
+                    <a href="recipes">Вернуться к рецептам</a>
+                </button>
             </div>
         </div>
     </fieldset>
 </form>
-<div class="form-group row">
-    <button type="submit" class="btn btn-primary"
-            style="background-color:#114630 !important; border: #114630 !important;">
-        Добавить
-    </button>
-    <button class="btn btn-primary back-btn">
-        <a href="recipes">Вернуться к рецептам</a>
-    </button>
-</div>
-
-</div>
 <script>
     var counter = 2;
 
@@ -135,6 +133,10 @@
             ch[1].id = "quantity" + counter;
             ch[1].value = '';
             ch[2].id = "measure" + counter;
+
+            ch[0].name = "ingredient" + counter;
+            ch[1].name = "quantity" + counter;
+            ch[2].name = "measure" + counter;
             counter++;
             document.getElementById('ingredients-list').appendChild(container);
             e.classList.add('disabled');
