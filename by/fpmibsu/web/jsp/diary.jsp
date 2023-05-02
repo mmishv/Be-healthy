@@ -47,60 +47,95 @@
             </svg>
         </div>
         <div class="meals-wrapper">
-            <div class="meal">
-                <div class="meal-name">Завтрак</div>
-                <div class="col-sm-8"></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-2"></div>
+            <div class="meal" id="meal1">
+                <div class="meal-name" id="meal-name1">Завтрак</div>
+                <div class="header product row">
+                    <div class="prod-name"></div>
+                    <div class="prod-bju">Б/Ж/У</div>
+                    <div class="prod-k">Ккал</div>
+                </div>
+                <div class="product row" id="meal-product1">
+                    <div class="prod-name" id="prod-name1">Кофе</div>
+                    <div class="prod-bju" id="prod-bju1">6/2/8</div>
+                    <div class="prod-k" id="prod-k1">86</div>
+                </div>
+                <div class="product row" id="meal-product2">
+                    <div class="prod-name" id="prod-name2">Кофе</div>
+                    <div class="prod-bju" id="prod-bju2">6/2/8</div>
+                    <div class="prod-k" id="prod-k2">86</div>
+                </div>
+
             </div>
-            <div class="meal">
-                <div class="meal-name">Обед</div>
-                <div class="col-sm-8"></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-2"></div>
-            </div>
-            <div class="meal">
-                <div class="meal-name">Чаепитие</div>
-                <div class="col-sm-8"></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-2"></div>
-            </div>
-            <div class="meal">
-                <div class="meal-name">Ужин</div>
-                <div class="col-sm-8"></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-2"></div>
-            </div>
-        </div>
-        <div class="add-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" color="#114630" fill="currentColor"
-                 class="bi bi-plus" viewBox="0 0 16 16">
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-            </svg>
+
         </div>
     </div>
 
-    <div class="total col-sm-3">
-        <div class="total-name">Отчёт дня</div>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar"
-                 style="width: 10%; background-color:#1f9f7a" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
+    <div class="col-sm-3">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary add-button" data-toggle="modal" data-target="#exampleModalCenter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+            </svg>
+            Добавить приём пищи
+        </button>
+
+        <div class="total">
+            <div class="total-name">Отчёт дня</div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped" role="progressbar"
+                     style="width: 10%; background-color:#1f9f7a" aria-valuenow="10" aria-valuemin="0"
+                     aria-valuemax="100"></div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped" role="progressbar"
+                     style="width: 25%; background-color:#7fba52" aria-valuenow="25" aria-valuemin="0"
+                     aria-valuemax="100"></div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped" role="progressbar"
+                     style="width: 50%; background-color:#c2c458" aria-valuenow="50" aria-valuemin="0"
+                     aria-valuemax="100"></div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped" role="progressbar"
+                     style="width: 75%; background-color:#c39143" aria-valuenow="75" aria-valuemin="0"
+                     aria-valuemax="100"></div>
+            </div>
         </div>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar"
-                 style="width: 25%; background-color:#7fba52" aria-valuenow="25" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-        </div>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar"
-                 style="width: 50%; background-color:#c2c458" aria-valuenow="50" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-        </div>
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped" role="progressbar"
-                 style="width: 75%; background-color:#c39143" aria-valuenow="75" aria-valuemin="0"
-                 aria-valuemax="100"></div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <input class="modal-title" id="exampleModalLongTitle" placeholder="Название приёма пищи"></input>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="products">
+                    <div class="row product-option" id="prod-option1">
+                        <select id="product1" class="form-control col-sm-6"></select>
+                        <input id="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <select id="measure1" class="form-control col-sm-2">
+                            <option selected>шт.</option>
+                            <option>ч.л.</option>
+                            <option>ст.л.</option>
+                            <option>г</option>
+                            <option>мл</option>
+                        </select>
+                        <button class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Добавить</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -111,6 +146,26 @@
         autoClose: true,
         position: 'bottom center'
     });
+    var counter = 2;
+
+    function addProduct(e) {
+        if (e.classList.contains('disabled')) {
+            e.parentElement.remove();
+        } else {
+            let container = e.parentElement.cloneNode(true);
+            container.id = "prod-option" + counter;
+            let ch = container.children;
+            ch[0].id = "product" + counter;
+            ch[1].id = "quantity" + counter;
+            ch[1].value = '';
+            ch[2].id = "measure" + counter;
+            counter++;
+            document.getElementById('products').appendChild(container);
+            e.classList.add('disabled');
+            e.style.backgroundColor = '#114630a8';
+            e.innerHTML = '-';
+        }
+    }
 </script>
 </body>
 </html>

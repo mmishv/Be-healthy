@@ -28,7 +28,8 @@
     height: 15vw;
     min-height: 200px;
     border: solid 2px green;
-    border-radius: 10px;
+    border-radius: 7px;
+    overflow-y: auto;
 }
 
 .form-control {
@@ -36,35 +37,108 @@
     margin: 0 auto 0 auto;
 }
 
-.bi {
-    margin: 0 !important;
-}
-
 .meal-name {
     text-align: center;
     border-bottom: solid 3px green;
     padding: 2%;
     font-weight: 500;
-    border-radius: 10px;
+    border-radius: 7px;
+    width: 100%;
+}
+
+.product.row {
+    margin: 0 !important;
+    padding: 0 2%;
+}
+
+.product.row .prod-bju, .product.row .prod-k {
+    font-size: small;
+    align-self: center;
+}
+
+.header.product.row {
+    color: #114630;
+    opacity: 0.8;
+}
+
+.prod-name {
+    width: 60%;
+}
+
+.prod-bju {
+    width: 20%;
+    text-align: center;
+}
+
+.prod-k {
+    width: 20%;
+    text-align: center;
+}
+
+.meal::-webkit-scrollbar {
+    width: 3px; /* width of the entire scrollbar */
+}
+
+.meal::-webkit-scrollbar-track {
+    background: #9ec49e; /* color of the tracking area */
+}
+
+.meal::-webkit-scrollbar-thumb {
+    background-color: #9ec49e; /* color of the scroll thumb */
+    border-radius: 40px; /* roundness of the scroll thumb */
+    border: 3px solid green; /* creates padding around scroll thumb */
 }
 
 .add-button {
-    text-align: right;
+    margin: 4vh auto 0 auto;
+    display: block !important;
+    background-color: #114630 !important;
+    border: none !important;
+    width: 100% !important;
+    border: solid 2px white;
+    padding: .75rem !important;
 }
 
-.bi-plus {
-    background-color: white;
-    opacity: 90%;
-    color: #114630 !important;
+.modal-dialog {
+    max-width: 550px !important;
+}
+
+.modal-title {
+    width: 100%;
+    line-height: 2.5 !important;
+    border: solid 2px green;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.product-option select, .product-option input, .product-option button {
+    margin: 0 auto !important;
+}
+
+.ing-button {
+    background-color: #114630;
+    color: white;
+    border-radius: 5px;
+}
+
+.modal-footer .btn.btn-primary {
+    background-color: #114630;
+    border: none;
+    padding: 1.5% 5% !important;
+}
+
+.modal-footer {
+    justify-content: center !important;
 }
 
 .total {
     background-color: #114630;
-    opacity: 0.8;
+    margin-top: 4vh;
+    padding: 5% 3%;
+    border-radius: 7px;
 }
 
 .total-name {
-    margin-top: 4vh;
     color: white;
     text-align: center;
     font-weight: 500;
