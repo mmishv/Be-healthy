@@ -53,7 +53,8 @@
                 for (RecipeCategory cat : categories) {
                     cat_name = cat.getName();
             %>
-            <li class="list-group-item"><%=cat_name%>
+            <li class="list-group-item"><a href="/recipe_category/<%=cat.getId()%>"
+                                           style="color: white !important; text-decoration: none !important;"> <%=cat_name%></a>
             </li>
             <%
                 }

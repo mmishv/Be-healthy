@@ -100,7 +100,6 @@
         <url-pattern>/profile</url-pattern>
     </filter-mapping>
 
-<!--
     <filter>
         <filter-name>CreateRecipeFilter</filter-name>
         <filter-class>by.fpmibsu.be_healthy.servlets.CreateRecipeFilter</filter-class>
@@ -110,7 +109,6 @@
         <filter-name>CreateRecipeFilter</filter-name>
         <url-pattern>/create_recipe</url-pattern>
     </filter-mapping>
--->
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
@@ -131,5 +129,16 @@
         <servlet-name>RegistrationServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RecipeCategoryServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.RecipeCategoryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RecipeCategoryServlet</servlet-name>
+        <url-pattern>/recipe_category/*</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
