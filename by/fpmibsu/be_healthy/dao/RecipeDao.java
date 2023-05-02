@@ -17,7 +17,6 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         List<Recipe> recipes = new ArrayList<>();
         String sql = "SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC";
         Statement statement = null;
-        PreparedStatement inner_statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -147,26 +146,43 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     @Override
     public boolean create(Recipe entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO RECIPE (ID,TITLE, PUBL_DATE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO RECIPE (TITLE, PUBL_DATE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?, ?)";
         PreparedStatement inner_statement1 = null, inner_statement2 = null;
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, entity.getId());
-            preparedStatement.setString(2, entity.getTitle());
-            preparedStatement.setDate(3, (Date) (entity.getDateOfPublication()));
-            preparedStatement.setInt(4, entity.getCookingTime());
-            preparedStatement.setString(5, entity.getText());
-            preparedStatement.setBytes(6,
+            //preparedStatement.setInt(1, entity.getId());
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
+            preparedStatement.setInt(3, entity.getCookingTime());
+            preparedStatement.setString(4, entity.getText());
+            preparedStatement.setBytes(5,
                     entity.getImage() != null ? entity.getImage() : null);
-            preparedStatement.setInt(7, entity.getAuthorId());
+            preparedStatement.setInt(6, entity.getAuthorId());
             preparedStatement.executeUpdate();
+            int recipe_id = getMaxId();
             for (var i : entity.getCategories()) {
                 String inner_sql = "INSERT INTO MM_CATEGORY_RECIPE (RECIPE_ID, CATEGORY_ID) VALUES(?, ?)";
                 try {
                     inner_statement1 = connection.prepareStatement(inner_sql);
-                    inner_statement1.setInt(1, entity.getId());
+                    inner_statement1.setInt(1, recipe_id);
                     inner_statement1.setInt(2, i.getId());
+                    inner_statement1.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (inner_statement1 != null) {
+                        inner_statement1.close();
+                    }
+                }
+            }
+            for (var i : entity.getIngredients()) {
+                String inner_sql = "INSERT INTO INGREDIENT (RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)";
+                try {
+                    inner_statement1 = connection.prepareStatement(inner_sql);
+                    inner_statement1.setInt(1, recipe_id);
+                    inner_statement1.setInt(2, i.getId());
+                    inner_statement1.setInt(3, i.getQuantity());
                     inner_statement1.executeUpdate();
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -209,5 +225,20 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             }
         }
         return recipes;
+    }
+    public int getMaxId() throws SQLException {
+        PreparedStatement preparedStatement = null, inner_statement = null;
+        String sql = "SELECT max(id) as id FROM RECIPE";
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                return resultSet.getInt("ID");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
     }
 }
