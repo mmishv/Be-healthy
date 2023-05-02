@@ -44,4 +44,7 @@ public class ProfileService {
     public String getAllJSON() throws JsonProcessingException, SQLException {
         return new ObjectMapper().writeValueAsString(new ProfileService().getAll());
     }
+    public int getIdByLogin(String login) throws SQLException {
+        return new ProfileDao().getIdByLogin(login);
+    }
 }

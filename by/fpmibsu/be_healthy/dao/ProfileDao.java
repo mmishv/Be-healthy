@@ -151,22 +151,22 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     @Override
     public boolean create(Profile entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO PROFILE (ID, NAME,EMAIL, LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF, AVATAR, WEIGHT)" +
-                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PROFILE (NAME, EMAIL, LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF, AVATAR, WEIGHT)" +
+                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, entity.getId());
-            preparedStatement.setString(2, entity.getName());
-            preparedStatement.setString(3, entity.getEmail());
-            preparedStatement.setString(4, entity.getLogin());
-            preparedStatement.setString(5, entity.getPassword());
-            preparedStatement.setInt(6, entity.getAge());
-            preparedStatement.setInt(7, entity.getHeight());
-            preparedStatement.setDouble(8, entity.getActivity());
-            preparedStatement.setBlob(9,
+            //preparedStatement.setInt(1, entity.getId());
+            preparedStatement.setString(1, entity.getName());
+            preparedStatement.setString(2, entity.getEmail());
+            preparedStatement.setString(3, entity.getLogin());
+            preparedStatement.setString(4, entity.getPassword());
+            preparedStatement.setInt(5, entity.getAge());
+            preparedStatement.setInt(6, entity.getHeight());
+            preparedStatement.setDouble(7, entity.getActivity());
+            preparedStatement.setBlob(8,
                     entity.getAvatar() != null ? new SerialBlob(entity.getAvatar()) : null);
-            preparedStatement.setDouble(10, entity.getWeight());
+            preparedStatement.setDouble(9, entity.getWeight());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -202,7 +202,6 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         return false;
     }
     public boolean isLoginAvailable(String login) throws SQLException {
-
         String sql = "SELECT * FROM PROFILE WHERE LOGIN=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, login);
@@ -240,5 +239,23 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             }
         }
         return success;
+    }
+
+    public int getIdByLogin(String login) throws SQLException {
+        String sql = "SELECT * FROM PROFILE WHERE LOGIN=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return -1;
     }
 }
