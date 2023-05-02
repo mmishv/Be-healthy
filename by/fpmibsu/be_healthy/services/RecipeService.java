@@ -39,4 +39,10 @@ public class RecipeService {
     public String getAllJSON() throws JsonProcessingException, SQLException {
         return new ObjectMapper().writeValueAsString(new RecipeService().getAll());
     }
+    public List<Recipe> getAllInCategory(int id) throws SQLException {
+        return new RecipeDao().getAllInCategory(id);
+    }
+    public String getAllInCategoryJSON(int id) throws JsonProcessingException, SQLException {
+        return new ObjectMapper().writeValueAsString(new RecipeDao().getAllInCategory(id));
+    }
 }

@@ -16,35 +16,12 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     public List<Recipe> getAll() throws SQLException {
         List<Recipe> recipes = new ArrayList<>();
         String sql = "SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC";
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
+        try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                Recipe recipe = new Recipe();
-                recipe.setId(resultSet.getInt("ID"));
-                recipe.setAuthorId(resultSet.getInt("AUTHOR_ID"));
-                recipe.setTitle(resultSet.getString("TITLE"));
-                recipe.setText(resultSet.getString("DESCRIPTION"));
-                recipe.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
-                recipe.setCookingTime(resultSet.getInt("COOKING_TIME"));
-                recipe.setImage(resultSet.getBytes("PHOTO"));
-
-                byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
-                String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
-                recipe.setBase64image(base64encoded);
-
-                recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByArticleId(recipe.getAuthorId()));
-                recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
-                recipes.add(recipe);
-            }
+            initRecipe(recipes, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (statement != null) {
-                statement.close();
-            }
             if (connection != null) {
                 connection.close();
             }
@@ -62,20 +39,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                recipe.setId(resultSet.getInt("ID"));
-                recipe.setAuthorId(resultSet.getInt("AUTHOR_ID"));
-                recipe.setTitle(resultSet.getString("TITLE"));
-                recipe.setText(resultSet.getString("DESCRIPTION"));
-                recipe.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
-                recipe.setCookingTime(resultSet.getInt("COOKING_TIME"));
-                recipe.setImage(resultSet.getBytes("PHOTO"));
-
-                byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
-                String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
-                recipe.setBase64image(base64encoded);
-
-                recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByArticleId(recipe.getAuthorId()));
-                recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
+                setRecipe(recipe, resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,6 +52,23 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             }
         }
         return recipe;
+    }
+
+    private void setRecipe(Recipe recipe, ResultSet resultSet) throws SQLException {
+        recipe.setId(resultSet.getInt("ID"));
+        recipe.setAuthorId(resultSet.getInt("AUTHOR_ID"));
+        recipe.setTitle(resultSet.getString("TITLE"));
+        recipe.setText(resultSet.getString("DESCRIPTION"));
+        recipe.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
+        recipe.setCookingTime(resultSet.getInt("COOKING_TIME"));
+        recipe.setImage(resultSet.getBytes("PHOTO"));
+
+        byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
+        String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
+        recipe.setBase64image(base64encoded);
+
+        recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByArticleId(recipe.getAuthorId()));
+        recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
     }
 
     @Override
@@ -147,11 +128,10 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     public boolean create(Recipe entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO RECIPE (TITLE, PUBL_DATE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?, ?)";
-        PreparedStatement inner_statement1 = null, inner_statement2 = null;
+        PreparedStatement inner_statement1 = null;
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            //preparedStatement.setInt(1, entity.getId());
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
             preparedStatement.setInt(3, entity.getCookingTime());
@@ -240,5 +220,37 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             throw new RuntimeException(e);
         }
         return -1;
+    }
+
+    public List<Recipe> getAllInCategory(int id) throws SQLException {
+        List<Recipe> recipes = new ArrayList<>();
+        String sql = "SELECT * FROM RECIPE WHERE ID IN " +
+                "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" +
+                "ORDER BY PUBL_DATE DESC";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            initRecipe(recipes, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return recipes;
+    }
+
+    private void initRecipe(List<Recipe> recipes, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            Recipe recipe = new Recipe();
+            setRecipe(recipe, resultSet);
+            recipes.add(recipe);
+        }
     }
 }
