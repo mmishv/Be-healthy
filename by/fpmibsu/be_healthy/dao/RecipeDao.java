@@ -29,6 +29,54 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         return recipes;
     }
 
+    public List<Recipe> getPage(int page, int per_page) throws SQLException {
+        List<Recipe> recipes = new ArrayList<>();
+        String sql = "SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC LIMIT ? OFFSER ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, per_page);
+            statement.setInt(2, per_page * (page-1));
+            ResultSet resultSet = statement.executeQuery();
+            initRecipe(recipes, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return recipes;
+    }
+
+    public List<Recipe> getCategoryPage(int page, int per_page, int category_id) throws SQLException {
+        List<Recipe> recipes = new ArrayList<>();
+        String sql = "SELECT * FROM RECIPE" +
+                "WHERE ID IN (SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" +
+                "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ? ";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, category_id);
+            statement.setInt(2, per_page);
+            statement.setInt(3, per_page * (page-1));
+            ResultSet resultSet = statement.executeQuery();
+            initRecipe(recipes, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return recipes;
+    }
     @Override
     public Recipe getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null, inner_statement = null;

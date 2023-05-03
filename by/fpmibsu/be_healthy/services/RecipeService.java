@@ -43,6 +43,20 @@ public class RecipeService {
         return new RecipeDao().getAllInCategory(id);
     }
     public String getAllInCategoryJSON(int id) throws JsonProcessingException, SQLException {
-        return new ObjectMapper().writeValueAsString(new RecipeDao().getAllInCategory(id));
+        return new ObjectMapper().writeValueAsString(getAllInCategory(id));
     }
+    public List<Recipe> getCategoryPage(int page, int per_page, int category_id) throws SQLException {
+        return new RecipeDao().getCategoryPage(page, per_page, category_id);
+    }
+    public String getCategoryPageJSON(int page, int per_page, int category_id) throws SQLException, JsonProcessingException {
+        return new ObjectMapper().writeValueAsString((getCategoryPage(page, per_page, category_id)));
+    }
+
+    public List<Recipe> getPage(int page, int per_page) throws SQLException {
+        return new RecipeDao().getPage(page, per_page);
+    }
+    public String getPageJSON(int page, int per_page) throws SQLException, JsonProcessingException {
+        return new ObjectMapper().writeValueAsString((getPage(page, per_page)));
+    }
+
 }
