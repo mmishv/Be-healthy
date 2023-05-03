@@ -48,7 +48,8 @@
             <%
                 ArrayList<RecipeCategory> categories =
                         new ObjectMapper().readValue(request.getAttribute("categories").toString(),
-                                new TypeReference<ArrayList<RecipeCategory>>() {});
+                                new TypeReference<ArrayList<RecipeCategory>>() {
+                                });
                 String cat_name;
                 for (RecipeCategory cat : categories) {
                     cat_name = cat.getName();
@@ -64,9 +65,29 @@
     <div class="col-sm-10">
         <button type="button" class="btn add-button">
             <a href="create_recipe">Добавить рецепт</a></button>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
         <div class="recipe-wrapper">
             <% ArrayList<Recipe> recipes = new ObjectMapper().readValue(request.getAttribute("recipes").toString(),
-                    new TypeReference<ArrayList<Recipe>>() {});
+                    new TypeReference<ArrayList<Recipe>>() {
+                    });
                 String name;
                 for (Recipe recipe : recipes) {
                     HashMap<String, BigDecimal> kbju = recipe.getKBJU();
@@ -117,10 +138,14 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td><%=kbju.get("k")%></td>
-                                            <td><%=kbju.get("b")%></td>
-                                            <td><%=kbju.get("j")%></td>
-                                            <td><%=kbju.get("u")%></td>
+                                            <td><%=kbju.get("k")%>
+                                            </td>
+                                            <td><%=kbju.get("b")%>
+                                            </td>
+                                            <td><%=kbju.get("j")%>
+                                            </td>
+                                            <td><%=kbju.get("u")%>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -161,14 +186,18 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        int cnt=1;
+                                        int cnt = 1;
                                         for (Ingredient i : recipe.getIngredients()) {
                                     %>
                                     <tr>
-                                        <th scope="row"><%=cnt++%></th>
-                                        <td><%=i.getName()%></td>
-                                        <td style="text-align: center;"><%=i.getQuantity()%></td>
-                                        <td style="text-align: center;"><%=i.getUnit()%></td>
+                                        <th scope="row"><%=cnt++%>
+                                        </th>
+                                        <td><%=i.getName()%>
+                                        </td>
+                                        <td style="text-align: center;"><%=i.getQuantity()%>
+                                        </td>
+                                        <td style="text-align: center;"><%=i.getUnit()%>
+                                        </td>
                                     </tr>
                                     </tbody>
                                     <%
