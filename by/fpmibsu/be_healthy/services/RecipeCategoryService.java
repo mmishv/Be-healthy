@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeCategoryService {
@@ -32,7 +31,7 @@ public class RecipeCategoryService {
     }
 
     public List<RecipeCategory> getRecipeCategoriesByArticleId(int id) throws SQLException {
-        return new RecipeCategoryDao().getRecipeCategoriesByArticleId(id);
+        return new RecipeCategoryDao().getCategoriesByRecipeId(id);
     }
 
     public String getAllJSON() throws JsonProcessingException, SQLException {

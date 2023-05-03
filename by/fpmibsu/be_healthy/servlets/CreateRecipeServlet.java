@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,20 +36,22 @@ public class CreateRecipeServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         int authorId, cookingTime;
         String title, text;
         byte[] image;
         List<Ingredient> ingredients = new ArrayList<>();
         List<RecipeCategory> categories = new ArrayList<>();
-            title = request.getParameter("title");
+            title =  new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
             cookingTime = Integer.parseInt(request.getParameter("cooking-time"));
             for (var c: request.getParameterValues("categories")){
                 RecipeCategory cat = new RecipeCategory();
                 cat.setId(Integer.parseInt(c));
                 categories.add(cat);
             }
-            text = request.getParameter("text");
+            text = new String(request.getParameter("text").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
             Part filePart = request.getPart("image");
             InputStream fileContent = filePart.getInputStream();
             image = new byte[fileContent.available()];

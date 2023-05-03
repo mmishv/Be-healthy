@@ -2,7 +2,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
 <%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
-<%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.Product" %><%--
   Created by IntelliJ IDEA.
   User: user
@@ -10,8 +9,11 @@
   Time: 17:39
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -46,7 +48,8 @@
     request.setAttribute("categories", cats);
     request.setAttribute("products", prods);
 %>
-<form method="POST" action="create_recipe" enctype="multipart/form-data">
+<fmt:requestEncoding value = "UTF-8"/>
+<form method="post" action="create_recipe" enctype="multipart/form-data" accept-charset="utf-8">
     <fieldset class="form-group">
         <div class="wrapper col-sm-9" style="margin: auto;">
             <div class="form-group row">
