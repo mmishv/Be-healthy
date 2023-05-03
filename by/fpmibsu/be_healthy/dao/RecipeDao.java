@@ -31,7 +31,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
 
     public List<Recipe> getPage(int page, int per_page) throws SQLException {
         List<Recipe> recipes = new ArrayList<>();
-        String sql = "SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC LIMIT ? OFFSER ?";
+        String sql = "SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -54,9 +54,9 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
 
     public List<Recipe> getCategoryPage(int page, int per_page, int category_id) throws SQLException {
         List<Recipe> recipes = new ArrayList<>();
-        String sql = "SELECT * FROM RECIPE" +
-                "WHERE ID IN (SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" +
-                "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ? ";
+        String sql = "SELECT * FROM RECIPE WHERE ID IN (SELECT RECIPE_ID ID " +
+                "FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" +
+                "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -318,7 +318,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         return -1;
     }
     public int getNumberOfRecipesInCategory(int id) throws SQLException {
-        String sql = "SELECT COUNT(*) RES FROM RECIPE " +
+        String sql = "SELECT COUNT(*) RES FROM RECIPE WHERE ID IN" +
                 "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)";
         PreparedStatement statement = null;
         try {

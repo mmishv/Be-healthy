@@ -13,10 +13,23 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class RecipesMainServlet extends HttpServlet {
+    final int RECIPES_PER_PAGE = 3;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pathInfo = request.getPathInfo();
+        String[] pathParts = pathInfo.split("/");
+        int page = Integer.parseInt(pathParts[pathParts.length-1]);
+        int recipe_cnt = 0;
         try {
-            request.setAttribute("recipes", new RecipeService().getAllJSON());
+            recipe_cnt = new RecipeService().getNumberOfRecipes();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        int page_cnt = (int) (1.0 * (recipe_cnt + RECIPES_PER_PAGE - 1)/RECIPES_PER_PAGE);
+        request.setAttribute("page_cnt", page_cnt);
+        request.setAttribute("cur_page", page);
+        try {
+            request.setAttribute("recipes", new RecipeService().getPageJSON(page, RECIPES_PER_PAGE));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

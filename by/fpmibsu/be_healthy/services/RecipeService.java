@@ -58,5 +58,10 @@ public class RecipeService {
     public String getPageJSON(int page, int per_page) throws SQLException, JsonProcessingException {
         return new ObjectMapper().writeValueAsString((getPage(page, per_page)));
     }
-
+    public int getNumberOfRecipesInCategory(int id) throws SQLException {
+        return new RecipeDao().getNumberOfRecipesInCategory(id);
+    }
+    public int getNumberOfRecipes() throws SQLException {
+        return new RecipeDao().getNumberOfRecipes();
+    }
 }
