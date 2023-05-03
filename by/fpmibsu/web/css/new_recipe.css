@@ -25,6 +25,10 @@
     justify-content: space-between;
 }
 
+.ingredient-option select, .ingredient-option input, .ingredient-option button {
+    margin: 0 auto !important;
+}
+
 .back-btn {
     background-color: #00000000 !important;
     border: solid 2px #114630 !important;
