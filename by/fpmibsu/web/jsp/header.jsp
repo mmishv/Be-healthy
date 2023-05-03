@@ -57,7 +57,7 @@
                     <a class="nav-link" href="product">Продукты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="recipes">Рецепты</a>
+                    <a class="nav-link" href="recipes/1">Рецепты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="forum">Форум</a>

@@ -76,8 +76,7 @@
 
     <servlet-mapping>
         <servlet-name>RecipesMainServlet</servlet-name>
-        <url-pattern>/recipes</url-pattern>
-
+        <url-pattern>/recipes/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

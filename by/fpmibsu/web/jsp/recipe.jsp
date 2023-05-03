@@ -46,6 +46,13 @@
     <div class="categories col-sm-2">
         <ul class="list-group">
             <%
+                int page_cnt = (int) request.getAttribute("page_cnt");
+                int cur_page = (int) request.getAttribute("cur_page");
+                Object t = request.getAttribute("cat_id");
+                String pref="";
+                if (t != null){
+                    pref+=(int)t+"-";
+                }
                 ArrayList<RecipeCategory> categories =
                         new ObjectMapper().readValue(request.getAttribute("categories").toString(),
                                 new TypeReference<ArrayList<RecipeCategory>>() {
@@ -54,7 +61,7 @@
                 for (RecipeCategory cat : categories) {
                     cat_name = cat.getName();
             %>
-            <li class="list-group-item"><a href="/recipe_category/<%=cat.getId()%>"
+            <li class="list-group-item"><a href="/recipe_category/<%=cat.getId()%>-<%=1%>"
                                            style="color: white !important; text-decoration: none !important;"> <%=cat_name%></a>
             </li>
             <%
@@ -67,21 +74,34 @@
             <a href="create_recipe">Добавить рецепт</a></button>
         <nav>
             <ul class="pagination">
+                <%
+                    if (cur_page > 1) {
+                %>
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                    <a class="page-link" href="<%=pref+(cur_page-1)%>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <%
+                    }
+                    for (int i = 1; i <= page_cnt; i++) {
+                %>
+                <li class="page-item"><a class="page-link" href="<%=pref+i%>"><%=i%></a></li>
+                <%
+                    }
+                    if (cur_page < page_cnt) {
+                %>
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link" href="<%=pref+(cur_page+1)%>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                     </a>
                 </li>
+                <%
+                }
+                %>
+                %>
             </ul>
         </nav>
         <div class="recipe-wrapper">

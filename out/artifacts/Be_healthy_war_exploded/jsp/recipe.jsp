@@ -46,14 +46,22 @@
     <div class="categories col-sm-2">
         <ul class="list-group">
             <%
+                int page_cnt = (int) request.getAttribute("page_cnt");
+                int cur_page = (int) request.getAttribute("cur_page");
+                Object t = request.getAttribute("cat_id");
+                String pref="";
+                if (t != null){
+                    pref+=(int)t+"-";
+                }
                 ArrayList<RecipeCategory> categories =
                         new ObjectMapper().readValue(request.getAttribute("categories").toString(),
-                                new TypeReference<ArrayList<RecipeCategory>>() {});
+                                new TypeReference<ArrayList<RecipeCategory>>() {
+                                });
                 String cat_name;
                 for (RecipeCategory cat : categories) {
                     cat_name = cat.getName();
             %>
-            <li class="list-group-item"><a href="/recipe_category/<%=cat.getId()%>"
+            <li class="list-group-item"><a href="/recipe_category/<%=cat.getId()%>-<%=1%>"
                                            style="color: white !important; text-decoration: none !important;"> <%=cat_name%></a>
             </li>
             <%
@@ -64,9 +72,42 @@
     <div class="col-sm-10">
         <button type="button" class="btn add-button">
             <a href="create_recipe">Добавить рецепт</a></button>
+        <nav>
+            <ul class="pagination">
+                <%
+                    if (cur_page > 1) {
+                %>
+                <li class="page-item">
+                    <a class="page-link" href="<%=pref+(cur_page-1)%>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <%
+                    }
+                    for (int i = 1; i <= page_cnt; i++) {
+                %>
+                <li class="page-item"><a class="page-link" href="<%=pref+i%>"><%=i%></a></li>
+                <%
+                    }
+                    if (cur_page < page_cnt) {
+                %>
+                <li class="page-item">
+                    <a class="page-link" href="<%=pref+(cur_page+1)%>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                <%
+                }
+                %>
+                %>
+            </ul>
+        </nav>
         <div class="recipe-wrapper">
             <% ArrayList<Recipe> recipes = new ObjectMapper().readValue(request.getAttribute("recipes").toString(),
-                    new TypeReference<ArrayList<Recipe>>() {});
+                    new TypeReference<ArrayList<Recipe>>() {
+                    });
                 String name;
                 for (Recipe recipe : recipes) {
                     HashMap<String, BigDecimal> kbju = recipe.getKBJU();
@@ -117,10 +158,14 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td><%=kbju.get("k")%></td>
-                                            <td><%=kbju.get("b")%></td>
-                                            <td><%=kbju.get("j")%></td>
-                                            <td><%=kbju.get("u")%></td>
+                                            <td><%=kbju.get("k")%>
+                                            </td>
+                                            <td><%=kbju.get("b")%>
+                                            </td>
+                                            <td><%=kbju.get("j")%>
+                                            </td>
+                                            <td><%=kbju.get("u")%>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -161,14 +206,18 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        int cnt=1;
+                                        int cnt = 1;
                                         for (Ingredient i : recipe.getIngredients()) {
                                     %>
                                     <tr>
-                                        <th scope="row"><%=cnt++%></th>
-                                        <td><%=i.getName()%></td>
-                                        <td style="text-align: center;"><%=i.getQuantity()%></td>
-                                        <td style="text-align: center;"><%=i.getUnit()%></td>
+                                        <th scope="row"><%=cnt++%>
+                                        </th>
+                                        <td><%=i.getName()%>
+                                        </td>
+                                        <td style="text-align: center;"><%=i.getQuantity()%>
+                                        </td>
+                                        <td style="text-align: center;"><%=i.getUnit()%>
+                                        </td>
                                     </tr>
                                     </tbody>
                                     <%
