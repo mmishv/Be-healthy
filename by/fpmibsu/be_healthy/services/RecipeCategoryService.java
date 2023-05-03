@@ -1,5 +1,6 @@
 package by.fpmibsu.be_healthy.services;
 
+import by.fpmibsu.be_healthy.dao.RecipeDao;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.dao.RecipeCategoryDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,5 +37,12 @@ public class RecipeCategoryService {
 
     public String getAllJSON() throws JsonProcessingException, SQLException {
         return new ObjectMapper().writeValueAsString(new RecipeCategoryService().getAll());
+    }
+
+    public int getNumberOfRecipes() throws SQLException {
+        return new RecipeDao().getNumberOfRecipes();
+    }
+    public int getNumberOfRecipesInCategory(int id) throws SQLException {
+        return new RecipeDao().getNumberOfRecipesInCategory(id);
     }
 }

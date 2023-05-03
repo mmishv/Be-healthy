@@ -253,4 +253,43 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             recipes.add(recipe);
         }
     }
+    public int getNumberOfRecipes() throws SQLException {
+        String sql = "SELECT COUNT(*) RES FROM RECIPE";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()){
+                return resultSet.getInt("RES");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return -1;
+    }
+    public int getNumberOfRecipesInCategory(int id) throws SQLException {
+        String sql = "SELECT COUNT(*) RES FROM RECIPE " +
+                "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                return resultSet.getInt("RES");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return -1;
+    }
 }
