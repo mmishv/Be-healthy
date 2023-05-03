@@ -67,7 +67,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
         recipe.setBase64image(base64encoded);
 
-        recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByArticleId(recipe.getAuthorId()));
+        recipe.setCategories(new RecipeCategoryDao().getCategoriesByRecipeId(recipe.getId()));
         recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
     }
 
