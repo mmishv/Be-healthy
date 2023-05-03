@@ -122,31 +122,27 @@
         </div>
     </fieldset>
 </form>
-<script>
-    var counter = 2;
-
-    function addIngredient(e) {
-        if (e.classList.contains('disabled')) {
-            e.parentElement.remove();
-        } else {
-            let container = e.parentElement.cloneNode(true);
-            container.id = "ing-option" + counter;
-            let ch = container.children;
-            ch[0].id = "ingredient" + counter;
-            ch[1].id = "quantity" + counter;
-            ch[1].value = '';
-            ch[2].id = "measure" + counter;
-
-            ch[0].name = "ingredient" + counter;
-            ch[1].name = "quantity" + counter;
-            ch[2].name = "measure" + counter;
-            counter++;
-            document.getElementById('ingredients-list').appendChild(container);
-            e.classList.add('disabled');
-            e.style.backgroundColor = '#114630a8';
-            e.innerHTML = '-';
-        }
+<script>    function addIngredient(e) {
+    if (e.classList.contains('disabled')) {
+        e.parentElement.remove();
+    } else {
+        let container = e.parentElement.cloneNode(true);
+        e.classList.add('disabled');
+        e.style.backgroundColor = '#114630a8';
+        e.innerHTML = '-';
+        container.children[1].value = '';
+        document.getElementById('ingredients-list').appendChild(container);
     }
+    let ingredients = document.getElementsByClassName('ingredient-option');
+    for(let i = 0; i < ingredients.length; i++){
+        var c = i + 1;
+        ingredients[i].id = "ing-option" + c;
+        let ch = ingredients[i].children;
+        ch[0].id = "ingredient" + c;
+        ch[1].id = "quantity" + c;
+        ch[2].id = "measure" + c;
+    }
+}
 </script>
 </body>
 </html>
