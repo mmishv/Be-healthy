@@ -122,7 +122,8 @@
         </div>
     </fieldset>
 </form>
-<script>    function addIngredient(e) {
+<script>
+    function addIngredient(e) {
     if (e.classList.contains('disabled')) {
         e.parentElement.remove();
     } else {

@@ -46,10 +46,13 @@ public class CreateRecipeServlet extends HttpServlet {
         List<RecipeCategory> categories = new ArrayList<>();
             title =  new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
             cookingTime = Integer.parseInt(request.getParameter("cooking-time"));
-            for (var c: request.getParameterValues("categories")){
-                RecipeCategory cat = new RecipeCategory();
-                cat.setId(Integer.parseInt(c));
-                categories.add(cat);
+            var cats = request.getParameterValues("categories");
+            if (cats!=null){
+                for (var c: cats){
+                    RecipeCategory cat = new RecipeCategory();
+                    cat.setId(Integer.parseInt(c));
+                    categories.add(cat);
+                }
             }
             text = new String(request.getParameter("text").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
             Part filePart = request.getPart("image");
