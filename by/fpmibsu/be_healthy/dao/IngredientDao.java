@@ -118,14 +118,13 @@ public class IngredientDao extends JDBCPostgreSQL implements Dao<Ingredient>{
     @Override
     public boolean create(Ingredient entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO INGREDIENT (ID, RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO INGREDIENT (RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, entity.getIngredientId());
-            preparedStatement.setInt(2, entity.getRecipe_id());
-            preparedStatement.setInt(3, entity.getId());
-            preparedStatement.setInt(4, entity.getQuantity());
+            preparedStatement.setInt(1, entity.getRecipe_id());
+            preparedStatement.setInt(2, entity.getId());
+            preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

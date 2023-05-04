@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Base64;
 
+import static by.fpmibsu.be_healthy.dao.MealDao.getId;
+
 public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     private Connection connection = getConnection();
 
@@ -205,20 +207,8 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
                 }
             }
             for (var i : entity.getIngredients()) {
-                String inner_sql = "INSERT INTO INGREDIENT (RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)";
-                try {
-                    inner_statement1 = connection.prepareStatement(inner_sql);
-                    inner_statement1.setInt(1, recipe_id);
-                    inner_statement1.setInt(2, i.getId());
-                    inner_statement1.setInt(3, i.getQuantity());
-                    inner_statement1.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (inner_statement1 != null) {
-                        inner_statement1.close();
-                    }
-                }
+                i.setRecipe_id(recipe_id);
+                new IngredientDao().create(i);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -258,16 +248,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         PreparedStatement preparedStatement = null, inner_statement = null;
         String sql = "SELECT max(id) as id FROM RECIPE";
         Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()) {
-                return resultSet.getInt("ID");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return -1;
+        return getId(sql, connection);
     }
 
     public List<Recipe> getAllInCategory(int id) throws SQLException {
@@ -275,18 +256,13 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         String sql = "SELECT * FROM RECIPE WHERE ID IN " +
                 "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" +
                 "ORDER BY PUBL_DATE DESC";
-        PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(sql);
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             initRecipe(recipes, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (statement != null) {
-                statement.close();
-            }
             if (connection != null) {
                 connection.close();
             }
