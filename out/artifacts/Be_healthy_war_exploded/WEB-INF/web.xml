@@ -3,12 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <!--    <welcome-file-list>
-            <welcome-file>index.jsp</welcome-file>
-        </welcome-file-list>-->
     <servlet>
         <servlet-name>main</servlet-name>
-        <jsp-file>/jsp/main.jsp</jsp-file>
+        <jsp-file>/jsp/main/main.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>main</servlet-name>
@@ -17,7 +14,7 @@
 
     <servlet>
         <servlet-name>main0</servlet-name>
-        <jsp-file>/jsp/main.jsp</jsp-file>
+        <jsp-file>/jsp/main/main.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>main0</servlet-name>
@@ -26,7 +23,7 @@
 
     <servlet>
         <servlet-name>registration</servlet-name>
-        <jsp-file>/jsp/registration.jsp</jsp-file>
+        <jsp-file>/jsp/profile/registration.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>registration</servlet-name>
@@ -35,7 +32,7 @@
 
     <servlet>
         <servlet-name>product</servlet-name>
-        <jsp-file>/jsp/product.jsp</jsp-file>
+        <jsp-file>/jsp/product/product.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>product</servlet-name>
@@ -44,7 +41,7 @@
 
     <servlet>
         <servlet-name>forum</servlet-name>
-        <jsp-file>/jsp/forum.jsp</jsp-file>
+        <jsp-file>/jsp/forum/forum.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>forum</servlet-name>
@@ -53,7 +50,7 @@
 
     <servlet>
         <servlet-name>diary</servlet-name>
-        <jsp-file>/jsp/diary.jsp</jsp-file>
+        <jsp-file>/jsp/diary/diary.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>diary</servlet-name>
@@ -62,7 +59,7 @@
 
     <servlet>
         <servlet-name>new_recipe</servlet-name>
-        <jsp-file>/jsp/new_recipe.jsp</jsp-file>
+        <jsp-file>/jsp/recipes/new_recipe.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>new_recipe</servlet-name>
@@ -71,7 +68,7 @@
 
     <servlet>
         <servlet-name>RecipesMainServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.RecipesMainServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.recipes.RecipesMainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -81,7 +78,7 @@
 
     <servlet>
         <servlet-name>create_recipe</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.CreateRecipeServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.recipes.CreateRecipeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -91,7 +88,7 @@
 
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>by.fpmibsu.be_healthy.servlets.AuthFilter</filter-class>
+        <filter-class>by.fpmibsu.be_healthy.servlets.filters.AuthFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -101,7 +98,7 @@
 
     <filter>
         <filter-name>CreateRecipeFilter</filter-name>
-        <filter-class>by.fpmibsu.be_healthy.servlets.CreateRecipeFilter</filter-class>
+        <filter-class>by.fpmibsu.be_healthy.servlets.filters.CreateRecipeFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -111,7 +108,7 @@
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.LogoutServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -121,7 +118,7 @@
 
     <servlet>
         <servlet-name>RegistrationServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.RegistrationServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.RegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -131,7 +128,7 @@
 
     <servlet>
         <servlet-name>RecipeCategoryServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.RecipeCategoryServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.recipes.RecipeCategoryServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
