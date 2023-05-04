@@ -1,4 +1,8 @@
-<%--
+<%@ page import="by.fpmibsu.be_healthy.entity.Meal" %>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
+<%@ page import="by.fpmibsu.be_healthy.entity.Product" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 24.04.2023
@@ -6,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -46,27 +51,35 @@
                 <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
             </svg>
         </div>
+        <% ArrayList<Meal> meals = new ObjectMapper().readValue(request.getAttribute("meals").toString(),
+                new TypeReference<ArrayList<Meal>>() {
+                });
+            ArrayList<Product> prods = new ObjectMapper().readValue(request.getAttribute("products").toString(),
+                    new TypeReference<ArrayList<Product>>() {
+                    });
+            request.setAttribute("products", prods);
+            request.setAttribute("meals", meals );
+        %>
         <div class="meals-wrapper">
-            <div class="meal" id="meal1">
-                <div class="meal-name" id="meal-name1">Завтрак</div>
-                <div class="header product row">
-                    <div class="prod-name"></div>
-                    <div class="prod-bju">Б/Ж/У</div>
-                    <div class="prod-k">Ккал</div>
+            <c:forEach items="${meals}" var="meal">
+                <div class="meal" id="meal${meal.id}">
+                    <c:if test="${not empty meal.name}">
+                    <div class="meal-name" id="meal-name1">${meal.name}</div>
+                    </c:if>
+                    <div class="header product row">
+                        <div class="prod-name"></div>
+                        <div class="prod-bju">Б/Ж/У</div>
+                        <div class="prod-k">ккал</div>
+                    </div>
+                    <c:forEach items="${meal.products}" var="product">
+                        <div class="product row">
+                            <div class="prod-name">${product.name}</div>
+                            <div class="prod-bju">${product.proteins}/${product.fats}/${product.carbohydrates}</div>
+                            <div class="prod-k">${product.calories}</div>
+                        </div>
+                    </c:forEach>
                 </div>
-                <div class="product row" id="meal-product1">
-                    <div class="prod-name" id="prod-name1">Кофе</div>
-                    <div class="prod-bju" id="prod-bju1">6/2/8</div>
-                    <div class="prod-k" id="prod-k1">86</div>
-                </div>
-                <div class="product row" id="meal-product2">
-                    <div class="prod-name" id="prod-name2">Кофе</div>
-                    <div class="prod-bju" id="prod-bju2">6/2/8</div>
-                    <div class="prod-k" id="prod-k2">86</div>
-                </div>
-
-            </div>
-
+            </c:forEach>
         </div>
     </div>
 
@@ -111,29 +124,30 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form>
+            <form method="post" action="/diary/${date}" accept-charset="utf-8">
                 <div class="modal-header">
-                    <input class="modal-title" id="exampleModalLongTitle" placeholder="Название приёма пищи"></input>
+                    <input class="modal-title" id="exampleModalLongTitle" name="title" placeholder="Название приёма пищи"></input>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="products">
                     <div class="row product-option" id="prod-option1">
-                        <select id="product1" class="form-control col-sm-6"></select>
-                        <input id="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
-                        <select id="measure1" class="form-control col-sm-2">
-                            <option selected>шт.</option>
-                            <option>ч.л.</option>
-                            <option>ст.л.</option>
-                            <option>г</option>
-                            <option>мл</option>
+                        <select id="product1" name="product1" class="form-control col-sm-6">
+                            <c:forEach items="${products}" var="product">
+                                <option value="${product.id}"><c:out value="${product.name}"/></option>
+                            </c:forEach>
+                        </select>
+                        <input id="quantity1" name="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <select id="measure1" name="measure1" class="form-control col-sm-2">
+                            <option selected>гр.</option>
+                            <option>мл.</option>
                         </select>
                         <button class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Добавить</button>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
                 </div>
             </form>
         </div>
@@ -156,9 +170,12 @@
             container.id = "prod-option" + counter;
             let ch = container.children;
             ch[0].id = "product" + counter;
+            ch[0].name = "product" + counter;
             ch[1].id = "quantity" + counter;
+            ch[1].name = "quantity" + counter;
             ch[1].value = '';
             ch[2].id = "measure" + counter;
+            ch[2].name = "measure" + counter;
             counter++;
             document.getElementById('products').appendChild(container);
             e.classList.add('disabled');

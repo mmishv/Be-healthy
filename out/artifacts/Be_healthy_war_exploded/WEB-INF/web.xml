@@ -58,15 +58,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>diary</servlet-name>
-        <jsp-file>/jsp/diary/diary.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>diary</servlet-name>
-        <url-pattern>/diary</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>new_recipe</servlet-name>
         <jsp-file>/jsp/recipes/new_recipe.jsp</jsp-file>
     </servlet>
@@ -95,6 +86,15 @@
         <url-pattern>/create_recipe</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MealServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.diary.MealServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MealServlet</servlet-name>
+        <url-pattern>/diary/*</url-pattern>
+    </servlet-mapping>
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>by.fpmibsu.be_healthy.servlets.filters.AuthFilter</filter-class>
