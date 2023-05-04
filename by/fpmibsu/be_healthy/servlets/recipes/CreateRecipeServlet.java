@@ -67,11 +67,7 @@ public class CreateRecipeServlet extends HttpServlet {
                 ingredients.add(ing);
                 cnt++;
             }
-            try {
-                authorId = new ProfileService().getIdByLogin((String) request.getSession().getAttribute("login"));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            authorId = (int) request.getSession().getAttribute("id");
             Recipe recipe = new Recipe();
             recipe.setTitle(title);
             recipe.setCookingTime(cookingTime);

@@ -23,6 +23,10 @@ public class AuthFilter implements Filter {
 
         final String login = req.getParameter("login");
         final String password = req.getParameter("password");
+        final int id;
+        if (req.getParameter("id")!=null){
+            id = Integer.parseInt(req.getParameter("id"));
+        }
 
         final AtomicReference<ProfileService> profile =
                 (AtomicReference<ProfileService>) req.getSession().getServletContext().getAttribute("profile");
@@ -37,6 +41,7 @@ public class AuthFilter implements Filter {
                 if (profile.get().isProfileExist(login, password)) {
                     req.getSession().setAttribute("password", password);
                     req.getSession().setAttribute("login", login);
+                    req.getSession().setAttribute("id", new ProfileService().getIdByLogin(login));
                     req.getSession().setAttribute("isLogged", true);
                     move(req, res, true);
                 } else {
