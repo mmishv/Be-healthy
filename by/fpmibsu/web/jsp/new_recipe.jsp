@@ -10,10 +10,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -48,7 +48,7 @@
     request.setAttribute("categories", cats);
     request.setAttribute("products", prods);
 %>
-<fmt:requestEncoding value = "UTF-8"/>
+<fmt:requestEncoding value="UTF-8"/>
 <form method="post" action="create_recipe" enctype="multipart/form-data" accept-charset="utf-8">
     <fieldset class="form-group">
         <div class="wrapper col-sm-9" style="margin: auto;">
@@ -61,7 +61,8 @@
             <div class="form-group row">
                 <label for="cooking-time" class="col-sm-4 col-form-label">Время приготовления, мин: </label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control" id="cooking-time" name="cooking-time" placeholder="Например, 30"
+                    <input type="number" class="form-control" id="cooking-time" name="cooking-time"
+                           placeholder="Например, 30"
                            required>
                 </div>
             </div>
@@ -71,7 +72,8 @@
                     <c:forEach items="${categories}" var="category">
                         <br/>
                         <div class="form-check col-sm-6">
-                            <input class="form-check-input" type="checkbox" name="categories" value="${category.id}" id="${category.id}">
+                            <input class="form-check-input" type="checkbox" name="categories" value="${category.id}"
+                                   id="${category.id}">
                             <label class="form-check-label" for="${category.id}">
                                 <c:out value="${category.name}"/>
                             </label>
@@ -88,7 +90,8 @@
                                 <option value="${product.id}"><c:out value="${product.name}"/></option>
                             </c:forEach>
                         </select>
-                        <input id="quantity1" name="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <input id="quantity1" name="quantity1" type="number" class="form-control col-sm-2"
+                               placeholder="кол-во" required>
                         <select id="measure1" name="measure1" class="form-control col-sm-2">
                             <option selected>шт.</option>
                             <option>ч.л.</option>
@@ -108,7 +111,8 @@
             </div>
             <div class="form-group row">
                 <label for="recipe-description" class="col-sm-4 bold">Описание рецепта:</label>
-                <textarea class="form-control col-sm-8" name="text" id="recipe-description" rows="5" required></textarea>
+                <textarea class="form-control col-sm-8" name="text" id="recipe-description" rows="5"
+                          required></textarea>
             </div>
             <div class="form-group row">
                 <button type="submit" class="btn btn-primary"
@@ -124,26 +128,30 @@
 </form>
 <script>
     function addIngredient(e) {
-    if (e.classList.contains('disabled')) {
-        e.parentElement.remove();
-    } else {
-        let container = e.parentElement.cloneNode(true);
-        e.classList.add('disabled');
-        e.style.backgroundColor = '#114630a8';
-        e.innerHTML = '-';
-        container.children[1].value = '';
-        document.getElementById('ingredients-list').appendChild(container);
+        if (e.classList.contains('disabled')) {
+            e.parentElement.remove();
+        } else {
+            let container = e.parentElement.cloneNode(true);
+            e.classList.add('disabled');
+            e.style.backgroundColor = '#114630a8';
+            e.innerHTML = '-';
+            container.children[1].value = '';
+            document.getElementById('ingredients-list').appendChild(container);
+        }
+        let ingredients = document.getElementsByClassName('ingredient-option');
+        for (let i = 0; i < ingredients.length; i++) {
+            var c = i + 1;
+            ingredients[i].id = "ing-option" + c;
+            ingredients[i].name = "ing-option" + c;
+            let ch = ingredients[i].children;
+            ch[0].id = "ingredient" + c;
+            ch[1].id = "quantity" + c;
+            ch[2].id = "measure" + c;
+            ch[0].name = "ingredient" + c;
+            ch[1].name = "quantity" + c;
+            ch[2].name = "measure" + c;
+        }
     }
-    let ingredients = document.getElementsByClassName('ingredient-option');
-    for(let i = 0; i < ingredients.length; i++){
-        var c = i + 1;
-        ingredients[i].id = "ing-option" + c;
-        let ch = ingredients[i].children;
-        ch[0].id = "ingredient" + c;
-        ch[1].id = "quantity" + c;
-        ch[2].id = "measure" + c;
-    }
-}
 </script>
 </body>
 </html>
