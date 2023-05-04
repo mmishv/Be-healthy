@@ -1,5 +1,7 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Time;
 import java.util.*;
 public class Meal implements Serializable {
@@ -62,5 +64,19 @@ public class Meal implements Serializable {
         return "Meal name: "
                 + name+ ", time: " + timeOfMeal;
     }
-
+    public HashMap<String, BigDecimal> getKBJU(){
+        HashMap<String, BigDecimal> kbju = new HashMap<>();
+        double k = 0, b=0, j=0, u=0;
+        for (MealProduct i: getProducts()){
+            k+=1.0*i.getQuantity()*i.getCalories()/100;
+            b+=i.getQuantity()*i.getProteins()/100;
+            j+=i.getQuantity()*i.getFats()/100;
+            u+=i.getQuantity()*i.getCarbohydrates()/100;
+        }
+        kbju.put("k", BigDecimal.valueOf(k));
+        kbju.put("b", BigDecimal.valueOf(b));
+        kbju.put("j", BigDecimal.valueOf(j));
+        kbju.put("u", BigDecimal.valueOf(u));
+        return kbju;
+    }
 }

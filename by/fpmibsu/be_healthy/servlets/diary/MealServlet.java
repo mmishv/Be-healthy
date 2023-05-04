@@ -4,11 +4,13 @@ import by.fpmibsu.be_healthy.dao.MealDao;
 import by.fpmibsu.be_healthy.entity.*;
 import by.fpmibsu.be_healthy.services.MealService;
 import by.fpmibsu.be_healthy.services.ProductService;
+import by.fpmibsu.be_healthy.services.ProfileService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -28,6 +30,17 @@ public class MealServlet extends HttpServlet {
         try {
             request.setAttribute("meals", new MealService().getAllByDateAndUserIdJSON(
                     valueOf(pathParts[pathParts.length-1]), user_id));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            Profile cur_user = new ProfileService().getEntityById(user_id);
+            var kbju_norm = cur_user.getKBJU_norm();
+            var kbju =  new MealService().getKBJUByDateAndUserId(valueOf(pathParts[pathParts.length-1]), user_id);
+            request.setAttribute("cal", kbju.get("k").divide(kbju_norm.get("k"), 2, RoundingMode.HALF_UP));
+            request.setAttribute("prot", kbju.get("b").divide(kbju_norm.get("b"), 2, RoundingMode.HALF_UP));
+            request.setAttribute("fats", kbju.get("j").divide(kbju_norm.get("j"), 2, RoundingMode.HALF_UP));
+            request.setAttribute("carb", kbju.get("u").divide(kbju_norm.get("u"), 2, RoundingMode.HALF_UP));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
