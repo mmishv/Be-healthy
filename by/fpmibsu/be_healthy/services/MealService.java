@@ -5,6 +5,7 @@ import by.fpmibsu.be_healthy.dao.MealDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,5 +38,11 @@ public class MealService {
 
     public String getAllJSON() throws JsonProcessingException, SQLException {
         return new ObjectMapper().writeValueAsString(new MealService().getAll());
+    }
+    public List<Meal> getAllByDateAndUserId(Date date, int id) throws SQLException {
+        return new MealDao().getAllByDateAndUserId(date, id);
+    }
+    public String getAllByDateAndUserIdJSON(Date date, int id) throws SQLException, JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(getAllByDateAndUserId(date, id));
     }
 }
