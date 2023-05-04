@@ -1,6 +1,8 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.File;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 public class Profile implements Serializable {
@@ -14,6 +16,7 @@ public class Profile implements Serializable {
     private int height;
     private int age;
     private double activity;
+    private HashMap<String, BigDecimal> KBJU_norm;
     private List<Article> written_articles;
     private List<Recipe> written_recipes;
     private List<ForumTopic> started_topics;
@@ -149,4 +152,11 @@ public class Profile implements Serializable {
         return "Name: "+ name +", email: " + email;
     }
 
+    public HashMap<String, BigDecimal> getKBJU_norm() {
+        return KBJU_norm;
+    }
+
+    public void setKBJU_norm(HashMap<String, BigDecimal> KBJU_norm) {
+        this.KBJU_norm = KBJU_norm;
+    }
 }

@@ -5,8 +5,11 @@ import by.fpmibsu.be_healthy.entity.*;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
 import javax.sql.rowset.serial.SerialBlob;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
@@ -22,24 +25,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Profile profile = new Profile();
-                profile.setId(resultSet.getInt("ID"));
-                profile.setName(resultSet.getString("NAME"));
-                profile.setEmail(resultSet.getString("EMAIL"));
-                profile.setLogin(resultSet.getString("LOGIN"));
-                profile.setPassword(resultSet.getString("PASSWORD"));
-                var blob = resultSet.getBlob("AVATAR");
-                if (blob != null)
-                    profile.setAvatar(blob.getBytes(1l, (int) blob.length()));
-
-                profile.setAge(resultSet.getInt("AGE"));
-                profile.setHeight(resultSet.getInt("HEIGHT"));
-                profile.setWeight(resultSet.getDouble("WEIGHT"));
-                profile.setActivity(resultSet.getDouble("ACTIVITY_COEF"));
-                profile.setWritten_articles(new ArticleDao().getWrittenArticlesByAuthorId(profile.getId()));
-                profile.setWritten_recipes(new RecipeDao().getWrittenRecipesByUserId(profile.getId()));
-                profile.setStarted_topics(new ForumTopicDao().getTopicsByAuthorId(profile.getId()));
-                profile.setMeals(new MealDao().getMealsByUserId(profile.getId()));
-                profile.setMessages(new ForumMessageDao().getMessagesByUserId(profile.getId()));
+                initProfile(resultSet, profile);
                 profiles.add(profile);
             }
         } catch (SQLException e) {
@@ -55,6 +41,32 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         return profiles;
     }
 
+    private void initProfile(ResultSet resultSet, Profile profile) throws SQLException {
+        profile.setId(resultSet.getInt("ID"));
+        profile.setName(resultSet.getString("NAME"));
+        profile.setEmail(resultSet.getString("EMAIL"));
+        profile.setLogin(resultSet.getString("LOGIN"));
+        profile.setPassword(resultSet.getString("PASSWORD"));
+        var blob = resultSet.getBlob("AVATAR");
+        if (blob != null)
+            profile.setAvatar(blob.getBytes(1l, (int) blob.length()));
+        HashMap<String, BigDecimal> KBJU_norm = new HashMap<>();
+        KBJU_norm.put("k", BigDecimal.valueOf(resultSet.getDouble("CAL_NORM")));
+        KBJU_norm.put("b", BigDecimal.valueOf(resultSet.getDouble("PROT_NORM")));
+        KBJU_norm.put("j",BigDecimal.valueOf(resultSet.getDouble("FATS_NORM")));
+        KBJU_norm.put("u", BigDecimal.valueOf(resultSet.getDouble("CARB_NORM")));
+        profile.setKBJU_norm(KBJU_norm);
+        profile.setAge(resultSet.getInt("AGE"));
+        profile.setHeight(resultSet.getInt("HEIGHT"));
+        profile.setWeight(resultSet.getDouble("WEIGHT"));
+        profile.setActivity(resultSet.getDouble("ACTIVITY_COEF"));
+        profile.setWritten_articles(new ArticleDao().getWrittenArticlesByAuthorId(profile.getId()));
+        profile.setWritten_recipes(new RecipeDao().getWrittenRecipesByUserId(profile.getId()));
+        profile.setStarted_topics(new ForumTopicDao().getTopicsByAuthorId(profile.getId()));
+        profile.setMeals(new MealDao().getMealsByUserId(profile.getId()));
+        profile.setMessages(new ForumMessageDao().getMessagesByUserId(profile.getId()));
+    }
+
     @Override
     public Profile getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -65,24 +77,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                profile.setId(resultSet.getInt("ID"));
-                profile.setName(resultSet.getString("NAME"));
-                profile.setEmail(resultSet.getString("EMAIL"));
-                profile.setLogin(resultSet.getString("LOGIN"));
-                profile.setPassword(resultSet.getString("PASSWORD"));
-                var blob = resultSet.getBlob("AVATAR");
-                if (blob != null)
-                    profile.setAvatar(blob.getBytes(1l, (int) blob.length()));
-
-                profile.setAge(resultSet.getInt("AGE"));
-                profile.setHeight(resultSet.getInt("HEIGHT"));
-                profile.setWeight(resultSet.getDouble("WEIGHT"));
-                profile.setActivity(resultSet.getDouble("ACTIVITY_COEF"));
-                profile.setWritten_articles(new ArticleDao().getWrittenArticlesByAuthorId(profile.getId()));
-                profile.setWritten_recipes(new RecipeDao().getWrittenRecipesByUserId(profile.getId()));
-                profile.setStarted_topics(new ForumTopicDao().getTopicsByAuthorId(profile.getId()));
-                profile.setMeals(new MealDao().getMealsByUserId(profile.getId()));
-                profile.setMessages(new ForumMessageDao().getMessagesByUserId(profile.getId()));
+                initProfile(resultSet, profile);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,7 +96,8 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     public boolean update(Profile entity) throws SQLException {
         boolean success = true;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE PROFILE SET NAME=?, AVATAR=?, WEIGHT=?, ACTIVITY_COEF=? WHERE ID=?";
+        String sql = "UPDATE PROFILE SET NAME=?, AVATAR=?, WEIGHT=?, ACTIVITY_COEF=?," +
+                " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
@@ -110,6 +106,11 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setDouble(3, entity.getWeight());
             preparedStatement.setDouble(4, entity.getActivity());
             preparedStatement.setInt(5, entity.getId());
+            var norm = entity.getKBJU_norm();
+            preparedStatement.setDouble(6, norm.get("c").doubleValue());
+            preparedStatement.setDouble(7, norm.get("u").doubleValue());
+            preparedStatement.setDouble(8, norm.get("j").doubleValue());
+            preparedStatement.setDouble(9, norm.get("b").doubleValue());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,12 +152,12 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     @Override
     public boolean create(Profile entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO PROFILE (NAME, EMAIL, LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF, AVATAR, WEIGHT)" +
-                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PROFILE (LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF," +
+                " AVATAR, WEIGHT, CAL_NORM, CARB_NORM, FATS_NORM, PROT_NORM)" +
+                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            //preparedStatement.setInt(1, entity.getId());
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2, entity.getEmail());
             preparedStatement.setString(3, entity.getLogin());
@@ -167,6 +168,12 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setBlob(8,
                     entity.getAvatar() != null ? new SerialBlob(entity.getAvatar()) : null);
             preparedStatement.setDouble(9, entity.getWeight());
+
+            var norm = entity.getKBJU_norm();
+            preparedStatement.setDouble(10, norm.get("c").doubleValue());
+            preparedStatement.setDouble(11, norm.get("u").doubleValue());
+            preparedStatement.setDouble(12, norm.get("j").doubleValue());
+            preparedStatement.setDouble(13, norm.get("b").doubleValue());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
