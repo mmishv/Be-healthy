@@ -66,6 +66,9 @@
                     <c:if test="${not empty meal.name}">
                     <div class="meal-name" id="meal-name1">${meal.name}</div>
                     </c:if>
+                    <c:if test="${empty meal.name}">
+                        <div class="meal-name" id="meal-name1">Без названия</div>
+                    </c:if>
                     <div class="header product row">
                         <div class="prod-name"></div>
                         <div class="prod-bju">Б/Ж/У</div>
@@ -78,6 +81,12 @@
                             <div class="prod-k">${product.calories}</div>
                         </div>
                     </c:forEach>
+                    <div class="delete-meal">
+                        <form method="get" action="/delete-meal/${meal.id}_${date}">
+                            <button type="submit" class="btn btn-danger"
+                                    name="delete" value="${meal.id}">Удалить</button>
+                        </form>
+                    </div>
                 </div>
             </c:forEach>
         </div>

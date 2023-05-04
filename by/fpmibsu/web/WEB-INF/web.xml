@@ -145,5 +145,15 @@
         <url-pattern>/recipe_category/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteMealServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.diary.DeleteMealServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteMealServlet</servlet-name>
+        <url-pattern>/delete-meal/*</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
