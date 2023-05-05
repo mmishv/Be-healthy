@@ -41,3 +41,45 @@ input {
     height: fit-content;
     align-self: center;
 }
+
+.back-btn {
+    background-color: #00000000 !important;
+    border: solid 2px white !important;
+    color: white !important;
+    position: absolute;
+    margin-left: 2%;
+}
+
+.back-btn a {
+    color: white !important;
+}
+
+.back-btn a:hover {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.mixer-header {
+    color: white;
+    position: relative;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.table-wrapper {
+    margin: 2% auto;
+    background-color: white;
+    width: 70%;
+    position: relative;
+    min-width: 800px;
+}
+
+.table-wrapper table th {
+    font-weight: 500 !important;
+    background-color: #4bc1798a;
+}
+
+.table-wrapper table td, .table-wrapper table th {
+    text-align: center;
+    border: solid 1px #cfd4d9;
+}

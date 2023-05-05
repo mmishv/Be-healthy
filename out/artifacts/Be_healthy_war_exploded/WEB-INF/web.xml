@@ -158,4 +158,12 @@
         <url-pattern>/product</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>mixer</servlet-name>
+        <jsp-file>/jsp/product/mixer.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mixer</servlet-name>
+        <url-pattern>/mixer</url-pattern>
+    </servlet-mapping>
 </web-app>
