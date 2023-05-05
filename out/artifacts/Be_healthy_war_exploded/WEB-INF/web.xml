@@ -40,15 +40,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>product</servlet-name>
-        <jsp-file>/jsp/product/product.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>product</servlet-name>
-        <url-pattern>/product</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>forum</servlet-name>
         <jsp-file>/jsp/forum/forum.jsp</jsp-file>
     </servlet>
@@ -155,5 +146,14 @@
         <url-pattern>/delete-meal/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MixerServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.products.MixerServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>MixerServlet</servlet-name>
+        <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+    
 </web-app>

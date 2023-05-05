@@ -35,7 +35,7 @@
 <div style="display: flex">
     <div class="calculator">
         <h2>Калькулятор калорий</h2>
-        <form action="jsp/main.jsp" method="GET">
+        <form action="jsp/main/main.jsp" method="GET">
             <fieldset class="form-group">
                 <div class="row">
                     <legend class="col-form-label col-sm-3 pt-0">Пол:</legend>

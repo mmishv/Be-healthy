@@ -126,4 +126,7 @@ public class Recipe implements Serializable {
         kbju.put("u", new BigDecimal(u/coef).setScale(1, RoundingMode.HALF_UP));
         return kbju;
     }
+    public void addIngregient(Ingredient i){
+        ingredients.add(i);
+    }
 }
