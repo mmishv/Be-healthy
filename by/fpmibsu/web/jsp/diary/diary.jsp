@@ -235,6 +235,12 @@
 <script src="../../js/addRow.js"></script>
 <script src="../../js/updateProgress.js"></script>
 <script>
+    new AirDatepicker('#airdatepicker', {
+        selectedDates: [new Date()],
+        autoClose: true,
+        position: 'bottom center'
+    });
+
     window.addEventListener('load', () => {
         updateProgressCalories(${k}, ${k_norm});
         updateProgressProteins(${b}, ${b_norm});
