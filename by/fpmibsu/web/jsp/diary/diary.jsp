@@ -194,5 +194,6 @@
 </div>
 <script src="../../js/air-datepicker.js"></script>
 <script src="../../js/addRow.js"></script>
+<script src="../../js/updateProgress.js"></script>
 </body>
 </html>

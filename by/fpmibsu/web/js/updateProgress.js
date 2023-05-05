@@ -1,10 +1,7 @@
 function updateProgress(values) {
     for (let i = 0; i < 4; i++) {
-        setProgress(document.getElementsByClassName('progress-bar')[i], values[i]);
+        let node = document.getElementsByClassName('progress-bar')[i];
+        node.ariaValuenow = values[i];
+        node.style.width = values[i] + '%';
     }
-}
-
-function setProgress(node, percent) {
-    node.ariaValuenow = percent;
-    node.style.width = percent + '%';
 }
