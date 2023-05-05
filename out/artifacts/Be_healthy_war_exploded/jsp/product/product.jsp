@@ -56,7 +56,9 @@
                     <option selected>гр.</option>
                     <option>мл.</option>
                 </select>
-                <button type="button" class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
+                <button type="button" class="col-sm-1 ing-button"
+                        onclick="addRow(this, 'products', 'product-inf', 'product')">+
+                </button>
             </div>
         </div>
         <div style="display: flex; justify-content: flex-end;">
@@ -64,29 +66,6 @@
         </div>
     </form>
 </div>
-<script>
-    var counter = 2;
-    function addProduct(e) {
-        if (e.classList.contains('disabled')) {
-            e.parentElement.remove();
-        } else {
-            let container = e.parentElement.cloneNode(true);
-            container.id = "product-inf" + counter;
-            let ch = container.children;
-            ch[0].id = "product" + counter;
-            ch[0].name = "product" + counter;
-            ch[1].id = "quantity" + counter;
-            ch[1].name = "quantity" + counter;
-            ch[1].value = '';
-            ch[2].id = "measure" + counter;
-            ch[2].name = "measure" + counter;
-            counter++;
-            document.getElementById('products').appendChild(container);
-            e.classList.add('disabled');
-            e.style.backgroundColor = '#114630a8';
-            e.innerHTML = '-';
-        }
-    }
-</script>
+<script src="../../js/addRow.js"></script>
 </body>
 </html>

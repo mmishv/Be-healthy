@@ -20,12 +20,12 @@
     margin-right: 5px;
 }
 
-.ingredient-option {
+.ing-option {
     width: 100%;
     justify-content: space-between;
 }
 
-.ingredient-option select, .ingredient-option input, .ingredient-option button {
+.ing-option select, .ing-option input, .ing-option button {
     margin: 0 auto !important;
 }
 

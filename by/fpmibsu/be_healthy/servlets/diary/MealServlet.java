@@ -37,10 +37,14 @@ public class MealServlet extends HttpServlet {
             Profile cur_user = new ProfileService().getEntityById(user_id);
             var kbju_norm = cur_user.getKBJU_norm();
             var kbju =  new MealService().getKBJUByDateAndUserId(valueOf(pathParts[pathParts.length-1]), user_id);
-            request.setAttribute("cal", kbju.get("k").divide(kbju_norm.get("k"), 2, RoundingMode.HALF_UP));
-            request.setAttribute("prot", kbju.get("b").divide(kbju_norm.get("b"), 2, RoundingMode.HALF_UP));
-            request.setAttribute("fats", kbju.get("j").divide(kbju_norm.get("j"), 2, RoundingMode.HALF_UP));
-            request.setAttribute("carb", kbju.get("u").divide(kbju_norm.get("u"), 2, RoundingMode.HALF_UP));
+            request.setAttribute("k", kbju.get("k"));
+            request.setAttribute("b", kbju.get("b"));
+            request.setAttribute("j", kbju.get("j"));
+            request.setAttribute("u", kbju.get("u"));
+            request.setAttribute("k_norm", kbju_norm.get("k"));
+            request.setAttribute("b_norm", kbju_norm.get("b"));
+            request.setAttribute("j_norm", kbju_norm.get("j"));
+            request.setAttribute("u_norm", kbju_norm.get("u"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

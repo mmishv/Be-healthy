@@ -84,7 +84,7 @@
             <div class="form-group row">
                 <div class="col-sm-4 bold">Ингредиенты:</div>
                 <div class="col-sm-8" id="ingredients-list">
-                    <div class="row ingredient-option" id="ing-option1">
+                    <div class="row ing-option" id="ing-option1">
                         <select id="ingredient1" name="ingredient1" class="form-control col-sm-6" required>
                             <c:forEach items="${products}" var="product">
                                 <option value="${product.id}"><c:out value="${product.name}"/></option>
@@ -96,7 +96,10 @@
                             <option selected>г.</option>
                             <option>мл.</option>
                         </select>
-                        <button class="col-sm-1 ing-button" onclick="addIngredient(this)">+</button>
+                        <button class="col-sm-1 ing-button"
+                                onclick="addRow(this, 'ingredients-list', 'ing-option', 'ingredient')">
+                            +
+                        </button>
                     </div>
                 </div>
             </div>
@@ -123,32 +126,6 @@
         </div>
     </fieldset>
 </form>
-<script>
-    function addIngredient(e) {
-        if (e.classList.contains('disabled')) {
-            e.parentElement.remove();
-        } else {
-            let container = e.parentElement.cloneNode(true);
-            e.classList.add('disabled');
-            e.style.backgroundColor = '#114630a8';
-            e.innerHTML = '-';
-            container.children[1].value = '';
-            document.getElementById('ingredients-list').appendChild(container);
-        }
-        let ingredients = document.getElementsByClassName('ingredient-option');
-        for (let i = 0; i < ingredients.length; i++) {
-            var c = i + 1;
-            ingredients[i].id = "ing-option" + c;
-            ingredients[i].name = "ing-option" + c;
-            let ch = ingredients[i].children;
-            ch[0].id = "ingredient" + c;
-            ch[1].id = "quantity" + c;
-            ch[2].id = "measure" + c;
-            ch[0].name = "ingredient" + c;
-            ch[1].name = "quantity" + c;
-            ch[2].name = "measure" + c;
-        }
-    }
-</script>
+<script src="../../js/addRow.js"></script>
 </body>
 </html>

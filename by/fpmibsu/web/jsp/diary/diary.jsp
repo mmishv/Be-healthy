@@ -74,11 +74,11 @@
                         <div class="prod-bju">Б/Ж/У</div>
                         <div class="prod-k">ккал</div>
                     </div>
-                    <c:forEach items="${meal.products}" var="product">
+                    <c:forEach items="${meal.products}" var="p">
                         <div class="product row">
-                            <div class="prod-name">${product.name}</div>
-                            <div class="prod-bju">${product.proteins}/${product.fats}/${product.carbohydrates}</div>
-                            <div class="prod-k">${product.calories}</div>
+                            <div class="prod-name">${p.name}</div>
+                            <div class="prod-bju">${p.proteins}/${p.fats * p.quantity / 100 }/${p.carbohydrates * p.quantity / 100}</div>
+                            <div class="prod-k">${p.calories * p.quantity / 100}</div>
                         </div>
                     </c:forEach>
                         <%--                    <div>--%>
@@ -115,7 +115,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Калории</div>
-                    <div>18/100</div>
+                    <div>${k}/${k_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -126,7 +126,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Белки</div>
-                    <div>18/100</div>
+                    <div>${b}/${b_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -137,7 +137,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Жиры</div>
-                    <div>18/100</div>
+                    <div>${j}/${j_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -148,7 +148,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Углеводы</div>
-                    <div>18/100</div>
+                    <div>${u}/${u_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -216,11 +216,8 @@
                         <input id="cur-quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во"
                                required>
                         <select id="cur-measure1" class="form-control col-sm-2">
-                            <option selected>шт.</option>
-                            <option>ч.л.</option>
-                            <option>ст.л.</option>
-                            <option>г</option>
-                            <option>мл</option>
+                            <option selected>гр.</option>
+                            <option>мл.</option>
                         </select>
                         <button class="col-sm-1 ing-button"
                                 onclick="addRow(this, 'cur-products', 'cur-prod-option', 'cur-product')">+
@@ -237,5 +234,14 @@
 <script src="../../js/air-datepicker.js"></script>
 <script src="../../js/addRow.js"></script>
 <script src="../../js/updateProgress.js"></script>
+<script>
+    window.addEventListener('load', () => {
+        updateProgressCalories(${k}, ${k_norm});
+        updateProgressProteins(${b}, ${b_norm});
+        updateProgressFats(${j}, ${j_norm});
+        updateProgressCarbs(${u}, ${u_norm});
+    });
+</script>
 </body>
 </html>
+
