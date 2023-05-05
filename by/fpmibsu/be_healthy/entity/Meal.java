@@ -73,10 +73,10 @@ public class Meal implements Serializable {
             j+=i.getQuantity()*i.getFats()/100;
             u+=i.getQuantity()*i.getCarbohydrates()/100;
         }
-        kbju.put("k", BigDecimal.valueOf(k));
-        kbju.put("b", BigDecimal.valueOf(b));
-        kbju.put("j", BigDecimal.valueOf(j));
-        kbju.put("u", BigDecimal.valueOf(u));
+        kbju.put("k", BigDecimal.valueOf(k).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("b", BigDecimal.valueOf(b).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("j", BigDecimal.valueOf(j).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("u", BigDecimal.valueOf(u).setScale(1, RoundingMode.HALF_UP));
         return kbju;
     }
 }

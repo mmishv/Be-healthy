@@ -51,10 +51,10 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         if (blob != null)
             profile.setAvatar(blob.getBytes(1l, (int) blob.length()));
         HashMap<String, BigDecimal> KBJU_norm = new HashMap<>();
-        KBJU_norm.put("k", BigDecimal.valueOf(resultSet.getDouble("CAL_NORM")));
-        KBJU_norm.put("b", BigDecimal.valueOf(resultSet.getDouble("PROT_NORM")));
-        KBJU_norm.put("j",BigDecimal.valueOf(resultSet.getDouble("FATS_NORM")));
-        KBJU_norm.put("u", BigDecimal.valueOf(resultSet.getDouble("CARB_NORM")));
+        KBJU_norm.put("k", BigDecimal.valueOf(resultSet.getDouble("CAL_NORM")).setScale(1, RoundingMode.HALF_UP));
+        KBJU_norm.put("b", BigDecimal.valueOf(resultSet.getDouble("PROT_NORM")).setScale(1, RoundingMode.HALF_UP));
+        KBJU_norm.put("j",BigDecimal.valueOf(resultSet.getDouble("FATS_NORM")).setScale(1, RoundingMode.HALF_UP));
+        KBJU_norm.put("u", BigDecimal.valueOf(resultSet.getDouble("CARB_NORM")).setScale(1, RoundingMode.HALF_UP));
         profile.setKBJU_norm(KBJU_norm);
         profile.setAge(resultSet.getInt("AGE"));
         profile.setHeight(resultSet.getInt("HEIGHT"));
