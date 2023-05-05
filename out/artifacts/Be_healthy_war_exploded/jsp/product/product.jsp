@@ -56,7 +56,7 @@
                     <option selected>гр.</option>
                     <option>мл.</option>
                 </select>
-                <button class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
+                <button type="button" class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
             </div>
         </div>
         <div style="display: flex; justify-content: flex-end;">
