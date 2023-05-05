@@ -58,13 +58,13 @@
                     new TypeReference<ArrayList<Product>>() {
                     });
             request.setAttribute("products", prods);
-            request.setAttribute("meals", meals );
+            request.setAttribute("meals", meals);
         %>
         <div class="meals-wrapper">
             <c:forEach items="${meals}" var="meal">
                 <div class="meal" id="meal${meal.id}">
                     <c:if test="${not empty meal.name}">
-                    <div class="meal-name" id="meal-name1">${meal.name}</div>
+                        <div class="meal-name" id="meal-name1">${meal.name}</div>
                     </c:if>
                     <c:if test="${empty meal.name}">
                         <div class="meal-name" id="meal-name1">Без названия</div>
@@ -84,7 +84,8 @@
                     <div class="delete-meal">
                         <form method="get" action="/delete-meal/${meal.id}_${date}">
                             <button type="submit" class="btn btn-danger"
-                                    name="delete" value="${meal.id}">Удалить</button>
+                                    name="delete" value="${meal.id}">Удалить
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -135,24 +136,29 @@
         <div class="modal-content">
             <form method="post" action="/diary/${date}" accept-charset="utf-8">
                 <div class="modal-header">
-                    <input class="modal-title" id="exampleModalLongTitle" name="title" placeholder="Название приёма пищи"></input>
+                    <input class="modal-title" id="exampleModalLongTitle" name="title"
+                           placeholder="Название приёма пищи"></input>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="products">
-                    <div class="row product-option" id="prod-option1">
+                    <div class="row prod-option" id="prod-option1">
                         <select id="product1" name="product1" class="form-control col-sm-6">
                             <c:forEach items="${products}" var="product">
                                 <option value="${product.id}"><c:out value="${product.name}"/></option>
                             </c:forEach>
                         </select>
-                        <input id="quantity1" name="quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во" required>
+                        <input id="quantity1" name="quantity1" type="number" class="form-control col-sm-2"
+                               placeholder="кол-во" required>
                         <select id="measure1" name="measure1" class="form-control col-sm-2">
                             <option selected>гр.</option>
                             <option>мл.</option>
                         </select>
-                        <button class="col-sm-1 ing-button" onclick="addProduct(this)">+</button>
+                        <button class="col-sm-1 ing-button"
+                                onclick="addRow(this, 'products', 'prod-option', 'product')">
+                            +
+                        </button>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -163,35 +169,6 @@
     </div>
 </div>
 <script src="../../js/air-datepicker.js"></script>
-<script>
-    new AirDatepicker('#airdatepicker', {
-        selectedDates: [new Date()],
-        autoClose: true,
-        position: 'bottom center'
-    });
-    var counter = 2;
-
-    function addProduct(e) {
-        if (e.classList.contains('disabled')) {
-            e.parentElement.remove();
-        } else {
-            let container = e.parentElement.cloneNode(true);
-            container.id = "prod-option" + counter;
-            let ch = container.children;
-            ch[0].id = "product" + counter;
-            ch[0].name = "product" + counter;
-            ch[1].id = "quantity" + counter;
-            ch[1].name = "quantity" + counter;
-            ch[1].value = '';
-            ch[2].id = "measure" + counter;
-            ch[2].name = "measure" + counter;
-            counter++;
-            document.getElementById('products').appendChild(container);
-            e.classList.add('disabled');
-            e.style.backgroundColor = '#114630a8';
-            e.innerHTML = '-';
-        }
-    }
-</script>
+<script src="../../js/addRow.js"></script>
 </body>
 </html>
