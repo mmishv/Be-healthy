@@ -24,7 +24,6 @@ public class RegistrationServlet extends HttpServlet {
                     new ProfileService().isLoginAvailable(login)){
             session.setAttribute("password", password);
             session.setAttribute("login", login);
-            session.setAttribute("id", new ProfileService().getIdByLogin(login));
                 try {
                     new ProfileService().register(login, password);
                 } catch (SQLException e) {
@@ -35,6 +34,7 @@ public class RegistrationServlet extends HttpServlet {
             else{
                 getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
             }
+            session.setAttribute("id", new ProfileService().getIdByLogin(login));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
