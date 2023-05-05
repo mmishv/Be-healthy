@@ -105,25 +105,49 @@
 
         <div class="total">
             <div class="total-name">Отчёт дня</div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 10%; background-color:#1f9f7a" aria-valuenow="10" aria-valuemin="0"
-                     aria-valuemax="100"></div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Калории</div>
+                    <div>18/100</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 10%; background-color:#1f9f7a" aria-valuenow="10" aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
             </div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 25%; background-color:#7fba52" aria-valuenow="25" aria-valuemin="0"
-                     aria-valuemax="100"></div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Белки</div>
+                    <div>18/100</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 25%; background-color:#7fba52" aria-valuenow="25" aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
             </div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 50%; background-color:#c2c458" aria-valuenow="50" aria-valuemin="0"
-                     aria-valuemax="100"></div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Жиры</div>
+                    <div>18/100</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 50%; background-color:#c2c458" aria-valuenow="50" aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
             </div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 75%; background-color:#c39143" aria-valuenow="75" aria-valuemin="0"
-                     aria-valuemax="100"></div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Углеводы</div>
+                    <div>18/100</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 100%; background-color:#c39143" aria-valuenow="100" aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
             </div>
         </div>
     </div>

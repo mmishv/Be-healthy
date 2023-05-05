@@ -135,16 +135,23 @@
     background-color: #114630;
     margin-top: 4vh;
     padding: 5% 3%;
-    border-radius: 7px;
+    border-radius: 10px;
 }
 
 .total-name {
     color: white;
     text-align: center;
     font-weight: 500;
+    font-size: larger;
 }
 
 .progress {
-    height: 1.8rem !important;
-    margin: 5%;
+    height: 2rem !important;
+    margin: 1% 0 5% 0;
+}
+
+.progress-descr {
+    display: flex;
+    justify-content: space-between;
+    color: white;
 }
