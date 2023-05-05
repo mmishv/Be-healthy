@@ -81,6 +81,12 @@
                             <div class="prod-k">${product.calories}</div>
                         </div>
                     </c:forEach>
+                        <%--                    <div>--%>
+                        <%--                        <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editMeal">--%>
+                        <%--                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">--%>
+                        <%--                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>--%>
+                        <%--                            </svg> Редактировать--%>
+                        <%--                        </button>--%>
                     <div class="delete-meal">
                         <form method="get" action="/delete-meal/${meal.id}_${date}">
                             <button type="submit" class="btn btn-danger"
@@ -88,6 +94,7 @@
                             </button>
                         </form>
                     </div>
+                        <%--                </div>--%>
                 </div>
             </c:forEach>
         </div>
@@ -187,6 +194,41 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editMeal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <input class="modal-title" id="mealTitle" placeholder="Название приёма пищи"></input>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="cur-products">
+                    <div class="row cur-prod-option" id="cur-prod-option1">
+                        <select id="cur-product1" class="form-control col-sm-6"></select>
+                        <input id="cur-quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во"
+                               required>
+                        <select id="cur-measure1" class="form-control col-sm-2">
+                            <option selected>шт.</option>
+                            <option>ч.л.</option>
+                            <option>ст.л.</option>
+                            <option>г</option>
+                            <option>мл</option>
+                        </select>
+                        <button class="col-sm-1 ing-button"
+                                onclick="addRow(this, 'cur-products', 'cur-prod-option', 'cur-product')">+
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Сохранить</button>
                 </div>
             </form>
         </div>

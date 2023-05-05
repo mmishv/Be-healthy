@@ -46,6 +46,14 @@
     width: 100%;
 }
 
+.edit-button {
+    font-size: small !important;
+    margin-top: 2% !important;
+    background-color: #114630 !important;
+    border: none !important;
+    width: fit-content;
+}
+
 .product.row {
     margin: 0 !important;
     padding: 0 2%;
@@ -111,7 +119,12 @@
     text-align: center;
 }
 
-.product-option select, .product-option input, .product-option button {
+.product-option {
+    justify-content: space-between;
+}
+
+.prod-option select, .prod-option input, .prod-option button,
+.cur-prod-option select, .cur-prod-option input, .cur-prod-option button {
     margin: 0 auto !important;
 }
 
