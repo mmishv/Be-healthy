@@ -44,7 +44,7 @@
 </div>
 <div>
     <div class="form-wrapper">
-        <form method="POST">
+        <form method="POST" action="/login">
             <fieldset class="form-group">
                 <h4>Вход</h4>
                 <div class="form-group row">
@@ -60,7 +60,7 @@
                 <button type="submit" class="btn btn-primary btn-black">Войти</button>
             </div>
         </form>
-        <form method="POST" action="register">
+        <form method="POST" action="/register">
             <fieldset class="form-group">
                 <h4>Регистрация</h4>
                 <div class="form-group row">

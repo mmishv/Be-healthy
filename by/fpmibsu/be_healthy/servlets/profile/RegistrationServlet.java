@@ -24,16 +24,16 @@ public class RegistrationServlet extends HttpServlet {
                     new ProfileService().isLoginAvailable(login)){
             session.setAttribute("password", password);
             session.setAttribute("login", login);
-            session.setAttribute("isLogged", true);
+            session.setAttribute("id", new ProfileService().getIdByLogin(login));
                 try {
                     new ProfileService().register(login, password);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                getServletContext().getRequestDispatcher("/jsp/main/main.jsp").forward(request, response);
+                response.sendRedirect("/profile");
             }
             else{
-                getServletContext().getRequestDispatcher("/jsp/profile/registration.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

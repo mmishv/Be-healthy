@@ -35,35 +35,25 @@ public class AuthFilter implements Filter {
         if (nonNull(session) &&
                 nonNull(session.getAttribute("login")) &&
                 nonNull(session.getAttribute("password"))) {
-            move(req, res, (boolean)session.getAttribute("isLogged"));
+            filterChain.doFilter(request, response);
         } else {
             try {
                 if (profile.get().isProfileExist(login, password)) {
                     req.getSession().setAttribute("password", password);
                     req.getSession().setAttribute("login", login);
                     req.getSession().setAttribute("id", new ProfileService().getIdByLogin(login));
-                    req.getSession().setAttribute("isLogged", true);
-                    move(req, res, true);
+                    //res.sendRedirect(req.getContextPath());
+                    filterChain.doFilter(request, response);
+                   // req.getRequestDispatcher(req.getContextPath()).forward(req, res);
                 } else {
-                    move(req, res, false);
+                    res.sendRedirect("/authentication");
+                   // req.getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
     }
-
-    private void move(final HttpServletRequest req, final HttpServletResponse res, boolean isLogged)
-            throws ServletException, IOException {
-        if (isLogged) {
-            req.getRequestDispatcher("/main").forward(req, res);
-
-        } else {
-            req.getRequestDispatcher("/registration").forward(req, res);
-        }
-    }
-
-
     @Override
     public void destroy() {
     }
