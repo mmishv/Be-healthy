@@ -111,7 +111,6 @@
                 String name;
                 for (Recipe recipe : recipes) {
                     HashMap<String, BigDecimal> kbju = recipe.getKBJU();
-                    name="bfgbdf d";
                     try {
                         name = new ProfileService().getEntityById(recipe.getAuthorId()).getLogin();
                     } catch (SQLException e) {

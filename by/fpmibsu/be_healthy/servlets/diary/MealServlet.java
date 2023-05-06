@@ -49,10 +49,10 @@ public class MealServlet extends HttpServlet {
                 kbju.put("j", kbju.getOrDefault("j", BigDecimal.valueOf(0)).add(t.get("j")));
                 kbju.put("u", kbju.getOrDefault("u", BigDecimal.valueOf(0)).add(t.get("u")));
             }
-            request.setAttribute("k", kbju.get("k").toBigInteger());
-            request.setAttribute("b", kbju.get("b"));
-            request.setAttribute("j", kbju.get("j"));
-            request.setAttribute("u", kbju.get("u"));
+            request.setAttribute("k", kbju.getOrDefault("k", BigDecimal.valueOf(0)).toBigInteger());
+            request.setAttribute("b", kbju.getOrDefault("b", BigDecimal.valueOf(0)));
+            request.setAttribute("j", kbju.getOrDefault("j", BigDecimal.valueOf(0)));
+            request.setAttribute("u", kbju.getOrDefault("u", BigDecimal.valueOf(0)));
             request.setAttribute("k_norm", kbju_norm.get("k").toBigInteger());
             request.setAttribute("b_norm", kbju_norm.get("b"));
             request.setAttribute("j_norm", kbju_norm.get("j"));
