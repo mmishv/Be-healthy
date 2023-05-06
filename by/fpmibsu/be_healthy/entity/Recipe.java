@@ -2,10 +2,10 @@ package by.fpmibsu.be_healthy.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Lob;
-import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +21,8 @@ public class Recipe implements Serializable {
     @Type(type = "org.hibernate.type.ImageType")
     byte[] image;
     String base64image;
-    private List<Ingredient> ingredients;
-    private List<RecipeCategory> categories;
+    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<RecipeCategory> categories = new ArrayList<>();
     public int getId() {
         return id;
     }
@@ -108,8 +108,19 @@ public class Recipe implements Serializable {
     public void setBase64image(String base64image) {
         this.base64image = base64image;
     }
-
     public HashMap<String, BigDecimal> getKBJU(){
+        HashMap<String, BigDecimal> kbju = getFullKBJU();
+        BigDecimal coef = kbju.get("weight").divide(BigDecimal.valueOf(100));
+        kbju.replace("k", kbju.get("k").divide(coef,1, RoundingMode.HALF_UP));
+        kbju.replace("b", kbju.get("b").divide(coef,1, RoundingMode.HALF_UP));
+        kbju.replace("j", kbju.get("j").divide(coef,1, RoundingMode.HALF_UP));
+        kbju.replace("u", kbju.get("u").divide(coef,1, RoundingMode.HALF_UP));
+        return kbju;
+    }
+    public HashMap<String, BigDecimal> getFullKBJU(){
+        return initFullKBJU();
+    }
+    private HashMap<String, BigDecimal> initFullKBJU(){
         HashMap<String, BigDecimal> kbju = new HashMap<>();
         double k = 0, b=0, j=0, u=0, kol=0;
         for (Ingredient i: getIngredients()){
@@ -119,14 +130,14 @@ public class Recipe implements Serializable {
             j+=i.getQuantity()*i.getFats()/100;
             u+=i.getQuantity()*i.getCarbohydrates()/100;
         }
-        double coef = kol/100;
-        kbju.put("k", new BigDecimal(k/coef).setScale(1, RoundingMode.HALF_UP));
-        kbju.put("b", new BigDecimal(b/coef).setScale(1, RoundingMode.HALF_UP));
-        kbju.put("j", new BigDecimal(j/coef).setScale(1, RoundingMode.HALF_UP));
-        kbju.put("u", new BigDecimal(u/coef).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("k", new BigDecimal(k).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("b", new BigDecimal(b).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("j", new BigDecimal(j).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("u", new BigDecimal(u).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("weight", new BigDecimal(kol).setScale(1, RoundingMode.HALF_UP));
         return kbju;
     }
-    public void addIngregient(Ingredient i){
+    public void addIngredient(Ingredient i){
         ingredients.add(i);
     }
 }

@@ -44,7 +44,7 @@
 <div class="row">
     <div class="mixer">
         <h3>Микшер рецептов</h3>
-        <form method="get" action="/product" accept-charset="utf-8">
+        <form method="get" action="/mixer" accept-charset="utf-8">
             <div id="products">
                 <div class="product-inf d-flex center" id="product-inf1">
                     <select id="product1" name="product1" class="form-control col-sm-6">
@@ -52,8 +52,8 @@
                             <option value="${product.id}"><c:out value="${product.name}"/></option>
                         </c:forEach>
                     </select>
-                    <input class="col-sm-2 form-control" id=quantity1" placeholder="кол-во">
-                    <select class="form-control col-sm-2" id="measure1">
+                    <input class="col-sm-2 form-control" type="number" name="quantity1" id="quantity1" placeholder="кол-во" required>
+                    <select class="form-control col-sm-2" name="measure1" id="measure1">
                         <option selected>гр.</option>
                         <option>мл.</option>
                     </select>
