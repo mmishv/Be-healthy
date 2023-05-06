@@ -38,8 +38,8 @@
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
 <div>
-    <button class="btn btn-primary back-btn">
-        <a href="/product">&#8592; Назад</a>
+    <button onclick="history.back();" class="btn btn-primary back-btn">
+       &#8592; Назад
     </button>
     <h3 class="mixer-header">Микшер рецептов: результат вашего запроса</h3>
 </div>
