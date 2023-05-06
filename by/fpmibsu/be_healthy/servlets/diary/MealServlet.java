@@ -5,17 +5,21 @@ import by.fpmibsu.be_healthy.entity.*;
 import by.fpmibsu.be_healthy.services.MealService;
 import by.fpmibsu.be_healthy.services.ProductService;
 import by.fpmibsu.be_healthy.services.ProfileService;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.sql.Date.valueOf;
@@ -26,22 +30,30 @@ public class MealServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
+        ArrayList<Meal> meals;
         int user_id =  (int) request.getSession().getAttribute("id");
         try {
-            request.setAttribute("meals", new MealService().getAllByDateAndUserIdJSON(
-                    valueOf(pathParts[pathParts.length-1]), user_id));
+            meals = (ArrayList<Meal>) new MealService().getAllByDateAndUserId(valueOf(pathParts[pathParts.length-1]), user_id);
+            request.setAttribute("meals", new ObjectMapper().writeValueAsString(meals));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
             Profile cur_user = new ProfileService().getEntityById(user_id);
             var kbju_norm = cur_user.getKBJU_norm();
-            var kbju =  new MealService().getKBJUByDateAndUserId(valueOf(pathParts[pathParts.length-1]), user_id);
-            request.setAttribute("k", kbju.get("k"));
+            var kbju = new HashMap<String, BigDecimal>();
+            for (var i: meals){
+                HashMap<String, BigDecimal> t = i.getKBJU();
+                kbju.put("k", kbju.getOrDefault("k", BigDecimal.valueOf(0)).add(t.get("k")));
+                kbju.put("b", kbju.getOrDefault("b", BigDecimal.valueOf(0)).add(t.get("b")));
+                kbju.put("j", kbju.getOrDefault("j", BigDecimal.valueOf(0)).add(t.get("j")));
+                kbju.put("u", kbju.getOrDefault("u", BigDecimal.valueOf(0)).add(t.get("u")));
+            }
+            request.setAttribute("k", kbju.get("k").toBigInteger());
             request.setAttribute("b", kbju.get("b"));
             request.setAttribute("j", kbju.get("j"));
             request.setAttribute("u", kbju.get("u"));
-            request.setAttribute("k_norm", kbju_norm.get("k"));
+            request.setAttribute("k_norm", kbju_norm.get("k").toBigInteger());
             request.setAttribute("b_norm", kbju_norm.get("b"));
             request.setAttribute("j_norm", kbju_norm.get("j"));
             request.setAttribute("u_norm", kbju_norm.get("u"));

@@ -47,20 +47,4 @@ public class MealService {
     public String getAllByDateAndUserIdJSON(Date date, int id) throws SQLException, JsonProcessingException {
         return new ObjectMapper().writeValueAsString(getAllByDateAndUserId(date, id));
     }
-
-    public HashMap<String, BigDecimal> getKBJUByDateAndUserId(Date date, int id) throws SQLException {
-        HashMap<String, BigDecimal> kbju = new HashMap<>();
-        kbju.put("k", BigDecimal.valueOf(0));
-        kbju.put("b", BigDecimal.valueOf(0));
-        kbju.put("j", BigDecimal.valueOf(0));
-        kbju.put("u", BigDecimal.valueOf(0));
-        for (var i: new MealDao().getAllByDateAndUserId(date, id)){
-            HashMap<String, BigDecimal> t = i.getKBJU();
-            kbju.replace("k", kbju.get("k").add(t.get("k")));
-            kbju.replace("b", kbju.get("b").add(t.get("b")));
-            kbju.replace("j", kbju.get("j").add(t.get("j")));
-            kbju.replace("u", kbju.get("u").add(t.get("u")));
-        }
-        return kbju;
-    }
 }

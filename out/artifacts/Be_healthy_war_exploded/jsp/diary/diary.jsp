@@ -125,7 +125,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Калории</div>
-                    <div> <fmt:formatNumber value="${k/k_norm}" maxFractionDigits="1"/> гр.</div>
+                    <div>${k}/${k_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -136,7 +136,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Белки</div>
-                    <div> <fmt:formatNumber value="${b/b_norm}" maxFractionDigits="1"/> гр.</div>
+                    <div> ${b}/${b_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -147,7 +147,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Жиры</div>
-                    <div> <fmt:formatNumber value="${j/j_norm}" maxFractionDigits="1"/> гр.</div>
+                    <div>${j}/${j_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
@@ -158,7 +158,7 @@
             <div class="total-progress">
                 <div class="progress-descr">
                     <div>Углеводы</div>
-                    <div> <fmt:formatNumber value="${u/u_norm}" maxFractionDigits="1"/> гр.</div>
+                    <div> ${u}/${u_norm} гр.</div>
                 </div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped" role="progressbar"
