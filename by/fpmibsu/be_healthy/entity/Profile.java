@@ -17,11 +17,6 @@ public class Profile implements Serializable {
     private int age;
     private double activity;
     private HashMap<String, BigDecimal> KBJU_norm;
-    private List<Article> written_articles;
-    private List<Recipe> written_recipes;
-    private List<ForumTopic> started_topics;
-    private List<ForumMessage> messages;
-    private List<Meal> meals;
     public String getLogin() {
         return login;
     }
@@ -105,46 +100,6 @@ public class Profile implements Serializable {
 
     public void setActivity(double activity) {
         this.activity = activity;
-    }
-
-    public List<Article> getWritten_articles() {
-        return written_articles;
-    }
-
-    public void setWritten_articles(List<Article> written_articles) {
-        this.written_articles = written_articles;
-    }
-
-    public List<Recipe> getWritten_recipes() {
-        return written_recipes;
-    }
-
-    public void setWritten_recipes(List<Recipe> written_recipes) {
-        this.written_recipes = written_recipes;
-    }
-
-    public List<ForumTopic> getStarted_topics() {
-        return started_topics;
-    }
-
-    public void setStarted_topics(List<ForumTopic> started_topics) {
-        this.started_topics = started_topics;
-    }
-
-    public List<ForumMessage> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<ForumMessage> messages) {
-        this.messages = messages;
-    }
-
-    public List<Meal> getMeals() {
-        return meals;
-    }
-
-    public void setMeals(List<Meal> meals) {
-        this.meals = meals;
     }
 
     @Override

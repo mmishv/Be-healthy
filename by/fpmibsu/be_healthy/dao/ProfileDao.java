@@ -60,11 +60,6 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         profile.setHeight(resultSet.getInt("HEIGHT"));
         profile.setWeight(resultSet.getDouble("WEIGHT"));
         profile.setActivity(resultSet.getDouble("ACTIVITY_COEF"));
-        profile.setWritten_articles(new ArticleDao().getWrittenArticlesByAuthorId(profile.getId()));
-        profile.setWritten_recipes(new RecipeDao().getWrittenRecipesByUserId(profile.getId()));
-        profile.setStarted_topics(new ForumTopicDao().getTopicsByAuthorId(profile.getId()));
-        profile.setMeals(new MealDao().getMealsByUserId(profile.getId()));
-        profile.setMessages(new ForumMessageDao().getMessagesByUserId(profile.getId()));
     }
 
     @Override
