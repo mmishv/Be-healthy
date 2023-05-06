@@ -1,10 +1,10 @@
 package by.fpmibsu.be_healthy.servlets.products;
 
 import by.fpmibsu.be_healthy.entity.Ingredient;
-import by.fpmibsu.be_healthy.entity.MealProduct;
 import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.services.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -17,8 +17,8 @@ public class MixerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int cnt = 1;
-        if (request.getParameter("quantity" + cnt) != null){
-            Recipe r = new Recipe();
+        Recipe r = new Recipe();
+        while (request.getParameter("quantity" + cnt) != null){
             while (request.getParameter("product" + cnt) != null) {
                 Product p;
                 try {
@@ -28,23 +28,19 @@ public class MixerServlet extends HttpServlet {
                 }
                 Ingredient i = new Ingredient(p);
                 i.setQuantity(Integer.parseInt(request.getParameter("quantity" + cnt)));
-                MealProduct product = new MealProduct();
-                product.setId(Integer.parseInt(request.getParameter("product" + cnt)));
-                product.setQuantity(Integer.parseInt(request.getParameter("quantity" + cnt)));
-                r.addIngregient(i);
+                i.setQuantity(Integer.parseInt(request.getParameter("quantity" + cnt)));
+                r.addIngredient(i);
                 cnt++;
             }
-            var kbju = r.getKBJU();
-            request.setAttribute("cal", kbju.get("k"));
-            request.setAttribute("prot", kbju.get("b"));
-            request.setAttribute("fats", kbju.get("j"));
-            request.setAttribute("carb", kbju.get("u"));
         }
-        try {
-            request.setAttribute("products", new ProductService().getAllJSON());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        getServletContext().getRequestDispatcher("/jsp/product/product.jsp").forward(request, response);
+        var kbju = r.getFullKBJU();
+        double weight = kbju.get("weight").doubleValue();
+        request.setAttribute("k", kbju.get("k"));
+        request.setAttribute("b", kbju.get("b"));
+        request.setAttribute("j", kbju.get("j"));
+        request.setAttribute("u", kbju.get("u"));
+        request.setAttribute("weight", kbju.get("weight").toBigInteger());
+        request.setAttribute("products", new ObjectMapper().writeValueAsString(r.getIngredients()));
+        getServletContext().getRequestDispatcher("/jsp/product/mixer.jsp").forward(request, response);
     }
 }
