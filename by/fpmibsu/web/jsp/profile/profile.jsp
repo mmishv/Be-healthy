@@ -35,10 +35,15 @@
 <div class="wrapper row">
     <div class="sections col-sm-2">
         <ul class="list-group">
-            <li class="list-group-item">Выпечка</li>
-            <li class="list-group-item">Гарниры</li>
-            <li class="list-group-item">Первые блюда</li>
-            <li class="list-group-item">Вторые блюда</li>
+            <li class="list-group-item">
+                <a class="nav-link" href="/profile">Обо мне</a></li>
+            <li class="list-group-item">
+                <a class="nav-link" href="/diary/<%=valueOf(LocalDate.now().toString())%>">
+                    Приёмы пищи</a></li>
+            <li class="list-group-item">
+                <a class="nav-link" href="">Мои рецепты</a></li>
+            <li class="list-group-item">
+                <a class="nav-link" href="">Мои статьи</a></li>
         </ul>
     </div>
     <div class="col-sm-10">

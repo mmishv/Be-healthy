@@ -170,6 +170,10 @@
     color: white;
 }
 
+.row {
+    margin: 0 !important;
+}
+
 
 .table-wrapper {
     background-color: white;
