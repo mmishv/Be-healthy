@@ -72,22 +72,44 @@
                     <c:if test="${empty meal.name}">
                         <div class="meal-name" id="meal-name1">Без названия</div>
                     </c:if>
-                    <div class="header product row">
-                        <div class="prod-name"></div>
-                        <div class="prod-bju">Б/Ж/У</div>
-                        <div class="prod-k">ккал</div>
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 60%;"></th>
+                                <th scope="col" style="width: 6%;">Б</th>
+                                <th scope="col" style="width: 6%;">Ж</th>
+                                <th scope="col" style="width: 6%;">У</th>
+                                <th scope="col" style="width: 11%;">вес</th>
+                                <th scope="col" style="width: 11%;">К</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${meal.products}" var="p">
+                                <tr>
+                                    <td style="text-align: left; padding-left: 2%;">${p.name}</td>
+                                    <td><fmt:formatNumber value="${p.proteins * p.quantity / 100}"
+                                                          maxFractionDigits="1"/></td>
+                                    <td><fmt:formatNumber value="${p.fats * p.quantity / 100}"
+                                                          maxFractionDigits="1"/></td>
+                                    <td><fmt:formatNumber value="${p.carbohydrates * p.quantity / 100}"
+                                                          maxFractionDigits="1"/></td>
+                                    <td>${p.quantity}</td>
+                                    <td><fmt:formatNumber value="${p.calories * p.quantity / 100}"
+                                                          maxFractionDigits="1"/></td>
+                                </tr>
+                            </c:forEach>
+                            <tr>
+                                <td style="background-color: #87CEFA; text-align: left; padding-left: 2%;">Итого</td>
+                                <td>${meal.KBJU.get("b")}</td>
+                                <td>${meal.KBJU.get("j")}</td>
+                                <td>${meal.KBJU.get("u")}</td>
+                                <td>${meal.KBJU.get("weight")}</td>
+                                <td>${meal.KBJU.get("k")}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <c:forEach items="${meal.products}" var="p">
-                        <div class="product row">
-                            <div class="prod-name">${p.name}</div>
-                            <div class="prod-bju">
-                                <fmt:formatNumber value="${p.proteins * p.quantity / 100}" maxFractionDigits="1"/>/<fmt:formatNumber value="${p.fats * p.quantity / 100}" maxFractionDigits="1"/>/<fmt:formatNumber value="${p.carbohydrates * p.quantity / 100}" maxFractionDigits="1"/>
-                            </div>
-                            <div class="prod-k">
-                                <fmt:formatNumber value="${p.calories * p.quantity / 100}" maxFractionDigits="1"/>
-                            </div>
-                        </div>
-                    </c:forEach>
                     <div>
                         <button type="button" class="btn btn-primary edit-button" data-toggle="modal"
                                 data-target="#editMeal">

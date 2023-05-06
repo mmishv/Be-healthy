@@ -169,3 +169,28 @@
     justify-content: space-between;
     color: white;
 }
+
+
+.table-wrapper {
+    background-color: white;
+    position: relative;
+}
+
+.table-wrapper table th{
+    font-weight: 500 !important;
+    background-color: #4bc1798a;
+}
+
+.table-wrapper table td, .table-wrapper table th{
+    font-size: 11px;
+    text-align: center;
+    border: solid 1px #cfd4d9;
+}
+
+.row {
+    margin: 0 !important;
+}
+
+#table1 {
+    background-color: white;
+}

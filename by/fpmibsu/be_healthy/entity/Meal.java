@@ -66,8 +66,9 @@ public class Meal implements Serializable {
     }
     public HashMap<String, BigDecimal> getKBJU(){
         HashMap<String, BigDecimal> kbju = new HashMap<>();
-        double k = 0, b=0, j=0, u=0;
+        double k = 0, b=0, j=0, u=0, weight = 0;
         for (MealProduct i: getProducts()){
+            weight+=i.getQuantity();
             k+=1.0*i.getQuantity()*i.getCalories()/100;
             b+=i.getQuantity()*i.getProteins()/100;
             j+=i.getQuantity()*i.getFats()/100;
@@ -77,6 +78,7 @@ public class Meal implements Serializable {
         kbju.put("b", BigDecimal.valueOf(b).setScale(1, RoundingMode.HALF_UP));
         kbju.put("j", BigDecimal.valueOf(j).setScale(1, RoundingMode.HALF_UP));
         kbju.put("u", BigDecimal.valueOf(u).setScale(1, RoundingMode.HALF_UP));
+        kbju.put("weight", BigDecimal.valueOf(((int) weight)));
         return kbju;
     }
 }
