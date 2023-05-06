@@ -107,6 +107,18 @@
     vertical-align: middle;
 }
 
+.meal-buttons button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 2.5rem;
+}
+
+.meal-buttons button:focus, .meal-buttons button:focus-visible {
+    border: none !important;
+    outline: none !important;
+}
+
 .scroll {
     overflow: auto;
 }
