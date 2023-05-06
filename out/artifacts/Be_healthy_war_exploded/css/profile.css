@@ -1,0 +1,39 @@
+.sections {
+    background-color: #114630 !important;
+    height: 100vh;
+    padding: 0 !important;
+}
+
+.list-group-item {
+    background-color: #00000000 !important;
+    color: white;
+    font-weight: 500;
+}
+
+.inf {
+    width: 50%;
+    margin: 5% auto 2% auto;
+}
+
+.row {
+    margin: 0 !important;
+}
+
+form {
+    color: white;
+    font-size: large;
+}
+
+input[type='radio']:after {
+    top: -7px !important;
+}
+
+.param-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.param {
+    width: 30% !important;
+}
