@@ -114,17 +114,18 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <div class="product row meal-total">
-                            <div class="prod-name">Итого</div>
-                            <div class="prod-q">${meal.KBJU.get("weight")}</div>
-                            <div class="prod-bju">
-                                    ${meal.KBJU.get("b")}/${meal.KBJU.get("j")}/${meal.KBJU.get("u")}
-                            </div>
-                            <div class="prod-k">
-                                    ${meal.KBJU.get("k")}
-                            </div>
+                    </div>
+                    <div class="product row meal-total">
+                        <div class="prod-name">Итого</div>
+                        <div class="prod-q">${meal.KBJU.get("weight")}</div>
+                        <div class="prod-bju">
+                                ${meal.KBJU.get("b")}/${meal.KBJU.get("j")}/${meal.KBJU.get("u")}
+                        </div>
+                        <div class="prod-k">
+                                ${meal.KBJU.get("k")}
                         </div>
                     </div>
+
                 </div>
             </c:forEach>
         </div>
