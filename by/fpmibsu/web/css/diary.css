@@ -22,10 +22,10 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffffe3;
-    margin: 2% 5%;
-    width: 40%;
+    margin: 2% 3%;
+    width: 45%;
     min-width: 240px;
-    height: 17vw;
+    height: 16rem;
     min-height: 200px;
     border: solid 2px green;
     border-radius: 7px;
@@ -44,22 +44,24 @@
     font-weight: 500;
     border-radius: 7px;
     width: 100%;
+    background-color: #51d71957;
+    font-size: 1.1rem;
 }
 
 .edit-button {
-    font-size: small !important;
-    margin-top: 2% !important;
     background-color: #114630 !important;
     border: none !important;
     width: fit-content;
 }
 
 .product.row {
+    border-bottom: solid 1px #00800096;
+    line-height: 2.1rem;
     margin: 0 !important;
     padding: 0 2%;
 }
 
-.product.row .prod-bju, .product.row .prod-k {
+.product.row .prod-bju, .product.row .prod-k, .product.row .prod-q {
     align-self: center;
     font-weight: 500;
 }
@@ -70,7 +72,7 @@
 }
 
 .prod-name {
-    width: 55%;
+    width: 45%;
     font-weight: 500;
 }
 
@@ -79,23 +81,40 @@
     text-align: center;
 }
 
-.prod-k {
-    width: 20%;
+.prod-k, .prod-q {
+    width: 15%;
     text-align: center;
 }
 
-.meal::-webkit-scrollbar {
-    width: 3px; /* width of the entire scrollbar */
+.meal-total {
+    background-color: #51d71957;
 }
 
-.meal::-webkit-scrollbar-track {
-    background: #9ec49e; /* color of the tracking area */
+.meal-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 43%;
+    position: absolute;
+    margin-top: 2px !important;
 }
 
-.meal::-webkit-scrollbar-thumb {
-    background-color: #9ec49e; /* color of the scroll thumb */
-    border-radius: 40px; /* roundness of the scroll thumb */
-    border: 3px solid green; /* creates padding around scroll thumb */
+.scroll {
+    overflow: auto;
+    min-height: 6.2rem;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 3px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: #9ec49e;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #9ec49e;
+    border-radius: 40px;
+    border: 3px solid green;
 }
 
 .add-button {
@@ -174,18 +193,22 @@
     margin: 0 !important;
 }
 
+.btn {
+    background-color: #00000000;
+}
+
 
 .table-wrapper {
     background-color: white;
     position: relative;
 }
 
-.table-wrapper table th{
+.table-wrapper table th {
     font-weight: 500 !important;
     background-color: #4bc1798a;
 }
 
-.table-wrapper table td, .table-wrapper table th{
+.table-wrapper table td, .table-wrapper table th {
     font-size: 11px;
     text-align: center;
     border: solid 1px #cfd4d9;
