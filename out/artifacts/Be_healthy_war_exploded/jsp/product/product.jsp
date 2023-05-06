@@ -41,30 +41,64 @@
             });
     request.setAttribute("products", prods);
 %>
-<div class="mixer col-sm-5">
-    <h3 style="text-align: center; margin-bottom: 5%;">Микшер рецептов</h3>
-    <form method="get" action="/product" accept-charset="utf-8">
-        <div id="products">
-            <div class="product-inf d-flex center" id="product-inf1">
-                <select id="product1" name="product1" class="form-control col-sm-6">
-                    <c:forEach items="${products}" var="product">
-                        <option value="${product.id}"><c:out value="${product.name}"/></option>
-                    </c:forEach>
-                </select>
-                <input class="col-sm-2 form-control" id=quantity1" placeholder="кол-во">
-                <select class="form-control col-sm-2" id="measure1">
-                    <option selected>гр.</option>
-                    <option>мл.</option>
-                </select>
-                <button type="button" class="col-sm-1 ing-button"
-                        onclick="addRow(this, 'products', 'product-inf', 'product')">+
-                </button>
+<div class="row">
+    <div class="mixer">
+        <h3>Микшер рецептов</h3>
+        <form method="get" action="/product" accept-charset="utf-8">
+            <div id="products">
+                <div class="product-inf d-flex center" id="product-inf1">
+                    <select id="product1" name="product1" class="form-control col-sm-6">
+                        <c:forEach items="${products}" var="product">
+                            <option value="${product.id}"><c:out value="${product.name}"/></option>
+                        </c:forEach>
+                    </select>
+                    <input class="col-sm-2 form-control" id=quantity1" placeholder="кол-во">
+                    <select class="form-control col-sm-2" id="measure1">
+                        <option selected>гр.</option>
+                        <option>мл.</option>
+                    </select>
+                    <button type="button" class="col-sm-1 ing-button"
+                            onclick="addRow(this, 'products', 'product-inf', 'product')">+
+                    </button>
+                </div>
             </div>
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <button type="submit" class="btn btn-primary btn-black">Рассчитать</button>
-        </div>
-    </form>
+            <div style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn btn-primary btn-black">Рассчитать</button>
+            </div>
+        </form>
+    </div>
+    <div class="product-table">
+        <h3 style="opacity: 0.8;">База продуктов</h3>
+        <table class="table" id="table1">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 40%;">Продукт</th>
+                <th scope="col" style="width: 15%;">Белки, г</th>
+                <th scope="col" style="width: 15%;">Жиры, г</th>
+                <th scope="col" style="width: 15%;">Углеводы, г</th>
+                <th scope="col" style="width: 15%;">Калории, г</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${products}" var="p">
+                <tr>
+                    <td style="text-align: left; padding-left: 2%;">${p.name}</td>
+                    <td>${p.proteins}</td>
+                    <td>${p.fats}</td>
+                    <td>${p.carbohydrates}</td>
+                    <td>${p.calories}</td>
+                </tr>
+            </c:forEach>
+            <tr>
+                <td style="text-align: left; padding-left: 2%;">Продукт</td>
+                <td>20</td>
+                <td>15</td>
+                <td>20</td>
+                <td>15</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script src="../../js/addRow.js"></script>
 </body>

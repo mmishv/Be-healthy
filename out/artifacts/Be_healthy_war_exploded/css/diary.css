@@ -14,7 +14,7 @@
 .meals-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 1%;
 }
 
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffffe3;
-    margin: 2%;
+    margin: 2% 5%;
     width: 40%;
     min-width: 240px;
     height: 17vw;
@@ -61,6 +61,7 @@
 
 .product.row .prod-bju, .product.row .prod-k {
     align-self: center;
+    font-weight: 500;
 }
 
 .header.product.row {
@@ -70,6 +71,7 @@
 
 .prod-name {
     width: 55%;
+    font-weight: 500;
 }
 
 .prod-bju {

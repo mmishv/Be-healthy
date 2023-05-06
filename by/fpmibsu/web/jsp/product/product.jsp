@@ -80,6 +80,15 @@
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${products}" var="p">
+                <tr>
+                    <td style="text-align: left; padding-left: 2%;">${p.name}</td>
+                    <td>${p.proteins}</td>
+                    <td>${p.fats}</td>
+                    <td>${p.carbohydrates}</td>
+                    <td>${p.calories}</td>
+                </tr>
+            </c:forEach>
             <tr>
                 <td style="text-align: left; padding-left: 2%;">Продукт</td>
                 <td>20</td>
