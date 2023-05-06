@@ -119,9 +119,7 @@
                         style="background-color:#114630 !important; border: #114630 !important;">
                     Добавить
                 </button>
-                <button class="btn btn-primary back-btn">
-                    <a href="recipes/1">Вернуться к рецептам</a>
-                </button>
+                <button onclick="history.back();" class="btn btn-primary back-btn">Вернуться к рецептам</button>
             </div>
         </div>
     </fieldset>
