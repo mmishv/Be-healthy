@@ -8,6 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.fpmibsu.be_healthy.dao.MealDao.getId;
+
 public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
     private Connection connection = getConnection();
 
@@ -171,25 +173,30 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
         return success;
     }
 
+    public int getMaxId() throws SQLException {
+        PreparedStatement preparedStatement = null, inner_statement = null;
+        String sql = "SELECT max(id) as id FROM ARTICLE";
+        Statement statement = null;
+        return getId(sql, connection);
+    }
     @Override
     public boolean create(Article entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ARTICLE (ID, TITLE, PUBL_DATE, FULL_TEXT, AUTHOR_ID) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ARTICLE (TITLE, PUBL_DATE, FULL_TEXT, AUTHOR_ID) VALUES(?, ?, ?, ?)";
         PreparedStatement inner_statement = null;
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, entity.getId());
-            preparedStatement.setString(2, entity.getTitle());
-            preparedStatement.setDate(3, (Date) (entity.getDateOfPublication()));
-            preparedStatement.setString(4, entity.getFulltext());
-            preparedStatement.setInt(5, entity.getAuthorId());
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
+            preparedStatement.setString(3, entity.getFulltext());
+            preparedStatement.setInt(4, entity.getAuthorId());
             preparedStatement.executeUpdate();
             for (var i : entity.getCategories()) {
                 String inner_sql = "INSERT INTO MM_CATEGORY_ARTICLE (ARTICLE_ID, CATEGORY_ID) VALUES(?, ?)";
                 try {
                     inner_statement = connection.prepareStatement(inner_sql);
-                    inner_statement.setInt(1, entity.getId());
+                    inner_statement.setInt(1, getMaxId());
                     inner_statement.setInt(2, i.getId());
                     inner_statement.executeUpdate();
                 } catch (SQLException e) {
