@@ -1,6 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Article;
+import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
 import java.sql.*;
@@ -19,16 +20,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
-            while (resultSet.next()) {
-                Article article = new Article();
-                article.setId(resultSet.getInt("ID"));
-                article.setAuthorId(resultSet.getInt("AUTHOR_ID"));
-                article.setTitle(resultSet.getString("TITLE"));
-                article.setFulltext(resultSet.getString("FULL_TEXT"));
-                article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
-                article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getAuthorId()));
-                articles.add(article);
-            }
+            initRecipes(articles, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -41,6 +33,45 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
         }
         return articles;
     }
+    public List<Article> getPage(int page, int per_page) throws SQLException {
+        List<Article> recipes = new ArrayList<>();
+        String sql = "SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, per_page);
+            statement.setInt(2, per_page * (page-1));
+            ResultSet resultSet = statement.executeQuery();
+            initRecipes(recipes, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return recipes;
+    }
+
+    private void initRecipes(List<Article> recipes, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            Article article = new Article();
+            setRecipe(resultSet, article);
+            recipes.add(article);
+        }
+    }
+
+    private void setRecipe(ResultSet resultSet, Article article) throws SQLException {
+        article.setId(resultSet.getInt("ID"));
+        article.setAuthorId(resultSet.getInt("AUTHOR_ID"));
+        article.setTitle(resultSet.getString("TITLE"));
+        article.setFulltext(resultSet.getString("FULL_TEXT"));
+        article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
+        article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getAuthorId()));
+    }
 
     @Override
     public Article getEntityById(long id) throws SQLException {
@@ -52,12 +83,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                article.setId(resultSet.getInt("ID"));
-                article.setAuthorId(resultSet.getInt("AUTHOR_ID"));
-                article.setTitle(resultSet.getString("TITLE"));
-                article.setFulltext(resultSet.getString("FULL_TEXT"));
-                article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
-                article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getAuthorId()));
+                setRecipe(resultSet, article);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -186,5 +212,22 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             }
         }
         return articles;
+    }
+
+    public int getNumberOfArticles() throws SQLException {
+        String sql = "SELECT COUNT(*) RES FROM ARTICLE";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()){
+                return resultSet.getInt("RES");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return -1;
     }
 }
