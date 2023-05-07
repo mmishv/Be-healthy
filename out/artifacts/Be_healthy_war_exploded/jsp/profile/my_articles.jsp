@@ -77,7 +77,7 @@
     %>
     <div class="col-sm-10">
         <button type="button" class="btn add-button">
-            <a href="http://localhost:8081/create_recipe">Добавить рецепт</a></button>
+            <a href="http://localhost:8081/create_article">Добавить статью</a></button>
         <%
             ArrayList<Article> articles = new ObjectMapper().readValue(request.getAttribute("articles").toString(),
                     new TypeReference<ArrayList<Article>>() {
