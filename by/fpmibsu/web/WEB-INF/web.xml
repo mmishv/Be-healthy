@@ -175,4 +175,15 @@
         <servlet-name>profile</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyRecipesServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.MyRecipesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MyRecipesServlet</servlet-name>
+        <url-pattern>/my_recipes/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>
