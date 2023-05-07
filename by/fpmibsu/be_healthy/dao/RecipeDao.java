@@ -59,10 +59,21 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         String sql = "SELECT * FROM RECIPE WHERE ID IN (SELECT RECIPE_ID ID " +
                 "FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" +
                 "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
+        return getPage(page, per_page, category_id, recipes, sql);
+    }
+
+    public List<Recipe> getAuthorPage(int page, int per_page, int author_id) throws SQLException {
+        List<Recipe> recipes = new ArrayList<>();
+        String sql = "SELECT * FROM RECIPE WHERE AUTHOR_ID = ?" +
+                "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
+        return getPage(page, per_page, author_id, recipes, sql);
+    }
+
+    private List<Recipe> getPage(int page, int per_page, int author_id, List<Recipe> recipes, String sql) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, category_id);
+            statement.setInt(1, author_id);
             statement.setInt(2, per_page);
             statement.setInt(3, per_page * (page-1));
             ResultSet resultSet = statement.executeQuery();
@@ -79,6 +90,7 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
         }
         return recipes;
     }
+
     @Override
     public Recipe getEntityById(long id) throws SQLException {
         PreparedStatement preparedStatement = null, inner_statement = null;
@@ -296,6 +308,14 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     public int getNumberOfRecipesInCategory(int id) throws SQLException {
         String sql = "SELECT COUNT(*) RES FROM RECIPE WHERE ID IN" +
                 "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)";
+        return getAmount(id, sql);
+    }
+    public int getNumberOfRecipesWrittenBy(int id) throws SQLException {
+        String sql = "SELECT COUNT(*) RES FROM RECIPE WHERE AUTHOR_ID = ?";
+        return getAmount(id, sql);
+    }
+
+    private int getAmount(int id, String sql) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);

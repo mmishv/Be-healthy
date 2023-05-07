@@ -64,4 +64,14 @@ public class RecipeService {
     public int getNumberOfRecipes() throws SQLException {
         return new RecipeDao().getNumberOfRecipes();
     }
+    public int getNumberOfRecipesWrittenBy(int id) throws SQLException {
+        return new RecipeDao().getNumberOfRecipesWrittenBy(id);
+    }
+
+    public List<Recipe> getAuthorPage(int page, int per_page, int id) throws SQLException {
+        return new RecipeDao().getAuthorPage(page, per_page, id);
+    }
+    public String getAuthorPageJSON(int page, int per_page, int id) throws SQLException, JsonProcessingException {
+        return new ObjectMapper().writeValueAsString((getAuthorPage(page, per_page, id)));
+    }
 }
