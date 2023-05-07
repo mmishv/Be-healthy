@@ -19,15 +19,7 @@
     <servlet-mapping>
         <servlet-name>main</servlet-name>
         <url-pattern></url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>main0</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.main.MainServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>main0</servlet-name>
-        <url-pattern>/main</url-pattern>
+        <url-pattern>/main/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -184,6 +176,16 @@
     <servlet-mapping>
         <servlet-name>MyRecipesServlet</servlet-name>
         <url-pattern>/my_recipes/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyArticlesServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.MyArticlesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MyArticlesServlet</servlet-name>
+        <url-pattern>/my_articles/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

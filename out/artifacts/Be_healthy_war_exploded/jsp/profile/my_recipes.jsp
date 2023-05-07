@@ -34,16 +34,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
           integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
           crossorigin="anonymous"></script>
-
 </head>
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
   <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
-<%--<div class="wrapper row">
-
-</div>--%>
 <div class="page-recipe">
   <div class="sections col-sm-2">
     <ul class="list-group">
@@ -53,9 +49,9 @@
         <a class="nav-link" href="/diary/<%=valueOf(LocalDate.now().toString())%>">
           Приёмы пищи</a></li>
       <li class="list-group-item">
-        <a class="nav-link" href="my_recipes/1">Мои рецепты</a></li>
+        <a class="nav-link" href="/my_recipes/1">Мои рецепты</a></li>
       <li class="list-group-item">
-        <a class="nav-link" href="">Мои статьи</a></li>
+        <a class="nav-link" href="/my_articles/1">Мои статьи</a></li>
     </ul>
   </div>
   <%

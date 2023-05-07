@@ -41,9 +41,9 @@
                 <a class="nav-link" href="/diary/<%=valueOf(LocalDate.now().toString())%>">
                     Приёмы пищи</a></li>
             <li class="list-group-item">
-                <a class="nav-link" href="my_recipes/1">Мои рецепты</a></li>
+                <a class="nav-link" href="/my_recipes/1">Мои рецепты</a></li>
             <li class="list-group-item">
-                <a class="nav-link" href="">Мои статьи</a></li>
+                <a class="nav-link" href="/my_articles/1">Мои статьи</a></li>
         </ul>
     </div>
     <div class="col-sm-10">
