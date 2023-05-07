@@ -239,7 +239,7 @@
             <form>
                 <div class="modal-header">
                     <input class="modal-title" id="mealTitle" name="mealTitle"
-                           placeholder="Название приёма пищи"></input>
+                           placeholder="Название приёма пищи">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
                         <span aria-hidden="true">&times;</span>
                     </button>

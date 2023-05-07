@@ -110,10 +110,11 @@
     height: 2.5rem;
 }
 
-.meal-buttons button:focus, .meal-buttons button:focus-visible,
-.modal-header .close {
+.meal-buttons button:focus, .meal-buttons button:focus-visible, .meal-buttons button:active,
+.modal-header .close:focus, .modal-header .close:focus-visible, .modal-header .close:active {
     border: none !important;
     outline: none !important;
+    box-shadow: none !important;
 }
 
 .meal-buttons svg {
