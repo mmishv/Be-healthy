@@ -66,10 +66,10 @@
             <c:forEach items="${meals}" var="meal">
                 <div class="meal" id="meal${meal.id}">
                     <c:if test="${not empty meal.name}">
-                        <div class="meal-name" id="meal-name1">${meal.name}</div>
+                        <div class="meal-name" id="meal-name${meal.id}">${meal.name}</div>
                     </c:if>
                     <c:if test="${empty meal.name}">
-                        <div class="meal-name" id="meal-name1">Без названия</div>
+                        <div class="meal-name" id="meal-name${meal.id}">Без названия</div>
                     </c:if>
                     <div class="row meal-buttons">
                         <button type="button" class="btn" data-toggle="modal" data-target="#editMeal"
