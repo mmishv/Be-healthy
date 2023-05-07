@@ -11,8 +11,16 @@
 }
 
 .inf {
-    width: 50%;
-    margin: 5% auto 2% auto;
+    width: 55%;
+    margin: 2% auto;
+    padding: 1% 2%;
+    background-color: #114630db;
+    border-radius: 10px;
+}
+
+.inf h2 {
+    margin-left: 3%;
+    align-self: center;
 }
 
 .row {
@@ -24,8 +32,17 @@ form {
     font-size: large;
 }
 
-input[type='radio']:after {
-    top: -7px !important;
+.form-group.row, .general-inf {
+    margin-bottom: 2% !important;
+}
+
+.general-inf {
+    justify-content: end;
+}
+
+h5 {
+    text-align: center;
+    margin: 2% 0 0 0 !important;
 }
 
 .param-wrapper {
@@ -36,4 +53,56 @@ input[type='radio']:after {
 
 .param {
     width: 30% !important;
+}
+
+.photo {
+    object-fit: cover;
+    object-position: center;
+    height: 8vw;
+    width: 8vw;
+    border-radius: 50%;
+    border: solid 1px white;
+}
+
+.save-btn {
+    font-size: large !important;
+    width: 100%;
+    margin: 2% auto 0 auto;
+}
+
+#close-btn {
+    background-color: #114630 !important;
+    opacity: 0.9;
+    border: none;
+}
+
+.edit-btn {
+    background-color: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    height: 2.5rem;
+}
+
+.edit-btn:focus, .edit-btn:focus-visible, .edit-btn:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.col-form-label.center {
+    text-align: center;
+}
+
+.modal-title, .modal-body label {
+    color: black;
+}
+
+input[type='radio'].large:checked:after {
+    height: 18px !important;
+    width: 18px !important;
+    left: -4px !important;
+}
+
+input[type='radio'].large:checked:after {
+    top: -5px !important
 }
