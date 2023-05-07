@@ -1,4 +1,9 @@
 <%@ page import="java.util.Objects" %>
+<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
+<%@ page import="by.fpmibsu.be_healthy.entity.Article" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
+<%@ page import="by.fpmibsu.be_healthy.entity.ArticleCategory" %>
 <%--
   Created by IntelliJ IDEA.
   User: Masha
@@ -7,6 +12,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -14,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="../../assets/favicon2.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -35,7 +43,7 @@
 <div style="display: flex">
     <div class="calculator">
         <h2>Калькулятор калорий</h2>
-        <form action="jsp/main/main.jsp" method="GET">
+        <form action="/main" method="GET">
             <fieldset class="form-group">
                 <div class="row">
                     <legend class="col-form-label col-sm-3 pt-0">Пол:</legend>
@@ -103,41 +111,72 @@
                     </button>
                 </div>
             </div>
+            <c:if test="${not empty result}">
+                <tr>
+                    <td> Результат: ${result}
+                    </td>
+                </tr>
+            </c:if>
+        </form>
+    </div>
+    <%
+        int page_cnt = (int) request.getAttribute("page_cnt");
+        int cur_page = (int) request.getAttribute("cur_page");
+    %>
+    <div class="articles-wrapper col-sm-5">
+        <%
+            ArrayList<Article> articles = new ObjectMapper().readValue(request.getAttribute("articles").toString(),
+                    new TypeReference<ArrayList<Article>>() {});
+            for (Article article: articles){
+        %>
+        <div class="article">
+            <h3 class="title"><%=article.getTitle()%></h3>
             <%
-                String sex = "";
-                double weight = 0, height = 0, age = 0, activity = 0, goal = 0, result = 0;
-                if (request.getParameter("age") != null && request.getParameter("weight") != null &&
-                        request.getParameter("height") != null) {
-                    sex = request.getParameter("sex");
-                    weight = Double.parseDouble(request.getParameter("weight"));
-                    height = Double.parseDouble(request.getParameter("height"));
-                    age = Double.parseDouble(request.getParameter("age"));
-                    activity = Double.parseDouble(request.getParameter("activity"));
-                    goal = Double.parseDouble(request.getParameter("goal"));
-                    result = (Objects.equals(sex, "female")) ? 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age :
-                            88.36 + 13.4 * weight + 4.8 * height - 5.7 * age;
-                    result *= activity * goal;
+                String category;
+                for (ArticleCategory cat : article.getCategories()) {
+                    category = cat.getName().toLowerCase();
             %>
-            <tr>
-                <td> Результат: <%=(int) result%>
-                </td>
-            </tr>
+            <div class="category" style="display: inline"><%=category%> </div>
             <%
                 }
             %>
-        </form>
-    </div>
-    <div class="articles-wrapper col-sm-5">
-        <h3>Вам может быть интересно</h3>
-        <div class="article">
-
+            <h6 class="article-text"><%=article.getFulltext()%></h6>
         </div>
-        <div class="article">
-
-        </div>
-        <div class="article">
-
-        </div>
+        <%
+            }
+        %>
+        <nav>
+            <ul class="pagination">
+                <%
+                    if (cur_page > 1) {
+                %>
+                <li class="page-item">
+                    <a class="page-link" href="<%=cur_page-1%>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <%
+                    }
+                    for (int i = 1; i <= page_cnt; i++) {
+                %>
+                <li class="page-item"><a class="page-link" href="<%=i%>"><%=i%></a></li>
+                <%
+                    }
+                    if (cur_page < page_cnt) {
+                %>
+                <li class="page-item">
+                    <a class="page-link" href="<%=(cur_page+1)%>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                <%
+                    }
+                %>
+                %>
+            </ul>
+        </nav>
     </div>
 </div>
 </body>

@@ -14,7 +14,7 @@
 
     <servlet>
         <servlet-name>main</servlet-name>
-        <jsp-file>/jsp/main/main.jsp</jsp-file>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.main.MainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>main</servlet-name>
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>main0</servlet-name>
-        <jsp-file>/jsp/main/main.jsp</jsp-file>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.main.MainServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>main0</servlet-name>

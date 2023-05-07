@@ -76,21 +76,6 @@ select.form-control {
     margin-right: 5px;
 }
 
-.articles-wrapper {
-    display: inline-block;
-    width: 40%;
-    height: 30%;
-    margin: 7% 5% 3% 5%;
-}
-
-.article {
-    height: 15vh;
-    width: 100%;
-    background-color: white;
-    opacity: 0.8;
-    margin: 2% 0 2% 0;
-}
-
 h3 {
     color: white !important;
 }

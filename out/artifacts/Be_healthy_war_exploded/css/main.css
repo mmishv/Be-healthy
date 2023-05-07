@@ -1,0 +1,44 @@
+.article-text, .title, .category {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    z-index: 1;
+    color: white !important;
+}
+.article-text, .category{
+    opacity: 0.6;
+}
+.articles-wrapper {
+    display: inline-block;
+    width: 50%;
+/*    height: 30%;*/
+    margin: 7% 5% 3% 5%;
+}
+
+.article {
+    height: 15vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0,.4);
+    margin: 5% 0 2% 0;
+    border-radius: 7px;
+}
+.pagination {
+    position: relative;
+    right: 5%;
+    top: 3vh !important;
+    margin-bottom: 10%;
+}
+
+.pagination .page-item .page-link {
+    color: #fff !important;
+    background-color: #114630 !important;
+    border: 1px solid #dee2e64d !important;
+    opacity: 0.8;
+}
+
+.pagination .page-item .page-link:active {
+    background-color: #137d51 !important;
+}

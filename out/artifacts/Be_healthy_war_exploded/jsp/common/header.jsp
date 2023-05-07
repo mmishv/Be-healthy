@@ -40,7 +40,7 @@
             <ul class="nav navbar-nav mx-auto" style="width: 100%; justify-content: space-around">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="/main">
+                    <a class="nav-link active" href="/main/1">
                         Главная</a>
                 </li>
                 <li class="nav-item">
