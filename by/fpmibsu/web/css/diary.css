@@ -19,12 +19,14 @@
 }
 
 .meal {
+    position: relative;
+    padding-bottom: 2.1rem;
     display: flex;
     flex-direction: column;
     background-color: #ffffffe3;
     margin: 2%;
     width: 45%;
-    min-width: 240px;
+    min-width: 370px;
     height: 16rem;
     min-height: 200px;
     border: solid 2px green;
@@ -88,19 +90,37 @@
 
 .meal-total {
     background-color: #51d71957;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .meal-buttons {
     display: flex;
     justify-content: space-between;
-    width: 43%;
+    width: 100%;
     position: absolute;
-    margin-top: 2px !important;
+    height: 2.5rem;
+}
+
+.meal-buttons svg {
+    vertical-align: middle;
+}
+
+.meal-buttons button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 2.5rem;
+}
+
+.meal-buttons button:focus, .meal-buttons button:focus-visible {
+    border: none !important;
+    outline: none !important;
 }
 
 .scroll {
     overflow: auto;
-    min-height: 6.2rem;
 }
 
 .scroll::-webkit-scrollbar {
@@ -195,29 +215,4 @@
 
 .btn {
     background-color: #00000000;
-}
-
-
-.table-wrapper {
-    background-color: white;
-    position: relative;
-}
-
-.table-wrapper table th {
-    font-weight: 500 !important;
-    background-color: #4bc1798a;
-}
-
-.table-wrapper table td, .table-wrapper table th {
-    font-size: 11px;
-    text-align: center;
-    border: solid 1px #cfd4d9;
-}
-
-.row {
-    margin: 0 !important;
-}
-
-#table1 {
-    background-color: white;
 }
