@@ -25,19 +25,6 @@ public class Runner {
         temp_rcat.setId(1);
         temp_rcat.setName("Десерты");
 
-        ForumTopic temp_topic = new ForumTopic();
-        temp_topic.setId(1);
-        temp_topic.setAuthorId(1);
-        temp_topic.setCreated_on(valueOf(LocalDate.now()));
-        temp_topic.setTitle("Приветствие");
-
-        ForumMessage temp_message = new ForumMessage();
-        temp_message.setId(1);
-        temp_message.setAuthorId(1);
-        temp_message.setDateOfPublication(valueOf(LocalDate.now()));
-        temp_message.setTopic_id(1);
-        temp_message.setText("Здравствуйте!");
-
         Product temp_product = new Product();
         temp_product.setId(2);
         temp_product.setName("Кофе молотый");
@@ -141,10 +128,8 @@ public class Runner {
             // new RecipeDao().update(temp_recipe);
 
             System.out.println("getEntityById(1) test:");
-            System.out.println(new ForumMessageDao().update(temp_message));
             System.out.println(new ArticleCategoryDao().update(temp_acat));
             System.out.println(new RecipeCategoryDao().update(temp_rcat));
-            System.out.println(new ForumTopicDao().update(temp_topic));
             System.out.println(new ProductDao().update(temp_product));
             System.out.println(new MealProductDao().update(temp_m_product));
             System.out.println(new MealDao().update(temp_meal));
@@ -154,10 +139,8 @@ public class Runner {
             System.out.println(new ProfileDao().update(temp_profile));
 
             System.out.println("getEntityById(1) test:");
-            System.out.println(new ForumMessageDao().getEntityById(1));
             System.out.println(new ArticleCategoryDao().getEntityById(1));
             System.out.println(new RecipeCategoryDao().getEntityById(1));
-            System.out.println(new ForumTopicDao().getEntityById(1));
             System.out.println(new ProductDao().getEntityById(1));
             System.out.println(new MealProductDao().getEntityById(1));
             System.out.println(new MealDao().getEntityById(1));
@@ -170,8 +153,6 @@ public class Runner {
             System.out.println("getAll() test:");
             List<ArticleCategory> article_categories = new ArticleCategoryDao().getAll();
             List<RecipeCategory> recipe_categories = new RecipeCategoryDao().getAll();
-            List<ForumMessage> messages =  new ForumMessageDao().getAll();
-            List<ForumTopic> topics =  new ForumTopicDao().getAll();
             List<Product> products =  new ProductDao().getAll();
             List<MealProduct> m_products =  new MealProductDao().getAll();
             List<Meal> meals =  new MealDao().getAll();
@@ -185,14 +166,6 @@ public class Runner {
             }
             System.out.println("----------------------------------");
             for (RecipeCategory e : recipe_categories) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (ForumMessage e : messages) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (ForumTopic e : topics) {
                 System.out.println(e);
             }
             System.out.println("----------------------------------");

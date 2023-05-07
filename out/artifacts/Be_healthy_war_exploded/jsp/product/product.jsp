@@ -52,7 +52,8 @@
                             <option value="${product.id}"><c:out value="${product.name}"/></option>
                         </c:forEach>
                     </select>
-                    <input class="col-sm-2 form-control" type="number" name="quantity1" id="quantity1" placeholder="кол-во" required>
+                    <input class="col-sm-2 form-control" type="number" name="quantity1" id="quantity1"
+                           placeholder="кол-во" required>
                     <select class="form-control col-sm-2" name="measure1" id="measure1">
                         <option selected>гр.</option>
                         <option>мл.</option>
@@ -68,7 +69,7 @@
         </form>
     </div>
     <div class="product-table">
-        <h3 style="opacity: 0.8;">База продуктов</h3>
+        <h4 style="opacity: 0.8;">База продуктов</h4>
         <table class="table" id="table1">
             <thead>
             <tr>

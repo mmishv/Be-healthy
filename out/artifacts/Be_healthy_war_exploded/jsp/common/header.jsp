@@ -54,9 +54,6 @@
                     <a class="nav-link" href="/recipes/1">Рецепты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/forum">Форум</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/profile">Профиль</a>
                 </li>
             </ul>
