@@ -103,10 +103,6 @@
     height: 2.5rem;
 }
 
-.meal-buttons svg {
-    vertical-align: middle;
-}
-
 .meal-buttons button {
     background-color: transparent;
     border: none;
@@ -114,9 +110,14 @@
     height: 2.5rem;
 }
 
-.meal-buttons button:focus, .meal-buttons button:focus-visible {
+.meal-buttons button:focus, .meal-buttons button:focus-visible,
+.modal-header .close {
     border: none !important;
     outline: none !important;
+}
+
+.meal-buttons svg {
+    vertical-align: middle;
 }
 
 .scroll {
@@ -157,6 +158,7 @@
     border: solid 2px green;
     border-radius: 10px;
     text-align: center;
+    background-color: #51d71957;
 }
 
 .product-option {
