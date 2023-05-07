@@ -55,7 +55,29 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
         }
         return recipes;
     }
-
+    public List<Article> getAuthorPage(int page, int per_page, int id) throws SQLException {
+        List<Article> recipes = new ArrayList<>();
+        String sql = "SELECT * FROM ARTICLE WHERE AUTHOR_ID = ? ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setInt(2, per_page);
+            statement.setInt(3, per_page * (page-1));
+            ResultSet resultSet = statement.executeQuery();
+            initRecipes(recipes, resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return recipes;
+    }
     private void initRecipes(List<Article> recipes, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             Article article = new Article();
@@ -224,6 +246,29 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return -1;
+    }
+
+    public int getNumberOfArticlesWrittenBy(int id) throws SQLException {
+        String sql = "SELECT COUNT(*) RES FROM ARTICLE WHERE AUTHOR_ID = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                return resultSet.getInt("RES");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
             if (connection != null) {
                 connection.close();
             }

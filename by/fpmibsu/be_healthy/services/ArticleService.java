@@ -51,4 +51,14 @@ public class ArticleService {
     public int getNumberOfArticles() throws SQLException {
         return new ArticleDao().getNumberOfArticles();
     }
+
+    public List<Article> getAuthorPage(int page, int per_page, int id) throws SQLException {
+        return new ArticleDao().getAuthorPage(page, per_page, id);
+    }
+    public String getAuthorPageJSON(int page, int per_page, int id) throws SQLException, JsonProcessingException {
+        return new ObjectMapper().writeValueAsString((getAuthorPage(page, per_page, id)));
+    }
+    public int getNumberOfArticlesWrittenBy(int id) throws SQLException {
+        return new ArticleDao().getNumberOfArticlesWrittenBy(id);
+    }
 }
