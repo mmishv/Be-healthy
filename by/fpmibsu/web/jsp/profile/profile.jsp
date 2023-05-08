@@ -104,6 +104,18 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="activity" class="col-sm-4 col-form-label">Физическая активность</label>
+                    <select id="activity" class="form-control col-sm-7" name="activity">
+                        <option value="1" selected>Без учета физ. нагрузки</option>
+                        <option value="1.2">Сидячий образ жизни</option>
+                        <option value="1.375">Легкая активность(1-2 раза в неделю)</option>
+                        <option value="1.55">Умеренная активность (3-5 раз в неделю)</option>
+                        <option value="1.725">Высокая активность (более 5 раз в неделю)</option>
+                        <option value="1.9">Очень высокая активность (профессиональный спорт)</option>
+                    </select>
+                </div>
+
+                <div class="form-group row">
                     <label for="aim" class="col-sm-4 col-form-label">Цель</label>
                     <select id="aim" class="form-control col-sm-7">
                         <option selected>Поддержание веса</option>
@@ -134,7 +146,7 @@
                         <input class="form-control" id="u" type="number">
                     </div>
                 </div>
-
+                <h6 class="col-sm-12">* рекомедуется: 1456 ккал, 82/54/190</h6>
                 <div class="form-group row" style="justify-content: end;">
                     <div class="col-sm-5">
                         <button class="btn btn-primary btn-black save-btn">Сохранить</button>
