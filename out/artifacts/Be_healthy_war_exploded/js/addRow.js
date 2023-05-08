@@ -1,4 +1,4 @@
-function addRow(e, parent, container, child) {
+function addRow(e, parent, container, child, pref='', postf='') {
     if (e.classList.contains('disabled')) {
         e.parentElement.remove();
     } else {
@@ -12,7 +12,7 @@ function addRow(e, parent, container, child) {
     let ingredients = document.getElementsByClassName(container);
     let quantity = "quantity";
     let measure = "measure";
-    if (parent == 'cur-products') {
+    if (parent === 'cur-products') {
         quantity = "cur-quantity";
         measure = "cur-measure";
     }
@@ -22,10 +22,10 @@ function addRow(e, parent, container, child) {
         ingredients[i].name = container + c;
         let ch = ingredients[i].children;
         ch[0].id = child + c;
-        ch[1].id = quantity + c;
-        ch[2].id = measure + c;
+        ch[1].id = pref+quantity+postf + c;
+        ch[2].id = pref+measure+postf + c;
         ch[0].name = child + c;
-        ch[1].name = quantity + c;
-        ch[2].name = measure + c;
+        ch[1].name = pref+quantity+postf + c;
+        ch[2].name = pref+measure+postf + c;
     }
 }
