@@ -50,7 +50,7 @@
     </div>
     <div class="col-sm-10">
         <div class="inf">
-            <form>
+            <form method="post" action="edit_profile">
                 <div class="row general-inf">
                     <c:if test="${profile.getAvatar()==null}">
                     <img src="./assets/profile.jpg" class="photo">
@@ -75,16 +75,16 @@
                         <legend class="col-form-label col-sm-4 pt-0">Пол:</legend>
                         <div class="col-sm-8">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input large" type="radio" name="gridRadios" id="gender"
-                                       value="option1"
-                                <c:if test="${profile.getSex()=='женский'}">checked</c:if>
+                                <input name="sex" class="form-check-input large" type="radio" id="gender"
+                                       value="1"
+                                <c:if test="${profile.getSex()=='женский'}">checked</c:if>>
                                 <label class="form-check-label" for="gender">
                                     Женский
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input large" type="radio" name="gridRadios" id="gender2"
-                                       value="option2"  <c:if test="${profile.getSex() =='мужской'}"> checked </c:if>>
+                                <input name="sex" class="form-check-input large" type="radio" id="gender2"
+                                       value="2"  <c:if test="${profile.getSex() =='мужской'}"> checked </c:if>>
                                 <label class="form-check-label" for="gender2">
                                     Мужской
                                 </label>
@@ -95,21 +95,21 @@
                 <div class="form-group row">
                     <label for="height" class="col-sm-4 col-form-label" >Рост:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" id="height" placeholder="Рост, см" type="number"
+                        <input name="height" class="form-control" id="height" placeholder="Рост, см" type="number"
                         <c:if test="${profile.getHeight()!=0}"> value="${profile.getHeight()}"</c:if>>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="weight" class="col-sm-4 col-form-label">Вес:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" id="weight" placeholder="Вес" type="number"
+                        <input name="weight" class="form-control" id="weight" placeholder="Вес" type="number"
                         <c:if test="${profile.getWeight()!=0}"> value="${profile.getWeight()}"</c:if>>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="age" class="col-sm-4 col-form-label">Возраст:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" id="age" placeholder="Возраст" type="number"
+                        <input name="age" class="form-control" id="age" placeholder="Возраст" type="number"
                         <c:if test="${profile.getAge()!=0}"> value="${profile.getAge()}"</c:if>>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
 
                 <div class="form-group row">
                     <label for="aim" class="col-sm-4 col-form-label">Цель</label>
-                    <select id="aim" class="form-control col-sm-7">
+                    <select name="aim" id="aim" class="form-control col-sm-7">
                         <option value="1" <c:if test="${profile.getGoal()==1}"> selected</c:if>>Поддержание веса</option>
                         <option value="1.2"<c:if test="${profile.getGoal()==1.2}"> selected</c:if>>Набор веса</option>
                         <option value="0.8" <c:if test="${profile.getGoal()==0.8}"> selected</c:if>>Сброс веса</option>
@@ -148,22 +148,22 @@
                     <label for="j" class="col-sm-3 col-form-label center">Жиры, г</label>
                     <label for="u" class="col-sm-3 col-form-label center">Углеводы, г</label>
                     <div class="col-sm-3">
-                        <input class="form-control" id="k" type="number"
+                        <input name="k" class="form-control" id="k" type="number"
                                placeholder="${profile.getCalorieRec()}" value="${kbju.get('k')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input class="form-control" id="b" type="number"
+                        <input name="b" class="form-control" id="b" type="number"
                                placeholder="${profile.getProteinRec()}" value="${kbju.get('b')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input class="form-control" id="j" type="number"
+                        <input name="j" class="form-control" id="j" type="number"
                                placeholder="${profile.getFatRec()}" value="${kbju.get('j')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input class="form-control" id="u" type="number"
+                        <input name="u" class="form-control" id="u" type="number"
                                placeholder="${profile.getCarbRec()}" value="${kbju.get('u')}">
                     </div>
                 </div>

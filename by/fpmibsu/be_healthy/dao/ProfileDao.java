@@ -101,7 +101,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         boolean success = true;
         PreparedStatement preparedStatement = null;
         String sql = "UPDATE PROFILE SET NAME=?, AVATAR=?, WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " +
-                " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ? WHERE ID=?";
+                " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
@@ -116,7 +116,9 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setDouble(8, norm.get("j").doubleValue());
             preparedStatement.setDouble(9, norm.get("b").doubleValue());
             preparedStatement.setDouble(10, entity.getGoal());
-            preparedStatement.setInt(11, entity.getId());
+            preparedStatement.setInt(11, entity.getHeight());
+            preparedStatement.setInt(12, entity.getAge());
+            preparedStatement.setInt(13, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

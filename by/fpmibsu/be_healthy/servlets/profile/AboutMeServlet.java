@@ -8,8 +8,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.Objects;
+
 @MultipartConfig
 @WebServlet(name = "AboutMeServlet", value = "/AboutMeServlet")
 public class AboutMeServlet extends HttpServlet {
@@ -34,7 +37,7 @@ public class AboutMeServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        if (request.getPart("avatar")!=null){
+        if (!Objects.equals(request.getParameter("avatar"), "")){
             Part filePart = request.getPart("avatar");
             InputStream fileContent = filePart.getInputStream();
             byte[] image = new byte[fileContent.available()];
@@ -43,7 +46,7 @@ public class AboutMeServlet extends HttpServlet {
                 profile.setAvatar(image);
             }
         }
-        if (request.getParameter("name")!=null)
+        if (!Objects.equals(request.getParameter("name"), ""))
             profile.setName(new String(request.getParameter("name").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         try {
             new ProfileService().update(profile);
