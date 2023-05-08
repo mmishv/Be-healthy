@@ -1,5 +1,6 @@
 package by.fpmibsu.be_healthy.dao;
 
+import by.fpmibsu.be_healthy.entity.MealProduct;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.services.MealProductService;
@@ -66,16 +67,19 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
     @Override
     public boolean update(Meal entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE MEAL SET NAME=?, TIME=?, DATE=?, USER_ID=? WHERE ID=?";
+        String sql = "UPDATE MEAL SET NAME=?, TIME=?  WHERE ID=?";
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setTime(2, entity.getTimeOfMeal());
-            preparedStatement.setDate(3, (Date) entity.getDateOfMeal());
-            preparedStatement.setLong(4, entity.getUser_id());
-            preparedStatement.setLong(5, entity.getId());
+            preparedStatement.setLong(3, entity.getId());
             preparedStatement.executeUpdate();
+            new MealProductDao().deleteMealProducts(entity.getId());
+            for (var i : entity.getProducts()) {
+                i.setMeal_id(entity.getId());
+                new MealProductService().create(i);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             success = false;
