@@ -38,9 +38,10 @@ public class AboutMeServlet extends HttpServlet {
             Part filePart = request.getPart("avatar");
             InputStream fileContent = filePart.getInputStream();
             byte[] image = new byte[fileContent.available()];
-            fileContent.read(image);
-            if (image!=null)
-                 profile.setAvatar(image);
+            if (fileContent.available()!=0){
+                fileContent.read(image);
+                profile.setAvatar(image);
+            }
         }
         if (request.getParameter("name")!=null)
             profile.setName(new String(request.getParameter("name").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
