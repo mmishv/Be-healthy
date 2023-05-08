@@ -1,9 +1,13 @@
 package by.fpmibsu.be_healthy.entity;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Lob;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class Profile implements Serializable {
     private int id;
@@ -11,11 +15,16 @@ public class Profile implements Serializable {
     private String email;
     private String login;
     private String password;
+    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] avatar;
+    String base64image;
     private double weight;
     private int height;
     private int age;
     private double activity;
+    private String sex;
+    private double goal;
     private HashMap<String, BigDecimal> KBJU_norm;
     public String getLogin() {
         return login;
@@ -113,5 +122,45 @@ public class Profile implements Serializable {
 
     public void setKBJU_norm(HashMap<String, BigDecimal> KBJU_norm) {
         this.KBJU_norm = KBJU_norm;
+    }
+
+    public String getBase64image() {
+        return base64image;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public double getGoal() {
+        return goal;
+    }
+
+    public void setGoal(double goal) {
+        this.goal = goal;
+    }
+
+    public void setBase64image(String base64image) {
+        this.base64image = base64image;
+    }
+    public int getCalorieRec(){
+        if (weight==0 || height==0 || age==0)
+            return 0;
+        return (int) (((Objects.equals(sex, "женский")) ? 447.6 + 9.2 * weight + 3.1 * height - 4.3 * age :
+                        88.36 + 13.4 * weight + 4.8 * height - 5.7 * age) * activity * goal);
+    }
+    public int getProteinRec(){
+        return (int) (getCalorieRec()*0.3/4);
+    }
+
+    public int getFatRec(){
+        return (int) (getCalorieRec()*0.3/9);
+    }
+    public int getCarbRec(){
+        return (int)(getCalorieRec()*0.4/4);
     }
 }
