@@ -49,7 +49,7 @@ public class AboutMeServlet extends HttpServlet {
         if (!Objects.equals(request.getParameter("name"), ""))
             profile.setName(new String(request.getParameter("name").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         try {
-            new ProfileService().update(profile);
+            new ProfileService().updateMainInfo(profile);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

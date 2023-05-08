@@ -100,25 +100,47 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     public boolean update(Profile entity) throws SQLException {
         boolean success = true;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE PROFILE SET NAME=?, AVATAR=?, WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " +
+        String sql = "UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " +
                 " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDouble(1, entity.getWeight());
+            preparedStatement.setDouble(2, entity.getActivity());
+            preparedStatement.setString(3, entity.getSex());
+            var norm = entity.getKBJU_norm();
+            preparedStatement.setDouble(4, norm.get("k").doubleValue());
+            preparedStatement.setDouble(5, norm.get("u").doubleValue());
+            preparedStatement.setDouble(6, norm.get("j").doubleValue());
+            preparedStatement.setDouble(7, norm.get("b").doubleValue());
+            preparedStatement.setDouble(8, entity.getGoal());
+            preparedStatement.setInt(9, entity.getHeight());
+            preparedStatement.setInt(10, entity.getAge());
+            preparedStatement.setInt(11, entity.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            success = false;
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return success;
+    }
+
+    public boolean updateMainInfo(Profile entity) throws SQLException {
+        boolean success = true;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setBytes(2,
                     entity.getAvatar() != null ? entity.getAvatar() : null);
-            preparedStatement.setDouble(3, entity.getWeight());
-            preparedStatement.setDouble(4, entity.getActivity());
-            preparedStatement.setString(5, entity.getSex());
-            var norm = entity.getKBJU_norm();
-            preparedStatement.setDouble(6, norm.get("k").doubleValue());
-            preparedStatement.setDouble(7, norm.get("u").doubleValue());
-            preparedStatement.setDouble(8, norm.get("j").doubleValue());
-            preparedStatement.setDouble(9, norm.get("b").doubleValue());
-            preparedStatement.setDouble(10, entity.getGoal());
-            preparedStatement.setInt(11, entity.getHeight());
-            preparedStatement.setInt(12, entity.getAge());
-            preparedStatement.setInt(13, entity.getId());
+            preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

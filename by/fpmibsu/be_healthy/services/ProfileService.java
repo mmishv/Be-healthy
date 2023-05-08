@@ -47,4 +47,7 @@ public class ProfileService {
     public int getIdByLogin(String login) throws SQLException {
         return new ProfileDao().getIdByLogin(login);
     }
+    public boolean updateMainInfo(Profile entity) throws SQLException {
+        return new ProfileDao().updateMainInfo(entity);
+    }
 }
