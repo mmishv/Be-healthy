@@ -73,7 +73,7 @@
                         <div class="meal-name" id="meal-name1">Без названия</div>
                     </c:if>
                     <div class="row meal-buttons">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#editMeal">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#editMeal${meal.id}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                  class="bi bi-pencil" viewBox="0 0 16 16">
                                 <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -125,7 +125,57 @@
                                 ${meal.KBJU.get("k")}
                         </div>
                     </div>
-
+                </div>
+                <div class="modal fade" id="editMeal${meal.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <input class="modal-title" id="mealTitle" placeholder="Название приёма пищи" value="${meal.name}"></input>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="cur-products">
+                                    <c:forEach items="${meal.products}" var="p" varStatus="loop">
+                                    <div class="row cur-prod-option" id="cur-prod-option${loop.count}">
+                                        <select id="cur-product${loop.count}" class="form-control col-sm-6">
+                                            <c:forEach items="${products}" var="product">
+                                                <c:if test="${product.id == meal.products[loop.index].id}">
+                                                    <option value="${product.id}" selected><c:out value="${product.name}"/></option>
+                                                </c:if>
+                                                <c:if test="${product.id != meal.products[loop.index].id}">
+                                                    <option value="${product.id}"><c:out value="${product.name}"/></option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </select>
+                                        <input value="${meal.products[loop.index].quantity}"
+                                               id="cur-quantity${loop.count}" type="number" class="form-control col-sm-2" placeholder="кол-во"
+                                               required>
+                                        <select id="cur-measure${loop.count}" class="form-control col-sm-2">
+                                            <option selected>гр.</option>
+                                            <option>мл.</option>
+                                        </select>
+                                        <c:if test="${loop.count != meal.products.size()}">
+                                            <button class="col-sm-1 ing-button disabled" style="background-color: rgba(17, 70, 48, 0.66);"
+                                                    onclick="addRow(this, 'cur-products', 'cur-prod-option', 'cur-product')">-
+                                            </button>
+                                        </c:if>
+                                        <c:if test="${loop.count == meal.products.size()}">
+                                            <button class="col-sm-1 ing-button"
+                                                    onclick="addRow(this, 'cur-products', 'cur-prod-option', 'cur-product')">+
+                                            </button>
+                                        </c:if>
+                                    </div>
+                                    </c:forEach>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Сохранить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </c:forEach>
         </div>
@@ -192,7 +242,6 @@
     </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
@@ -227,38 +276,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Добавить</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="editMeal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <input class="modal-title" id="mealTitle" placeholder="Название приёма пищи"></input>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="cur-products">
-                    <div class="row cur-prod-option" id="cur-prod-option1">
-                        <select id="cur-product1" class="form-control col-sm-6"></select>
-                        <input id="cur-quantity1" type="number" class="form-control col-sm-2" placeholder="кол-во"
-                               required>
-                        <select id="cur-measure1" class="form-control col-sm-2">
-                            <option selected>гр.</option>
-                            <option>мл.</option>
-                        </select>
-                        <button class="col-sm-1 ing-button"
-                                onclick="addRow(this, 'cur-products', 'cur-prod-option', 'cur-product')">+
-                        </button>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Сохранить</button>
                 </div>
             </form>
         </div>
