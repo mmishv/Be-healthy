@@ -5,7 +5,9 @@
   Time: 0:34
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -50,10 +52,15 @@
         <div class="inf">
             <form>
                 <div class="row general-inf">
+                    <c:if test="${profile.getAvatar()==null}">
                     <img src="./assets/profile.jpg" class="photo">
+                    </c:if>
+                    <c:if test="${profile.getAvatar()!=null}">
+                        <img src="data:image/jpeg;base64,${profile.getBase64image()}" class="photo">
+                    </c:if>
                     <div class="col-sm-8"
                          style="display: inline-flex; justify-content: space-between; padding-right: 0">
-                        <h2>George</h2>
+                        <h2>${profile.getName()}</h2>
                         <button type="button" class="btn btn-primary edit-btn" data-toggle="modal"
                                 data-target="#editModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
@@ -69,14 +76,15 @@
                         <div class="col-sm-8">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input large" type="radio" name="gridRadios" id="gender"
-                                       value="option1" checked>
+                                       value="option1"
+                                <c:if test="${profile.getSex()=='женский'}">checked</c:if>
                                 <label class="form-check-label" for="gender">
                                     Женский
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input large" type="radio" name="gridRadios" id="gender2"
-                                       value="option2">
+                                       value="option2"  <c:if test="${profile.getSex() =='мужской'}"> checked </c:if>>
                                 <label class="form-check-label" for="gender2">
                                     Мужской
                                 </label>
@@ -85,45 +93,54 @@
                     </div>
                 </fieldset>
                 <div class="form-group row">
-                    <label for="height" class="col-sm-4 col-form-label">Рост:</label>
+                    <label for="height" class="col-sm-4 col-form-label" >Рост:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" id="height" placeholder="Рост, см" type="number">
+                        <input class="form-control" id="height" placeholder="Рост, см" type="number"
+                        <c:if test="${profile.getHeight()!=0}"> value="${profile.getHeight()}"</c:if>>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="weight" class="col-sm-4 col-form-label">Вес:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" id="weight" placeholder="Вес" type="number">
+                        <input class="form-control" id="weight" placeholder="Вес" type="number"
+                        <c:if test="${profile.getWeight()!=0}"> value="${profile.getWeight()}"</c:if>>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="age" class="col-sm-4 col-form-label">Возраст:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" id="age" placeholder="Возраст" type="number">
+                        <input class="form-control" id="age" placeholder="Возраст" type="number"
+                        <c:if test="${profile.getAge()!=0}"> value="${profile.getAge()}"</c:if>>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="activity" class="col-sm-4 col-form-label">Физическая активность</label>
                     <select id="activity" class="form-control col-sm-7" name="activity">
-                        <option value="1" selected>Без учета физ. нагрузки</option>
-                        <option value="1.2">Сидячий образ жизни</option>
-                        <option value="1.375">Легкая активность(1-2 раза в неделю)</option>
-                        <option value="1.55">Умеренная активность (3-5 раз в неделю)</option>
-                        <option value="1.725">Высокая активность (более 5 раз в неделю)</option>
-                        <option value="1.9">Очень высокая активность (профессиональный спорт)</option>
+                        <option value="1" <c:if test="${profile.getActivity()==1}"> selected</c:if>>
+                            Без учета физ. нагрузки</option>
+                        <option value="1.2" <c:if test="${profile.getActivity()==1.2}"> selected</c:if>>
+                            Сидячий образ жизни</option>
+                        <option value="1.375" <c:if test="${profile.getActivity()==1.375}"> selected</c:if>>
+                            Легкая активность(1-2 раза в неделю)</option>
+                        <option value="1.55" <c:if test="${profile.getActivity()==1.55}"> selected</c:if>>
+                            Умеренная активность (3-5 раз в неделю)</option>
+                        <option value="1.725" <c:if test="${profile.getActivity()==1.725}"> selected</c:if>>
+                            Высокая активность (более 5 раз в неделю)</option>
+                        <option value="1.9" <c:if test="${profile.getActivity()==1.9}"> selected</c:if>>
+                            Очень высокая активность (профессиональный спорт)</option>
                     </select>
                 </div>
 
                 <div class="form-group row">
                     <label for="aim" class="col-sm-4 col-form-label">Цель</label>
                     <select id="aim" class="form-control col-sm-7">
-                        <option selected>Поддержание веса</option>
-                        <option>Набор веса</option>
-                        <option>Сброс веса</option>
+                        <option value="1" <c:if test="${profile.getGoal()==1}"> selected</c:if>>Поддержание веса</option>
+                        <option value="1.2"<c:if test="${profile.getGoal()==1.2}"> selected</c:if>>Набор веса</option>
+                        <option value="0.8" <c:if test="${profile.getGoal()==0.8}"> selected</c:if>>Сброс веса</option>
                     </select>
                 </div>
-
+                <c:set var="kbju" scope="session" value="${profile.getKBJU_norm()}" />
                 <div class="form-group row">
                     <h5 class="col-sm-12">Задать ограничения на суточную норму</h5>
                     <label for="k" class="col-sm-3 col-form-label center">Калории, г</label>
@@ -131,22 +148,31 @@
                     <label for="j" class="col-sm-3 col-form-label center">Жиры, г</label>
                     <label for="u" class="col-sm-3 col-form-label center">Углеводы, г</label>
                     <div class="col-sm-3">
-                        <input class="form-control" id="k" type="number">
+                        <input class="form-control" id="k" type="number"
+                               placeholder="${profile.getCalorieRec()}" value="${kbju.get('k')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input class="form-control" id="b" type="number">
+                        <input class="form-control" id="b" type="number"
+                               placeholder="${profile.getProteinRec()}" value="${kbju.get('b')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input class="form-control" id="j" type="number">
+                        <input class="form-control" id="j" type="number"
+                               placeholder="${profile.getFatRec()}" value="${kbju.get('j')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input class="form-control" id="u" type="number">
+                        <input class="form-control" id="u" type="number"
+                               placeholder="${profile.getCarbRec()}" value="${kbju.get('u')}">
                     </div>
                 </div>
-                <h6 class="col-sm-12">* рекомедуется: 1456 ккал, 82/54/190</h6>
+                <h6 class="col-sm-12">
+                    <c:if test="${profile.getProteinRec() != 0}"> * рекомедуется: ${profile.getCalorieRec()} ккал,
+                        ${profile.getProteinRec()}/${profile.getFatRec()}/${profile.getCarbRec()}</c:if>
+                    <c:if test="${profile.getProteinRec() == 0}"> * пожалуйста, введите информацию о своем росте
+                        , возрасте и весе, чтобы мы могли дать Вам рекомендации</c:if>
+                    </h6>
                 <div class="form-group row" style="justify-content: end;">
                     <div class="col-sm-5">
                         <button class="btn btn-primary btn-black save-btn">Сохранить</button>
@@ -161,7 +187,8 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form>
+            <fmt:requestEncoding value="UTF-8"/>
+            <form method="post" action="profile" enctype="multipart/form-data" accept-charset="utf-8">
                 <div class="modal-header">
                     <h4 class="modal-title">Редактировать</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -172,18 +199,18 @@
                     <div class="form-group row">
                         <label for="user-photo" class="col-sm-5 bold">Загрузить фото</label>
                         <div class="col-sm-7">
-                            <input type="file" class="form-control-file" id="user-photo">
+                            <input type="file" class="form-control-file" id="user-photo" name="avatar">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="user-name" class="col-sm-5 col-form-label">Новое имя: </label>
                         <div class="col-sm-7">
-                            <input class="form-control" id="user-name" required>
+                            <input name="name" class="form-control" id="user-name" value="${profile.getName()}">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="close-btn">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
                 </div>
             </form>
         </div>
