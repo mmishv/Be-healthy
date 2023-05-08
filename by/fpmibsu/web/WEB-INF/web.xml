@@ -173,8 +173,9 @@
 
     <servlet>
         <servlet-name>profile</servlet-name>
-        <jsp-file>/jsp/profile/profile.jsp</jsp-file>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.AboutMeServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>profile</servlet-name>
         <url-pattern>/profile</url-pattern>
