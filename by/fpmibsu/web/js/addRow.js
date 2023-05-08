@@ -1,4 +1,4 @@
-function addRow(e, parent, container, child, id) {
+function addRow(e, parent, container, child) {
     if (e.classList.contains('disabled')) {
         e.parentElement.remove();
     } else {
@@ -7,9 +7,9 @@ function addRow(e, parent, container, child, id) {
         e.style.backgroundColor = '#114630a8';
         e.innerHTML = '-';
         temp.children[1].value = '';
-        document.getElementById(parent + id).appendChild(temp);
+        document.getElementById(parent).appendChild(temp);
     }
-    let ingredients = document.getElementById(parent + id).children;
+    let ingredients = document.getElementsByClassName(container);
     let quantity = "quantity";
     let measure = "measure";
     if (parent == 'cur-products') {
@@ -27,15 +27,5 @@ function addRow(e, parent, container, child, id) {
         ch[0].name = child + c;
         ch[1].name = quantity + c;
         ch[2].name = measure + c;
-        if (parent == 'cur-products') {
-            ch[3].id = 'cur-button' + c;
-            ch[3].name = 'cur-button' + c;
-            for (let j = 0; j < 4; j++) {
-                ch[j].id += '-m';
-                ch[j].name += '-m';
-            }
-            ingredients[i].id += '-m';
-            ingredients[i].name += '-m';
-        }
     }
 }
