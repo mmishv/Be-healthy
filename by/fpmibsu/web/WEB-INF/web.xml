@@ -171,6 +171,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>article</servlet-name>
+        <jsp-file>/jsp/main/article.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/article</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>MyRecipesServlet</servlet-name>
         <servlet-class>by.fpmibsu.be_healthy.servlets.profile.MyRecipesServlet</servlet-class>
     </servlet>

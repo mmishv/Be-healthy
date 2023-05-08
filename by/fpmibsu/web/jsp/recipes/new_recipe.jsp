@@ -125,5 +125,6 @@
     </fieldset>
 </form>
 <script src="../../js/addRow.js"></script>
+<script src="../../js/autoHeight.js"></script>
 </body>
 </html>
