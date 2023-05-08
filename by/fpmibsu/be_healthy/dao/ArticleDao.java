@@ -1,7 +1,6 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Article;
-import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
 import java.sql.*;
@@ -22,7 +21,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
-            initRecipes(articles, resultSet);
+            initArticle(articles, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -44,7 +43,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             statement.setInt(1, per_page);
             statement.setInt(2, per_page * (page-1));
             ResultSet resultSet = statement.executeQuery();
-            initRecipes(recipes, resultSet);
+            initArticle(recipes, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -67,7 +66,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             statement.setInt(2, per_page);
             statement.setInt(3, per_page * (page-1));
             ResultSet resultSet = statement.executeQuery();
-            initRecipes(recipes, resultSet);
+            initArticle(recipes, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -80,21 +79,21 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
         }
         return recipes;
     }
-    private void initRecipes(List<Article> recipes, ResultSet resultSet) throws SQLException {
+    private void initArticle(List<Article> articles, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             Article article = new Article();
-            setRecipe(resultSet, article);
-            recipes.add(article);
+            setArticle(resultSet, article);
+            articles.add(article);
         }
     }
 
-    private void setRecipe(ResultSet resultSet, Article article) throws SQLException {
+    private void setArticle(ResultSet resultSet, Article article) throws SQLException {
         article.setId(resultSet.getInt("ID"));
         article.setAuthorId(resultSet.getInt("AUTHOR_ID"));
         article.setTitle(resultSet.getString("TITLE"));
         article.setFulltext(resultSet.getString("FULL_TEXT"));
         article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
-        article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getAuthorId()));
+        article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getId()));
     }
 
     @Override
@@ -107,7 +106,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                setRecipe(resultSet, article);
+                setArticle(resultSet, article);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -32,8 +32,8 @@
 <div class="background">
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
-<button class="btn btn-primary back-btn">
-    <a href="/main/1">&#8592; Назад</a>
+<button onclick="history.back();" class="btn btn-primary back-btn">
+    &#8592; Назад
 </button>
 <div class="article-wrapper">
     <h3 id="article-title">${article.title}</h3>
