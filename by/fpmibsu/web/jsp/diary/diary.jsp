@@ -126,52 +126,95 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="editMeal${meal.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                <div class="modal fade" id="editMeal${meal.id}" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <form>
+                            <form method="post" action="/edit-meal/${meal.id}_${date}" accept-charset="utf-8">
                                 <div class="modal-header">
-                                    <input class="modal-title" id="mealTitle" placeholder="Название приёма пищи" value="${meal.name}"></input>
+                                    <input class="modal-title" name="title" placeholder="Название приёма пищи"
+                                           value="${meal.name}"></input>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body" id="cur-products">
-                                    <c:forEach items="${meal.products}" var="p" varStatus="loop">
-                                    <div class="row cur-prod-option" id="cur-prod-option${loop.count}">
-                                        <select id="cur-product${loop.count}" class="form-control col-sm-6">
-                                            <c:forEach items="${products}" var="product">
-                                                <c:if test="${product.id == meal.products[loop.index].id}">
-                                                    <option value="${product.id}" selected><c:out value="${product.name}"/></option>
-                                                </c:if>
-                                                <c:if test="${product.id != meal.products[loop.index].id}">
-                                                    <option value="${product.id}"><c:out value="${product.name}"/></option>
-                                                </c:if>
-                                            </c:forEach>
-                                        </select>
-                                        <input value="${meal.products[loop.index].quantity}"
-                                               id="cur-quantity${loop.count}" type="number" class="form-control col-sm-2" placeholder="кол-во"
-                                               required>
-                                        <select id="cur-measure${loop.count}" class="form-control col-sm-2">
-                                            <option selected>гр.</option>
-                                            <option>мл.</option>
-                                        </select>
-                                        <c:if test="${loop.count != meal.products.size()}">
-                                            <button class="col-sm-1 ing-button disabled" style="background-color: rgba(17, 70, 48, 0.66);"
-                                                    onclick="addRow(this, 'cur-products', 'cur-prod-option', 'cur-product')">-
-                                            </button>
-                                        </c:if>
-                                        <c:if test="${loop.count == meal.products.size()}">
+                                <div class="modal-body" id="cur-products_additional${meal.id}">
+                                    <c:if test="${meal.products.size()==0}">
+                                        <div class="row cur-prod-option${meal.id}-" id="cur-prod-option${meal.id}-1">
+                                            <select id="add_product${meal.id}_1" name="add_product${meal.id}_1"
+                                                    class="form-control col-sm-6">
+                                                <c:forEach items="${products}" var="product">
+                                                    <option value="${product.id}"><c:out
+                                                            value="${product.name}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                            <input id="add_quantity${meal.id}_1" name="add_quantity${meal.id}_1"
+                                                   type="number"
+                                                   class="form-control col-sm-2"
+                                                   placeholder="кол-во" required>
+                                            <select id="add_measure${meal.id}_1" name="add_measure${meal.id}_1"
+                                                    class="form-control col-sm-2">
+                                                <option selected>гр.</option>
+                                                <option>мл.</option>
+                                            </select>
                                             <button class="col-sm-1 ing-button"
-                                                    onclick="addRow(this, 'cur-products', 'cur-prod-option', 'cur-product')">+
+                                                    onclick="addRow(this, 'cur-products_additional${meal.id}',
+                                                            'cur-prod-option${meal.id}-','add_product${meal.id}_', 'add_','${meal.id}_')">
+                                                +
                                             </button>
-                                        </c:if>
-                                    </div>
+                                        </div>
+                                    </c:if>
+                                    <c:forEach items="${meal.products}" var="p" varStatus="loop">
+                                        <div class="row cur-prod-option${meal.id}-"
+                                             id="cur-prod-option${meal.id}-${loop.count}">
+                                            <select name="add_product${meal.id}_${loop.count}"
+                                                    id="add_product${meal.id}_${loop.count}"
+                                                    class="form-control col-sm-6">
+                                                <c:forEach items="${products}" var="product">
+                                                    <c:if test="${product.id == meal.products[loop.index].id}">
+                                                        <option value="${product.id}" selected><c:out
+                                                                value="${product.name}"/></option>
+                                                    </c:if>
+                                                    <c:if test="${product.id != meal.products[loop.index].id}">
+                                                        <option value="${product.id}"><c:out
+                                                                value="${product.name}"/></option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
+                                            <input name="add_quantity${meal.id}_${loop.count}"
+                                                   value="${meal.products[loop.index].quantity}"
+                                                   id="add_quantity${meal.id}_${loop.count}"
+                                                   type="number" class="form-control col-sm-2" placeholder="кол-во"
+                                                   required>
+                                            <select name="add_measure${meal.id}_${loop.count}"
+                                                    id="add_measure${meal.id}_${loop.count}"
+                                                    class="form-control col-sm-2">
+                                                <option selected>гр.</option>
+                                                <option>мл.</option>
+                                            </select>
+                                            <c:if test="${loop.count != meal.products.size()}">
+                                                <button class="col-sm-1 ing-button disabled"
+                                                        style="background-color: rgba(17, 70, 48, 0.66);"
+                                                        onclick="addRow(this, 'cur-products_additional${meal.id}',
+                                                                'cur-prod-option${meal.id}-${loop.count}-',
+                                                                'add_product${meal.id}_', 'add_', '${meal.id}_')">
+                                                    -
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${loop.count == meal.products.size()}">
+                                                <button class="col-sm-1 ing-button"
+                                                        onclick="addRow(this, 'cur-products_additional${meal.id}',
+                                                                'cur-prod-option${meal.id}-', 'add_product${meal.id}_',
+                                                                'add_', '${meal.id}_')">
+                                                    +
+                                                </button>
+                                            </c:if>
+                                        </div>
                                     </c:forEach>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Сохранить</button>
+                                    <button type="submit" class="btn btn-primary">Сохранить</button>
                                 </div>
                             </form>
                         </div>
@@ -294,16 +337,19 @@
             location.href = '/diary/' + parseDate(d);
         },
     });
+
     function nextDay() {
         var date = new Date('${date}');
         date.setDate(date.getDate() + 1);
         location.href = '/diary/' + parseDate(date);
     }
+
     function prevDay() {
         var date = new Date('${date}');
         date.setDate(date.getDate() - 1);
         location.href = '/diary/' + parseDate(date);
     }
+
     function parseDate(d) {
         var year = d.getFullYear();
         var month = d.getMonth() + 1;
@@ -316,6 +362,7 @@
         }
         return year + '-' + month + '-' + dt;
     }
+
     window.addEventListener('load', () => {
         updateProgressCalories(${k}, ${k_norm});
         updateProgressProteins(${b}, ${b_norm});

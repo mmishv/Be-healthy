@@ -143,6 +143,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>EditMealServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.diary.EditMealServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditMealServlet</servlet-name>
+        <url-pattern>/edit-meal/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ProductsServlet</servlet-name>
         <servlet-class>by.fpmibsu.be_healthy.servlets.products.ProductsServlet</servlet-class>
     </servlet>
