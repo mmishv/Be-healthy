@@ -130,7 +130,9 @@
             for (Article article: articles){
         %>
         <div class="article">
-            <h3 class="title"><%=article.getTitle()%></h3>
+            <h3 class="title"><a href="/article/<%=article.getId()%>"
+                                 style="color: white !important; text-decoration: none !important;"> <%=article.getTitle()%></a>
+            </h3>
             <%
                 String category;
                 for (ArticleCategory cat : article.getCategories()) {

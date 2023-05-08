@@ -65,67 +65,67 @@
         %>
         <div class="meals-wrapper">
             <c:forEach items="${meals}" var="meal">
-            <div class="meal" id="meal${meal.id}">
-                <c:if test="${not empty meal.name}">
-                    <div class="meal-name" id="meal-name1">${meal.name}</div>
-                </c:if>
-                <c:if test="${empty meal.name}">
-                    <div class="meal-name" id="meal-name1">Без названия</div>
-                </c:if>
-                <div class="row meal-buttons">
-                    <button type="button" class="btn" data-toggle="modal" data-target="#editMeal${meal.id}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="bi bi-pencil" viewBox="0 0 16 16">
-                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                        </svg>
-                    </button>
-                    <div class="delete-meal">
-                        <form method="get" action="/delete-meal/${meal.id}_${date}">
-                            <button type="submit" class="btn"
-                                    name="delete" value="${meal.id}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="black"
-                                     class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                                </svg>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <div class="header product row">
-                    <div class="prod-name"></div>
-                    <div class="prod-q">Вес, г</div>
-                    <div class="prod-bju">Б/Ж/У</div>
-                    <div class="prod-k">ккал</div>
-                </div>
-                <div class="scroll">
-                    <c:forEach items="${meal.products}" var="p">
-                        <div class="product row">
-                            <div class="prod-name">${p.name}</div>
-                            <div class="prod-q">${p.quantity}</div>
-                            <div class="prod-bju">
-                                <fmt:formatNumber value="${p.proteins * p.quantity / 100}"
-                                                  maxFractionDigits="1"/>/<fmt:formatNumber
-                                    value="${p.fats * p.quantity / 100}" maxFractionDigits="1"/>/<fmt:formatNumber
-                                    value="${p.carbohydrates * p.quantity / 100}" maxFractionDigits="1"/>
-                            </div>
-                            <div class="prod-k">
-                                <fmt:formatNumber value="${p.calories * p.quantity / 100}" maxFractionDigits="1"/>
-                            </div>
+                <div class="meal" id="meal${meal.id}">
+                    <c:if test="${not empty meal.name}">
+                        <div class="meal-name" id="meal-name1">${meal.name}</div>
+                    </c:if>
+                    <c:if test="${empty meal.name}">
+                        <div class="meal-name" id="meal-name1">Без названия</div>
+                    </c:if>
+                    <div class="row meal-buttons">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#editMeal${meal.id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                 class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            </svg>
+                        </button>
+                        <div class="delete-meal">
+                            <form method="get" action="/delete-meal/${meal.id}_${date}">
+                                <button type="submit" class="btn"
+                                        name="delete" value="${meal.id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="black"
+                                         class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
-                    </c:forEach>
-                </div>
-                <div class="product row meal-total">
-                    <div class="prod-name">Итого</div>
-                    <div class="prod-q">${meal.KBJU.get("weight")}</div>
-                    <div class="prod-bju">
-                            ${meal.KBJU.get("b")}/${meal.KBJU.get("j")}/${meal.KBJU.get("u")}
                     </div>
-                    <div class="prod-k">
-                            ${meal.KBJU.get("k")}
+                    <div class="header product row">
+                        <div class="prod-name"></div>
+                        <div class="prod-q">Вес, г</div>
+                        <div class="prod-bju">Б/Ж/У</div>
+                        <div class="prod-k">ккал</div>
+                    </div>
+                    <div class="scroll">
+                        <c:forEach items="${meal.products}" var="p">
+                            <div class="product row">
+                                <div class="prod-name">${p.name}</div>
+                                <div class="prod-q">${p.quantity}</div>
+                                <div class="prod-bju">
+                                    <fmt:formatNumber value="${p.proteins * p.quantity / 100}"
+                                                      maxFractionDigits="1"/>/<fmt:formatNumber
+                                        value="${p.fats * p.quantity / 100}" maxFractionDigits="1"/>/<fmt:formatNumber
+                                        value="${p.carbohydrates * p.quantity / 100}" maxFractionDigits="1"/>
+                                </div>
+                                <div class="prod-k">
+                                    <fmt:formatNumber value="${p.calories * p.quantity / 100}" maxFractionDigits="1"/>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="product row meal-total">
+                        <div class="prod-name">Итого</div>
+                        <div class="prod-q">${meal.KBJU.get("weight")}</div>
+                        <div class="prod-bju">
+                                ${meal.KBJU.get("b")}/${meal.KBJU.get("j")}/${meal.KBJU.get("u")}
+                        </div>
+                        <div class="prod-k">
+                                ${meal.KBJU.get("k")}
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="modal fade" id="editMeal${meal.id}" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle"
                      aria-hidden="true">
@@ -142,16 +142,19 @@
                                 <div class="modal-body" id="cur-products_additional${meal.id}">
                                     <c:if test="${meal.products.size()==0}">
                                         <div class="row cur-prod-option${meal.id}-" id="cur-prod-option${meal.id}-1">
-                                            <select id="add_product${meal.id}_1" name="add_product${meal.id}_1" class="form-control col-sm-6">
+                                            <select id="add_product${meal.id}_1" name="add_product${meal.id}_1"
+                                                    class="form-control col-sm-6">
                                                 <c:forEach items="${products}" var="product">
                                                     <option value="${product.id}"><c:out
                                                             value="${product.name}"/></option>
                                                 </c:forEach>
                                             </select>
-                                            <input id="add_quantity${meal.id}_1" name="add_quantity${meal.id}_1" type="number"
+                                            <input id="add_quantity${meal.id}_1" name="add_quantity${meal.id}_1"
+                                                   type="number"
                                                    class="form-control col-sm-2"
                                                    placeholder="кол-во" required>
-                                            <select id="add_measure${meal.id}_1" name="add_measure${meal.id}_1" class="form-control col-sm-2">
+                                            <select id="add_measure${meal.id}_1" name="add_measure${meal.id}_1"
+                                                    class="form-control col-sm-2">
                                                 <option selected>гр.</option>
                                                 <option>мл.</option>
                                             </select>
@@ -163,8 +166,10 @@
                                         </div>
                                     </c:if>
                                     <c:forEach items="${meal.products}" var="p" varStatus="loop">
-                                        <div class="row cur-prod-option${meal.id}-" id="cur-prod-option${meal.id}-${loop.count}">
-                                            <select name="add_product${meal.id}_${loop.count}" id="add_product${meal.id}_${loop.count}"
+                                        <div class="row cur-prod-option${meal.id}-"
+                                             id="cur-prod-option${meal.id}-${loop.count}">
+                                            <select name="add_product${meal.id}_${loop.count}"
+                                                    id="add_product${meal.id}_${loop.count}"
                                                     class="form-control col-sm-6">
                                                 <c:forEach items="${products}" var="product">
                                                     <c:if test="${product.id == meal.products[loop.index].id}">
@@ -182,7 +187,8 @@
                                                    id="add_quantity${meal.id}_${loop.count}"
                                                    type="number" class="form-control col-sm-2" placeholder="кол-во"
                                                    required>
-                                            <select name="add_measure${meal.id}_${loop.count}" id="add_measure${meal.id}_${loop.count}"
+                                            <select name="add_measure${meal.id}_${loop.count}"
+                                                    id="add_measure${meal.id}_${loop.count}"
                                                     class="form-control col-sm-2">
                                                 <option selected>гр.</option>
                                                 <option>мл.</option>
@@ -207,76 +213,76 @@
                                         </div>
                                     </c:forEach>
                                 </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    </form>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary add-button" data-toggle="modal"
+                data-target="#exampleModalCenter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-plus-square-fill" viewBox="0 0 16 16" onClick="">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+            </svg>
+            Добавить приём пищи
+        </button>
+
+        <div class="total">
+            <div class="total-name">Отчёт дня</div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Калории</div>
+                    <div>${k}/${k_norm} гр.</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 10%; background-color:#1f9f7a" aria-valuenow="10" aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Белки</div>
+                    <div> ${b}/${b_norm} гр.</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 25%; background-color:#7fba52" aria-valuenow="25" aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Жиры</div>
+                    <div>${j}/${j_norm} гр.</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 50%; background-color:#c2c458" aria-valuenow="50" aria-valuemin="0"
+                         aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="total-progress">
+                <div class="progress-descr">
+                    <div>Углеводы</div>
+                    <div> ${u}/${u_norm} гр.</div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: 100%; background-color:#c39143" aria-valuenow="100" aria-valuemin="0"
+                         aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
-        </c:forEach>
     </div>
-</div>
-
-<div class="col-sm-3">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary add-button" data-toggle="modal"
-            data-target="#exampleModalCenter">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-             class="bi bi-plus-square-fill" viewBox="0 0 16 16" onClick="">
-            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-        </svg>
-        Добавить приём пищи
-    </button>
-
-    <div class="total">
-        <div class="total-name">Отчёт дня</div>
-        <div class="total-progress">
-            <div class="progress-descr">
-                <div>Калории</div>
-                <div>${k}/${k_norm} гр.</div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 10%; background-color:#1f9f7a" aria-valuenow="10" aria-valuemin="0"
-                     aria-valuemax="100"></div>
-            </div>
-        </div>
-        <div class="total-progress">
-            <div class="progress-descr">
-                <div>Белки</div>
-                <div> ${b}/${b_norm} гр.</div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 25%; background-color:#7fba52" aria-valuenow="25" aria-valuemin="0"
-                     aria-valuemax="100"></div>
-            </div>
-        </div>
-        <div class="total-progress">
-            <div class="progress-descr">
-                <div>Жиры</div>
-                <div>${j}/${j_norm} гр.</div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 50%; background-color:#c2c458" aria-valuenow="50" aria-valuemin="0"
-                     aria-valuemax="100"></div>
-            </div>
-        </div>
-        <div class="total-progress">
-            <div class="progress-descr">
-                <div>Углеводы</div>
-                <div> ${u}/${u_norm} гр.</div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped" role="progressbar"
-                     style="width: 100%; background-color:#c39143" aria-valuenow="100" aria-valuemin="0"
-                     aria-valuemax="100"></div>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"

@@ -209,4 +209,15 @@
         <url-pattern>/my_articles/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ArticleServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.main.ArticleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ArticleServlet</servlet-name>
+        <url-pattern>/article/*</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
