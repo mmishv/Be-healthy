@@ -2,12 +2,10 @@ package by.fpmibsu.be_healthy.services;
 
 import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.dao.ProfileDao;
-import by.fpmibsu.be_healthy.entity.Recipe;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileService {
@@ -32,8 +30,8 @@ public class ProfileService {
     public boolean create(Profile entity) throws SQLException {
         return new ProfileDao().create(entity);
     }
-    public boolean isProfileExist(String login, String password) throws SQLException{
-        return new ProfileDao().isProfileExist(login, password);
+    public String getPasswordByLogin(String login) throws SQLException{
+        return new ProfileDao().getPasswordByLogin(login);
     }
     public boolean register(String login, String password) throws SQLException {
         return new ProfileDao().register(login, password);

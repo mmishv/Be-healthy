@@ -4,7 +4,6 @@ package by.fpmibsu.be_healthy.dao;
 import by.fpmibsu.be_healthy.entity.*;
 import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
 
-import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
@@ -221,15 +220,14 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         return success;
     }
 
-    public boolean isProfileExist(String login, String password) throws SQLException {
+    public String getPasswordByLogin(String login) throws SQLException {
 
-        String sql = "SELECT * FROM PROFILE WHERE LOGIN=? AND PASSWORD=?";
+        String sql = "SELECT PASSWORD FROM PROFILE WHERE LOGIN=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return true;
+                return resultSet.getString("PASSWORD");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -238,7 +236,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
                 connection.close();
             }
         }
-        return false;
+        return "";
     }
     public boolean isLoginAvailable(String login) throws SQLException {
         String sql = "SELECT * FROM PROFILE WHERE LOGIN=?";

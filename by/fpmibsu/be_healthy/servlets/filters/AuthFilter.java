@@ -1,6 +1,8 @@
 package by.fpmibsu.be_healthy.servlets.filters;
 
 import by.fpmibsu.be_healthy.services.ProfileService;
+import org.mindrot.jbcrypt.BCrypt;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,21 +39,7 @@ public class AuthFilter implements Filter {
                 nonNull(session.getAttribute("password"))) {
             filterChain.doFilter(request, response);
         } else {
-            try {
-                if (profile.get().isProfileExist(login, password)) {
-                    req.getSession().setAttribute("password", password);
-                    req.getSession().setAttribute("login", login);
-                    req.getSession().setAttribute("id", new ProfileService().getIdByLogin(login));
-                    //res.sendRedirect(req.getContextPath());
-                    filterChain.doFilter(request, response);
-                   // req.getRequestDispatcher(req.getContextPath()).forward(req, res);
-                } else {
-                    res.sendRedirect("/authentication");
-                   // req.getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            res.sendRedirect("/authentication");
         }
     }
     @Override

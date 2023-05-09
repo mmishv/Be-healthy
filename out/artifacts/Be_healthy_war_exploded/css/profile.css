@@ -126,7 +126,7 @@ input[type='radio'].large:checked:after {
 
 select.form-control {
     width: 54% !important;
-    margin-left: 2%;
+    margin-left: 2% !important;
 }
 
 .back-btn {

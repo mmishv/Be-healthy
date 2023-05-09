@@ -1,5 +1,4 @@
 package by.fpmibsu.be_healthy.servlets.profile;
-import by.fpmibsu.be_healthy.dao.ProfileDao;
 import by.fpmibsu.be_healthy.services.ProfileService;
 
 import java.io.IOException;
@@ -11,16 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final HttpSession session = request.getSession();
-        String password = request.getParameter("reg_password1"),
+        String password = BCrypt.hashpw(request.getParameter("reg_password1"),BCrypt.gensalt()),
                 login = request.getParameter("reg_login");
         try {
-            if (Objects.equals(password, request.getParameter("reg_password2")) &&
+            if (Objects.equals(request.getParameter("reg_password1"), request.getParameter("reg_password2")) &&
                     new ProfileService().isLoginAvailable(login)){
             session.setAttribute("password", password);
             session.setAttribute("login", login);
