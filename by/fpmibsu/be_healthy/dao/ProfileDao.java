@@ -2,7 +2,7 @@ package by.fpmibsu.be_healthy.dao;
 
 
 import by.fpmibsu.be_healthy.entity.*;
-import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
+import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

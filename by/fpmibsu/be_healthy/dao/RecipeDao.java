@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
-import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
+import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.*;

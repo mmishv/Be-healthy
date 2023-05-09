@@ -1,7 +1,6 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.entity.MealProduct;
-import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
+import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.services.MealProductService;
 

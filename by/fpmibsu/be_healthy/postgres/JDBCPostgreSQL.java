@@ -1,4 +1,4 @@
-package by.fpmibsu.be_healthy.pg;
+package by.fpmibsu.be_healthy.postgres;
 
 import java.sql.DriverManager;
 import java.sql.Connection;

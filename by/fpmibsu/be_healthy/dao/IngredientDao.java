@@ -1,9 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Ingredient;
-import by.fpmibsu.be_healthy.entity.MealProduct;
-import by.fpmibsu.be_healthy.entity.Product;
-import by.fpmibsu.be_healthy.pg.JDBCPostgreSQL;
+import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.sql.*;
 import java.util.ArrayList;
