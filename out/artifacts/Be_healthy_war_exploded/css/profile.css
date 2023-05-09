@@ -1,7 +1,19 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
 .sections {
     background-color: #114630 !important;
     height: 100vh;
     padding: 0 !important;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 120%;
 }
 
 .list-group-item {
@@ -10,8 +22,13 @@
     font-weight: 500;
 }
 
+.wrapper {
+    position: relative;
+    height: 100%;
+}
+
 .inf {
-    width: 55%;
+    width: 60%;
     margin: 2% auto;
     padding: 1% 2%;
     background-color: #114630db;
@@ -105,4 +122,31 @@ input[type='radio'].large:checked:after {
 
 input[type='radio'].large:checked:after {
     top: -5px !important
+}
+
+select.form-control {
+    width: 54% !important;
+    margin-left: 2%;
+}
+
+.back-btn {
+    background-color: #00000000 !important;
+    border: solid 2px white !important;
+    color: white !important;
+    position: absolute;
+    margin-top: 2%;
+    right: 5%;
+}
+
+.back-btn a {
+    color: white !important;
+}
+
+.back-btn a:hover {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.back-btn svg {
+    vertical-align: text-bottom;
 }
