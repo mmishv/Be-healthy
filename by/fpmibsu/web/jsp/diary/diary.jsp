@@ -140,31 +140,6 @@
                                     </button>
                                 </div>
                                 <div class="modal-body" id="cur-products_additional${meal.id}">
-                                    <c:if test="${meal.products.size()==0}">
-                                        <div class="row cur-prod-option${meal.id}-" id="cur-prod-option${meal.id}-1">
-                                            <select id="add_product${meal.id}_1" name="add_product${meal.id}_1"
-                                                    class="form-control col-sm-6">
-                                                <c:forEach items="${products}" var="product">
-                                                    <option value="${product.id}"><c:out
-                                                            value="${product.name}"/></option>
-                                                </c:forEach>
-                                            </select>
-                                            <input id="add_quantity${meal.id}_1" name="add_quantity${meal.id}_1"
-                                                   type="number"
-                                                   class="form-control col-sm-2"
-                                                   placeholder="кол-во" required>
-                                            <select id="add_measure${meal.id}_1" name="add_measure${meal.id}_1"
-                                                    class="form-control col-sm-2">
-                                                <option selected>гр.</option>
-                                                <option>мл.</option>
-                                            </select>
-                                            <button class="col-sm-1 ing-button"
-                                                    onclick="addRow(this, 'cur-products_additional${meal.id}',
-                                                            'cur-prod-option${meal.id}-','add_product${meal.id}_', 'add_','${meal.id}_')">
-                                                +
-                                            </button>
-                                        </div>
-                                    </c:if>
                                     <c:forEach items="${meal.products}" var="p" varStatus="loop">
                                         <div class="row cur-prod-option${meal.id}-"
                                              id="cur-prod-option${meal.id}-${loop.count}">
