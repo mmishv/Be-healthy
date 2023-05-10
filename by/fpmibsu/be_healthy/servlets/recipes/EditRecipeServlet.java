@@ -57,8 +57,6 @@ public class EditRecipeServlet extends HttpServlet {
                 categories.add(cat);
             }
         }
-        image = new byte[request.getPart("image").getInputStream().available()];
-        request.getPart("image").getInputStream().read(image);
         int cnt = 1;
         while (request.getParameter("ingredient" + cnt) != null) {
             Ingredient ing = new Ingredient();
@@ -79,7 +77,11 @@ public class EditRecipeServlet extends HttpServlet {
         recipe.setTitle(new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         recipe.setCookingTime(cookingTime);
         recipe.setText(new String(request.getParameter("text").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
-        recipe.setImage(image);
+        if (request.getPart("image").getInputStream().available()!=0){
+            image = new byte[request.getPart("image").getInputStream().available()];
+            request.getPart("image").getInputStream().read(image);
+            recipe.setImage(image);
+        }
         recipe.setIngredients(ingredients);
         recipe.setCategories(categories);
         try {

@@ -109,7 +109,7 @@
       <div class="form-group row">
         <label for="recipe-photo" class="col-sm-4 bold">Фото рецепта:</label>
         <div class="col-sm-8">
-          <input type="file" name="image" class="form-control-file" id="recipe-photo" required accept="image/png, image/jpeg">
+          <input type="file" name="image" class="form-control-file" id="recipe-photo" accept="image/png, image/jpeg">
         </div>
       </div>
       <div class="form-group row">
