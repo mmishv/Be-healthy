@@ -111,7 +111,7 @@
           <h6 class="card-title"><%=recipe.getCookingTime()%> минут</h6>
         </div>
         <div class="card-body">
-          <button type="submit" class="btn">
+          <button type="button" class="btn" onclick="deleteRecipe(<%=recipe.getId()%>)">
             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="black"
                  class="bi bi-trash" viewBox="0 0 16 16">
               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
@@ -241,6 +241,9 @@
 <script>
   function editRecipe(id) {
     window.location.href = '/edit_recipe/'+parseInt(id);
+  }
+  function deleteRecipe(id) {
+    window.location.href = '/delete_recipe/'+parseInt(id);
   }
 </script>
 </body>

@@ -217,7 +217,7 @@
                     <div class="form-group row">
                         <label for="user-photo" class="col-sm-5 bold">Загрузить фото</label>
                         <div class="col-sm-7">
-                            <input type="file" class="form-control-file" id="user-photo" name="avatar">
+                            <input type="file" class="form-control-file" id="user-photo" name="avatar" accept="image/png, image/jpeg">>
                         </div>
                     </div>
                     <div class="form-group row">

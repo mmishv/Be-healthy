@@ -202,6 +202,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DeleteRecipeServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.recipes.DeleteRecipeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteRecipeServlet</servlet-name>
+        <url-pattern>/delete_recipe/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>article</servlet-name>
         <jsp-file>/jsp/main/article.jsp</jsp-file>
     </servlet>

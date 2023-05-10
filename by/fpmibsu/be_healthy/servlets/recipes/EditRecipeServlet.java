@@ -87,6 +87,6 @@ public class EditRecipeServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        response.sendRedirect("http://localhost:8081/recipes/1");
+        response.sendRedirect("http://localhost:8081/my_recipes/1");
     }
 }
