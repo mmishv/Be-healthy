@@ -124,17 +124,21 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
     @Override
     public boolean update(Article entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE ARTICLE SET TITLE=?, PUBL_DATE=?,FULL_TEXT=?, AUTHOR_ID=? WHERE ID=?";
+        String sql = "UPDATE ARTICLE SET TITLE=?, FULL_TEXT=? WHERE ID=?";
+        PreparedStatement inner_statement1 = null;
         boolean success = true;
         try {
-
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
-            preparedStatement.setString(3, entity.getFulltext());
-            preparedStatement.setInt(4, entity.getAuthorId());
-            preparedStatement.setInt(5, entity.getId());
+            preparedStatement.setString(2, entity.getFulltext());
+            preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
+
+            String inner_sql = "DELETE FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?";
+            inner_statement1 = connection.prepareStatement(inner_sql);
+            inner_statement1.setInt(1, entity.getId());
+            inner_statement1.executeUpdate();
+            setCategories(entity, entity.getId());
         } catch (SQLException e) {
             e.printStackTrace();
             success = false;
@@ -147,6 +151,17 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             }
         }
         return success;
+    }
+
+    private void setCategories(Article entity, int article_id) throws SQLException {
+        PreparedStatement inner_statement = null;
+        for (var i : entity.getCategories()) {
+            String inner_sql = "INSERT INTO MM_CATEGORY_ARTICLE (ARTICLE_ID, CATEGORY_ID) VALUES(?, ?)";
+            inner_statement = connection.prepareStatement(inner_sql);
+            inner_statement.setInt(1, article_id);
+            inner_statement.setInt(2, i.getId());
+            inner_statement.executeUpdate();
+        }
     }
 
     @Override
@@ -182,7 +197,6 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
     public boolean create(Article entity) throws SQLException {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO ARTICLE (TITLE, PUBL_DATE, FULL_TEXT, AUTHOR_ID) VALUES(?, ?, ?, ?)";
-        PreparedStatement inner_statement = null;
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -191,21 +205,7 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
             preparedStatement.setString(3, entity.getFulltext());
             preparedStatement.setInt(4, entity.getAuthorId());
             preparedStatement.executeUpdate();
-            for (var i : entity.getCategories()) {
-                String inner_sql = "INSERT INTO MM_CATEGORY_ARTICLE (ARTICLE_ID, CATEGORY_ID) VALUES(?, ?)";
-                try {
-                    inner_statement = connection.prepareStatement(inner_sql);
-                    inner_statement.setInt(1, getMaxId());
-                    inner_statement.setInt(2, i.getId());
-                    inner_statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (inner_statement != null) {
-                        inner_statement.close();
-                    }
-                }
-            }
+            setCategories(entity, getMaxId());
         } catch (SQLException e) {
             e.printStackTrace();
             success = false;

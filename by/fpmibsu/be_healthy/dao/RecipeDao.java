@@ -154,17 +154,9 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             new IngredientService().deleteRecipeIngredients(entity.getId());
             int recipe_id =  entity.getId();
             String inner_sql = "DELETE FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?";
-            try {
-                inner_statement1 = connection.prepareStatement(inner_sql);
-                inner_statement1.setInt(1, recipe_id);
-                inner_statement1.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                if (inner_statement1 != null) {
-                    inner_statement1.close();
-                }
-            }
+            inner_statement1 = connection.prepareStatement(inner_sql);
+            inner_statement1.setInt(1, recipe_id);
+            inner_statement1.executeUpdate();
             initCategoriesAndIngredients(entity, recipe_id);
         } catch (SQLException e) {
             e.printStackTrace();
