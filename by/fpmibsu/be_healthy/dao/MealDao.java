@@ -149,26 +149,6 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
         }
         return success;
     }
-    public List<Meal> getMealsByUserId(int id) throws SQLException {
-        PreparedStatement statement = null;
-        String sql = "SELECT ID FROM MEAL WHERE USER_ID=?";
-        List<Meal> meals = new ArrayList<>();
-        try{
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            ResultSet mealsIds = statement.executeQuery();
-            while (mealsIds.next()){
-                meals.add(new MealDao().getEntityById(mealsIds.getInt("ID")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally{
-            if (statement != null) {
-                statement.close();
-            }
-        }
-        return meals;
-    }
     public int getMaxId() {
         String sql = "SELECT max(id) as id FROM MEAL";
         Statement statement;

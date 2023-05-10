@@ -33,11 +33,6 @@ public class MealService {
     public boolean create(Meal entity) throws SQLException {
         return new MealDao().create(entity);
     }
-
-    public List<Meal> getMealsByUserId(int id) throws SQLException {
-        return new MealDao().getMealsByUserId(id);
-    }
-
     public String getAllJSON() throws JsonProcessingException, SQLException {
         return new ObjectMapper().writeValueAsString(new MealService().getAll());
     }
