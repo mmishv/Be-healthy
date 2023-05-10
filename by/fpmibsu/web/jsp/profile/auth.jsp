@@ -49,11 +49,11 @@
                 <h4>Вход</h4>
                 <div class="form-group row">
                     <label for="DropdownFormLogin1" class="col-sm-4">Логин</label>
-                    <input type="text" class="form-control col-sm-8" name="login" id="DropdownFormLogin1">
+                    <input type="text" class="form-control col-sm-8" name="login" id="DropdownFormLogin1" required>
                 </div>
                 <div class="form-group row">
                     <label for="DropdownFormPassword1" class="col-sm-4">Пароль</label>
-                    <input type="password" class="form-control col-sm-8" name="password" id="DropdownFormPassword1">
+                    <input type="password" class="form-control col-sm-8" name="password" id="DropdownFormPassword1" required>
                 </div>
             </fieldset>
             <div style="display: flex; justify-content: flex-end;">
@@ -65,15 +65,15 @@
                 <h4>Регистрация</h4>
                 <div class="form-group row">
                     <label for="DropdownFormLogin2" class="col-sm-4">Логин</label>
-                    <input type="text" class="form-control col-sm-8" name="reg_login" id="DropdownFormLogin2">
+                    <input type="text" class="form-control col-sm-8" name="reg_login" id="DropdownFormLogin2" required>
                 </div>
                 <div class="form-group row">
                     <label for="DropdownFormPassword2" class="col-sm-4">Пароль</label>
-                    <input type="password" class="form-control col-sm-8" name="reg_password1" id="DropdownFormPassword2">
+                    <input type="password" class="form-control col-sm-8" name="reg_password1" id="DropdownFormPassword2" required>
                 </div>
                 <div class="form-group row">
                     <label for="DropdownFormPassword2-repeat" class="col-sm-4">Подтвердите пароль</label>
-                    <input type="password" class="form-control col-sm-8" name="reg_password2" id="DropdownFormPassword2-repeat">
+                    <input type="password" class="form-control col-sm-8" name="reg_password2" id="DropdownFormPassword2-repeat" required>
                 </div>
                 <div style="display: flex; justify-content: flex-end;">
                     <button type="submit" class="btn btn-primary btn-black">Зарегистрироваться</button>
