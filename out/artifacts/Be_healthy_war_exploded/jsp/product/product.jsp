@@ -69,7 +69,7 @@
         </form>
     </div>
     <div class="product-table">
-        <h4 style="opacity: 0.8;">База продуктов</h4>
+        <h4 style="opacity: 0.8; margin-top: 0 !important;">База продуктов</h4>
         <table class="table" id="table1">
             <thead>
             <tr>

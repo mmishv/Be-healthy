@@ -197,7 +197,7 @@
                                                 <button class="col-sm-1 ing-button disabled"
                                                         style="background-color: rgba(17, 70, 48, 0.66);"
                                                         onclick="addRow(this, 'cur-products_additional${meal.id}',
-                                                                'cur-prod-option${meal.id}-${loop.count}-',
+                                                                'cur-prod-option${meal.id}-',
                                                                 'add_product${meal.id}_', 'add_', '${meal.id}_')">
                                                     -
                                                 </button>
