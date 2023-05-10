@@ -31,7 +31,7 @@ public class MainServlet extends HttpServlet {
             request.setAttribute("result", result);
         }
         String pathInfo = request.getPathInfo();
-        String[] pathParts = pathInfo.split("/");
+        String[] pathParts = pathInfo==null? new String[0]: pathInfo.split("/");
         int page = Integer.parseInt(pathParts.length==0? String.valueOf(1) : pathParts[pathParts.length-1]);
         int article_cnt = 0;
         try {
