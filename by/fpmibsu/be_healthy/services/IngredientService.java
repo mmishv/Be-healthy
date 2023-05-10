@@ -39,4 +39,7 @@ public class IngredientService {
     public String getAllJSON() throws JsonProcessingException, SQLException {
         return new ObjectMapper().writeValueAsString(new IngredientService().getAll());
     }
+    public boolean deleteRecipeIngredients(int id) throws SQLException {
+        return new IngredientDao().deleteRecipeIngredients(id);
+    }
 }

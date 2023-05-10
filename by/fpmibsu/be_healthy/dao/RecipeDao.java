@@ -2,6 +2,7 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
+import by.fpmibsu.be_healthy.services.IngredientService;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
@@ -149,6 +150,22 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.setInt(6, entity.getAuthorId());
             preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();
+            PreparedStatement inner_statement1 = null;
+            new IngredientService().deleteRecipeIngredients(entity.getId());
+            int recipe_id =  entity.getId();
+            String inner_sql = "DELETE FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?";
+            try {
+                inner_statement1 = connection.prepareStatement(inner_sql);
+                inner_statement1.setInt(1, recipe_id);
+                inner_statement1.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (inner_statement1 != null) {
+                    inner_statement1.close();
+                }
+            }
+            initCategoriesAndIngredients(entity, recipe_id);
         } catch (SQLException e) {
             e.printStackTrace();
             success = false;
@@ -161,6 +178,29 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             }
         }
         return success;
+    }
+
+    private void initCategoriesAndIngredients(Recipe entity, int recipe_id) throws SQLException {
+        PreparedStatement inner_statement1 = null;
+        for (var i : entity.getCategories()) {
+            String inner_sql = "INSERT INTO MM_CATEGORY_RECIPE (RECIPE_ID, CATEGORY_ID) VALUES(?, ?)";
+            try {
+                inner_statement1 = connection.prepareStatement(inner_sql);
+                inner_statement1.setInt(1, recipe_id);
+                inner_statement1.setInt(2, i.getId());
+                inner_statement1.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (inner_statement1 != null) {
+                    inner_statement1.close();
+                }
+            }
+        }
+        for (var i : entity.getIngredients()) {
+            i.setRecipe_id(recipe_id);
+            new IngredientDao().create(i);
+        }
     }
 
     @Override
@@ -189,39 +229,20 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     @Override
     public boolean create(Recipe entity) throws SQLException {
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO RECIPE (TITLE, PUBL_DATE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO RECIPE (TITLE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement inner_statement1 = null;
         boolean success = true;
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
-            preparedStatement.setInt(3, entity.getCookingTime());
-            preparedStatement.setString(4, entity.getText());
-            preparedStatement.setBytes(5,
+            preparedStatement.setInt(2, entity.getCookingTime());
+            preparedStatement.setString(3, entity.getText());
+            preparedStatement.setBytes(4,
                     entity.getImage() != null ? entity.getImage() : null);
-            preparedStatement.setInt(6, entity.getAuthorId());
+            preparedStatement.setInt(5, entity.getAuthorId());
             preparedStatement.executeUpdate();
             int recipe_id = getMaxId();
-            for (var i : entity.getCategories()) {
-                String inner_sql = "INSERT INTO MM_CATEGORY_RECIPE (RECIPE_ID, CATEGORY_ID) VALUES(?, ?)";
-                try {
-                    inner_statement1 = connection.prepareStatement(inner_sql);
-                    inner_statement1.setInt(1, recipe_id);
-                    inner_statement1.setInt(2, i.getId());
-                    inner_statement1.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (inner_statement1 != null) {
-                        inner_statement1.close();
-                    }
-                }
-            }
-            for (var i : entity.getIngredients()) {
-                i.setRecipe_id(recipe_id);
-                new IngredientDao().create(i);
-            }
+            initCategoriesAndIngredients(entity, recipe_id);
         } catch (SQLException e) {
             e.printStackTrace();
             success = false;

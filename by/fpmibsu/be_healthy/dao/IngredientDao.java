@@ -157,4 +157,25 @@ public class IngredientDao extends JDBCPostgreSQL implements Dao<Ingredient>{
         }
         return ingredients;
     }
+    public boolean deleteRecipeIngredients(int id) throws SQLException {
+        boolean success = true;
+        PreparedStatement preparedStatement = null;
+        String sql = "DELETE FROM INGREDIENT WHERE RECIPE_ID=?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            success = false;
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return success;
+    }
 }

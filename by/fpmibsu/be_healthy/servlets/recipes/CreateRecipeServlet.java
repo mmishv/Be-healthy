@@ -36,9 +36,6 @@ public class CreateRecipeServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
         int authorId, cookingTime;
         String title, text;
         byte[] image;
@@ -76,7 +73,6 @@ public class CreateRecipeServlet extends HttpServlet {
             recipe.setAuthorId(authorId);
             recipe.setIngredients(ingredients);
             recipe.setCategories(categories);
-            recipe.setDateOfPublication(valueOf(LocalDate.now()));
             try {
                 new RecipeService().create(recipe);
             } catch (SQLException e) {
