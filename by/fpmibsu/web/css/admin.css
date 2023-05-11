@@ -1,0 +1,86 @@
+.back-btn#admin-btn{
+    position: relative !important;
+    margin: auto !important;
+    width: 100%;
+    right: 0;
+}
+#table-search{
+    margin: 1% 6%;
+    width: 88% !important;
+    background-color: white;
+}
+.users h3{
+    margin: 2% auto;
+    color: white;
+    text-align: center;}
+
+#table-search th{
+    font-weight: 500 !important;
+    background-color: #c1e45cc4;
+}
+
+#table-search td, #table-search th{
+    text-align: center;
+    vertical-align: middle;
+    border: solid 1px #cfd4d9;
+}
+
+button{
+    cursor: pointer;
+}
+
+.control-buttons{
+    display: flex;
+    justify-content: space-around;
+    vertical-align: middle;
+
+}
+
+.control-buttons button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 2.5rem;
+}
+
+.control-buttons button:focus, .control-buttons button:focus-visible,
+{
+    border: none !important;
+    outline: none !important;
+}
+
+.control-buttons svg{
+    vertical-align: middle;
+}
+
+.pagination-wrapper{
+    text-align: -webkit-center;
+    text-align: center;
+}
+
+.pagination{
+    justify-content: center;
+}
+
+.pagination .page-item .page-link, #show-all-btn{
+    color: #fff !important;
+    background-color: #97b445c4 !important;
+    border: 1px solid #dee2e64d !important;
+    opacity: 0.8 !important;
+}
+
+.pagination .page-item .page-link:active, #show-all-btn:active{
+    background-color: #137d51 !important;
+}
+
+#show-all-btn{
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem !important;
+    position: absolute;
+}
+
+#search{
+    width:88%;
+    margin: auto;
+}

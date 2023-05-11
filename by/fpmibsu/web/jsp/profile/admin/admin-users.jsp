@@ -131,5 +131,6 @@
     </div>
 
 </div>
+<script src="../../../js/tableSearch.js"></script>
 </body>
 </html>
