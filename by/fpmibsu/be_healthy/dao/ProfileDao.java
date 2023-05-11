@@ -14,30 +14,21 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
-    private Connection connection = getConnection();
+    private final Connection connection = getConnection();
 
     @Override
-    public List<Profile> getAll() throws SQLException {
+    public List<Profile> getAll() {
         List<Profile> profiles = new ArrayList<>();
-        String sql = "SELECT * FROM PROFILE";
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM PROFILE");
             while (resultSet.next()) {
                 Profile profile = new Profile();
                 initProfile(resultSet, profile);
                 profiles.add(profile);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return profiles;
     }
@@ -50,17 +41,15 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         profile.setLogin(resultSet.getString("LOGIN"));
         profile.setPassword(resultSet.getString("PASSWORD"));
         profile.setAvatar(resultSet.getBytes("AVATAR"));
-
-        if (profile.getAvatar()!=null){
+        if (profile.getAvatar() != null) {
             byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("AVATAR"));
             String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
             profile.setBase64image(base64encoded);
         }
-
         HashMap<String, BigDecimal> KBJU_norm = new HashMap<>();
         KBJU_norm.put("k", BigDecimal.valueOf(resultSet.getDouble("CAL_NORM")).setScale(1, RoundingMode.HALF_UP));
         KBJU_norm.put("b", BigDecimal.valueOf(resultSet.getDouble("PROT_NORM")).setScale(1, RoundingMode.HALF_UP));
-        KBJU_norm.put("j",BigDecimal.valueOf(resultSet.getDouble("FATS_NORM")).setScale(1, RoundingMode.HALF_UP));
+        KBJU_norm.put("j", BigDecimal.valueOf(resultSet.getDouble("FATS_NORM")).setScale(1, RoundingMode.HALF_UP));
         KBJU_norm.put("u", BigDecimal.valueOf(resultSet.getDouble("CARB_NORM")).setScale(1, RoundingMode.HALF_UP));
         profile.setKBJU_norm(KBJU_norm);
         profile.setAge(resultSet.getInt("AGE"));
@@ -71,38 +60,25 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     }
 
     @Override
-    public Profile getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "SELECT * FROM PROFILE WHERE ID=?";
+    public Profile getEntityById(long id) {
         Profile profile = new Profile();
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 initProfile(resultSet, profile);
             }
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return profile;
     }
 
     @Override
-    public boolean update(Profile entity) throws SQLException {
-        boolean success = true;
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " +
-                " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean update(Profile entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " + " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?")) {
             preparedStatement.setDouble(1, entity.getWeight());
             preparedStatement.setDouble(2, entity.getActivity());
             preparedStatement.setString(3, entity.getSex());
@@ -116,77 +92,47 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setInt(10, entity.getAge());
             preparedStatement.setInt(11, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
-    public boolean updateMainInfo(Profile entity) throws SQLException {
-        boolean success = true;
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean updateMainInfo(Profile entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setBytes(2,
-                    entity.getAvatar() != null ? entity.getAvatar() : null);
+            preparedStatement.setBytes(2, entity.getAvatar() != null ? entity.getAvatar() : null);
             preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     @Override
-    public boolean delete(Profile entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM PROFILE WHERE ID=?";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean delete(Profile entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     @Override
-    public boolean create(Profile entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO PROFILE (LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF," +
-                " AVATAR, WEIGHT, CAL_NORM, CARB_NORM, FATS_NORM, PROT_NORM, SEX, GOAL)" +
-                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean create(Profile entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF," + " AVATAR, WEIGHT, CAL_NORM, CARB_NORM, FATS_NORM, PROT_NORM, SEX, GOAL)" + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2, entity.getEmail());
             preparedStatement.setString(3, entity.getLogin());
@@ -194,10 +140,8 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setInt(5, entity.getAge());
             preparedStatement.setInt(6, entity.getHeight());
             preparedStatement.setDouble(7, entity.getActivity());
-            preparedStatement.setBytes(8,
-                    entity.getAvatar() != null ? entity.getAvatar() : null);
+            preparedStatement.setBytes(8, entity.getAvatar() != null ? entity.getAvatar() : null);
             preparedStatement.setDouble(9, entity.getWeight());
-
             var norm = entity.getKBJU_norm();
             preparedStatement.setDouble(10, norm.get("c").doubleValue());
             preparedStatement.setDouble(11, norm.get("u").doubleValue());
@@ -206,92 +150,69 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setDouble(13, entity.getGoal());
             preparedStatement.setString(14, entity.getSex());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
-    public String getPasswordByLogin(String login) throws SQLException {
-
-        String sql = "SELECT PASSWORD FROM PROFILE WHERE LOGIN=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+    public String getPasswordByLogin(String login) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT PASSWORD FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getString("PASSWORD");
             }
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
         }
         return "";
     }
-    public boolean isLoginAvailable(String login) throws SQLException {
-        String sql = "SELECT * FROM PROFILE WHERE LOGIN=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+    public boolean isLoginAvailable(String login) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return false;
-            }
+            if (resultSet.next()) return false;
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
         return true;
     }
-    public boolean register(String login, String password) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+
+    public boolean register(String login, String password) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)")) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
-    public int getIdByLogin(String login) throws SQLException {
-        String sql = "SELECT * FROM PROFILE WHERE LOGIN=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+    public int getIdByLogin(String login) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt("ID");
             }
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
         }
         return -1;
     }

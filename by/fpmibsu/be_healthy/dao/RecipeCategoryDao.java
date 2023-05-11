@@ -7,150 +7,98 @@ import java.sql.*;
 import java.util.*;
 
 public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCategory> {
-    private Connection connection = getConnection();
+    private final Connection connection = getConnection();
 
     @Override
-    public List<RecipeCategory> getAll() throws SQLException {
+    public List<RecipeCategory> getAll() {
         List<RecipeCategory> categories = new ArrayList<>();
-        String sql = "SELECT ID, NAME FROM RECIPE_CATEGORY ORDER BY NAME";
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT ID, NAME FROM RECIPE_CATEGORY ORDER BY NAME");
             while (resultSet.next()) {
                 RecipeCategory category = new RecipeCategory();
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
                 categories.add(category);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return categories;
     }
 
     @Override
-    public RecipeCategory getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "SELECT ID, NAME FROM RECIPE_CATEGORY WHERE ID=?";
+    public RecipeCategory getEntityById(long id) {
         RecipeCategory category = new RecipeCategory();
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM RECIPE_CATEGORY WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
             }
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return category;
     }
 
     @Override
-    public boolean update(RecipeCategory entity) throws SQLException {
-        boolean success = true;
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE RECIPE_CATEGORY SET NAME=? WHERE ID=?";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean update(RecipeCategory entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE RECIPE_CATEGORY SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     @Override
-    public boolean delete(RecipeCategory entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM RECIPE_CATEGORY WHERE ID=?";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean delete(RecipeCategory entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE_CATEGORY WHERE ID=?")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     @Override
-    public boolean create(RecipeCategory entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO RECIPE_CATEGORY (ID, NAME) VALUES(?, ?)";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean create(RecipeCategory entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE_CATEGORY (ID, NAME) VALUES(?, ?)")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.setString(2, entity.getName());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
-    public List<RecipeCategory> getCategoriesByRecipeId(int id) throws SQLException {
-        PreparedStatement statement = null;
-        String inner_sql = "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?";
+    public List<RecipeCategory> getCategoriesByRecipeId(int id) {
         List<RecipeCategory> categories = new ArrayList<>();
-        try {
-            statement = connection.prepareStatement(inner_sql);
+        try (PreparedStatement statement = connection.prepareStatement("SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?")) {
             statement.setInt(1, id);
             ResultSet categoriesIds = statement.executeQuery();
             while (categoriesIds.next()) {
                 categories.add(new RecipeCategoryDao().getEntityById(categoriesIds.getInt("ID")));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
         }
         return categories;
     }

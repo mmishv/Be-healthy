@@ -1,156 +1,111 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
+import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCategory> {
-    private Connection connection = getConnection();
+    private final Connection connection = getConnection();
 
     @Override
-    public List<ArticleCategory> getAll() throws SQLException {
+    public List<ArticleCategory> getAll() {
         List<ArticleCategory> categories = new ArrayList<>();
-        String sql = "SELECT ID, NAME FROM ARTICLE_CATEGORY ORDER BY NAME";
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT ID, NAME FROM ARTICLE_CATEGORY ORDER BY NAME");
             while (resultSet.next()) {
                 ArticleCategory category = new ArticleCategory();
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
                 categories.add(category);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return categories;
     }
 
     @Override
-    public ArticleCategory getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "SELECT ID, NAME FROM ARTICLE_CATEGORY WHERE ID=?";
+    public ArticleCategory getEntityById(long id) {
         ArticleCategory category = new ArticleCategory();
         try {
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM ARTICLE_CATEGORY WHERE ID=?");
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
             }
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return category;
     }
 
     @Override
-    public boolean update(ArticleCategory entity) throws SQLException {
-        boolean success = true;
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE ARTICLE_CATEGORY SET NAME=? WHERE ID=?";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean update(ArticleCategory entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ARTICLE_CATEGORY SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     @Override
-    public boolean delete(ArticleCategory entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM ARTICLE_CATEGORY WHERE ID=?";
-        boolean success = true;
+    public boolean delete(ArticleCategory entity) {
         try {
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ARTICLE_CATEGORY WHERE ID=?");
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     @Override
-    public boolean create(ArticleCategory entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ARTICLE_CATEGORY (ID, NAME) VALUES(?, ?)";
-        boolean success = true;
+    public boolean create(ArticleCategory entity) {
         try {
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ARTICLE_CATEGORY (ID, NAME) VALUES(?, ?)");
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.setString(2, entity.getName());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
-    public List<ArticleCategory> getArticleCategoriesByArticleId(int id) throws SQLException {
-        PreparedStatement statement = null;
-        String inner_sql = "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?";
+    public List<ArticleCategory> getArticleCategoriesByArticleId(int id) {
         List<ArticleCategory> categories = new ArrayList<>();
         try {
-            statement = connection.prepareStatement(inner_sql);
+            PreparedStatement statement = connection.prepareStatement("SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?");
             statement.setInt(1, id);
             ResultSet categoriesIds = statement.executeQuery();
             while (categoriesIds.next()) {
                 categories.add(new ArticleCategoryDao().getEntityById(categoriesIds.getInt("ID")));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
         }
         return categories;
     }

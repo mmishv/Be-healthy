@@ -7,79 +7,55 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.fpmibsu.be_healthy.dao.MealDao.getId;
-
 public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
-    private Connection connection = getConnection();
+    private final Connection connection = getConnection();
 
     @Override
-    public List<Article> getAll() throws SQLException {
+    public List<Article> getAll() {
         List<Article> articles = new ArrayList<>();
-        String sql = "SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC";
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            initArticle(articles, resultSet);
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC");
+            initArticles(articles, resultSet);
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return articles;
     }
-    public List<Article> getPage(int page, int per_page) throws SQLException {
+
+    public List<Article> getPage(int page, int per_page) {
         List<Article> recipes = new ArrayList<>();
-        String sql = "SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
-        PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(sql);
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?")) {
             statement.setInt(1, per_page);
-            statement.setInt(2, per_page * (page-1));
+            statement.setInt(2, per_page * (page - 1));
             ResultSet resultSet = statement.executeQuery();
-            initArticle(recipes, resultSet);
+            initArticles(recipes, resultSet);
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return recipes;
     }
-    public List<Article> getAuthorPage(int page, int per_page, int id) throws SQLException {
+
+    public List<Article> getAuthorPage(int page, int per_page, int id) {
         List<Article> recipes = new ArrayList<>();
-        String sql = "SELECT * FROM ARTICLE WHERE AUTHOR_ID = ? ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
-        PreparedStatement statement = null;
         try {
-            statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ARTICLE WHERE AUTHOR_ID = ? ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?");
             statement.setInt(1, id);
             statement.setInt(2, per_page);
-            statement.setInt(3, per_page * (page-1));
+            statement.setInt(3, per_page * (page - 1));
             ResultSet resultSet = statement.executeQuery();
-            initArticle(recipes, resultSet);
+            initArticles(recipes, resultSet);
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return recipes;
     }
-    private void initArticle(List<Article> articles, ResultSet resultSet) throws SQLException {
+
+    private void initArticles(List<Article> articles, ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             Article article = new Article();
             setArticle(resultSet, article);
@@ -97,187 +73,120 @@ public class ArticleDao extends JDBCPostgreSQL implements Dao<Article> {
     }
 
     @Override
-    public Article getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "SELECT * FROM ARTICLE WHERE ID=?";
+    public Article getEntityById(long id) {
         Article article = new Article();
         try {
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ARTICLE WHERE ID=?");
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                setArticle(resultSet, article);
-            }
+            if (resultSet.next()) setArticle(resultSet, article);
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return article;
     }
 
     @Override
-    public boolean update(Article entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE ARTICLE SET TITLE=?, FULL_TEXT=? WHERE ID=?";
-        PreparedStatement inner_statement1 = null;
-        boolean success = true;
+    public boolean update(Article entity) {
         try {
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ARTICLE SET TITLE=?, FULL_TEXT=? WHERE ID=?");
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setString(2, entity.getFulltext());
             preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
-
-            String inner_sql = "DELETE FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?";
-            inner_statement1 = connection.prepareStatement(inner_sql);
-            inner_statement1.setInt(1, entity.getId());
-            inner_statement1.executeUpdate();
+            preparedStatement = connection.prepareStatement("DELETE FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?");
+            preparedStatement.setInt(1, entity.getId());
+            preparedStatement.executeUpdate();
             setCategories(entity, entity.getId());
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     private void setCategories(Article entity, int article_id) throws SQLException {
-        PreparedStatement inner_statement = null;
         for (var i : entity.getCategories()) {
-            String inner_sql = "INSERT INTO MM_CATEGORY_ARTICLE (ARTICLE_ID, CATEGORY_ID) VALUES(?, ?)";
-            inner_statement = connection.prepareStatement(inner_sql);
-            inner_statement.setInt(1, article_id);
-            inner_statement.setInt(2, i.getId());
-            inner_statement.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO MM_CATEGORY_ARTICLE (ARTICLE_ID, CATEGORY_ID) VALUES(?, ?)");
+            preparedStatement.setInt(1, article_id);
+            preparedStatement.setInt(2, i.getId());
+            preparedStatement.executeUpdate();
         }
     }
 
     @Override
-    public boolean delete(Article entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM ARTICLE WHERE ID=?";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean delete(Article entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ARTICLE WHERE ID=?")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
-    public int getMaxId() throws SQLException {
-        PreparedStatement preparedStatement = null, inner_statement = null;
-        String sql = "SELECT max(id) as id FROM ARTICLE";
-        Statement statement = null;
-        return getId(sql, connection);
+    public int getMaxId() {
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT MAX(id) AS id FROM ARTICLE");
+            if (resultSet.next()) {
+                return resultSet.getInt("ID");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
+
     @Override
-    public boolean create(Article entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO ARTICLE (TITLE, PUBL_DATE, FULL_TEXT, AUTHOR_ID) VALUES(?, ?, ?, ?)";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean create(Article entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ARTICLE (TITLE, PUBL_DATE, FULL_TEXT, AUTHOR_ID) VALUES(?, ?, ?, ?)")) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
             preparedStatement.setString(3, entity.getFulltext());
             preparedStatement.setInt(4, entity.getAuthorId());
             preparedStatement.executeUpdate();
             setCategories(entity, getMaxId());
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
-    public List<Article> getWrittenArticlesByAuthorId(int id) throws SQLException {
-        PreparedStatement statement = null;
-        String sql = "SELECT ID FROM ARTICLE WHERE AUTHOR_ID=?";
-        List<Article> articles = new ArrayList<>();
-        try {
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            ResultSet articlesIds = statement.executeQuery();
-
-            while (articlesIds.next()) {
-                articles.add(new ArticleDao().getEntityById(articlesIds.getInt("ID")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-        }
-        return articles;
-    }
-
-    public int getNumberOfArticles() throws SQLException {
-        String sql = "SELECT COUNT(*) RES FROM ARTICLE";
+    public int getNumberOfArticles() {
         try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()){
-                return resultSet.getInt("RES");
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS ARTICLE_NUM FROM ARTICLE");
+            if (resultSet.next()) {
+                return resultSet.getInt("ARTICLE_NUM");
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
         }
         return -1;
     }
 
-    public int getNumberOfArticlesWrittenBy(int id) throws SQLException {
-        String sql = "SELECT COUNT(*) RES FROM ARTICLE WHERE AUTHOR_ID = ?";
-        PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(sql);
+    public int getNumberOfArticlesWrittenBy(int id) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS ARTICLE_NUM FROM ARTICLE WHERE AUTHOR_ID = ?")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()){
-                return resultSet.getInt("RES");
+            if (resultSet.next()) {
+                return resultSet.getInt("ARTICLE_NUM");
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
         return -1;
     }

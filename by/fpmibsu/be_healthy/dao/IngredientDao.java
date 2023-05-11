@@ -7,175 +7,123 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientDao extends JDBCPostgreSQL implements Dao<Ingredient>{
-    private Connection connection = getConnection();
-    @Override
-    public List<Ingredient> getAll() throws SQLException {
-        List<Ingredient> products = new ArrayList<>();
-        String sql = "SELECT * FROM INGREDIENT";
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+public class IngredientDao extends JDBCPostgreSQL implements Dao<Ingredient> {
+    private final Connection connection = getConnection();
 
+    @Override
+    public List<Ingredient> getAll() {
+        List<Ingredient> ingredients = new ArrayList<>();
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM INGREDIENT");
             while (resultSet.next()) {
                 Ingredient product = new Ingredient(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
                 product.setIngredientId(resultSet.getInt("ID"));
                 product.setQuantity(resultSet.getInt("QUANTITY"));
                 product.setRecipe_id(resultSet.getInt("RECIPE_ID"));
-                products.add(product);
+                ingredients.add(product);
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
         }
-        return products;
-    }
-    @Override
-    public Ingredient getEntityById(long id) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "SELECT * FROM INGREDIENT WHERE ID=?";
-        Ingredient product = new Ingredient();
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
-                product = new Ingredient(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
-                product.setIngredientId(resultSet.getInt("ID"));
-                product.setQuantity(resultSet.getInt("QUANTITY"));
-                product.setRecipe_id(resultSet.getInt("RECIPE_ID"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
-        }
-        return product;
+        return ingredients;
     }
 
     @Override
-    public boolean update(Ingredient entity) throws SQLException {
-        boolean success = true;
-        PreparedStatement preparedStatement = null;
-        String sql = "UPDATE INGREDIENT SET RECIPE_ID=?, PRODUCT_ID=?, QUANTITY=? WHERE ID=?";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public Ingredient getEntityById(long id) {
+        Ingredient ingredient = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM INGREDIENT WHERE ID=?")) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                ingredient = new Ingredient(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
+                ingredient.setIngredientId(resultSet.getInt("ID"));
+                ingredient.setQuantity(resultSet.getInt("QUANTITY"));
+                ingredient.setRecipe_id(resultSet.getInt("RECIPE_ID"));
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ingredient;
+    }
+
+    @Override
+    public boolean update(Ingredient entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE INGREDIENT SET RECIPE_ID=?, PRODUCT_ID=?, QUANTITY=? WHERE ID=?")) {
             preparedStatement.setInt(1, entity.getRecipe_id());
             preparedStatement.setInt(2, entity.getId());
             preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.setInt(4, entity.getIngredientId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 
     @Override
-    public boolean delete(Ingredient entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM INGREDIENT WHERE ID=?";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean delete(Ingredient entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM INGREDIENT WHERE ID=?")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
+
     @Override
-    public boolean create(Ingredient entity) throws SQLException {
-        PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO INGREDIENT (RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)";
-        boolean success = true;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+    public boolean create(Ingredient entity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO INGREDIENT (RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)")) {
             preparedStatement.setInt(1, entity.getRecipe_id());
             preparedStatement.setInt(2, entity.getId());
             preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
-     public List<Ingredient> getIngredientsByRecipeId(int id) throws SQLException {
-        PreparedStatement statement = null;
+
+    public List<Ingredient> getIngredientsByRecipeId(int id) {
         List<Ingredient> ingredients = new ArrayList<>();
-        String inner_sql = "SELECT ID FROM INGREDIENT WHERE RECIPE_ID=?";
-        try {
-            statement = connection.prepareStatement(inner_sql);
+        try (PreparedStatement statement = connection.prepareStatement("SELECT ID FROM INGREDIENT WHERE RECIPE_ID=?")) {
             statement.setInt(1, id);
             ResultSet ingredientsIds = statement.executeQuery();
             while (ingredientsIds.next()) {
                 ingredients.add(new IngredientDao().getEntityById(ingredientsIds.getInt("ID")));
             }
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
         }
         return ingredients;
     }
-    public boolean deleteRecipeIngredients(int id) throws SQLException {
-        boolean success = true;
-        PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM INGREDIENT WHERE RECIPE_ID=?";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+
+    public boolean deleteRecipeIngredients(int id) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM INGREDIENT WHERE RECIPE_ID=?")) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            success = false;
-        } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            return false;
         }
-        return success;
+        return true;
     }
 }
