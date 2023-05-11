@@ -15,12 +15,7 @@ import java.util.Objects;
 public class EditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Profile profile;
-        try {
-            profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));;
         if (!Objects.equals(request.getParameter("sex"), ""))
             profile.setSex(Objects.equals(request.getParameter("sex"), "1") ? "женский":"мужской");
         if (!Objects.equals(request.getParameter("height"), ""))
@@ -41,11 +36,7 @@ public class EditServlet extends HttpServlet {
             profile.getKBJU_norm().put("j", BigDecimal.valueOf(Double.parseDouble(request.getParameter("j"))));
         if (!Objects.equals(request.getParameter("u"), ""))
             profile.getKBJU_norm().put("u", BigDecimal.valueOf(Double.parseDouble(request.getParameter("u"))));
-        try {
-            new ProfileService().update(profile);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new ProfileService().update(profile);
         response.sendRedirect("http://localhost:8081/profile");
     }
 }

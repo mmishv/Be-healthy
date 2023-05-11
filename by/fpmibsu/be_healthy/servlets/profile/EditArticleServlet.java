@@ -26,15 +26,11 @@ public class EditArticleServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
         int article_id = Integer.parseInt(pathParts[pathParts.length-1]);
-        try {
-            Article article = new ArticleService().getEntityById(article_id);
-            request.setAttribute("categories", new ArticleCategoryService().getAll());
-            request.setAttribute("a_cats", article.getCategories().
-                    stream().map(ArticleCategory::getId).collect(Collectors.toList()));
-            request.setAttribute("article", article);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Article article = new ArticleService().getEntityById(article_id);
+        request.setAttribute("categories", new ArticleCategoryService().getAll());
+        request.setAttribute("a_cats", article.getCategories().
+                stream().map(ArticleCategory::getId).collect(Collectors.toList()));
+        request.setAttribute("article", article);
         getServletContext().getRequestDispatcher("/jsp/profile/edit_article.jsp").forward(request, response);
     }
 
@@ -53,19 +49,11 @@ public class EditArticleServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
         int article_id = Integer.parseInt(pathParts[pathParts.length-1]);
-        try {
-            article = new ArticleService().getEntityById(article_id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        article = new ArticleService().getEntityById(article_id);
         article.setTitle(new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         article.setFulltext(new String(request.getParameter("text").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         article.setCategories(categories);
-        try {
-            new ArticleService().update(article);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new ArticleService().update(article);
         response.sendRedirect("http://localhost:8081/my_articles/1");
     }
 }

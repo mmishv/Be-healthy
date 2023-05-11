@@ -20,11 +20,7 @@ import static java.sql.Date.valueOf;
 public class CreateArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            request.setAttribute("categories", new ArticleCategoryService().getAllJSON());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        request.setAttribute("categories", new ArticleCategoryService().getAllJSON());
         getServletContext().getRequestDispatcher("/jsp/profile/create_article.jsp").forward(request, response);
     }
     @Override
@@ -49,11 +45,7 @@ public class CreateArticleServlet extends HttpServlet {
         article.setAuthorId(authorId);
         article.setCategories(categories);
         article.setDateOfPublication(valueOf(LocalDate.now()));
-        try {
-            new ArticleService().create(article);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new ArticleService().create(article);
         response.sendRedirect("http://localhost:8081/my_articles/1");
     }
 }

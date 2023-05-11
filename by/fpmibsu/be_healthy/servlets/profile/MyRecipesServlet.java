@@ -17,26 +17,13 @@ public class MyRecipesServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);
-        int recipe_cnt = 0;
-        try {
-            recipe_cnt = new RecipeService().getNumberOfRecipesWrittenBy((int) request.getSession().getAttribute("id"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        int recipe_cnt = new RecipeService().getNumberOfRecipesWrittenBy((int) request.getSession().getAttribute("id"));
         int page_cnt = (int) (1.0 * (recipe_cnt + RECIPES_PER_PAGE - 1)/RECIPES_PER_PAGE);
         request.setAttribute("page_cnt", page_cnt);
         request.setAttribute("cur_page", page);
-        try {
-            request.setAttribute("recipes", new RecipeService().getAuthorPageJSON(page, RECIPES_PER_PAGE,
-                    (int) request.getSession().getAttribute("id")));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        request.setAttribute("recipes", new RecipeService().getAuthorPageJSON(page, RECIPES_PER_PAGE,
+                (int) request.getSession().getAttribute("id")));
         getServletContext().getRequestDispatcher("/jsp/profile/my_recipes.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

@@ -18,25 +18,14 @@ import java.util.Objects;
 public class AboutMeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Profile profile;
-        try {
-            profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
         request.setAttribute("profile", profile);
         getServletContext().getRequestDispatcher("/jsp/profile/profile.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Profile profile;
-        try {
-            profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
         if (!Objects.equals(request.getParameter("avatar"), "")){
             Part filePart = request.getPart("avatar");
             InputStream fileContent = filePart.getInputStream();
@@ -48,11 +37,7 @@ public class AboutMeServlet extends HttpServlet {
         }
         if (!Objects.equals(request.getParameter("name"), ""))
             profile.setName(new String(request.getParameter("name").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
-        try {
-            new ProfileService().updateMainInfo(profile);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new ProfileService().updateMainInfo(profile);
         response.sendRedirect("http://localhost:8081/profile");
     }
 }

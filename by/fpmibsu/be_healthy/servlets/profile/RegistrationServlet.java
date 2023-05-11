@@ -19,24 +19,16 @@ public class RegistrationServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         String password = BCrypt.hashpw(request.getParameter("reg_password1"),BCrypt.gensalt()),
                 login = request.getParameter("reg_login");
-        try {
-            if (Objects.equals(request.getParameter("reg_password1"), request.getParameter("reg_password2")) &&
-                    new ProfileService().isLoginAvailable(login)){
+        if (Objects.equals(request.getParameter("reg_password1"), request.getParameter("reg_password2")) &&
+                new ProfileService().isLoginAvailable(login)){
             session.setAttribute("password", password);
             session.setAttribute("login", login);
-                try {
-                    new ProfileService().register(login, password);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                response.sendRedirect("/profile");
-            }
-            else{
-                getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
-            }
-            session.setAttribute("id", new ProfileService().getIdByLogin(login));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new ProfileService().register(login, password);
+            response.sendRedirect("/profile");
         }
+        else{
+            getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
+        }
+        session.setAttribute("id", new ProfileService().getIdByLogin(login));
     }
 }

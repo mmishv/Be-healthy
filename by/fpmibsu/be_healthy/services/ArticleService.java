@@ -1,64 +1,60 @@
 package by.fpmibsu.be_healthy.services;
 
-import by.fpmibsu.be_healthy.dao.RecipeDao;
-import by.fpmibsu.be_healthy.entity.Article;
 import by.fpmibsu.be_healthy.dao.ArticleDao;
-import by.fpmibsu.be_healthy.entity.Recipe;
+import by.fpmibsu.be_healthy.entity.Article;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ArticleService {
-    public List<Article> getAll() throws SQLException {
+    public List<Article> getAll() {
         return new ArticleDao().getAll();
     }
 
 
-    public Article getEntityById(long id) throws SQLException {
+    public Article getEntityById(long id) {
         return new ArticleDao().getEntityById(id);
     }
 
 
-    public boolean update(Article entity) throws SQLException {
+    public boolean update(Article entity) {
         return new ArticleDao().update(entity);
     }
 
-    public boolean delete(Article entity) throws SQLException {
+    public boolean delete(Article entity) {
         return new ArticleDao().delete(entity);
     }
 
-    public boolean create(Article entity) throws SQLException {
+    public boolean create(Article entity) {
         return new ArticleDao().create(entity);
     }
 
-    public List<Article> getWrittenArticlesByAuthorId(int id) throws SQLException {
-        return new ArticleDao().getWrittenArticlesByAuthorId(id);
-    }
-
-    public String getAllJSON() throws JsonProcessingException, SQLException {
+    public String getAllJSON() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(new ArticleService().getAll());
     }
 
-    public List<Article> getPage(int page, int per_page) throws SQLException {
+    public List<Article> getPage(int page, int per_page) {
         return new ArticleDao().getPage(page, per_page);
     }
-    public String getPageJSON(int page, int per_page) throws SQLException, JsonProcessingException {
+
+    public String getPageJSON(int page, int per_page) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString((getPage(page, per_page)));
     }
 
-    public int getNumberOfArticles() throws SQLException {
+    public int getNumberOfArticles() {
         return new ArticleDao().getNumberOfArticles();
     }
 
-    public List<Article> getAuthorPage(int page, int per_page, int id) throws SQLException {
+    public List<Article> getAuthorPage(int page, int per_page, int id) {
         return new ArticleDao().getAuthorPage(page, per_page, id);
     }
-    public String getAuthorPageJSON(int page, int per_page, int id) throws SQLException, JsonProcessingException {
+
+    public String getAuthorPageJSON(int page, int per_page, int id) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString((getAuthorPage(page, per_page, id)));
     }
-    public int getNumberOfArticlesWrittenBy(int id) throws SQLException {
+
+    public int getNumberOfArticlesWrittenBy(int id) {
         return new ArticleDao().getNumberOfArticlesWrittenBy(id);
     }
 }

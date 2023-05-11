@@ -111,11 +111,7 @@
                 String name;
                 for (Recipe recipe : recipes) {
                     HashMap<String, BigDecimal> kbju = recipe.getKBJU();
-                    try {
-                        name = new ProfileService().getEntityById(recipe.getAuthorId()).getLogin();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                    name = new ProfileService().getEntityById(recipe.getAuthorId()).getLogin();
             %>
             <div class="card">
                 <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="card-img-top">

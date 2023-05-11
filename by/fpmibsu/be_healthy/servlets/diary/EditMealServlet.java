@@ -39,11 +39,7 @@ public class EditMealServlet extends HttpServlet {
         meal.setProducts(products);
         meal.setName(title);
         meal.setTimeOfMeal(Time.valueOf(LocalTime.now()));
-        try {
-            new MealDao().update(meal);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new MealDao().update(meal);
         response.sendRedirect("http://localhost:8081/diary/"+part[1]);
     }
 }

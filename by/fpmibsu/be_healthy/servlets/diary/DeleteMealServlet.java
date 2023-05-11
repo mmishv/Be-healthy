@@ -19,11 +19,7 @@ public class DeleteMealServlet extends HttpServlet {
         String[] part =pathParts[pathParts.length-1].split("_");
         Meal meal = new Meal();
         meal.setId(Integer.parseInt(part[0]));
-        try {
-            new MealService().delete(meal);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new MealService().delete(meal);
         response.sendRedirect("http://localhost:8081/diary/"+part[1]);
     }
 }

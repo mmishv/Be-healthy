@@ -19,25 +19,12 @@ public class RecipesMainServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);
-        int recipe_cnt = 0;
-        try {
-            recipe_cnt = new RecipeService().getNumberOfRecipes();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        int  recipe_cnt = new RecipeService().getNumberOfRecipes();
         int page_cnt = (int) (1.0 * (recipe_cnt + RECIPES_PER_PAGE - 1)/RECIPES_PER_PAGE);
         request.setAttribute("page_cnt", page_cnt);
         request.setAttribute("cur_page", page);
-        try {
-            request.setAttribute("recipes", new RecipeService().getPageJSON(page, RECIPES_PER_PAGE));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        request.setAttribute("recipes", new RecipeService().getPageJSON(page, RECIPES_PER_PAGE));
+        request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
         getServletContext().getRequestDispatcher("/jsp/recipes/recipe.jsp").forward(request, response);
     }
 }

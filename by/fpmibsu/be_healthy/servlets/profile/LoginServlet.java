@@ -15,19 +15,15 @@ public class LoginServlet extends HttpServlet {
         final HttpSession session = request.getSession();
         String password = request.getParameter("password"),
                 login = request.getParameter("login");
-        try {
-            String stored_password = new ProfileService().getPasswordByLogin(login);
-            if (BCrypt.checkpw(password, stored_password)){
-                session.setAttribute("password", stored_password);
-                session.setAttribute("login", login);
-                session.setAttribute("id", new ProfileService().getIdByLogin(login));
-                response.sendRedirect("/profile");
-            }
-            else{
-                getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        String stored_password = new ProfileService().getPasswordByLogin(login);
+        if (BCrypt.checkpw(password, stored_password)){
+            session.setAttribute("password", stored_password);
+            session.setAttribute("login", login);
+            session.setAttribute("id", new ProfileService().getIdByLogin(login));
+            response.sendRedirect("/profile");
+        }
+        else{
+            getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
         }
     }
 }

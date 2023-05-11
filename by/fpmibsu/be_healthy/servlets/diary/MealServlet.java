@@ -32,39 +32,27 @@ public class MealServlet extends HttpServlet {
         String[] pathParts = pathInfo.split("/");
         ArrayList<Meal> meals;
         int user_id =  (int) request.getSession().getAttribute("id");
-        try {
-            meals = (ArrayList<Meal>) new MealService().getAllByDateAndUserId(valueOf(pathParts[pathParts.length-1]), user_id);
-            request.setAttribute("meals", new ObjectMapper().writeValueAsString(meals));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        meals = (ArrayList<Meal>) new MealService().getAllByDateAndUserId(valueOf(pathParts[pathParts.length-1]), user_id);
+        request.setAttribute("meals", new ObjectMapper().writeValueAsString(meals));
+        Profile cur_user = new ProfileService().getEntityById(user_id);
+        var kbju_norm = cur_user.getKBJU_norm();
+        var kbju = new HashMap<String, BigDecimal>();
+        for (var i: meals){
+            HashMap<String, BigDecimal> t = i.getKBJU();
+            kbju.put("k", kbju.getOrDefault("k", BigDecimal.valueOf(0)).add(t.get("k")));
+            kbju.put("b", kbju.getOrDefault("b", BigDecimal.valueOf(0)).add(t.get("b")));
+            kbju.put("j", kbju.getOrDefault("j", BigDecimal.valueOf(0)).add(t.get("j")));
+            kbju.put("u", kbju.getOrDefault("u", BigDecimal.valueOf(0)).add(t.get("u")));
         }
-        try {
-            Profile cur_user = new ProfileService().getEntityById(user_id);
-            var kbju_norm = cur_user.getKBJU_norm();
-            var kbju = new HashMap<String, BigDecimal>();
-            for (var i: meals){
-                HashMap<String, BigDecimal> t = i.getKBJU();
-                kbju.put("k", kbju.getOrDefault("k", BigDecimal.valueOf(0)).add(t.get("k")));
-                kbju.put("b", kbju.getOrDefault("b", BigDecimal.valueOf(0)).add(t.get("b")));
-                kbju.put("j", kbju.getOrDefault("j", BigDecimal.valueOf(0)).add(t.get("j")));
-                kbju.put("u", kbju.getOrDefault("u", BigDecimal.valueOf(0)).add(t.get("u")));
-            }
-            request.setAttribute("k", kbju.getOrDefault("k", BigDecimal.valueOf(0)).toBigInteger());
-            request.setAttribute("b", kbju.getOrDefault("b", BigDecimal.valueOf(0)));
-            request.setAttribute("j", kbju.getOrDefault("j", BigDecimal.valueOf(0)));
-            request.setAttribute("u", kbju.getOrDefault("u", BigDecimal.valueOf(0)));
-            request.setAttribute("k_norm", kbju_norm.get("k").toBigInteger());
-            request.setAttribute("b_norm", kbju_norm.get("b"));
-            request.setAttribute("j_norm", kbju_norm.get("j"));
-            request.setAttribute("u_norm", kbju_norm.get("u"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            request.setAttribute("products", new ProductService().getAllJSON());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        request.setAttribute("k", kbju.getOrDefault("k", BigDecimal.valueOf(0)).toBigInteger());
+        request.setAttribute("b", kbju.getOrDefault("b", BigDecimal.valueOf(0)));
+        request.setAttribute("j", kbju.getOrDefault("j", BigDecimal.valueOf(0)));
+        request.setAttribute("u", kbju.getOrDefault("u", BigDecimal.valueOf(0)));
+        request.setAttribute("k_norm", kbju_norm.get("k").toBigInteger());
+        request.setAttribute("b_norm", kbju_norm.get("b"));
+        request.setAttribute("j_norm", kbju_norm.get("j"));
+        request.setAttribute("u_norm", kbju_norm.get("u"));
+        request.setAttribute("products", new ProductService().getAllJSON());
         request.setAttribute("date", pathParts[pathParts.length-1]);
         getServletContext().getRequestDispatcher("/jsp/diary/diary.jsp").forward(request, response);
     }
@@ -89,11 +77,7 @@ public class MealServlet extends HttpServlet {
         meal.setName(title);
         meal.setDateOfMeal(valueOf(pathParts[pathParts.length-1]));
         meal.setTimeOfMeal(Time.valueOf(LocalTime.now()));
-        try {
-            new MealDao().create(meal);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new MealDao().create(meal);
         response.sendRedirect("http://localhost:8081/diary/"+pathParts[pathParts.length-1]);
     }
 }

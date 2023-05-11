@@ -22,16 +22,8 @@ import static java.sql.Date.valueOf;
 public class CreateRecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            request.setAttribute("products", new ProductService().getAllJSON());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        request.setAttribute("products", new ProductService().getAllJSON());
+        request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
         getServletContext().getRequestDispatcher("/jsp/recipes/new_recipe.jsp").forward(request, response);
     }
     @Override
@@ -41,43 +33,39 @@ public class CreateRecipeServlet extends HttpServlet {
         byte[] image;
         List<Ingredient> ingredients = new ArrayList<>();
         List<RecipeCategory> categories = new ArrayList<>();
-            title =  new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
-            cookingTime = Integer.parseInt(request.getParameter("cooking-time"));
-            var cats = request.getParameterValues("categories");
-            if (cats!=null){
-                for (var c: cats){
-                    RecipeCategory cat = new RecipeCategory();
-                    cat.setId(Integer.parseInt(c));
-                    categories.add(cat);
-                }
+        title =  new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        cookingTime = Integer.parseInt(request.getParameter("cooking-time"));
+        var cats = request.getParameterValues("categories");
+        if (cats!=null){
+            for (var c: cats){
+                RecipeCategory cat = new RecipeCategory();
+                cat.setId(Integer.parseInt(c));
+                categories.add(cat);
             }
-            text = new String(request.getParameter("text").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
-            Part filePart = request.getPart("image");
-            InputStream fileContent = filePart.getInputStream();
-            image = new byte[fileContent.available()];
-            fileContent.read(image);
-            int cnt = 1;
-            while (request.getParameter("ingredient" + cnt) != null) {
-                Ingredient ing = new Ingredient();
-                ing.setId(Integer.parseInt(request.getParameter("ingredient" + String.valueOf(cnt))));
-                ing.setQuantity(Integer.parseInt(request.getParameter("quantity" + String.valueOf(cnt))));
-                ingredients.add(ing);
-                cnt++;
-            }
-            authorId = (int) request.getSession().getAttribute("id");
-            Recipe recipe = new Recipe();
-            recipe.setTitle(title);
-            recipe.setCookingTime(cookingTime);
-            recipe.setText(text);
-            recipe.setImage(image);
-            recipe.setAuthorId(authorId);
-            recipe.setIngredients(ingredients);
-            recipe.setCategories(categories);
-            try {
-                new RecipeService().create(recipe);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        }
+        text = new String(request.getParameter("text").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        Part filePart = request.getPart("image");
+        InputStream fileContent = filePart.getInputStream();
+        image = new byte[fileContent.available()];
+        fileContent.read(image);
+        int cnt = 1;
+        while (request.getParameter("ingredient" + cnt) != null) {
+            Ingredient ing = new Ingredient();
+            ing.setId(Integer.parseInt(request.getParameter("ingredient" + String.valueOf(cnt))));
+            ing.setQuantity(Integer.parseInt(request.getParameter("quantity" + String.valueOf(cnt))));
+            ingredients.add(ing);
+            cnt++;
+        }
+        authorId = (int) request.getSession().getAttribute("id");
+        Recipe recipe = new Recipe();
+        recipe.setTitle(title);
+        recipe.setCookingTime(cookingTime);
+        recipe.setText(text);
+        recipe.setImage(image);
+        recipe.setAuthorId(authorId);
+        recipe.setIngredients(ingredients);
+        recipe.setCategories(categories);
+        new RecipeService().create(recipe);
         response.sendRedirect("http://localhost:8081/my_recipes/1");
     }
 }

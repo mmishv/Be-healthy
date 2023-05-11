@@ -16,11 +16,7 @@ import java.sql.SQLException;
 public class ProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            request.setAttribute("products", new ProductService().getAllJSON());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        request.setAttribute("products", new ProductService().getAllJSON());
         getServletContext().getRequestDispatcher("/jsp/product/product.jsp").forward(request, response);
     }
 }

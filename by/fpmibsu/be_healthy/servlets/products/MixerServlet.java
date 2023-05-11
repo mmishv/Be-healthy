@@ -20,12 +20,7 @@ public class MixerServlet extends HttpServlet {
         Recipe r = new Recipe();
         while (request.getParameter("quantity" + cnt) != null){
             while (request.getParameter("product" + cnt) != null) {
-                Product p;
-                try {
-                    p = new ProductService().getEntityById(Integer.parseInt(request.getParameter("product" + cnt)));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                Product p = new ProductService().getEntityById(Integer.parseInt(request.getParameter("product" + cnt)));
                 Ingredient i = new Ingredient(p);
                 i.setQuantity(Integer.parseInt(request.getParameter("quantity" + cnt)));
                 i.setQuantity(Integer.parseInt(request.getParameter("quantity" + cnt)));
@@ -34,7 +29,6 @@ public class MixerServlet extends HttpServlet {
             }
         }
         var kbju = r.getFullKBJU();
-        double weight = kbju.get("weight").doubleValue();
         request.setAttribute("k", kbju.get("k"));
         request.setAttribute("b", kbju.get("b"));
         request.setAttribute("j", kbju.get("j"));

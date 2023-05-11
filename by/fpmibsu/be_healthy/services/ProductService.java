@@ -5,33 +5,32 @@ import by.fpmibsu.be_healthy.dao.ProductDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ProductService {
-    public List<Product> getAll() throws SQLException {
+    public List<Product> getAll() {
         return new ProductDao().getAll();
     }
 
 
-    public Product getEntityById(long id) throws SQLException {
+    public Product getEntityById(long id) {
         return new ProductDao().getEntityById(id);
     }
 
 
-    public boolean update(Product entity) throws SQLException {
+    public boolean update(Product entity) {
         return new ProductDao().update(entity);
     }
 
-    public boolean delete(Product entity) throws SQLException {
+    public boolean delete(Product entity) {
         return new ProductDao().delete(entity);
     }
 
-    public boolean create(Product entity) throws SQLException {
+    public boolean create(Product entity) {
         return new ProductDao().create(entity);
     }
 
-    public String getAllJSON() throws JsonProcessingException, SQLException {
+    public String getAllJSON() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(new ProductService().getAll());
     }
 }

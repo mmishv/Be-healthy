@@ -16,14 +16,10 @@ public class ArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
-        try {
-            Article article = new ArticleService().
-                    getEntityById(Integer.parseInt(pathParts[pathParts.length-1]));
-            request.setAttribute("article", article);
-            request.setAttribute("author", new ProfileService().getEntityById(article.getAuthorId()).getLogin());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Article article = new ArticleService().
+                getEntityById(Integer.parseInt(pathParts[pathParts.length-1]));
+        request.setAttribute("article", article);
+        request.setAttribute("author", new ProfileService().getEntityById(article.getAuthorId()).getLogin());
         getServletContext().getRequestDispatcher("/jsp/main/article.jsp").forward(request, response);
     }
 }

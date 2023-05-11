@@ -30,16 +30,12 @@ public class EditRecipeServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
         int recipe_id = Integer.parseInt(pathParts[pathParts.length-1]);
-        try {
-            Recipe recipe = new RecipeService().getEntityById(recipe_id);
-            request.setAttribute("recipe", recipe);
-            request.setAttribute("r_cats", recipe.getCategories().
-                    stream().map(RecipeCategory::getId).collect(Collectors.toList()));
-            request.setAttribute("products", new ProductService().getAll());
-            request.setAttribute("categories", new RecipeCategoryService().getAll());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Recipe recipe = new RecipeService().getEntityById(recipe_id);
+        request.setAttribute("recipe", recipe);
+        request.setAttribute("r_cats", recipe.getCategories().
+                stream().map(RecipeCategory::getId).collect(Collectors.toList()));
+        request.setAttribute("products", new ProductService().getAll());
+        request.setAttribute("categories", new RecipeCategoryService().getAll());
         getServletContext().getRequestDispatcher("/jsp/recipes/edit_recipe.jsp").forward(request, response);
     }
     @Override
@@ -68,12 +64,7 @@ public class EditRecipeServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
         int recipe_id = Integer.parseInt(pathParts[pathParts.length-1]);
-        Recipe recipe = null;
-        try {
-            recipe = new RecipeService().getEntityById(recipe_id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Recipe recipe = new RecipeService().getEntityById(recipe_id);
         recipe.setTitle(new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         recipe.setCookingTime(cookingTime);
         recipe.setText(new String(request.getParameter("text").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
@@ -84,11 +75,7 @@ public class EditRecipeServlet extends HttpServlet {
         }
         recipe.setIngredients(ingredients);
         recipe.setCategories(categories);
-        try {
-            new RecipeService().update(recipe);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new RecipeService().update(recipe);
         response.sendRedirect("http://localhost:8081/my_recipes/1");
     }
 }

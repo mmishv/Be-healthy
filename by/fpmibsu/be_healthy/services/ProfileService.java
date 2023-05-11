@@ -5,47 +5,52 @@ import by.fpmibsu.be_healthy.dao.ProfileDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ProfileService {
-    public List<Profile> getAll() throws SQLException {
+    public List<Profile> getAll() {
         return new ProfileDao().getAll();
     }
 
 
-    public Profile getEntityById(long id) throws SQLException {
+    public Profile getEntityById(long id) {
         return new ProfileDao().getEntityById(id);
     }
 
 
-    public boolean update(Profile entity) throws SQLException {
+    public boolean update(Profile entity) {
         return new ProfileDao().update(entity);
     }
 
-    public boolean delete(Profile entity) throws SQLException {
+    public boolean delete(Profile entity) {
         return new ProfileDao().delete(entity);
     }
 
-    public boolean create(Profile entity) throws SQLException {
+    public boolean create(Profile entity) {
         return new ProfileDao().create(entity);
     }
-    public String getPasswordByLogin(String login) throws SQLException{
+
+    public String getPasswordByLogin(String login) {
         return new ProfileDao().getPasswordByLogin(login);
     }
-    public boolean register(String login, String password) throws SQLException {
+
+    public boolean register(String login, String password) {
         return new ProfileDao().register(login, password);
     }
-    public boolean isLoginAvailable(String login) throws SQLException {
+
+    public boolean isLoginAvailable(String login) {
         return new ProfileDao().isLoginAvailable(login);
     }
-    public String getAllJSON() throws JsonProcessingException, SQLException {
+
+    public String getAllJSON() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(new ProfileService().getAll());
     }
-    public int getIdByLogin(String login) throws SQLException {
+
+    public int getIdByLogin(String login) {
         return new ProfileDao().getIdByLogin(login);
     }
-    public boolean updateMainInfo(Profile entity) throws SQLException {
+
+    public boolean updateMainInfo(Profile entity) {
         return new ProfileDao().updateMainInfo(entity);
     }
 }

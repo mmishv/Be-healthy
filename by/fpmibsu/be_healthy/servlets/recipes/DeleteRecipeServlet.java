@@ -20,11 +20,7 @@ public class DeleteRecipeServlet extends HttpServlet {
         String[] pathParts = pathInfo.split("/");
         Recipe recipe = new Recipe();
         recipe.setId(Integer.parseInt(pathParts[pathParts.length-1]));
-        try {
-            new RecipeService().delete(recipe);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new RecipeService().delete(recipe);
         response.sendRedirect("http://localhost:8081/my_recipes/1");
     }
 

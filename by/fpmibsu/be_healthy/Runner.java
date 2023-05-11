@@ -112,94 +112,89 @@ public class Runner {
         temp_profile.setAge(30);
         temp_profile.setActivity(1.1);
 
-        try {
-            //new ArticleCategoryDao().create(temp_acat);
-            //new RecipeCategoryDao().create(temp_rcat);
-            //new ForumTopicDao().create(temp_topic);
-            //new ForumMessageDao().create(temp_message);
-            //new MealDao().create(temp_meal);
-            //new ProductDao().create(temp_product);
-            //new MealProductDao().create(temp_m_product);
-            //new ArticleDao().create(temp_article);
-            //new RecipeDao().create(temp_recipe);
-            //new IngredientDao().create(temp_ing);
-            //new ProfileDao().create(temp_profile);
+        //new ArticleCategoryDao().create(temp_acat);
+        //new RecipeCategoryDao().create(temp_rcat);
+        //new ForumTopicDao().create(temp_topic);
+        //new ForumMessageDao().create(temp_message);
+        //new MealDao().create(temp_meal);
+        //new ProductDao().create(temp_product);
+        //new MealProductDao().create(temp_m_product);
+        //new ArticleDao().create(temp_article);
+        //new RecipeDao().create(temp_recipe);
+        //new IngredientDao().create(temp_ing);
+        //new ProfileDao().create(temp_profile);
 
-            // new RecipeDao().update(temp_recipe);
+        // new RecipeDao().update(temp_recipe);
 
-            System.out.println("getEntityById(1) test:");
-            System.out.println(new ArticleCategoryDao().update(temp_acat));
-            System.out.println(new RecipeCategoryDao().update(temp_rcat));
-            System.out.println(new ProductDao().update(temp_product));
-            System.out.println(new MealProductDao().update(temp_m_product));
-            System.out.println(new MealDao().update(temp_meal));
-            System.out.println(new ArticleDao().update(temp_article));
-            System.out.println(new RecipeDao().update(temp_recipe));
-            System.out.println(new IngredientDao().update(temp_ing));
-            System.out.println(new ProfileDao().update(temp_profile));
+        System.out.println("getEntityById(1) test:");
+        System.out.println(new ArticleCategoryDao().update(temp_acat));
+        System.out.println(new RecipeCategoryDao().update(temp_rcat));
+        System.out.println(new ProductDao().update(temp_product));
+        System.out.println(new MealProductDao().update(temp_m_product));
+        System.out.println(new MealDao().update(temp_meal));
+        System.out.println(new ArticleDao().update(temp_article));
+        System.out.println(new RecipeDao().update(temp_recipe));
+        System.out.println(new IngredientDao().update(temp_ing));
+        System.out.println(new ProfileDao().update(temp_profile));
 
-            System.out.println("getEntityById(1) test:");
-            System.out.println(new ArticleCategoryDao().getEntityById(1));
-            System.out.println(new RecipeCategoryDao().getEntityById(1));
-            System.out.println(new ProductDao().getEntityById(1));
-            System.out.println(new MealProductDao().getEntityById(1));
-            System.out.println(new MealDao().getEntityById(1));
-            System.out.println(new ArticleDao().getEntityById(1));
-            System.out.println(new RecipeDao().getEntityById(1));
-            System.out.println(new IngredientDao().getEntityById(1));
-            System.out.println(new ProfileDao().getEntityById(1));
-            System.out.println("----------------------------------");
+        System.out.println("getEntityById(1) test:");
+        System.out.println(new ArticleCategoryDao().getEntityById(1));
+        System.out.println(new RecipeCategoryDao().getEntityById(1));
+        System.out.println(new ProductDao().getEntityById(1));
+        System.out.println(new MealProductDao().getEntityById(1));
+        System.out.println(new MealDao().getEntityById(1));
+        System.out.println(new ArticleDao().getEntityById(1));
+        System.out.println(new RecipeDao().getEntityById(1));
+        System.out.println(new IngredientDao().getEntityById(1));
+        System.out.println(new ProfileDao().getEntityById(1));
+        System.out.println("----------------------------------");
 
-            System.out.println("getAll() test:");
-            List<ArticleCategory> article_categories = new ArticleCategoryDao().getAll();
-            List<RecipeCategory> recipe_categories = new RecipeCategoryDao().getAll();
-            List<Product> products =  new ProductDao().getAll();
-            List<MealProduct> m_products =  new MealProductDao().getAll();
-            List<Meal> meals =  new MealDao().getAll();
-            List<Article> articles =  new ArticleDao().getAll();
-            List<Recipe> recipes =  new RecipeDao().getAll();
-            List<Ingredient> ingredients =  new IngredientDao().getAll();
-            List<Profile> profiles =  new ProfileDao().getAll();
+        System.out.println("getAll() test:");
+        List<ArticleCategory> article_categories = new ArticleCategoryDao().getAll();
+        List<RecipeCategory> recipe_categories = new RecipeCategoryDao().getAll();
+        List<Product> products =  new ProductDao().getAll();
+        List<MealProduct> m_products =  new MealProductDao().getAll();
+        List<Meal> meals =  new MealDao().getAll();
+        List<Article> articles =  new ArticleDao().getAll();
+        List<Recipe> recipes =  new RecipeDao().getAll();
+        List<Ingredient> ingredients =  new IngredientDao().getAll();
+        List<Profile> profiles =  new ProfileDao().getAll();
 
-            for (ArticleCategory e : article_categories) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (RecipeCategory e : recipe_categories) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (Product e : products) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (MealProduct e : m_products) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (Meal e : meals) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (Article e : articles) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (Recipe e : recipes) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (Ingredient e : ingredients) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-            for (Profile e : profiles) {
-                System.out.println(e);
-            }
-            System.out.println("----------------------------------");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        for (ArticleCategory e : article_categories) {
+            System.out.println(e);
         }
+        System.out.println("----------------------------------");
+        for (RecipeCategory e : recipe_categories) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
+        for (Product e : products) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
+        for (MealProduct e : m_products) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
+        for (Meal e : meals) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
+        for (Article e : articles) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
+        for (Recipe e : recipes) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
+        for (Ingredient e : ingredients) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
+        for (Profile e : profiles) {
+            System.out.println(e);
+        }
+        System.out.println("----------------------------------");
     }
 }

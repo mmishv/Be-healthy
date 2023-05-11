@@ -19,11 +19,7 @@ public class DeleteArticleServlet extends HttpServlet {
         String[] pathParts = pathInfo.split("/");
         Article article = new Article();
         article.setId(Integer.parseInt(pathParts[pathParts.length-1]));
-        try {
-            new ArticleService().delete(article);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new ArticleService().delete(article);
         response.sendRedirect("http://localhost:8081/my_articles/1");
     }
 }
