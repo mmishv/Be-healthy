@@ -60,6 +60,11 @@
                 </svg>
                 Выйти</a>
         </button>
+        <c:if test="${profile.getRole().getName()=='администратор'}">
+            <button type="button" class="btn btn-primary">
+                <a href="admin">Режим администратора</a>
+            </button>
+        </c:if>
         <div class="inf">
             <form method="post" action="edit_profile">
                 <div class="row general-inf">

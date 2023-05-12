@@ -270,5 +270,14 @@
         <url-pattern>/article/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MainAdminServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.admin.MainAdminServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainAdminServlet</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>

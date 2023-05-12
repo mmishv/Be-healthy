@@ -20,7 +20,7 @@ public class ProfileDao implements Dao<Profile> {
         List<Profile> profiles = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM PROFILE");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM PROFILE ORDER BY LOGIN");
             while (resultSet.next()) {
                 Profile profile = new Profile();
                 initProfile(resultSet, profile);
