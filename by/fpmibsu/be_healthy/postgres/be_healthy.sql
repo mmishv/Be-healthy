@@ -5,7 +5,7 @@
 -- Dumped from database version 14.5
 -- Dumped by pg_dump version 14.5
 
--- Started on 2023-05-09 19:54:08
+-- Started on 2023-05-12 17:09:38
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -68,7 +68,7 @@ CREATE SEQUENCE public.article_category_id_seq
 ALTER TABLE public.article_category_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3429 (class 0 OID 0)
+-- TOC entry 3441 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: article_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -93,7 +93,7 @@ CREATE SEQUENCE public.article_id_seq
 ALTER TABLE public.article_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3430 (class 0 OID 0)
+-- TOC entry 3442 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: article_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -134,7 +134,7 @@ CREATE SEQUENCE public.ingredient_id_seq
 ALTER TABLE public.ingredient_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3431 (class 0 OID 0)
+-- TOC entry 3443 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: ingredient_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -175,7 +175,7 @@ CREATE SEQUENCE public.meal_id_seq
 ALTER TABLE public.meal_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3432 (class 0 OID 0)
+-- TOC entry 3444 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: meal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -216,7 +216,7 @@ CREATE SEQUENCE public.meal_product_id_seq
 ALTER TABLE public.meal_product_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3433 (class 0 OID 0)
+-- TOC entry 3445 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: meal_product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -289,7 +289,7 @@ CREATE SEQUENCE public.product_id_seq
 ALTER TABLE public.product_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3434 (class 0 OID 0)
+-- TOC entry 3446 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -318,7 +318,8 @@ CREATE TABLE public.profile (
     fats_norm numeric DEFAULT 60 NOT NULL,
     avatar bytea,
     sex character varying DEFAULT 'женский'::character varying NOT NULL,
-    goal numeric DEFAULT 1 NOT NULL
+    goal numeric DEFAULT 1 NOT NULL,
+    role_id integer DEFAULT 1 NOT NULL
 );
 
 
@@ -341,7 +342,7 @@ CREATE SEQUENCE public.profile_id_seq
 ALTER TABLE public.profile_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3435 (class 0 OID 0)
+-- TOC entry 3447 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: profile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -357,7 +358,7 @@ ALTER SEQUENCE public.profile_id_seq OWNED BY public.profile.id;
 CREATE TABLE public.recipe (
     id integer NOT NULL,
     title character varying(100) NOT NULL,
-    publ_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    publ_date timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     cooking_time integer NOT NULL,
     description text NOT NULL,
     author_id integer NOT NULL,
@@ -398,7 +399,7 @@ CREATE SEQUENCE public.recipe_category_id_seq
 ALTER TABLE public.recipe_category_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3436 (class 0 OID 0)
+-- TOC entry 3448 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: recipe_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -423,7 +424,7 @@ CREATE SEQUENCE public.recipe_id_seq
 ALTER TABLE public.recipe_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3437 (class 0 OID 0)
+-- TOC entry 3449 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: recipe_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -432,7 +433,45 @@ ALTER SEQUENCE public.recipe_id_seq OWNED BY public.recipe.id;
 
 
 --
--- TOC entry 3228 (class 2604 OID 27254)
+-- TOC entry 230 (class 1259 OID 28415)
+-- Name: role; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.role (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.role OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 28414)
+-- Name: role_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.role_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.role_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3450 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.role_id_seq OWNED BY public.role.id;
+
+
+--
+-- TOC entry 3234 (class 2604 OID 27254)
 -- Name: article id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -440,7 +479,7 @@ ALTER TABLE ONLY public.article ALTER COLUMN id SET DEFAULT nextval('public.arti
 
 
 --
--- TOC entry 3227 (class 2604 OID 27214)
+-- TOC entry 3233 (class 2604 OID 27214)
 -- Name: article_category id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -448,7 +487,7 @@ ALTER TABLE ONLY public.article_category ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
--- TOC entry 3238 (class 2604 OID 27524)
+-- TOC entry 3244 (class 2604 OID 27524)
 -- Name: ingredient id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -456,7 +495,7 @@ ALTER TABLE ONLY public.ingredient ALTER COLUMN id SET DEFAULT nextval('public.i
 
 
 --
--- TOC entry 3233 (class 2604 OID 27476)
+-- TOC entry 3239 (class 2604 OID 27476)
 -- Name: meal id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -464,7 +503,7 @@ ALTER TABLE ONLY public.meal ALTER COLUMN id SET DEFAULT nextval('public.meal_id
 
 
 --
--- TOC entry 3236 (class 2604 OID 27496)
+-- TOC entry 3242 (class 2604 OID 27496)
 -- Name: meal_product id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -472,7 +511,7 @@ ALTER TABLE ONLY public.meal_product ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
--- TOC entry 3220 (class 2604 OID 27189)
+-- TOC entry 3226 (class 2604 OID 27189)
 -- Name: product id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -480,7 +519,7 @@ ALTER TABLE ONLY public.product ALTER COLUMN id SET DEFAULT nextval('public.prod
 
 
 --
--- TOC entry 3212 (class 2604 OID 27136)
+-- TOC entry 3217 (class 2604 OID 27136)
 -- Name: profile id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -488,7 +527,7 @@ ALTER TABLE ONLY public.profile ALTER COLUMN id SET DEFAULT nextval('public.prof
 
 
 --
--- TOC entry 3230 (class 2604 OID 27299)
+-- TOC entry 3236 (class 2604 OID 27299)
 -- Name: recipe id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -496,7 +535,7 @@ ALTER TABLE ONLY public.recipe ALTER COLUMN id SET DEFAULT nextval('public.recip
 
 
 --
--- TOC entry 3226 (class 2604 OID 27205)
+-- TOC entry 3232 (class 2604 OID 27205)
 -- Name: recipe_category id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -504,7 +543,15 @@ ALTER TABLE ONLY public.recipe_category ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 3255 (class 2606 OID 27218)
+-- TOC entry 3246 (class 2604 OID 28418)
+-- Name: role id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.role ALTER COLUMN id SET DEFAULT nextval('public.role_id_seq'::regclass);
+
+
+--
+-- TOC entry 3262 (class 2606 OID 27218)
 -- Name: article_category article_category_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -513,7 +560,7 @@ ALTER TABLE ONLY public.article_category
 
 
 --
--- TOC entry 3257 (class 2606 OID 27216)
+-- TOC entry 3264 (class 2606 OID 27216)
 -- Name: article_category article_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -522,7 +569,7 @@ ALTER TABLE ONLY public.article_category
 
 
 --
--- TOC entry 3259 (class 2606 OID 27258)
+-- TOC entry 3266 (class 2606 OID 27258)
 -- Name: article article_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -531,7 +578,7 @@ ALTER TABLE ONLY public.article
 
 
 --
--- TOC entry 3271 (class 2606 OID 27529)
+-- TOC entry 3278 (class 2606 OID 27529)
 -- Name: ingredient ingredient_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -540,7 +587,7 @@ ALTER TABLE ONLY public.ingredient
 
 
 --
--- TOC entry 3273 (class 2606 OID 27860)
+-- TOC entry 3280 (class 2606 OID 27860)
 -- Name: ingredient ingredient_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -549,7 +596,7 @@ ALTER TABLE ONLY public.ingredient
 
 
 --
--- TOC entry 3267 (class 2606 OID 27481)
+-- TOC entry 3274 (class 2606 OID 27481)
 -- Name: meal meal_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -558,7 +605,7 @@ ALTER TABLE ONLY public.meal
 
 
 --
--- TOC entry 3269 (class 2606 OID 27865)
+-- TOC entry 3276 (class 2606 OID 27865)
 -- Name: meal_product meal_product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -567,7 +614,7 @@ ALTER TABLE ONLY public.meal_product
 
 
 --
--- TOC entry 3261 (class 2606 OID 27284)
+-- TOC entry 3268 (class 2606 OID 27284)
 -- Name: mm_category_article mm_category_article_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -576,7 +623,7 @@ ALTER TABLE ONLY public.mm_category_article
 
 
 --
--- TOC entry 3265 (class 2606 OID 27314)
+-- TOC entry 3272 (class 2606 OID 27314)
 -- Name: mm_category_recipe mm_category_recipe_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -585,7 +632,7 @@ ALTER TABLE ONLY public.mm_category_recipe
 
 
 --
--- TOC entry 3247 (class 2606 OID 27200)
+-- TOC entry 3254 (class 2606 OID 27200)
 -- Name: product product_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -594,7 +641,7 @@ ALTER TABLE ONLY public.product
 
 
 --
--- TOC entry 3249 (class 2606 OID 27198)
+-- TOC entry 3256 (class 2606 OID 27198)
 -- Name: product product_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -603,7 +650,7 @@ ALTER TABLE ONLY public.product
 
 
 --
--- TOC entry 3241 (class 2606 OID 27142)
+-- TOC entry 3248 (class 2606 OID 27142)
 -- Name: profile profile_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -612,7 +659,7 @@ ALTER TABLE ONLY public.profile
 
 
 --
--- TOC entry 3243 (class 2606 OID 27144)
+-- TOC entry 3250 (class 2606 OID 27144)
 -- Name: profile profile_login_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -621,7 +668,7 @@ ALTER TABLE ONLY public.profile
 
 
 --
--- TOC entry 3245 (class 2606 OID 27140)
+-- TOC entry 3252 (class 2606 OID 27140)
 -- Name: profile profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -630,7 +677,7 @@ ALTER TABLE ONLY public.profile
 
 
 --
--- TOC entry 3251 (class 2606 OID 27209)
+-- TOC entry 3258 (class 2606 OID 27209)
 -- Name: recipe_category recipe_category_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -639,7 +686,7 @@ ALTER TABLE ONLY public.recipe_category
 
 
 --
--- TOC entry 3253 (class 2606 OID 27207)
+-- TOC entry 3260 (class 2606 OID 27207)
 -- Name: recipe_category recipe_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -648,7 +695,7 @@ ALTER TABLE ONLY public.recipe_category
 
 
 --
--- TOC entry 3263 (class 2606 OID 27304)
+-- TOC entry 3270 (class 2606 OID 27304)
 -- Name: recipe recipe_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -657,7 +704,25 @@ ALTER TABLE ONLY public.recipe
 
 
 --
--- TOC entry 3274 (class 2606 OID 27259)
+-- TOC entry 3282 (class 2606 OID 28422)
+-- Name: role role_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.role
+    ADD CONSTRAINT role_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 3284 (class 2606 OID 28420)
+-- Name: role role_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.role
+    ADD CONSTRAINT role_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3286 (class 2606 OID 27259)
 -- Name: article article_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -666,7 +731,7 @@ ALTER TABLE ONLY public.article
 
 
 --
--- TOC entry 3283 (class 2606 OID 27535)
+-- TOC entry 3295 (class 2606 OID 27535)
 -- Name: ingredient ingredient_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -675,7 +740,7 @@ ALTER TABLE ONLY public.ingredient
 
 
 --
--- TOC entry 3284 (class 2606 OID 27930)
+-- TOC entry 3296 (class 2606 OID 27930)
 -- Name: ingredient ingredient_recipe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -684,7 +749,7 @@ ALTER TABLE ONLY public.ingredient
 
 
 --
--- TOC entry 3281 (class 2606 OID 27972)
+-- TOC entry 3293 (class 2606 OID 27972)
 -- Name: meal_product meal_product_meal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -693,7 +758,7 @@ ALTER TABLE ONLY public.meal_product
 
 
 --
--- TOC entry 3282 (class 2606 OID 27977)
+-- TOC entry 3294 (class 2606 OID 27977)
 -- Name: meal_product meal_product_product_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -702,7 +767,7 @@ ALTER TABLE ONLY public.meal_product
 
 
 --
--- TOC entry 3280 (class 2606 OID 27487)
+-- TOC entry 3292 (class 2606 OID 27487)
 -- Name: meal meal_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -711,25 +776,25 @@ ALTER TABLE ONLY public.meal
 
 
 --
--- TOC entry 3275 (class 2606 OID 27285)
+-- TOC entry 3287 (class 2606 OID 28387)
 -- Name: mm_category_article mm_category_article_article_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.mm_category_article
-    ADD CONSTRAINT mm_category_article_article_id_fkey FOREIGN KEY (article_id) REFERENCES public.article(id);
+    ADD CONSTRAINT mm_category_article_article_id_fkey FOREIGN KEY (article_id) REFERENCES public.article(id) ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
 --
--- TOC entry 3276 (class 2606 OID 27290)
+-- TOC entry 3288 (class 2606 OID 28392)
 -- Name: mm_category_article mm_category_article_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.mm_category_article
-    ADD CONSTRAINT mm_category_article_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.article_category(id);
+    ADD CONSTRAINT mm_category_article_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.article_category(id) ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
 --
--- TOC entry 3278 (class 2606 OID 27920)
+-- TOC entry 3290 (class 2606 OID 28397)
 -- Name: mm_category_recipe mm_category_recipe_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -738,7 +803,7 @@ ALTER TABLE ONLY public.mm_category_recipe
 
 
 --
--- TOC entry 3279 (class 2606 OID 27925)
+-- TOC entry 3291 (class 2606 OID 28402)
 -- Name: mm_category_recipe mm_category_recipe_recipe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -747,7 +812,16 @@ ALTER TABLE ONLY public.mm_category_recipe
 
 
 --
--- TOC entry 3277 (class 2606 OID 27305)
+-- TOC entry 3285 (class 2606 OID 28425)
+-- Name: profile profile_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_role_id_fkey FOREIGN KEY (role_id) REFERENCES public.role(id) NOT VALID;
+
+
+--
+-- TOC entry 3289 (class 2606 OID 27305)
 -- Name: recipe recipe_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -755,7 +829,7 @@ ALTER TABLE ONLY public.recipe
     ADD CONSTRAINT recipe_author_id_fkey FOREIGN KEY (author_id) REFERENCES public.profile(id);
 
 
--- Completed on 2023-05-09 19:54:08
+-- Completed on 2023-05-12 17:09:38
 
 --
 -- PostgreSQL database dump complete
