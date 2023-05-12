@@ -25,6 +25,7 @@ public class Profile implements Serializable {
     private double activity;
     private String sex;
     private double goal;
+    private Role role;
     private HashMap<String, BigDecimal> KBJU_norm;
     public String getLogin() {
         return login;
@@ -162,5 +163,13 @@ public class Profile implements Serializable {
     }
     public int getCarbRec(){
         return (int)(getCalorieRec()*0.4/4);
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

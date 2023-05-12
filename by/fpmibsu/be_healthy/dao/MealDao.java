@@ -1,7 +1,6 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.services.MealProductService;
 
@@ -9,7 +8,7 @@ import java.sql.*;
 import java.util.*;
 import java.sql.Date;
 
-public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
+public class MealDao implements Dao<Meal> {
 
     @Override
     public List<Meal> getAll() {

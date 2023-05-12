@@ -2,7 +2,6 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.services.IngredientService;
 
 import java.nio.charset.StandardCharsets;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Base64;
 
-public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
+public class RecipeDao implements Dao<Recipe> {
 
     @Override
     public List<Recipe> getAll() {

@@ -2,13 +2,12 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao extends JDBCPostgreSQL implements Dao<Product> {
+public class ProductDao implements Dao<Product> {
 
     @Override
     public List<Product> getAll() {

@@ -53,4 +53,7 @@ public class ProfileService {
     public boolean updateMainInfo(Profile entity) {
         return new ProfileDao().updateMainInfo(entity);
     }
+    public boolean updateRole(Profile entity){
+        return new ProfileDao().updateRole(entity);
+    }
 }

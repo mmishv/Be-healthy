@@ -3,7 +3,6 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.*;
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,7 +13,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
-public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
+public class ProfileDao implements Dao<Profile> {
 
     @Override
     public List<Profile> getAll() {
@@ -52,6 +51,7 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         KBJU_norm.put("j", BigDecimal.valueOf(resultSet.getDouble("FATS_NORM")).setScale(1, RoundingMode.HALF_UP));
         KBJU_norm.put("u", BigDecimal.valueOf(resultSet.getDouble("CARB_NORM")).setScale(1, RoundingMode.HALF_UP));
         profile.setKBJU_norm(KBJU_norm);
+        profile.setRole(new RoleDao().getEntityById(resultSet.getInt("ROLE_ID")));
         profile.setAge(resultSet.getInt("AGE"));
         profile.setHeight(resultSet.getInt("HEIGHT"));
         profile.setWeight(resultSet.getDouble("WEIGHT"));
@@ -99,6 +99,18 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
         return true;
     }
 
+    public boolean updateRole(Profile entity){
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET ROLE_ID=? WHERE ID=?")) {
+            preparedStatement.setInt(1, entity.getRole().getId());
+            preparedStatement.setInt(2, entity.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
     public boolean updateMainInfo(Profile entity) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?")) {
@@ -129,7 +141,10 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     @Override
     public boolean create(Profile entity) {
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF," + " AVATAR, WEIGHT, CAL_NORM, CARB_NORM, FATS_NORM, PROT_NORM, SEX, GOAL)" + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "INSERT INTO PROFILE (NAME, EMAIL, LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF,"
+                                + " AVATAR, WEIGHT, CAL_NORM, CARB_NORM, FATS_NORM, PROT_NORM, SEX, GOAL)"
+                                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2, entity.getEmail());
             preparedStatement.setString(3, entity.getLogin());
@@ -144,8 +159,8 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setDouble(11, norm.get("u").doubleValue());
             preparedStatement.setDouble(12, norm.get("j").doubleValue());
             preparedStatement.setDouble(13, norm.get("b").doubleValue());
-            preparedStatement.setDouble(13, entity.getGoal());
-            preparedStatement.setString(14, entity.getSex());
+            preparedStatement.setDouble(14, entity.getGoal());
+            preparedStatement.setString(15, entity.getSex());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

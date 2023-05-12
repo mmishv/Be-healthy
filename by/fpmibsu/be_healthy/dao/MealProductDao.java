@@ -1,14 +1,13 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.MealProduct;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealProductDao extends JDBCPostgreSQL implements Dao<MealProduct> {
+public class MealProductDao implements Dao<MealProduct> {
 
     @Override
     public List<MealProduct> getAll() {

@@ -1,13 +1,12 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 
 import java.sql.*;
 import java.util.*;
 
-public class RecipeCategoryDao extends JDBCPostgreSQL implements Dao<RecipeCategory> {
+public class RecipeCategoryDao implements Dao<RecipeCategory> {
 
     @Override
     public List<RecipeCategory> getAll() {

@@ -2,13 +2,12 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleCategoryDao extends JDBCPostgreSQL implements Dao<ArticleCategory> {
+public class ArticleCategoryDao implements Dao<ArticleCategory> {
     @Override
     public List<ArticleCategory> getAll() {
         List<ArticleCategory> categories = new ArrayList<>();

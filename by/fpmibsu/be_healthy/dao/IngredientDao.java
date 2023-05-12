@@ -2,13 +2,12 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Ingredient;
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientDao extends JDBCPostgreSQL implements Dao<Ingredient> {
+public class IngredientDao implements Dao<Ingredient> {
 
     @Override
     public List<Ingredient> getAll() {
