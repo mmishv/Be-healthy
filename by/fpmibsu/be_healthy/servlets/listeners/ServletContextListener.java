@@ -2,13 +2,12 @@ package by.fpmibsu.be_healthy.servlets.listeners;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.util.concurrent.atomic.AtomicReference;
 import by.fpmibsu.be_healthy.services.ProfileService;
-
+import by.fpmibsu.be_healthy.postgres.DataSource;
 @WebListener
-public class AuthListener implements ServletContextListener {
+public class ServletContextListener implements javax.servlet.ServletContextListener {
     private AtomicReference<ProfileService> profile;
 
     @Override
@@ -20,5 +19,6 @@ public class AuthListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         profile = null;
+        DataSource.close();
     }
 }
