@@ -67,7 +67,7 @@
 
     <servlet>
         <servlet-name>create_article</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.CreateArticleServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.articles.CreateArticleServlet</servlet-class>
     </servlet>
 
 
@@ -94,7 +94,7 @@
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.LogoutServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.authetication.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -104,7 +104,7 @@
 
     <servlet>
         <servlet-name>RegistrationServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.RegistrationServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.authetication.RegistrationServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -114,7 +114,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.LoginServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.authetication.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -213,7 +213,7 @@
 
     <servlet>
         <servlet-name>EditArticleServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.EditArticleServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.articles.EditArticleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -223,7 +223,7 @@
 
     <servlet>
         <servlet-name>DeleteArticleServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.DeleteArticleServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.articles.DeleteArticleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -242,7 +242,7 @@
 
     <servlet>
         <servlet-name>MyRecipesServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.MyRecipesServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.recipes.MyRecipesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -252,7 +252,7 @@
 
     <servlet>
         <servlet-name>MyArticlesServlet</servlet-name>
-        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.MyArticlesServlet</servlet-class>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.articles.MyArticlesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
