@@ -63,13 +63,13 @@
                 <a class="nav-link" href="">Категории статей</a></li>
         </ul>
     </div>
-    <div class="col-sm-10 users" id="table-users">
-        <h3>Список пользователей</h3>
+    <div class="col-sm-10">
+        <h3 class="header">Список пользователей</h3>
         <div class="form-group">
-            <input id="search" class="form-control" placeholder="Поиск по логину..." autocomplete="off" name="search"
+            <input class="form-control" id="search" placeholder="Поиск по логину..." autocomplete="off" name="search"
                    type="text" oninput="tableSearch();">
         </div>
-        <table class="table table-striped" id="table-search">
+        <table class="table table-striped users" id="table-search">
             <thead>
             <tr>
                 <th scope="col" style="width: 5%;">№</th>
@@ -82,7 +82,7 @@
             <tbody>
             <c:forEach items="${profiles}" var="profile" varStatus="loop">
                 <tr>
-                    <td style="text-align: left; padding-left: 2%;">${loop.count}</td>
+                    <td>${loop.count}</td>
                     <td>${profile.login}</td>
                     <td>${profile.role.name}</td>
                     <td class="searchable">${profile.name}</td>
