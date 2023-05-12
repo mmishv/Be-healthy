@@ -23,20 +23,10 @@ public class AuthFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
 
-        final String login = req.getParameter("login");
-        final String password = req.getParameter("password");
-        final int id;
-        if (req.getParameter("id")!=null){
-            id = Integer.parseInt(req.getParameter("id"));
-        }
-
-        final AtomicReference<ProfileService> profile =
-                (AtomicReference<ProfileService>) req.getSession().getServletContext().getAttribute("profile");
+        final String login = (String) req.getSession().getAttribute("login");
         final HttpSession session = req.getSession();
 
-        if (nonNull(session) &&
-                nonNull(session.getAttribute("login")) &&
-                nonNull(session.getAttribute("password"))) {
+        if (nonNull(session) && nonNull(login)) {
             filterChain.doFilter(request, response);
         } else {
             res.sendRedirect("/authentication");

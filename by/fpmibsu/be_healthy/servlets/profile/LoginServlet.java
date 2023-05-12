@@ -7,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -17,7 +16,6 @@ public class LoginServlet extends HttpServlet {
                 login = request.getParameter("login");
         String stored_password = new ProfileService().getPasswordByLogin(login);
         if (BCrypt.checkpw(password, stored_password)){
-            session.setAttribute("password", stored_password);
             session.setAttribute("login", login);
             session.setAttribute("id", new ProfileService().getIdByLogin(login));
             response.sendRedirect("/profile");
