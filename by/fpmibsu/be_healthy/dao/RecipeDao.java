@@ -1,6 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
+import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.services.IngredientService;
 
@@ -11,15 +12,14 @@ import java.util.List;
 import java.util.Base64;
 
 public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
-    private final Connection connection = getConnection();
 
     @Override
     public List<Recipe> getAll() {
         List<Recipe> recipes = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC");
             initRecipe(recipes, resultSet);
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -28,13 +28,12 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
 
     public List<Recipe> getPage(int page, int per_page) {
         List<Recipe> recipes = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?")) {
             statement.setInt(1, per_page);
             statement.setInt(2, per_page * (page - 1));
             ResultSet resultSet = statement.executeQuery();
             initRecipe(recipes, resultSet);
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,14 +53,13 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     }
 
     private List<Recipe> getPage(int page, int per_page, int author_id, List<Recipe> recipes, String sql) {
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, author_id);
             statement.setInt(2, per_page);
             statement.setInt(3, per_page * (page - 1));
             ResultSet resultSet = statement.executeQuery();
             initRecipe(recipes, resultSet);
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,14 +69,13 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     @Override
     public Recipe getEntityById(long id) {
         Recipe recipe = new Recipe();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM RECIPE WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM RECIPE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 setRecipe(recipe, resultSet);
             }
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -104,7 +101,8 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
 
     @Override
     public boolean update(Recipe entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE RECIPE SET TITLE=?, PUBL_DATE=?, COOKING_TIME=?, DESCRIPTION=?, PHOTO=?, AUTHOR_ID=? WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE RECIPE SET TITLE=?, PUBL_DATE=?, COOKING_TIME=?, DESCRIPTION=?, PHOTO=?, AUTHOR_ID=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
             preparedStatement.setInt(3, entity.getCookingTime());
@@ -114,28 +112,30 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();
             new IngredientService().deleteRecipeIngredients(entity.getId());
-            int recipe_id = entity.getId();
-            PreparedStatement inner_statement1 = connection.prepareStatement("DELETE FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?");
-            inner_statement1.setInt(1, recipe_id);
-            inner_statement1.executeUpdate();
-            initCategoriesAndIngredients(entity, recipe_id);
-            preparedStatement.close();
-            inner_statement1.close();
-            connection.close();
+            deleteFromMM(entity.getId());
+            initCategoriesAndIngredients(entity, entity.getId());
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
-
+    private void deleteFromMM(int recipe_id){
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement inner_statement1 = connection.prepareStatement("DELETE FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?")){
+             inner_statement1.setInt(1, recipe_id);
+             inner_statement1.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void initCategoriesAndIngredients(Recipe entity, int recipe_id) {
         for (var i : entity.getCategories()) {
-            try (PreparedStatement inner_statement1 = connection.prepareStatement("INSERT INTO MM_CATEGORY_RECIPE (RECIPE_ID, CATEGORY_ID) VALUES(?, ?)")) {
+            try (Connection connection = DataSource.getConnection();
+                 PreparedStatement inner_statement1 = connection.prepareStatement("INSERT INTO MM_CATEGORY_RECIPE (RECIPE_ID, CATEGORY_ID) VALUES(?, ?)")) {
                 inner_statement1.setInt(1, recipe_id);
                 inner_statement1.setInt(2, i.getId());
                 inner_statement1.executeUpdate();
-                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -148,11 +148,10 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
 
     @Override
     public boolean delete(Recipe entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE WHERE ID=?")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -162,7 +161,8 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
 
     @Override
     public boolean create(Recipe entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE (TITLE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?)")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE (TITLE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setInt(2, entity.getCookingTime());
             preparedStatement.setString(3, entity.getText());
@@ -171,7 +171,6 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
             preparedStatement.executeUpdate();
             int recipe_id = getMaxId();
             initCategoriesAndIngredients(entity, recipe_id);
-            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -180,13 +179,12 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     }
 
     public int getMaxId() {
-        try {
-            Statement statement = connection.createStatement();
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery("SELECT MAX(id) AS max_id FROM RECIPE");
             if (resultSet.next()) {
                 return resultSet.getInt("max_id");
             }
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -195,12 +193,11 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
 
     public List<Recipe> getAllInCategory(int id) {
         List<Recipe> recipes = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM RECIPE WHERE ID IN " + "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" + "ORDER BY PUBL_DATE DESC")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM RECIPE WHERE ID IN " + "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)" + "ORDER BY PUBL_DATE DESC")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             initRecipe(recipes, resultSet);
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -216,12 +213,12 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     }
 
     public int getNumberOfRecipes() {
-        try (Statement statement = connection.createStatement()) {
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) RES FROM RECIPE");
             if (resultSet.next()) {
                 return resultSet.getInt("RES");
             }
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -239,12 +236,11 @@ public class RecipeDao extends JDBCPostgreSQL implements Dao<Recipe> {
     }
 
     private int getAmount(int id, String sql) {
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) return resultSet.getInt("RES");
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

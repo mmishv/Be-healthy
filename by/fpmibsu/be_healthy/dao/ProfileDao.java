@@ -2,6 +2,7 @@ package by.fpmibsu.be_healthy.dao;
 
 
 import by.fpmibsu.be_healthy.entity.*;
+import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 
 import java.math.BigDecimal;
@@ -14,19 +15,18 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
-    private final Connection connection = getConnection();
 
     @Override
     public List<Profile> getAll() {
         List<Profile> profiles = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM PROFILE");
             while (resultSet.next()) {
                 Profile profile = new Profile();
                 initProfile(resultSet, profile);
                 profiles.add(profile);
             }
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,14 +62,13 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     @Override
     public Profile getEntityById(long id) {
         Profile profile = new Profile();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 initProfile(resultSet, profile);
             }
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,7 +77,8 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
 
     @Override
     public boolean update(Profile entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " + " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " + " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?")) {
             preparedStatement.setDouble(1, entity.getWeight());
             preparedStatement.setDouble(2, entity.getActivity());
             preparedStatement.setString(3, entity.getSex());
@@ -92,8 +92,6 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setInt(10, entity.getAge());
             preparedStatement.setInt(11, entity.getId());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -102,13 +100,12 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     }
 
     public boolean updateMainInfo(Profile entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setBytes(2, entity.getAvatar() != null ? entity.getAvatar() : null);
             preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -118,11 +115,10 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
 
     @Override
     public boolean delete(Profile entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PROFILE WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -132,7 +128,8 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
 
     @Override
     public boolean create(Profile entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF," + " AVATAR, WEIGHT, CAL_NORM, CARB_NORM, FATS_NORM, PROT_NORM, SEX, GOAL)" + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF," + " AVATAR, WEIGHT, CAL_NORM, CARB_NORM, FATS_NORM, PROT_NORM, SEX, GOAL)" + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2, entity.getEmail());
             preparedStatement.setString(3, entity.getLogin());
@@ -150,8 +147,6 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
             preparedStatement.setDouble(13, entity.getGoal());
             preparedStatement.setString(14, entity.getSex());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -160,14 +155,13 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     }
 
     public String getPasswordByLogin(String login) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT PASSWORD FROM PROFILE WHERE LOGIN=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT PASSWORD FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getString("PASSWORD");
             }
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,12 +169,11 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     }
 
     public boolean isLoginAvailable(String login) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) return false;
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -189,12 +182,11 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     }
 
     public boolean register(String login, String password) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)")) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -203,14 +195,13 @@ public class ProfileDao extends JDBCPostgreSQL implements Dao<Profile> {
     }
 
     public int getIdByLogin(String login) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt("ID");
             }
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

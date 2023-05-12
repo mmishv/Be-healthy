@@ -1,5 +1,6 @@
 package by.fpmibsu.be_healthy.dao;
 
+import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.postgres.JDBCPostgreSQL;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.services.MealProductService;
@@ -9,15 +10,14 @@ import java.util.*;
 import java.sql.Date;
 
 public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
-    private final Connection connection = getConnection();
 
     @Override
     public List<Meal> getAll() {
         List<Meal> meals = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM MEAL");
             initMeal(meals, resultSet);
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -27,7 +27,8 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
     @Override
     public Meal getEntityById(long id) {
         Meal meal = new Meal();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MEAL WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MEAL WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -38,8 +39,6 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 meal.setDateOfMeal(resultSet.getTime("DATE"));
                 meal.setProducts(new MealProductDao().getProductsByMealId(meal.getId()));
             }
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,7 +47,8 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
 
     @Override
     public boolean update(Meal entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE MEAL SET NAME=?, TIME=?  WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE MEAL SET NAME=?, TIME=?  WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setTime(2, entity.getTimeOfMeal());
             preparedStatement.setLong(3, entity.getId());
@@ -58,8 +58,6 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 i.setMeal_id(entity.getId());
                 new MealProductService().create(i);
             }
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -69,11 +67,10 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
 
     @Override
     public boolean delete(Meal entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL WHERE ID=?")) {
             preparedStatement.setLong(1, entity.getId());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -83,7 +80,8 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
 
     @Override
     public boolean create(Meal entity) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO MEAL (USER_ID, NAME, TIME, DATE) VALUES(?, ?, ?, ?)")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO MEAL (USER_ID, NAME, TIME, DATE) VALUES(?, ?, ?, ?)")) {
             preparedStatement.setInt(1, entity.getUser_id());
             preparedStatement.setString(2, entity.getName());
             preparedStatement.setTime(3, entity.getTimeOfMeal());
@@ -94,8 +92,6 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
                 i.setMeal_id(id);
                 new MealProductService().create(i);
             }
-            preparedStatement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -104,13 +100,12 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
     }
 
     public int getMaxId() {
-        try {
-            Statement statement = connection.createStatement();
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery("SELECT MAX(id) AS id FROM MEAL");
             if (resultSet.next()) {
                 return resultSet.getInt("ID");
             }
-            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -119,13 +114,12 @@ public class MealDao extends JDBCPostgreSQL implements Dao<Meal> {
 
     public List<Meal> getAllByDateAndUserId(Date date, int id) {
         List<Meal> meals = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM MEAL WHERE DATE = ? AND USER_ID = ?")) {
+        try (Connection connection = DataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM MEAL WHERE DATE = ? AND USER_ID = ?")) {
             statement.setDate(1, date);
             statement.setInt(2, id);
             ResultSet resultSet = statement.executeQuery();
             initMeal(meals, resultSet);
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
