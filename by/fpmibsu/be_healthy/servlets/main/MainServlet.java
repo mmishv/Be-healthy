@@ -1,16 +1,14 @@
 package by.fpmibsu.be_healthy.servlets.main;
 
 import by.fpmibsu.be_healthy.services.ArticleService;
-import by.fpmibsu.be_healthy.services.RecipeService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Objects;
 
-@WebServlet(name = "MainServlet", value = "/MainServlet")
+@WebServlet({"/main/*", ""})
 public class MainServlet extends HttpServlet {
     final int ARTICLES_PER_PAGE = 6;
     @Override

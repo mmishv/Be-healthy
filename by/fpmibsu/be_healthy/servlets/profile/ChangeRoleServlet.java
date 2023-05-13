@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AddAdminServlet", value = "/AddAdminServlet")
+@WebServlet(name = "AddAdminServlet", value = "/change_role/*")
 public class ChangeRoleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

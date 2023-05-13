@@ -9,15 +9,12 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.sql.Date.valueOf;
-
-@WebServlet(name = "EditMealServlet", value = "/EditMealServlet")
+@WebServlet(name = "EditMealServlet", value = "/edit-meal/*")
 public class EditMealServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

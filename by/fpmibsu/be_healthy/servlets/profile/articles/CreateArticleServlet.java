@@ -7,16 +7,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.sql.Date.valueOf;
 
-@WebServlet(name = "CreateArticleServlet", value = "/CreateArticleServlet")
+@WebServlet(name = "CreateArticleServlet", value = "/create_article")
 public class CreateArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

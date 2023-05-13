@@ -5,7 +5,6 @@ import by.fpmibsu.be_healthy.entity.*;
 import by.fpmibsu.be_healthy.services.MealService;
 import by.fpmibsu.be_healthy.services.ProductService;
 import by.fpmibsu.be_healthy.services.ProfileService;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.*;
@@ -13,9 +12,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ import java.util.List;
 
 import static java.sql.Date.valueOf;
 
-@WebServlet(name = "AddMealServlet", value = "/AddMealServlet")
+@WebServlet(name = "AddMealServlet", value = "/diary/*")
 public class MealServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,8 +1,6 @@
 package by.fpmibsu.be_healthy.servlets.recipes;
 
-import by.fpmibsu.be_healthy.dao.RecipeDao;
 import by.fpmibsu.be_healthy.entity.Ingredient;
-import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.services.ProductService;
@@ -13,17 +11,13 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.sql.Date.valueOf;
 @MultipartConfig
-@WebServlet(name = "EditRecipeServlet", value = "/EditRecipeServlet")
+@WebServlet(name = "EditRecipeServlet", value = "/edit_recipe/*")
 public class EditRecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

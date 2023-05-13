@@ -1,17 +1,14 @@
 package by.fpmibsu.be_healthy.servlets.recipes;
 
-import by.fpmibsu.be_healthy.entity.Recipe;
-import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.services.RecipeCategoryService;
 import by.fpmibsu.be_healthy.services.RecipeService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.*;
 
+@WebServlet({"/recipes/*"})
 public class RecipesMainServlet extends HttpServlet {
     final int RECIPES_PER_PAGE = 6;
     @Override

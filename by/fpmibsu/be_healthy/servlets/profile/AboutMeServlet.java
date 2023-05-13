@@ -8,13 +8,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.util.Objects;
 
 @MultipartConfig
-@WebServlet(name = "AboutMeServlet", value = "/AboutMeServlet")
+@WebServlet(name = "AboutMeServlet", value = "/profile")
 public class AboutMeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

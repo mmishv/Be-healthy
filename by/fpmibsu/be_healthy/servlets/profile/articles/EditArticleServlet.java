@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@WebServlet(name = "EditArticleServlet", value = "/EditArticleServlet")
+@WebServlet(name = "EditArticleServlet", value = "/edit_article/*")
 public class EditArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

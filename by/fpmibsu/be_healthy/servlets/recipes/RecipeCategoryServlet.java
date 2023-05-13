@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "RecipeCategoryServlet", value = "/RecipeCategoryServlet")
+@WebServlet(name = "RecipeCategoryServlet", value = "/recipe_category/*")
 public class RecipeCategoryServlet extends HttpServlet {
     final int RECIPES_PER_PAGE = 1;
     @Override

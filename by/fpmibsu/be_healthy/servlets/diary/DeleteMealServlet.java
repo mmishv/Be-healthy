@@ -1,6 +1,5 @@
 package by.fpmibsu.be_healthy.servlets.diary;
 
-import by.fpmibsu.be_healthy.dao.MealDao;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.services.MealService;
 
@@ -8,9 +7,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet(name = "DeleteMealServlet", value = "/DeleteMealServlet")
+@WebServlet(name = "DeleteMealServlet", value = "/delete-meal/*")
 public class DeleteMealServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -11,13 +11,9 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import static java.sql.Date.valueOf;
-
-@WebServlet(name = "createRecipeServlet", value = "/createRecipeServlet")
+@WebServlet(name = "createRecipeServlet", value = "/create_recipe")
 @MultipartConfig
 public class CreateRecipeServlet extends HttpServlet {
     @Override

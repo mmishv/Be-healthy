@@ -1,15 +1,13 @@
 package by.fpmibsu.be_healthy.servlets.recipes;
 
-import by.fpmibsu.be_healthy.services.RecipeCategoryService;
 import by.fpmibsu.be_healthy.services.RecipeService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet(name = "MyRecipesServlet", value = "/MyRecipesServlet")
+@WebServlet(name = "MyRecipesServlet", value = "/my_recipes/*")
 public class MyRecipesServlet extends HttpServlet {
     final int RECIPES_PER_PAGE = 2;
     @Override

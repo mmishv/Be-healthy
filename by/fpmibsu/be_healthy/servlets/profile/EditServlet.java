@@ -8,10 +8,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.Objects;
 
-@WebServlet(name = "EditServlet", value = "/EditServlet")
+@WebServlet(name = "EditServlet", value = "/edit_profile")
 public class EditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

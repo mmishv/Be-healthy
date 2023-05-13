@@ -1,8 +1,5 @@
 package by.fpmibsu.be_healthy.servlets.recipes;
 
-import by.fpmibsu.be_healthy.dao.MealDao;
-import by.fpmibsu.be_healthy.entity.Article;
-import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.services.RecipeService;
 
@@ -10,9 +7,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet(name = "DeleteRecipeServlet", value = "/DeleteRecipeServlet")
+@WebServlet(name = "DeleteRecipeServlet", value = "/delete_recipe/*")
 public class DeleteRecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "MyArticlesServlet", value = "/MyArticlesServlet")
+@WebServlet(name = "MyArticlesServlet", value = "/my_articles/*")
 public class MyArticlesServlet extends HttpServlet {
     final int ARTICLES_PER_PAGE = 2;
     @Override
