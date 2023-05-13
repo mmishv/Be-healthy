@@ -38,7 +38,7 @@
         <ul class="list-group">
             <li class="list-group-item">
                 <button class="btn btn-primary back-btn" id="admin-btn">
-                    <a href="product">
+                    <a href="admin">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                              class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -61,6 +61,8 @@
                 <a class="nav-link" href="articles_management">Статьи</a></li>
             <li class="list-group-item">
                 <a class="nav-link" href="">Категории статей</a></li>
+            <li class="list-group-item">
+                <a class="nav-link" href="recipes_moderation/1">Модерация рецептов</a></li>
         </ul>
     </div>
     <div class="col-sm-10 rec">

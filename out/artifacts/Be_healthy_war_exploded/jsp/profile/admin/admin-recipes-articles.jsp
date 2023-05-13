@@ -61,6 +61,8 @@
                 <a class="nav-link" href="articles_management">Статьи</a></li>
             <li class="list-group-item">
                 <a class="nav-link" href="">Категории статей</a></li>
+            <li class="list-group-item">
+                <a class="nav-link" href="recipes_moderation/1">Модерация рецептов</a></li>
         </ul>
     </div>
     <div class="col-sm-10 rec">
