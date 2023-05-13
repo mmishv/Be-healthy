@@ -29,13 +29,14 @@ public class EditRecipeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
-        int recipe_id = Integer.parseInt(pathParts[pathParts.length-1]);
+        int recipe_id = Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]);
         Recipe recipe = new RecipeService().getEntityById(recipe_id);
         request.setAttribute("recipe", recipe);
         request.setAttribute("r_cats", recipe.getCategories().
                 stream().map(RecipeCategory::getId).collect(Collectors.toList()));
         request.setAttribute("products", new ProductService().getAll());
         request.setAttribute("categories", new RecipeCategoryService().getAll());
+        request.setAttribute("is_admin",pathParts[pathParts.length-1].split("_").length==1? "":"_admin" );
         getServletContext().getRequestDispatcher("/jsp/recipes/edit_recipe.jsp").forward(request, response);
     }
     @Override
@@ -62,8 +63,8 @@ public class EditRecipeServlet extends HttpServlet {
             cnt++;
         }
         String pathInfo = request.getPathInfo();
-        String[] pathParts = pathInfo.split("/");;
-        int recipe_id = Integer.parseInt(pathParts[pathParts.length-1]);
+        String[] pathParts = pathInfo.split("/");
+        int recipe_id = Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]);
         Recipe recipe = new RecipeService().getEntityById(recipe_id);
         recipe.setTitle(new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         recipe.setCookingTime(cookingTime);
@@ -76,6 +77,9 @@ public class EditRecipeServlet extends HttpServlet {
         recipe.setIngredients(ingredients);
         recipe.setCategories(categories);
         new RecipeService().update(recipe);
-        response.sendRedirect("http://localhost:8081/my_recipes/1");
+        if (pathParts[pathParts.length-1].split("_").length==1)
+            response.sendRedirect("http://localhost:8081/my_recipes/1");
+        else
+            response.sendRedirect("http://localhost:8081/recipes_management");
     }
 }

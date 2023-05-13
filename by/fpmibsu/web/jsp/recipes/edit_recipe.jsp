@@ -40,7 +40,7 @@
   <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
 <fmt:requestEncoding value="UTF-8"/>
-<form method="post" action="edit_recipe/${recipe.getId()}" enctype="multipart/form-data" accept-charset="utf-8">
+<form method="post" action="edit_recipe/${recipe.getId()}${is_admin}" enctype="multipart/form-data" accept-charset="utf-8">
   <fieldset class="form-group">
     <div class="wrapper col-sm-9" style="margin: auto;">
       <div class="form-group row">

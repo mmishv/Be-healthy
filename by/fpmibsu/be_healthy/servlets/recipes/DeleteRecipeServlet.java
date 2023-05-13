@@ -19,9 +19,12 @@ public class DeleteRecipeServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         Recipe recipe = new Recipe();
-        recipe.setId(Integer.parseInt(pathParts[pathParts.length-1]));
+        recipe.setId(Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]));
         new RecipeService().delete(recipe);
-        response.sendRedirect("http://localhost:8081/my_recipes/1");
+        if (pathParts[pathParts.length-1].split("_").length==1)
+            response.sendRedirect("http://localhost:8081/my_recipes/1");
+        else
+            response.sendRedirect("http://localhost:8081/recipes_management");
     }
 
 }

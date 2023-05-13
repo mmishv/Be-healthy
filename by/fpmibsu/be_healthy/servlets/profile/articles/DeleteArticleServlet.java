@@ -18,8 +18,11 @@ public class DeleteArticleServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         Article article = new Article();
-        article.setId(Integer.parseInt(pathParts[pathParts.length-1]));
+        article.setId(Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]));
         new ArticleService().delete(article);
-        response.sendRedirect("http://localhost:8081/my_articles/1");
+        if (pathParts[pathParts.length-1].split("_").length==1)
+            response.sendRedirect("http://localhost:8081/my_articles/1");
+        else
+            response.sendRedirect("http://localhost:8081/articles_management");
     }
 }
