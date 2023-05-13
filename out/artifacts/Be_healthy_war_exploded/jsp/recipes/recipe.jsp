@@ -71,7 +71,7 @@
                     </li>
                 </c:if>
                 <c:forEach begin="1" end="${page_cnt}" varStatus="i">
-                    <li class="page-item"><a class="page-link" href="${cat_id}${i}"> ${i.count} </a></li>
+                    <li class="page-item"><a class="page-link" href="${cat_id}${i.count}"> ${i.count} </a></li>
                 </c:forEach>
                 <c:if test="${cur_page<page_cnt}">
                     <li class="page-item">

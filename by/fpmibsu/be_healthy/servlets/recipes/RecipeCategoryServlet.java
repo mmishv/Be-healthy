@@ -8,6 +8,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
+import static java.lang.String.valueOf;
+
 @WebServlet(name = "RecipeCategoryServlet", value = "/recipe_category/*")
 public class RecipeCategoryServlet extends HttpServlet {
     final int RECIPES_PER_PAGE = 1;
@@ -22,7 +24,7 @@ public class RecipeCategoryServlet extends HttpServlet {
         int page_cnt = (int) (1.0 * (recipe_cnt + RECIPES_PER_PAGE - 1)/RECIPES_PER_PAGE);
         request.setAttribute("page_cnt", page_cnt);
         request.setAttribute("cur_page", page);
-        request.setAttribute("cat_id", category_id);
+        request.setAttribute("cat_id", valueOf(category_id)+"-");
         request.setAttribute("recipes", new RecipeService().getCategoryPageJSON(page, RECIPES_PER_PAGE, category_id));
         request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
         getServletContext().getRequestDispatcher("/jsp/recipes/recipe.jsp").forward(request, response);

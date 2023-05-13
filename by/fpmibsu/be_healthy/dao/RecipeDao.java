@@ -43,7 +43,7 @@ public class RecipeDao implements Dao<Recipe> {
     public List<Recipe> getCategoryPage(int page, int per_page, int category_id) {
         List<Recipe> recipes = new ArrayList<>();
         String sql = "SELECT * FROM RECIPE WHERE ID IN (SELECT RECIPE_ID ID "
-                + "FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?) AND MODERATED = TRUE"
+                + "FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?) AND MODERATED = TRUE "
                 + "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
         return helpGetPage(page, per_page, category_id, recipes, sql);
     }
@@ -226,7 +226,7 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     public int getNumberOfRecipesInCategory(int id) {
-        String sql = "SELECT COUNT(*) RES FROM RECIPE WHERE MODERATED = TRUE AND ID IN"
+        String sql = "SELECT COUNT(*) RES FROM RECIPE WHERE MODERATED = TRUE AND ID IN "
                 + "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)";
         return getAmount(id, sql);
     }
