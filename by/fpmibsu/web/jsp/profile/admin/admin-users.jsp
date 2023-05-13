@@ -50,15 +50,15 @@
                 </button>
             </li>
             <li class="list-group-item">
-                <a class="nav-link" href="">Пользователи</a></li>
+                <a class="nav-link" href="admin">Пользователи</a></li>
             <li class="list-group-item">
                 <a class="nav-link" href="">База продуктов</a></li>
             <li class="list-group-item">
-                <a class="nav-link" href="">Рецепты</a></li>
+                <a class="nav-link" href="recipes_management">Рецепты</a></li>
             <li class="list-group-item">
                 <a class="nav-link" href="">Категории рецептов</a></li>
             <li class="list-group-item">
-                <a class="nav-link" href="">Статьи</a></li>
+                <a class="nav-link" href="articles_management">Статьи</a></li>
             <li class="list-group-item">
                 <a class="nav-link" href="">Категории статей</a></li>
         </ul>
