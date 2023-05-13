@@ -21,6 +21,7 @@ public class Recipe implements Serializable {
     @Type(type = "org.hibernate.type.ImageType")
     byte[] image;
     String base64image;
+    boolean moderated;
     private List<Ingredient> ingredients = new ArrayList<>();
     private List<RecipeCategory> categories = new ArrayList<>();
     public int getId() {
@@ -139,5 +140,13 @@ public class Recipe implements Serializable {
     }
     public void addIngredient(Ingredient i){
         ingredients.add(i);
+    }
+
+    public boolean isModerated() {
+        return moderated;
+    }
+
+    public void setModerated(boolean moderated) {
+        this.moderated = moderated;
     }
 }

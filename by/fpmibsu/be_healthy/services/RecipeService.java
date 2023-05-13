@@ -22,8 +22,8 @@ public class RecipeService {
         return new RecipeDao().update(entity);
     }
 
-    public boolean delete(Recipe entity) {
-        return new RecipeDao().delete(entity);
+    public boolean delete(int id) {
+        return new RecipeDao().delete(id);
     }
 
     public boolean create(Recipe entity) {
@@ -34,14 +34,6 @@ public class RecipeService {
         return new ObjectMapper().writeValueAsString(new RecipeService().getAll());
     }
 
-    public List<Recipe> getAllInCategory(int id) {
-        return new RecipeDao().getAllInCategory(id);
-    }
-
-    public String getAllInCategoryJSON(int id) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(getAllInCategory(id));
-    }
-
     public List<Recipe> getCategoryPage(int page, int per_page, int category_id) {
         return new RecipeDao().getCategoryPage(page, per_page, category_id);
     }
@@ -50,20 +42,16 @@ public class RecipeService {
         return new ObjectMapper().writeValueAsString((getCategoryPage(page, per_page, category_id)));
     }
 
-    public List<Recipe> getPage(int page, int per_page) {
-        return new RecipeDao().getPage(page, per_page);
-    }
-
-    public String getPageJSON(int page, int per_page) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString((getPage(page, per_page)));
+    public List<Recipe> getPage(int page, int per_page, boolean moderated) {
+        return new RecipeDao().getPage(page, per_page, moderated);
     }
 
     public int getNumberOfRecipesInCategory(int id) {
         return new RecipeDao().getNumberOfRecipesInCategory(id);
     }
 
-    public int getNumberOfRecipes() {
-        return new RecipeDao().getNumberOfRecipes();
+    public int getNumberOfRecipes(boolean moderated) {
+        return new RecipeDao().getNumberOfRecipes(moderated);
     }
 
     public int getNumberOfRecipesWrittenBy(int id) {
@@ -73,8 +61,7 @@ public class RecipeService {
     public List<Recipe> getAuthorPage(int page, int per_page, int id) {
         return new RecipeDao().getAuthorPage(page, per_page, id);
     }
-
-    public String getAuthorPageJSON(int page, int per_page, int id) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString((getAuthorPage(page, per_page, id)));
+    public boolean updateModerationStatus(int id, boolean moderated){
+        return new RecipeDao().updateModerationStatus(id, moderated);
     }
 }
