@@ -14,13 +14,14 @@ public class DeleteRecipeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
-        Recipe recipe = new Recipe();
-        recipe.setId(Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]));
-        new RecipeService().delete(recipe);
-        if (pathParts[pathParts.length-1].split("_").length==1)
+        new RecipeService().delete(Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]));
+        var t = pathParts[pathParts.length-1].split("_");
+        if (t.length==1)
             response.sendRedirect("http://localhost:8081/my_recipes/1");
-        else
+        else if (t.length==2)
             response.sendRedirect("http://localhost:8081/recipes_management");
+        else
+            response.sendRedirect("http://localhost:8081/recipes_moderation/"+Integer.parseInt(t[t.length-1]));
     }
 
 }

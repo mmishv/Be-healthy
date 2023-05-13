@@ -22,8 +22,8 @@ public class ArticleService {
         return new ArticleDao().update(entity);
     }
 
-    public boolean delete(Article entity) {
-        return new ArticleDao().delete(entity);
+    public boolean delete(int id) {
+        return new ArticleDao().delete(id);
     }
 
     public boolean create(Article entity) {

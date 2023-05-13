@@ -57,10 +57,10 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
     }
 
     @Override
-    public boolean delete(ArticleCategory entity) {
+    public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ARTICLE_CATEGORY WHERE ID=?");){
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

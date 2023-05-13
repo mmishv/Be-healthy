@@ -14,9 +14,7 @@ public class DeleteProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
-        Profile profile = new Profile();
-        profile.setId(Integer.parseInt(pathParts[pathParts.length-1]));
-        new ProfileService().delete(profile);
+        new ProfileService().delete(Integer.parseInt(pathParts[pathParts.length-1]));
         response.sendRedirect("http://localhost:8081/admin");
     }
 }

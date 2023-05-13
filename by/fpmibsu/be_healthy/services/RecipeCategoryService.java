@@ -22,8 +22,8 @@ public class RecipeCategoryService {
         return new RecipeCategoryDao().update(entity);
     }
 
-    public boolean delete(RecipeCategory entity) {
-        return new RecipeCategoryDao().delete(entity);
+    public boolean delete(int id) {
+        return new RecipeCategoryDao().delete(id);
     }
 
     public boolean create(RecipeCategory entity) {
@@ -36,13 +36,5 @@ public class RecipeCategoryService {
 
     public String getAllJSON() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(new RecipeCategoryService().getAll());
-    }
-
-    public int getNumberOfRecipes() {
-        return new RecipeDao().getNumberOfRecipes();
-    }
-
-    public int getNumberOfRecipesInCategory(int id) {
-        return new RecipeDao().getNumberOfRecipesInCategory(id);
     }
 }

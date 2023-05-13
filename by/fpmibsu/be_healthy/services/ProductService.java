@@ -22,8 +22,8 @@ public class ProductService {
         return new ProductDao().update(entity);
     }
 
-    public boolean delete(Product entity) {
-        return new ProductDao().delete(entity);
+    public boolean delete(int id) {
+        return new ProductDao().delete(id);
     }
 
     public boolean create(Product entity) {

@@ -22,8 +22,8 @@ public class IngredientService {
         return new IngredientDao().update(entity);
     }
 
-    public boolean delete(Ingredient entity) {
-        return new IngredientDao().delete(entity);
+    public boolean delete(int id) {
+        return new IngredientDao().delete(id);
     }
 
     public boolean create(Ingredient entity) {

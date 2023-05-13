@@ -65,10 +65,10 @@ public class MealDao implements Dao<Meal> {
     }
 
     @Override
-    public boolean delete(Meal entity) {
+    public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL WHERE ID=?")) {
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

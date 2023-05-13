@@ -126,10 +126,10 @@ public class ProfileDao implements Dao<Profile> {
     }
 
     @Override
-    public boolean delete(Profile entity) {
+    public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PROFILE WHERE ID=?")) {
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

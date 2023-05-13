@@ -22,8 +22,8 @@ public class ArticleCategoryService {
         return new ArticleCategoryDao().update(entity);
     }
 
-    public boolean delete(ArticleCategory entity) {
-        return new ArticleCategoryDao().delete(entity);
+    public boolean delete(int id) {
+        return new ArticleCategoryDao().delete(id);
     }
 
     public boolean create(ArticleCategory entity) {

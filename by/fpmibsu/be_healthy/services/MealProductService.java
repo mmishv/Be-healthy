@@ -26,8 +26,8 @@ public class MealProductService {
         return new MealProductDao().deleteMealProducts(id);
     }
 
-    public boolean delete(MealProduct entity) {
-        return new MealProductDao().delete(entity);
+    public boolean delete(int id) {
+        return new MealProductDao().delete(id);
     }
 
     public boolean create(MealProduct entity) {

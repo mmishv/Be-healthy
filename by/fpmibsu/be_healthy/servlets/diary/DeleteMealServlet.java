@@ -15,9 +15,7 @@ public class DeleteMealServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String[] part =pathParts[pathParts.length-1].split("_");
-        Meal meal = new Meal();
-        meal.setId(Integer.parseInt(part[0]));
-        new MealService().delete(meal);
+        new MealService().delete(Integer.parseInt(part[0]));
         response.sendRedirect("http://localhost:8081/diary/"+part[1]);
     }
 }

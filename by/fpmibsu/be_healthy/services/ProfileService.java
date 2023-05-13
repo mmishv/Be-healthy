@@ -22,8 +22,8 @@ public class ProfileService {
         return new ProfileDao().update(entity);
     }
 
-    public boolean delete(Profile entity) {
-        return new ProfileDao().delete(entity);
+    public boolean delete(int id) {
+        return new ProfileDao().delete(id);
     }
 
     public boolean create(Profile entity) {

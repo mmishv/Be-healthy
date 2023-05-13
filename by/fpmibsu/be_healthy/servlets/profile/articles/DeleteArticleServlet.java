@@ -14,9 +14,7 @@ public class DeleteArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
-        Article article = new Article();
-        article.setId(Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]));
-        new ArticleService().delete(article);
+        new ArticleService().delete(Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]));
         if (pathParts[pathParts.length-1].split("_").length==1)
             response.sendRedirect("http://localhost:8081/my_articles/1");
         else

@@ -122,10 +122,10 @@ public class ArticleDao implements Dao<Article> {
     }
 
     @Override
-    public boolean delete(Article entity) {
+    public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ARTICLE WHERE ID=?")) {
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

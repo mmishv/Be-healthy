@@ -64,10 +64,10 @@ public class MealProductDao implements Dao<MealProduct> {
     }
 
     @Override
-    public boolean delete(MealProduct entity) {
+    public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL_PRODUCT WHERE ID=?")) {
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

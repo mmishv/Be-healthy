@@ -18,8 +18,8 @@ public class RoleService {
         return new RoleDao().update(entity);
     }
 
-    public boolean delete(Role entity) {
-        return new RoleDao().delete(entity);
+    public boolean delete(int id) {
+        return new RoleDao().delete(id);
     }
 
     public boolean create(Role entity) {

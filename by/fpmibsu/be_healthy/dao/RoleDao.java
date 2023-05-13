@@ -58,10 +58,10 @@ public class RoleDao implements Dao<Role> {
     }
 
     @Override
-    public boolean delete(Role entity) {
+    public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ROLE WHERE ID=?");){
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

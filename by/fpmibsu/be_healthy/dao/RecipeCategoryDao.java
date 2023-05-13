@@ -58,10 +58,10 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
     }
 
     @Override
-    public boolean delete(RecipeCategory entity) {
+    public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE_CATEGORY WHERE ID=?")) {
-            preparedStatement.setLong(1, entity.getId());
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

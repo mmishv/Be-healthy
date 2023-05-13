@@ -19,11 +19,11 @@ public class RecipesMainServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);
-        int  recipe_cnt = new RecipeService().getNumberOfRecipes();
+        int  recipe_cnt = new RecipeService().getNumberOfRecipes(true);
         int page_cnt = (int) (1.0 * (recipe_cnt + RECIPES_PER_PAGE - 1)/RECIPES_PER_PAGE);
         request.setAttribute("page_cnt", page_cnt);
         request.setAttribute("cur_page", page);
-        var recipes =  new RecipeService().getPage(page, RECIPES_PER_PAGE);
+        var recipes =  new RecipeService().getPage(page, RECIPES_PER_PAGE, true);
         request.setAttribute("recipes",new ObjectMapper().writeValueAsString(recipes));
         request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
         ArrayList<String> authors = new ArrayList<>();

@@ -23,8 +23,8 @@ public class MealService {
         return new MealDao().update(entity);
     }
 
-    public boolean delete(Meal entity) {
-        return new MealDao().delete(entity);
+    public boolean delete(int id) {
+        return new MealDao().delete(id);
     }
 
     public boolean create(Meal entity) {
