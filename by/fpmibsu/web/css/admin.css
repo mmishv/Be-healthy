@@ -95,7 +95,7 @@ button {
 
 /*scroll*/
 .scroll-table-body {
-    height: 60vh;
+    max-height: 60vh;
     overflow-x: auto;
     margin-top: 0px;
     margin-bottom: 20px;
