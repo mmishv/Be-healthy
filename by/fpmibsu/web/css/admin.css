@@ -130,10 +130,6 @@ button {
     margin: auto;
 }
 
-.us #search, .us .scroll-table {
-    width: 88% !important;
-}
-
-.rec #search, .rec .scroll-table {
+.rec #search, .rec .scroll-table, .us #search, .us .scroll-table {
     width: 78% !important;
 }

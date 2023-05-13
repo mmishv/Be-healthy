@@ -1,31 +1,16 @@
-.back-btn#admin-btn {
-    position: relative !important;
-    margin: auto !important;
-    width: 100%;
-    right: 0;
-}
-
-#table-search {
-    margin: 1% 6%;
-    width: 88% !important;
-    background-color: white;
-}
-
-.users h3 {
+/*header*/
+h3.header {
     margin: 2% auto;
     color: white;
     text-align: center;
 }
 
-#table-search th {
-    font-weight: 500 !important;
-    background-color: #c1e45cc4;
-}
-
-#table-search td, #table-search th {
-    text-align: center;
-    vertical-align: middle;
-    border: solid 1px #cfd4d9;
+/*buttons*/
+.back-btn#admin-btn {
+    position: relative !important;
+    margin: auto !important;
+    width: 100%;
+    right: 0;
 }
 
 button {
@@ -55,6 +40,14 @@ button {
     vertical-align: middle;
 }
 
+#show-all-btn {
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem !important;
+    position: absolute;
+}
+
+/*pagination*/
 .pagination-wrapper {
     text-align: -webkit-center;
     text-align: center;
@@ -75,14 +68,68 @@ button {
     background-color: #137d51 !important;
 }
 
-#show-all-btn {
-    border-radius: 0.25rem;
-    padding: 0.5rem 0.75rem;
-    margin-bottom: 1rem !important;
-    position: absolute;
+/*table*/
+.scroll-table {
+    margin: auto !important;
+    background-color: white;
 }
 
+.scroll-table td, .scroll-table th {
+    text-align: center;
+    vertical-align: middle !important;
+    border: solid 1px #cfd4d9;
+}
+
+.scroll-table th {
+    font-weight: 500 !important;
+    border: none !important;
+}
+
+.us .scroll-table th {
+    background-color: #c1e45cc4;
+}
+
+.rec .scroll-table th {
+    background-color: #61dbb6c4;
+}
+
+/*scroll*/
+.scroll-table-body {
+    max-height: 60vh;
+    overflow-x: auto;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.scroll-table table {
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+    margin: 0 !important;
+}
+
+.scroll-table-body thead {
+    visibility: collapse;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+/*search*/
 #search {
-    width: 88%;
     margin: auto;
+}
+
+.rec #search, .rec .scroll-table, .us #search, .us .scroll-table {
+    width: 78% !important;
 }
