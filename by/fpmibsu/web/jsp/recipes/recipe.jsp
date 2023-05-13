@@ -3,12 +3,7 @@
 <%@ page import="by.fpmibsu.be_healthy.entity.Recipe" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
-<%@ page import="by.fpmibsu.be_healthy.services.ProfileService" %>
-<%@ page import="java.sql.SQLException" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.RecipeCategory" %>
-<%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.math.BigDecimal" %>
 <%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
 <%--
   Created by IntelliJ IDEA.

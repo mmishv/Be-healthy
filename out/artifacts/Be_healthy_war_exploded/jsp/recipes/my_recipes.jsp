@@ -1,12 +1,6 @@
-<%@ page import="by.fpmibsu.be_healthy.entity.Recipe" %>
-<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
-<%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="by.fpmibsu.be_healthy.services.ProfileService" %>
-<%@ page import="by.fpmibsu.be_healthy.entity.RecipeCategory" %>
-<%@ page import="by.fpmibsu.be_healthy.entity.Ingredient" %><%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--
   Created by IntelliJ IDEA.
   User: Masha
   Date: 07.05.2023
@@ -54,187 +48,146 @@
         <a class="nav-link" href="/my_articles/1">Мои статьи</a></li>
     </ul>
   </div>
-  <%
-    int page_cnt = (int) request.getAttribute("page_cnt");
-    int cur_page = (int) request.getAttribute("cur_page");
-  %>
   <div class="col-sm-10">
     <button type="button" class="btn add-button">
       <a href="http://localhost:8081/create_recipe">Добавить рецепт</a></button>
     <nav>
       <ul class="pagination">
-        <%
-          if (cur_page > 1) {
-        %>
-        <li class="page-item">
-          <a class="page-link" href="<%=(cur_page-1)%>" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <%
-          }
-          for (int i = 1; i <= page_cnt; i++) {
-        %>
-        <li class="page-item"><a class="page-link" href="<%=i%>"><%=i%></a></li>
-        <%
-          }
-          if (cur_page < page_cnt) {
-        %>
-        <li class="page-item">
-          <a class="page-link" href="<%=(cur_page+1)%>" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-        <%
-          }
-        %>
-        %>
+        <c:if test="${cur_page>1}">
+          <li class="page-item">
+            <a class="page-link" href="${pref}${cur_page-1}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+        </c:if>
+        <c:forEach begin="1" end="${page_cnt}" varStatus="i">
+          <li class="page-item"><a class="page-link" href="${pref}${i}"> ${i.count} </a></li>
+        </c:forEach>
+        <c:if test="${cur_page<page_cnt}">
+          <li class="page-item">
+            <a class="page-link" href="${pref}${cur_page+1}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </c:if>
       </ul>
     </nav>
     <div class="recipe-wrapper">
-      <% ArrayList<Recipe> recipes = new ObjectMapper().readValue(request.getAttribute("recipes").toString(),
-              new TypeReference<ArrayList<Recipe>>() {
-              });
-        String name = request.getSession().getAttribute("login").toString();
-        for (Recipe recipe : recipes) {
-          HashMap<String, BigDecimal> kbju = recipe.getKBJU();
-      %>
-      <div class="card">
-        <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title"><%=recipe.getTitle()%>
-          </h5>
-          <h6 class="card-title"><%=name%>
-          </h6>
-          <h6 class="card-title"><%=recipe.getCookingTime()%> минут</h6>
-        </div>
-        <div class="card-body">
-          <button type="button" class="btn" onclick="deleteRecipe(<%=recipe.getId()%>)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="black"
-                 class="bi bi-trash" viewBox="0 0 16 16">
-              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-            </svg>
-          </button>
-          <button type="button" class="btn btn-primary" data-toggle="modal"
-                  data-target="#<%=recipe.getId()%>">
-            Посмотреть рецепт
-          </button>
-          <button type="button" class="btn" onclick="editRecipe(<%=recipe.getId()%>)" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                 class="bi bi-pencil" viewBox="0 0 16 16">
-              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-            </svg>
-          </button>
-        </div>
-        <div class="modal fade" id="<%=recipe.getId()%>" tabindex="-1" role="dialog"
-             aria-labelledby="<%=recipe.getId()%>" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="<%=recipe.getId()%>"><%=recipe.getTitle()%>
-                </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <img src="data:image/jpeg;base64,<%=recipe.getBase64image()%>" class="modal-img">
-                <div class="general-info">
+      <c:forEach items="${recipes}" var="recipe" varStatus="loop">
+        <div class="card">
+          <img src="data:image/jpeg;base64,${recipe.getBase64image()}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">${recipe.title}
+            </h5>
+            <h6 class="card-title">${authors[loop.index]}</h6>
+            <h6 class="card-title">${recipe.cookingTime} минут</h6>
+          </div>
+          <div class="card-body">
+            <button type="button" class="btn" onclick="deleteRecipe(${recipe.getId()})">
+              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="black"
+                   class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+              </svg>
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#${recipe.getId()}">
+              Посмотреть рецепт
+            </button>
+            <button type="button" class="btn" onclick="editRecipe(${recipe.getId()})" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                   class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="modal fade" id="${recipe.id}" tabindex="-1" role="dialog"
+               aria-labelledby="${recipe.id}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="${recipe.id}">${recipe.title}</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img src="data:image/jpeg;base64,${recipe.getBase64image()}" class="modal-img">
+                  <div class="general-info">
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th scope="col" class="col-md-3">К</th>
+                        <th scope="col" class="col-md-3">Б</th>
+                        <th scope="col" class="col-md-3">Ж</th>
+                        <th scope="col" class="col-md-3">У</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>${recipe.getKBJU()['k']}
+                        </td>
+                        <td>${recipe.getKBJU()['b']}
+                        </td>
+                        <td>${recipe.getKBJU()['j']}
+                        </td>
+                        <td>${recipe.getKBJU()['u']}
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                    <div class="author${recipe.id}">Автор: ${authors[loop.index]}
+                    </div>
+                    <div class="cooking-time${recipe.id}">Время
+                      приготовления: ${recipe.cookingTime} минут
+                    </div>
+                    <div class="recipe-category${recipe.id}" style="display: inline">
+                      Категории:
+                    </div>
+                    <c:forEach items="${recipe.categories}" var="cat" varStatus="loop1">
+                      <div class="category" style="display: inline">${cat.name.toLowerCase()}<c:if
+                              test="${loop1.count!=fn:length(recipe.categories)}">, </c:if></div>
+                    </c:forEach>
+                  </div>
                   <table class="table">
                     <thead>
                     <tr>
-                      <th scope="col" class="col-md-3">К</th>
-                      <th scope="col" class="col-md-3">Б</th>
-                      <th scope="col" class="col-md-3">Ж</th>
-                      <th scope="col" class="col-md-3">У</th>
+                      <th scope="col"></th>
+                      <th scope="col" class="col-md-7">Ингредиент</th>
+                      <th scope="col" class="col-md-2">Количество</th>
+                      <th scope="col" class="col-md-3">Мера измерения</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td><%=kbju.get("k")%>
-                      </td>
-                      <td><%=kbju.get("b")%>
-                      </td>
-                      <td><%=kbju.get("j")%>
-                      </td>
-                      <td><%=kbju.get("u")%>
-                      </td>
-                    </tr>
+                    <c:forEach items="${recipe.ingredients}" var="i" varStatus="loop2">
+                      <tr>
+                        <th scope="row">${loop2.count}
+                        </th>
+                        <td>${i.name}
+                        </td>
+                        <td style="text-align: center;">${i.quantity}
+                        </td>
+                        <td style="text-align: center;">${i.unit}
+                        </td>
+                      </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
-                  <div class="author<%=recipe.getId()%>">Автор: <%=name%>
+                  <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
+                  <div id="recipe-text${recipe.id}" class="recipe-text">
+                      ${recipe.text}<br>
                   </div>
-                  <div class="cooking-time<%=recipe.getId()%>">Время
-                    приготовления: <%=recipe.getCookingTime()%>  минут
-                  </div>
-                  <div class="recipe-category<%=recipe.getId()%> " style="display: inline">
-                    Категории:
-                  </div>
-                  <%
-                    String category;
-                    int n = recipe.getCategories().size();
-                    for (RecipeCategory cat : recipe.getCategories()) {
-                      category = cat.getName().toLowerCase();
-                      if (--n != 0) {
-                  %>
-                  <div class="category" style="display: inline"><%= category %>,</div>
-                  <%
-                  } else {
-                  %>
-                  <div class="category" style="display: inline"><%= category %>
-                  </div>
-                  <%
-                      }
-                    }
-                  %>
                 </div>
-                <table class="table">
-                  <thead>
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col" class="col-md-7">Ингредиент</th>
-                    <th scope="col" class="col-md-2">Количество</th>
-                    <th scope="col" class="col-md-3">Мера измерения</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <%
-                    int cnt = 1;
-                    for (Ingredient i : recipe.getIngredients()) {
-                  %>
-                  <tr>
-                    <th scope="row"><%=cnt++%>
-                    </th>
-                    <td><%=i.getName()%>
-                    </td>
-                    <td style="text-align: center;"><%=i.getQuantity()%>
-                    </td>
-                    <td style="text-align: center;"><%=i.getUnit()%>
-                    </td>
-                  </tr>
-                  </tbody>
-                  <%
-                    }
-                  %>
-                </table>
-                <h5 style="text-align: center; margin-top: 3%">Рецепт</h5>
-                <div id="recipe-text<%=recipe.getId()%>" class="recipe-text">
-                  <%=recipe.getText()%><br>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <%
-        }
-      %>
+      </c:forEach>
     </div>
   </div>
 </div>
