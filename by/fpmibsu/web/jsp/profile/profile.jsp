@@ -35,7 +35,7 @@
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
 <div class="wrapper row">
-    <jsp:include page="profile-navbar.html"/>
+    <jsp:include page="profile-navbar.jsp"/>
     <div class="col-sm-10">
         <button class="btn btn-primary back-btn">
             <a href="logout">

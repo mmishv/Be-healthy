@@ -58,7 +58,7 @@
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
 <div class="wrapper" style="display: flex; height: 100%;">
-    <jsp:include page="../profile-navbar.html"/>
+    <jsp:include page="../profile-navbar.jsp"/>
     <%
         int page_cnt = (int) request.getAttribute("page_cnt");
         int cur_page = (int) request.getAttribute("cur_page");

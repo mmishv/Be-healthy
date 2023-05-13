@@ -35,7 +35,7 @@
   <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
 <div class="page-recipe">
-  <jsp:include page="../profile-navbar.html"/>
+  <jsp:include page="../profile/profile-navbar.jsp"/>
   <div class="col-sm-10">
     <button type="button" class="btn add-button">
       <a href="http://localhost:8081/create_recipe">Добавить рецепт</a></button>

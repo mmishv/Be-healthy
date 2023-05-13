@@ -1,3 +1,6 @@
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="static java.lang.String.valueOf" %>
+<%@page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="sections col-sm-2">
   <ul class="list-group">
     <li class="list-group-item">
