@@ -23,4 +23,13 @@
         <url-pattern>/diary/*</url-pattern>
         <url-pattern>/create_recipe</url-pattern>
     </filter-mapping>
+
+    <servlet>
+        <servlet-name>auth</servlet-name>
+        <jsp-file>/jsp/profile/auth.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>auth</servlet-name>
+        <url-pattern>/authentication</url-pattern>
+    </servlet-mapping>
 </web-app>

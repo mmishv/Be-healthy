@@ -1,11 +1,14 @@
 package by.fpmibsu.be_healthy.servlets.recipes;
 
+import by.fpmibsu.be_healthy.services.ProfileService;
 import by.fpmibsu.be_healthy.services.RecipeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "MyRecipesServlet", value = "/my_recipes/*")
 public class MyRecipesServlet extends HttpServlet {
@@ -19,8 +22,14 @@ public class MyRecipesServlet extends HttpServlet {
         int page_cnt = (int) (1.0 * (recipe_cnt + RECIPES_PER_PAGE - 1)/RECIPES_PER_PAGE);
         request.setAttribute("page_cnt", page_cnt);
         request.setAttribute("cur_page", page);
-        request.setAttribute("recipes", new RecipeService().getAuthorPageJSON(page, RECIPES_PER_PAGE,
-                (int) request.getSession().getAttribute("id")));
+        var recipes =  new RecipeService().getAuthorPage(page, RECIPES_PER_PAGE,
+                (int) request.getSession().getAttribute("id"));
+        request.setAttribute("recipes", recipes);
+        ArrayList<String> authors = new ArrayList<>();
+        for (var r : recipes){
+            authors.add(new ProfileService().getEntityById(r.getAuthorId()).getLogin());
+        }
+        request.setAttribute("authors", authors);
         getServletContext().getRequestDispatcher("/jsp/recipes/my_recipes.jsp").forward(request, response);
     }
 }
