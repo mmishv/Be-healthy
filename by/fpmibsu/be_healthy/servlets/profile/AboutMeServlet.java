@@ -36,6 +36,6 @@ public class AboutMeServlet extends HttpServlet {
         if (!Objects.equals(request.getParameter("name"), ""))
             profile.setName(new String(request.getParameter("name").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
         new ProfileService().updateMainInfo(profile);
-        response.sendRedirect("http://localhost:8081/profile");
+        response.sendRedirect(request.getContextPath()+"/profile");
     }
 }

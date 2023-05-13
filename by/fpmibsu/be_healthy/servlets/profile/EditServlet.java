@@ -36,6 +36,6 @@ public class EditServlet extends HttpServlet {
         if (!Objects.equals(request.getParameter("u"), ""))
             profile.getKBJU_norm().put("u", BigDecimal.valueOf(Double.parseDouble(request.getParameter("u"))));
         new ProfileService().update(profile);
-        response.sendRedirect("http://localhost:8081/profile");
+        response.sendRedirect(request.getContextPath()+"/profile");
     }
 }

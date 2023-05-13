@@ -38,8 +38,4 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("articles", new ArticleService().getPageJSON(page, ARTICLES_PER_PAGE));
         getServletContext().getRequestDispatcher("/jsp/main/main.jsp").forward(request, response);
     }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

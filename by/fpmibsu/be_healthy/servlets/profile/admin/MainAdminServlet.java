@@ -15,9 +15,4 @@ public class MainAdminServlet extends HttpServlet {
         request.setAttribute("my_id", request.getSession().getAttribute("id"));
         getServletContext().getRequestDispatcher("/jsp/profile/admin/admin-users.jsp").forward(request, response);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

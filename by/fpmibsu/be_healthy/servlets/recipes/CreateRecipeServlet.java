@@ -47,8 +47,8 @@ public class CreateRecipeServlet extends HttpServlet {
         int cnt = 1;
         while (request.getParameter("ingredient" + cnt) != null) {
             Ingredient ing = new Ingredient();
-            ing.setId(Integer.parseInt(request.getParameter("ingredient" + String.valueOf(cnt))));
-            ing.setQuantity(Integer.parseInt(request.getParameter("quantity" + String.valueOf(cnt))));
+            ing.setId(Integer.parseInt(request.getParameter("ingredient" + cnt)));
+            ing.setQuantity(Integer.parseInt(request.getParameter("quantity" + cnt)));
             ingredients.add(ing);
             cnt++;
         }
@@ -62,6 +62,6 @@ public class CreateRecipeServlet extends HttpServlet {
         recipe.setIngredients(ingredients);
         recipe.setCategories(categories);
         new RecipeService().create(recipe);
-        response.sendRedirect("http://localhost:8081/my_recipes/1");
+        response.sendRedirect(request.getContextPath()+"/my_recipes/1");
     }
 }

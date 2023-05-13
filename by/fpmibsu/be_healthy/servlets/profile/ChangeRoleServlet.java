@@ -20,6 +20,6 @@ public class ChangeRoleServlet extends HttpServlet {
         role.setId(role.getId()==1? 2: 1);
         profile.setRole(role);
         new ProfileService().updateRole(profile);
-        response.sendRedirect("http://localhost:8081/admin");
+        response.sendRedirect(request.getContextPath()+"/admin");
     }
 }

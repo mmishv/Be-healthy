@@ -44,6 +44,6 @@ public class CreateArticleServlet extends HttpServlet {
         article.setCategories(categories);
         article.setDateOfPublication(valueOf(LocalDate.now()));
         new ArticleService().create(article);
-        response.sendRedirect("http://localhost:8081/my_articles/1");
+        response.sendRedirect(request.getContextPath()+"/my_articles/1");
     }
 }

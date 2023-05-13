@@ -40,6 +40,6 @@ public class RecipesModerationServlet extends HttpServlet {
         String[] lastPart = pathParts[pathParts.length-1].split("-");
         int id = Integer.parseInt(lastPart[lastPart.length-1]);
         new RecipeService().updateModerationStatus(id, true);
-        response.sendRedirect("http://localhost:8081/recipes_moderation/"+Integer.parseInt(lastPart[0]));
+        response.sendRedirect(request.getContextPath()+"/recipes_moderation/"+Integer.parseInt(lastPart[0]));
     }
 }

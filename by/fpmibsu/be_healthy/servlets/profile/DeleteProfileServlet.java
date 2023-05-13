@@ -1,6 +1,5 @@
 package by.fpmibsu.be_healthy.servlets.profile;
 
-import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.services.ProfileService;
 
 import javax.servlet.*;
@@ -15,6 +14,6 @@ public class DeleteProfileServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         new ProfileService().delete(Integer.parseInt(pathParts[pathParts.length-1]));
-        response.sendRedirect("http://localhost:8081/admin");
+        response.sendRedirect(request.getContextPath()+"/admin");
     }
 }

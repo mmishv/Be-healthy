@@ -75,6 +75,6 @@ public class MealServlet extends HttpServlet {
         meal.setDateOfMeal(valueOf(pathParts[pathParts.length-1]));
         meal.setTimeOfMeal(Time.valueOf(LocalTime.now()));
         new MealDao().create(meal);
-        response.sendRedirect("http://localhost:8081/diary/"+pathParts[pathParts.length-1]);
+        response.sendRedirect(request.getContextPath()+"/diary/"+pathParts[pathParts.length-1]);
     }
 }

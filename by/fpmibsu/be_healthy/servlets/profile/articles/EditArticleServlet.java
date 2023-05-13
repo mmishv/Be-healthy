@@ -52,8 +52,8 @@ public class EditArticleServlet extends HttpServlet {
         article.setCategories(categories);
         new ArticleService().update(article);
         if (pathParts[pathParts.length-1].split("_").length==1)
-            response.sendRedirect("http://localhost:8081/my_articles/1");
+            response.sendRedirect(request.getContextPath()+"/my_articles/1");
         else
-            response.sendRedirect("http://localhost:8081/articles_management");
+            response.sendRedirect(request.getContextPath()+"/articles_management");
     }
 }

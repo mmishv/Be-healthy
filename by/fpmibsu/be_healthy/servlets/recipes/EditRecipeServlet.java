@@ -51,8 +51,8 @@ public class EditRecipeServlet extends HttpServlet {
         int cnt = 1;
         while (request.getParameter("ingredient" + cnt) != null) {
             Ingredient ing = new Ingredient();
-            ing.setId(Integer.parseInt(request.getParameter("ingredient" + String.valueOf(cnt))));
-            ing.setQuantity(Integer.parseInt(request.getParameter("quantity" + String.valueOf(cnt))));
+            ing.setId(Integer.parseInt(request.getParameter("ingredient" + cnt)));
+            ing.setQuantity(Integer.parseInt(request.getParameter("quantity" + cnt)));
             ingredients.add(ing);
             cnt++;
         }
@@ -72,8 +72,8 @@ public class EditRecipeServlet extends HttpServlet {
         recipe.setCategories(categories);
         new RecipeService().update(recipe);
         if (pathParts[pathParts.length-1].split("_").length==1)
-            response.sendRedirect("http://localhost:8081/my_recipes/1");
+            response.sendRedirect(request.getContextPath()+"/my_recipes/1");
         else
-            response.sendRedirect("http://localhost:8081/recipes_management");
+            response.sendRedirect(request.getContextPath()+"/recipes_management");
     }
 }
