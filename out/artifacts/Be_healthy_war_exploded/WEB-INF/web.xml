@@ -280,4 +280,13 @@
         <url-pattern>/admin/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteProfileServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.DeleteProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteProfileServlet</servlet-name>
+        <url-pattern>/delete_profile/*</url-pattern>
+    </servlet-mapping>
 </web-app>
