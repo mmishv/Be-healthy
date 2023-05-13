@@ -35,19 +35,7 @@
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
 <div class="wrapper row">
-    <div class="sections col-sm-2">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <a class="nav-link" href="/profile">Обо мне</a></li>
-            <li class="list-group-item">
-                <a class="nav-link" href="/diary/<%=valueOf(LocalDate.now().toString())%>">
-                    Приёмы пищи</a></li>
-            <li class="list-group-item">
-                <a class="nav-link" href="/my_recipes/1">Мои рецепты</a></li>
-            <li class="list-group-item">
-                <a class="nav-link" href="/my_articles/1">Мои статьи</a></li>
-        </ul>
-    </div>
+    <jsp:include page="profile-navbar.html"/>
     <div class="col-sm-10">
         <button class="btn btn-primary back-btn">
             <a href="logout">
