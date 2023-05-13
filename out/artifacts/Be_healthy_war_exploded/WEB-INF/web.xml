@@ -289,4 +289,14 @@
         <servlet-name>DeleteProfileServlet</servlet-name>
         <url-pattern>/delete_profile/*</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeRoleServlet</servlet-name>
+        <servlet-class>by.fpmibsu.be_healthy.servlets.profile.ChangeRoleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ChangeRoleServlet</servlet-name>
+        <url-pattern>/change_role/*</url-pattern>
+    </servlet-mapping>
 </web-app>
