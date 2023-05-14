@@ -21,7 +21,6 @@ button {
     display: flex;
     justify-content: space-around;
     vertical-align: middle;
-
 }
 
 .control-buttons button {
@@ -45,6 +44,19 @@ button {
     padding: 0.5rem 0.75rem;
     margin-bottom: 1rem !important;
     position: absolute;
+}
+
+.btn.btn-primary.save-btn {
+    margin: 3% auto 0 auto !important;
+    display: block !important;
+    background-color: #114630 !important;
+    width: 40%;
+}
+
+.btn.add-btn {
+    margin-left: 80%;
+    position: absolute;
+    background-color: #d7ea52c4 !important;
 }
 
 /*pagination*/
@@ -93,6 +105,10 @@ button {
     background-color: #61dbb6c4;
 }
 
+.simple .scroll-table th {
+    background-color: #d7ea52c4;
+}
+
 /*scroll*/
 .scroll-table-body {
     max-height: 60vh;
@@ -133,3 +149,13 @@ button {
 .rec #search, .rec .scroll-table, .us #search, .us .scroll-table {
     width: 78% !important;
 }
+
+.simple #search, .simple .scroll-table {
+    width: 60% !important;
+}
+
+/*modal*/
+/*.modal.fade{*/
+/*    margin-left: 17% !important;*/
+/*    width: 83% !important;*/
+/*}*/

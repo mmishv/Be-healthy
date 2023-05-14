@@ -8,6 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="utf-8">
     <title>Режим администратора</title>
@@ -34,7 +35,7 @@
     <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
 </div>
 <div class="wrapper row">
-   <jsp:include page="navbar.html"/>
+    <jsp:include page="navbar.html"/>
     <div class="col-sm-10 rec">
         <c:if test="${fn:length(items) > 0}">
             <c:set var="classpath" scope="session" value="${fn:split(items[0].getClass().name.toLowerCase(), '.')}"/>
@@ -75,14 +76,16 @@
                             <td>${item.dateOfPublication}</td>
                             <td>
                                 <div class="control-buttons">
-                                    <button type="submit" title="Редактировать" onclick="editEntity('${cl}', '${item.id}')">
+                                    <button type="submit" title="Редактировать"
+                                            onclick="editEntity('${cl}', '${item.id}')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                              fill="currentColor"
                                              class="bi bi-pencil" viewBox="0 0 16 16">
                                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                         </svg>
                                     </button>
-                                    <button type="submit" title="Удалить" name="delete" onclick="deleteEntity('${cl}', '${item.id}')">
+                                    <button type="submit" title="Удалить" name="delete"
+                                            onclick="deleteEntity('${cl}', '${item.id}')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                              class="bi bi-trash" viewBox="0 0 16 16">
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
@@ -103,11 +106,11 @@
 <script src="../../../js/tableSearch.js"></script>
 <script>
     function editEntity(entity, id) {
-        window.location.href = '/edit_' + entity + '/' + parseInt(id)+'_admin';
+        window.location.href = '/edit_' + entity + '/' + parseInt(id) + '_admin';
     }
 
     function deleteEntity(entity, id) {
-        window.location.href = '/delete_' + entity + '/' + parseInt(id)+'_admin';
+        window.location.href = '/delete_' + entity + '/' + parseInt(id) + '_admin';
     }
 </script>
 </body>

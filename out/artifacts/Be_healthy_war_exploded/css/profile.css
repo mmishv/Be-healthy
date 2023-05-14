@@ -6,6 +6,7 @@ body {
     height: 100%;
 }
 
+/*navbar*/
 .sections {
     background-color: #114630 !important;
     height: 100vh;
@@ -22,6 +23,7 @@ body {
     font-weight: 500;
 }
 
+/*main*/
 .wrapper {
     position: relative;
     height: 100%;
@@ -38,6 +40,15 @@ body {
 .inf h2 {
     margin-left: 3%;
     align-self: center;
+}
+
+.photo {
+    object-fit: cover;
+    object-position: center;
+    height: 8vw;
+    width: 8vw;
+    border-radius: 50%;
+    border: solid 1px white;
 }
 
 .row {
@@ -72,15 +83,30 @@ h5 {
     width: 30% !important;
 }
 
-.photo {
-    object-fit: cover;
-    object-position: center;
-    height: 8vw;
-    width: 8vw;
-    border-radius: 50%;
-    border: solid 1px white;
+.col-form-label.center {
+    text-align: center;
 }
 
+.modal-title, .modal-body label {
+    color: black;
+}
+
+input[type='radio'].large:checked:after {
+    height: 18px !important;
+    width: 18px !important;
+    left: -4px !important;
+}
+
+input[type='radio'].large:checked:after {
+    top: -5px !important
+}
+
+select.form-control {
+    width: 54% !important;
+    margin-left: 2% !important;
+}
+
+/*buttons*/
 .save-btn {
     font-size: large !important;
     width: 100%;
@@ -106,43 +132,31 @@ h5 {
     box-shadow: none !important;
 }
 
-.col-form-label.center {
-    text-align: center;
+.exit-buttons {
+    position: absolute;
+    margin-top: 3vh;
+    right: 5%;
+    display: flex;
+    justify-content: start;
+    width: fit-content;
+    flex-direction: column;
 }
 
-.modal-title, .modal-body label {
-    color: black;
-}
-
-input[type='radio'].large:checked:after {
-    height: 18px !important;
-    width: 18px !important;
-    left: -4px !important;
-}
-
-input[type='radio'].large:checked:after {
-    top: -5px !important
-}
-
-select.form-control {
-    width: 54% !important;
-    margin-left: 2% !important;
-}
-
-.back-btn {
-    background-color: #00000000 !important;
+.back-btn, .admin-btn {
+    background-color: black !important;
     border: solid 2px white !important;
     color: white !important;
-    position: absolute;
-    margin-top: 2%;
-    right: 5%;
 }
 
-.back-btn a {
+.admin-btn {
+    margin-top: 10%;
+}
+
+.back-btn a, .admin-btn a {
     color: white !important;
 }
 
-.back-btn a:hover {
+.back-btn a:hover, .admin-btn a:hover {
     color: white !important;
     text-decoration: none !important;
 }
