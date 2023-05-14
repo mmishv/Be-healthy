@@ -3,7 +3,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
 <%@ page import="by.fpmibsu.be_healthy.entity.Article" %>
-<%@ page import="by.fpmibsu.be_healthy.entity.ArticleCategory" %>
 <%--
   Created by IntelliJ IDEA.
   User: Masha

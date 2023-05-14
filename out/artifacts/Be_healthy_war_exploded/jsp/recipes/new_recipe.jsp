@@ -37,7 +37,7 @@
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <% ArrayList<RecipeCategory> cats = new ObjectMapper().readValue(request.getAttribute("categories").toString(),
         new TypeReference<ArrayList<RecipeCategory>>() {
@@ -106,7 +106,8 @@
             <div class="form-group row">
                 <label for="recipe-photo" class="col-sm-4 bold">Фото рецепта:</label>
                 <div class="col-sm-8">
-                    <input type="file" name="image" class="form-control-file" id="recipe-photo" required accept="image/png, image/jpeg">
+                    <input type="file" name="image" class="form-control-file" id="recipe-photo" required
+                           accept="image/png, image/jpeg">
                 </div>
             </div>
             <div class="form-group row">

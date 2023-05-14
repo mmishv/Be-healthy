@@ -3,7 +3,6 @@
 <%@ page import="by.fpmibsu.be_healthy.entity.Article" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
-<%@ page import="by.fpmibsu.be_healthy.entity.ArticleCategory" %>
 <%--
   Created by IntelliJ IDEA.
   User: Masha
@@ -38,7 +37,7 @@
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <div style="display: flex">
     <div class="calculator">
@@ -103,30 +102,28 @@
 
             <div class="form-group row">
                 <div class="col-sm-3">
-                    <button type="submit" class="btn btn-primary btn-black">Рассчитать</button>
+                    <button type="submit" class="btn btn-primary btn-black scaled">Рассчитать</button>
                 </div>
                 <div class="col-sm-3">
-                    <button type="reset" class="btn btn-primary"
+                    <button type="reset" class="btn btn-primary scaled"
                             style="background-color: #00000000; border: solid 2px white;">Сбросить
                     </button>
                 </div>
             </div>
             <c:if test="${not empty result}">
-                <tr>
-                    <td> Результат: ${result}
-                    </td>
-                </tr>
+                <h5> Результат: ${result} </h5>
             </c:if>
         </form>
     </div>
-<%
+    <%
         ArrayList<Article> articles = new ObjectMapper().readValue(request.getAttribute("articles").toString(),
-                new TypeReference<ArrayList<Article>>() {});
+                new TypeReference<ArrayList<Article>>() {
+                });
         request.setAttribute("articles", articles);
-%>
+    %>
     <div class="articles-wrapper col-sm-5">
         <c:forEach items="${articles}" var="article" varStatus="loop">
-            <div class="art-back">
+            <div class="art-back scaled">
                 <div class="article">
                     <h3 class="title"><a href="/article/${article.id}">${article.title}
                     </a>

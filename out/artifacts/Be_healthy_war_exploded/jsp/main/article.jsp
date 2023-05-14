@@ -30,7 +30,7 @@
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <button onclick="history.back();" class="btn btn-primary back-btn">
     &#8592; Назад
@@ -46,14 +46,14 @@
     </div>
     <div id="article-categories">
         <h6>
-        <c:forEach items="${article.categories}" var="cat" varStatus="loop">
-            <c:if test="${loop.count!=article.categories.size()}">
-                <div class="category" style="display: inline">${cat.getName().toLowerCase()}, </div>
-            </c:if>
-            <c:if test="${loop.count==article.categories.size()}">
-                <div class="category" style="display: inline">${cat.getName().toLowerCase()}</div>
-            </c:if>
-        </c:forEach>
+            <c:forEach items="${article.categories}" var="cat" varStatus="loop">
+                <c:if test="${loop.count!=article.categories.size()}">
+                    <div class="category" style="display: inline">${cat.getName().toLowerCase()},</div>
+                </c:if>
+                <c:if test="${loop.count==article.categories.size()}">
+                    <div class="category" style="display: inline">${cat.getName().toLowerCase()}</div>
+                </c:if>
+            </c:forEach>
         </h6>
     </div>
     <div id="article-text">

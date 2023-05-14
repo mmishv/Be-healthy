@@ -40,7 +40,7 @@
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <div>
     <div class="form-wrapper">
@@ -53,11 +53,12 @@
                 </div>
                 <div class="form-group row">
                     <label for="DropdownFormPassword1" class="col-sm-4">Пароль</label>
-                    <input type="password" class="form-control col-sm-8" name="password" id="DropdownFormPassword1" required>
+                    <input type="password" class="form-control col-sm-8" name="password" id="DropdownFormPassword1"
+                           required>
                 </div>
             </fieldset>
             <div style="display: flex; justify-content: flex-end;">
-                <button type="submit" class="btn btn-primary btn-black">Войти</button>
+                <button type="submit" class="btn btn-primary btn-black scaled">Войти</button>
             </div>
         </form>
         <form method="POST" action="/register">
@@ -69,14 +70,16 @@
                 </div>
                 <div class="form-group row">
                     <label for="DropdownFormPassword2" class="col-sm-4">Пароль</label>
-                    <input type="password" class="form-control col-sm-8" name="reg_password1" id="DropdownFormPassword2" required>
+                    <input type="password" class="form-control col-sm-8" name="reg_password1" id="DropdownFormPassword2"
+                           required>
                 </div>
                 <div class="form-group row">
                     <label for="DropdownFormPassword2-repeat" class="col-sm-4">Подтвердите пароль</label>
-                    <input type="password" class="form-control col-sm-8" name="reg_password2" id="DropdownFormPassword2-repeat" required>
+                    <input type="password" class="form-control col-sm-8" name="reg_password2"
+                           id="DropdownFormPassword2-repeat" required>
                 </div>
                 <div style="display: flex; justify-content: flex-end;">
-                    <button type="submit" class="btn btn-primary btn-black">Зарегистрироваться</button>
+                    <button type="submit" class="btn btn-primary btn-black scaled">Зарегистрироваться</button>
                 </div>
             </fieldset>
         </form>
