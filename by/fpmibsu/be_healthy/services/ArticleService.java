@@ -34,16 +34,16 @@ public class ArticleService {
         return new ObjectMapper().writeValueAsString(new ArticleService().getAll());
     }
 
-    public List<Article> getPage(int page, int per_page) {
-        return new ArticleDao().getPage(page, per_page);
+    public List<Article> getPage(int page, int per_page, boolean moderated) {
+        return new ArticleDao().getPage(page, per_page, moderated);
     }
 
-    public String getPageJSON(int page, int per_page) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString((getPage(page, per_page)));
+    public String getPageJSON(int page, int per_page, boolean moderated) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString((getPage(page, per_page, moderated)));
     }
 
-    public int getNumberOfArticles() {
-        return new ArticleDao().getNumberOfArticles();
+    public int getNumberOfArticles(boolean moderated) {
+        return new ArticleDao().getNumberOfArticles(moderated);
     }
 
     public List<Article> getAuthorPage(int page, int per_page, int id) {
@@ -56,5 +56,8 @@ public class ArticleService {
 
     public int getNumberOfArticlesWrittenBy(int id) {
         return new ArticleDao().getNumberOfArticlesWrittenBy(id);
+    }
+    public boolean updateModerationStatus(int id, boolean moderated){
+        return new ArticleDao().updateModerationStatus(id, moderated);
     }
 }

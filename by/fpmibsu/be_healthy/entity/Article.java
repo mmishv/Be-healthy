@@ -10,6 +10,7 @@ public class Article implements Serializable {
     private String fulltext;
     private Date dateOfPublication;
     private List<ArticleCategory> categories;
+    boolean moderated;
     public int getId() {
         return id;
     }
@@ -56,6 +57,14 @@ public class Article implements Serializable {
 
     public void setCategories(List<ArticleCategory> categories) {
         this.categories = categories;
+    }
+
+    public boolean isModerated() {
+        return moderated;
+    }
+
+    public void setModerated(boolean moderated) {
+        this.moderated = moderated;
     }
 
     @Override
