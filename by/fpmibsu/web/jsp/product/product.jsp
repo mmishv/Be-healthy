@@ -33,7 +33,7 @@
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <%
     ArrayList<Product> prods = new ObjectMapper().readValue(request.getAttribute("products").toString(),

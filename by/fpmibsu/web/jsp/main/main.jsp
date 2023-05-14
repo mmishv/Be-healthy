@@ -37,7 +37,7 @@
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <div style="display: flex">
     <div class="calculator">
@@ -102,19 +102,16 @@
 
             <div class="form-group row">
                 <div class="col-sm-3">
-                    <button type="submit" class="btn btn-primary btn-black">Рассчитать</button>
+                    <button type="submit" class="btn btn-primary btn-black scaled">Рассчитать</button>
                 </div>
                 <div class="col-sm-3">
-                    <button type="reset" class="btn btn-primary"
+                    <button type="reset" class="btn btn-primary scaled"
                             style="background-color: #00000000; border: solid 2px white;">Сбросить
                     </button>
                 </div>
             </div>
             <c:if test="${not empty result}">
-                <tr>
-                    <td> Результат: ${result}
-                    </td>
-                </tr>
+                <h5> Результат: ${result} </h5>
             </c:if>
         </form>
     </div>

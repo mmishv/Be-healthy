@@ -14,6 +14,7 @@
     <link rel="icon" href="../../assets/favicon2.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/profile.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -30,7 +31,7 @@
 <body>
 <jsp:directive.include file="../../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <div class="wrapper row">
     <jsp:include page="navbar.html"/>

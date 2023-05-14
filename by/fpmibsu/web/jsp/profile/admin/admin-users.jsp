@@ -15,6 +15,7 @@
     <link rel="icon" href="../../assets/favicon2.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/admin.css">
     <link rel="stylesheet" href="../../css/profile.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
@@ -31,7 +32,7 @@
 <body>
 <jsp:directive.include file="../../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <div class="wrapper row">
     <jsp:include page="navbar.html"/>
@@ -106,10 +107,11 @@
 <script src="../../../js/tableSearch.js"></script>
 <script>
     function changeProfileRole(id) {
-        window.location.href = '/change_role/'+parseInt(id);
+        window.location.href = '/change_role/' + parseInt(id);
     }
+
     function deleteProfile(id) {
-        window.location.href = '/delete_profile/'+parseInt(id);
+        window.location.href = '/delete_profile/' + parseInt(id);
     }
 </script>
 </body>

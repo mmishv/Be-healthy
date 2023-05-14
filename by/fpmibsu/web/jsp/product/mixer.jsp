@@ -35,11 +35,11 @@
 <body>
 <jsp:directive.include file="../common/header.jsp"></jsp:directive.include>
 <div class="background">
-    <div style="opacity: 0.8; background: black; width: 100%; height: 100%;"></div>
+    <div class="background-cover"></div>
 </div>
 <div>
     <button onclick="history.back();" class="btn btn-primary back-btn">
-       &#8592; Назад
+        &#8592; Назад
     </button>
     <h3 class="mixer-header">Микшер рецептов: результат вашего запроса</h3>
 </div>
