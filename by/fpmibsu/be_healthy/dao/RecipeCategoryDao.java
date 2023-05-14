@@ -73,9 +73,8 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
     @Override
     public boolean create(RecipeCategory entity) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE_CATEGORY (ID, NAME) VALUES(?, ?)")) {
-            preparedStatement.setLong(1, entity.getId());
-            preparedStatement.setString(2, entity.getName());
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE_CATEGORY (NAME) VALUES(?)")) {
+            preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
