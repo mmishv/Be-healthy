@@ -126,29 +126,34 @@
     <div class="articles-wrapper col-sm-5">
         <%
             ArrayList<Article> articles = new ObjectMapper().readValue(request.getAttribute("articles").toString(),
-                    new TypeReference<ArrayList<Article>>() {});
-            for (Article article: articles){
+                    new TypeReference<ArrayList<Article>>() {
+                    });
+            for (Article article : articles) {
         %>
-        <div class="article">
-            <h3 class="title"><a href="/article/<%=article.getId()%>"
-                                 style="color: white !important; text-decoration: none !important;"> <%=article.getTitle()%></a>
-            </h3>
-            <%
-                String category;
-                for (ArticleCategory cat : article.getCategories()) {
-                    category = cat.getName().toLowerCase();
-            %>
-            <div class="category" style="display: inline"><%=category%> </div>
-            <%
-                }
-            %>
-            <h6 class="article-text"><%=article.getFulltext()%></h6>
+        <div class="art-back">
+            <div class="article">
+                <h3 class="title"><a href="/article/<%=article.getId()%>"><%=article.getTitle()%>
+                </a>
+                </h3>
+                <%
+                    String category;
+                    for (ArticleCategory cat : article.getCategories()) {
+                        category = cat.getName().toLowerCase();
+                %>
+                <div class="category" style="display: inline"><%=category%>
+                </div>
+                <%
+                    }
+                %>
+                <h6 class="article-text"><%=article.getFulltext()%>
+                </h6>
+            </div>
         </div>
         <%
             }
         %>
         <nav>
-            <ul class="pagination">
+            <ul class="pagination justify-content-center">
                 <%
                     if (cur_page > 1) {
                 %>
@@ -162,7 +167,8 @@
                     }
                     for (int i = 1; i <= page_cnt; i++) {
                 %>
-                <li class="page-item"><a class="page-link" href="main/<%=i%>"><%=i%></a></li>
+                <li class="page-item"><a class="page-link" href="main/<%=i%>"><%=i%>
+                </a></li>
                 <%
                     }
                     if (cur_page < page_cnt) {
