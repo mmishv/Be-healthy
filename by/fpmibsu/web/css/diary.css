@@ -11,6 +11,7 @@
     width: 280px;
 }
 
+/*meals*/
 .meals-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -34,6 +35,10 @@
     overflow-y: auto;
 }
 
+.meal:hover {
+    transform: scale(1.05);
+}
+
 .form-control {
     width: 200px !important;
     margin: 0 auto 0 auto;
@@ -48,12 +53,6 @@
     width: 100%;
     background-color: #51d71957;
     font-size: 1.1rem;
-}
-
-.edit-button {
-    background-color: #114630 !important;
-    border: none !important;
-    width: fit-content;
 }
 
 .product.row {
@@ -95,6 +94,17 @@
     width: 100%;
 }
 
+/*buttons*/
+.btn {
+    background-color: #00000000;
+}
+
+.edit-button {
+    background-color: #114630 !important;
+    border: none !important;
+    width: fit-content;
+}
+
 .meal-buttons {
     display: flex;
     justify-content: space-between;
@@ -121,6 +131,17 @@
     vertical-align: middle;
 }
 
+.add-button {
+    margin: 4vh auto 0 auto;
+    display: block !important;
+    background-color: #114630 !important;
+    border: none !important;
+    width: 100% !important;
+    border: solid 2px white;
+    padding: .75rem !important;
+}
+
+/*scroll*/
 .scroll {
     overflow: auto;
 }
@@ -139,16 +160,7 @@
     border: 3px solid green;
 }
 
-.add-button {
-    margin: 4vh auto 0 auto;
-    display: block !important;
-    background-color: #114630 !important;
-    border: none !important;
-    width: 100% !important;
-    border: solid 2px white;
-    padding: .75rem !important;
-}
-
+/*modal*/
 .modal-dialog {
     max-width: 550px !important;
 }
@@ -163,7 +175,7 @@
 }
 
 .product-option {
-    justify-content: space-between;
+    justify-content: space-between !important;
 }
 
 .prod-option select, .prod-option input, .prod-option button,
@@ -187,6 +199,7 @@
     justify-content: center !important;
 }
 
+/*statistics*/
 .total {
     background-color: #114630;
     margin-top: 4vh;
@@ -216,6 +229,4 @@
     margin: 0 !important;
 }
 
-.btn {
-    background-color: #00000000;
-}
+
