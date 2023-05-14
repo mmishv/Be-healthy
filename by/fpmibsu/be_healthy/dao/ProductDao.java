@@ -56,12 +56,7 @@ public class ProductDao implements Dao<Product> {
     public boolean update(Product entity) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PRODUCT SET NAME=?, CARBOHYDRATES=?, FATS=?, PROTEINS=?, CALORIES=?, UNIT=? WHERE ID=?")) {
-            preparedStatement.setString(1, entity.getName());
-            preparedStatement.setDouble(2, entity.getCarbohydrates());
-            preparedStatement.setDouble(3, entity.getFats());
-            preparedStatement.setDouble(4, entity.getProteins());
-            preparedStatement.setInt(5, entity.getCalories());
-            preparedStatement.setString(6, entity.getUnit());
+            initCreateUpdate(entity, preparedStatement);
             preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -87,19 +82,23 @@ public class ProductDao implements Dao<Product> {
     @Override
     public boolean create(Product entity) {
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PRODUCT (ID, NAME, CARBOHYDRATES, FATS, PROTEINS, CALORIES, UNIT) VALUES(?, ?, ?, ?, ?, ?, ?)")) {
-            preparedStatement.setInt(1, entity.getId());
-            preparedStatement.setString(2, entity.getName());
-            preparedStatement.setDouble(3, entity.getCarbohydrates());
-            preparedStatement.setDouble(4, entity.getFats());
-            preparedStatement.setDouble(5, entity.getProteins());
-            preparedStatement.setInt(6, entity.getCalories());
-            preparedStatement.setString(7, entity.getUnit());
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "INSERT INTO PRODUCT (NAME, CARBOHYDRATES, FATS, PROTEINS, CALORIES, UNIT) VALUES( ?, ?, ?, ?, ?, ?)")) {
+            initCreateUpdate(entity, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+
+    private void initCreateUpdate(Product entity, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, entity.getName());
+        preparedStatement.setDouble(2, entity.getCarbohydrates());
+        preparedStatement.setDouble(3, entity.getFats());
+        preparedStatement.setDouble(4, entity.getProteins());
+        preparedStatement.setInt(5, entity.getCalories());
+        preparedStatement.setString(6, entity.getUnit());
     }
 }
