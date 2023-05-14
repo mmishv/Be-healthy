@@ -22,12 +22,13 @@ public class ArticleDao implements Dao<Article> {
         return articles;
     }
 
-    public List<Article> getPage(int page, int per_page) {
+    public List<Article> getPage(int page, int per_page, boolean moderated) {
         List<Article> recipes = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?")) {
-            statement.setInt(1, per_page);
-            statement.setInt(2, per_page * (page - 1));
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM ARTICLE WHERE moderated = ?  ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?")) {
+            statement.setBoolean(1, moderated);
+            statement.setInt(2, per_page);
+            statement.setInt(3, per_page * (page - 1));
             ResultSet resultSet = statement.executeQuery();
             initArticles(recipes, resultSet);
         } catch (SQLException e) {
@@ -65,6 +66,7 @@ public class ArticleDao implements Dao<Article> {
         article.setTitle(resultSet.getString("TITLE"));
         article.setFulltext(resultSet.getString("FULL_TEXT"));
         article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
+        article.setModerated(resultSet.getBoolean("MODERATED"));
         article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getId()));
     }
 
@@ -98,6 +100,20 @@ public class ArticleDao implements Dao<Article> {
         }
         return true;
     }
+
+    public boolean updateModerationStatus(int id, boolean moderated){
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ARTICLE SET MODERATED=? WHERE ID=?")) {
+            preparedStatement.setBoolean(1, moderated);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     private void deleteFromMM(int article_id){
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?")){
@@ -150,7 +166,8 @@ public class ArticleDao implements Dao<Article> {
     @Override
     public boolean create(Article entity) {
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement =  connection.prepareStatement("INSERT INTO ARTICLE (TITLE, PUBL_DATE, FULL_TEXT, AUTHOR_ID) VALUES(?, ?, ?, ?)")) {
+                PreparedStatement preparedStatement =  connection.prepareStatement(
+                        "INSERT INTO ARTICLE (TITLE, PUBL_DATE, FULL_TEXT, AUTHOR_ID) VALUES(?, ?, ?, ?)")) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
             preparedStatement.setString(3, entity.getFulltext());
@@ -164,13 +181,12 @@ public class ArticleDao implements Dao<Article> {
         return true;
     }
 
-    public int getNumberOfArticles() {
+    public int getNumberOfArticles(boolean moderated) {
         try (Connection connection = DataSource.getConnection();
-                Statement statement =  connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS ARTICLE_NUM FROM ARTICLE");
-            if (resultSet.next()) {
-                return resultSet.getInt("ARTICLE_NUM");
-            }
+             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) RES FROM ARTICLE WHERE MODERATED=?")) {
+            statement.setBoolean(1, moderated);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) return resultSet.getInt("RES");
         } catch (SQLException e) {
             e.printStackTrace();
         }
