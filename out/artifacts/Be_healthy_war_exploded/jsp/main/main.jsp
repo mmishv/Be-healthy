@@ -119,70 +119,51 @@
             </c:if>
         </form>
     </div>
-    <%
-        int page_cnt = (int) request.getAttribute("page_cnt");
-        int cur_page = (int) request.getAttribute("cur_page");
-    %>
+<%
+        ArrayList<Article> articles = new ObjectMapper().readValue(request.getAttribute("articles").toString(),
+                new TypeReference<ArrayList<Article>>() {});
+        request.setAttribute("articles", articles);
+%>
     <div class="articles-wrapper col-sm-5">
-        <%
-            ArrayList<Article> articles = new ObjectMapper().readValue(request.getAttribute("articles").toString(),
-                    new TypeReference<ArrayList<Article>>() {
-                    });
-            for (Article article : articles) {
-        %>
-        <div class="art-back">
-            <div class="article">
-                <h3 class="title"><a href="/article/<%=article.getId()%>"><%=article.getTitle()%>
-                </a>
-                </h3>
-                <%
-                    String category;
-                    for (ArticleCategory cat : article.getCategories()) {
-                        category = cat.getName().toLowerCase();
-                %>
-                <div class="category" style="display: inline"><%=category%>
+        <c:forEach items="${articles}" var="article" varStatus="loop">
+            <div class="art-back">
+                <div class="article">
+                    <h3 class="title"><a href="/article/${article.id}">${article.title}
+                    </a>
+                    </h3>
+                    <c:forEach items="${article.categories}" var="cat" varStatus="loop">
+
+                        <div class="category" style="display: inline">${cat.name.toLowerCase()}
+                        </div>
+                    </c:forEach>
+                    <h6 class="article-text">${article.fulltext}
+                    </h6>
                 </div>
-                <%
-                    }
-                %>
-                <h6 class="article-text"><%=article.getFulltext()%>
-                </h6>
             </div>
-        </div>
-        <%
-            }
-        %>
+        </c:forEach>
         <nav>
             <ul class="pagination justify-content-center">
-                <%
-                    if (cur_page > 1) {
-                %>
-                <li class="page-item">
-                    <a class="page-link" href="main/<%=cur_page-1%>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-                <%
-                    }
-                    for (int i = 1; i <= page_cnt; i++) {
-                %>
-                <li class="page-item"><a class="page-link" href="main/<%=i%>"><%=i%>
-                </a></li>
-                <%
-                    }
-                    if (cur_page < page_cnt) {
-                %>
-                <li class="page-item">
-                    <a class="page-link" href="main/<%=(cur_page+1)%>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
-                <%
-                    }
-                %>
-                %>
+                <c:if test="${cur_page>1}">
+                    <li class="page-item">
+                        <a class="page-link" href="main/${cur_page-1}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:forEach begin="1" end="${page_cnt}" varStatus="i">
+                    <li class="page-item"><a class="page-link" href="main/${i.count}">${i.count}
+                    </a></li>
+                </c:forEach>
+                <c:if test="${cur_page < page_cnt}">
+
+                    <li class="page-item">
+                        <a class="page-link" href="main/${cur_page+1}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </nav>
     </div>
