@@ -50,7 +50,7 @@
                     Выйти</a>
             </button>
             <c:if test="${profile.getRole().getName()=='администратор'}">
-                <button type="button" class="btn btn-primary admin-btn">
+                <button type="button" class="btn btn-primary admin-btn scaled">
                     <a href="admin">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                              class="bi bi-person-gear" viewBox="0 0 16 16">
@@ -72,7 +72,7 @@
                     <div class="col-sm-7"
                          style="display: inline-flex; justify-content: space-between; padding-right: 0">
                         <h2>${profile.getName()}</h2>
-                        <button type="button" class="btn btn-primary edit-btn" data-toggle="modal"
+                        <button type="button" class="btn btn-primary edit-btn scaled" data-toggle="modal"
                                 data-target="#editModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
                                  class="bi bi-pencil" viewBox="0 0 16 16">
@@ -193,7 +193,7 @@
                 </h6>
                 <div class="form-group row" style="justify-content: end;">
                     <div class="col-sm-5">
-                        <button class="btn btn-primary btn-black save-btn">Сохранить</button>
+                        <button class="btn btn-primary btn-black save-btn scaled">Сохранить</button>
                     </div>
                 </div>
             </form>

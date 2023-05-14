@@ -41,9 +41,11 @@
 </div>
 <%
     ArrayList<RecipeCategory> categories = new ObjectMapper().readValue(request.getAttribute("categories").toString(),
-            new TypeReference<ArrayList<RecipeCategory>>() {});
+            new TypeReference<ArrayList<RecipeCategory>>() {
+            });
     ArrayList<Recipe> recipes = new ObjectMapper().readValue(request.getAttribute("recipes").toString(),
-            new TypeReference<ArrayList<Recipe>>() {});
+            new TypeReference<ArrayList<Recipe>>() {
+            });
     request.setAttribute("recipes", recipes);
     request.setAttribute("categories", categories);
 %>
@@ -58,7 +60,7 @@
         </ul>
     </div>
     <div class="col-sm-10">
-        <button type="button" class="btn add-button">
+        <button type="button scaled" class="btn add-button">
             <a href="/create_recipe">Добавить рецепт</a></button>
         <nav>
             <ul class="pagination">
@@ -94,7 +96,7 @@
                         <h6 class="card-title">${recipe.cookingTime} минут</h6>
                     </div>
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                        <button type="button" class="btn btn-primary scaled" data-toggle="modal"
                                 data-target="#${recipe.id}">
                             Посмотреть рецепт
                         </button>

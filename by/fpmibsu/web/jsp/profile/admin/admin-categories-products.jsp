@@ -38,7 +38,8 @@
         <h3 class="header">База продуктов</h3>
 
         <div class="form-group">
-            <button class="btn add-btn" type="submit" title="Добавить" data-toggle="modal" data-target="#editModal">
+            <button class="btn add-btn scaled" type="submit" title="Добавить" data-toggle="modal"
+                    data-target="#editModal">
                 +
             </button>
             <input class="form-control" id="search" placeholder="Поиск по названию..." autocomplete="off" name="search"

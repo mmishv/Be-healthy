@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div style="display: flex; justify-content: flex-end;">
-                <button type="submit" class="btn btn-primary btn-black">Рассчитать</button>
+                <button type="submit" class="btn btn-primary btn-black scaled">Рассчитать</button>
             </div>
         </form>
     </div>

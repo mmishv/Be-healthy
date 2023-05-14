@@ -118,14 +118,15 @@
             </c:if>
         </form>
     </div>
-<%
+    <%
         ArrayList<Article> articles = new ObjectMapper().readValue(request.getAttribute("articles").toString(),
-                new TypeReference<ArrayList<Article>>() {});
+                new TypeReference<ArrayList<Article>>() {
+                });
         request.setAttribute("articles", articles);
-%>
+    %>
     <div class="articles-wrapper col-sm-5">
         <c:forEach items="${articles}" var="article" varStatus="loop">
-            <div class="art-back">
+            <div class="art-back scaled">
                 <div class="article">
                     <h3 class="title"><a href="/article/${article.id}">${article.title}
                     </a>

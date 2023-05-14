@@ -98,3 +98,6 @@ h4 {
     border: solid 2px black !important;
 }
 
+.scaled:hover, .back-btn:hover {
+    transform: scale(1.05);
+}

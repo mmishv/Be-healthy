@@ -61,10 +61,6 @@ input {
     margin: 2% 0 0 0 !important;
 }
 
-.btn.btn-black:hover {
-    transform: scale(1.05);
-}
-
 .ing-button {
     background-color: black;
     color: white;

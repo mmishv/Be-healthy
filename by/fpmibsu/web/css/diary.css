@@ -35,10 +35,6 @@
     overflow-y: auto;
 }
 
-.meal:hover {
-    transform: scale(1.05);
-}
-
 .form-control {
     width: 200px !important;
     margin: 0 auto 0 auto;
