@@ -31,11 +31,11 @@ public class MainServlet extends HttpServlet {
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo==null? new String[0]: pathInfo.split("/");
         int page = Integer.parseInt(pathParts.length==0? String.valueOf(1) : pathParts[pathParts.length-1]);
-        int article_cnt = new ArticleService().getNumberOfArticles();
+        int article_cnt = new ArticleService().getNumberOfArticles(true);
         int page_cnt = (int) (1.0 * (article_cnt + ARTICLES_PER_PAGE - 1)/ARTICLES_PER_PAGE);
         request.setAttribute("page_cnt", page_cnt);
         request.setAttribute("cur_page", page);
-        request.setAttribute("articles", new ArticleService().getPageJSON(page, ARTICLES_PER_PAGE));
+        request.setAttribute("articles", new ArticleService().getPageJSON(page, ARTICLES_PER_PAGE,true));
         getServletContext().getRequestDispatcher("/jsp/main/main.jsp").forward(request, response);
     }
 }

@@ -1,7 +1,6 @@
 package by.fpmibsu.be_healthy.servlets.profile.admin;
 
 import by.fpmibsu.be_healthy.services.ProfileService;
-import by.fpmibsu.be_healthy.services.RecipeCategoryService;
 import by.fpmibsu.be_healthy.services.RecipeService;
 
 import javax.servlet.*;
@@ -24,7 +23,6 @@ public class RecipesModerationServlet extends HttpServlet {
         request.setAttribute("page_cnt", page_cnt);
         request.setAttribute("cur_page", page);
         request.setAttribute("recipes", recipes);
-        request.setAttribute("categories", new RecipeCategoryService().getAll());
         ArrayList<String> authors = new ArrayList<>();
         for (var r : recipes){
             authors.add(new ProfileService().getEntityById(r.getAuthorId()).getLogin());
