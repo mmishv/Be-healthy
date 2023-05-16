@@ -1,4 +1,4 @@
-package be_healthy.entity;
+package entity;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.entity.Ingredient;
 import by.fpmibsu.be_healthy.entity.Product;

@@ -1,4 +1,4 @@
-package be_healthy.entity;
+package entity;
 
 import by.fpmibsu.be_healthy.entity.Profile;
 import org.junit.Before;
