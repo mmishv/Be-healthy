@@ -1,3 +1,4 @@
+/*
 package be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class HibernateCRUDTest extends HTest {
 
+*/
 /*    @Test
     public void testGetObjectById_success() {
         ArticleCategory category = em.find(ArticleCategory.class, 1);
@@ -44,6 +46,8 @@ public class HibernateCRUDTest extends HTest {
 
         List<ArticleCategory> books = em.createNamedQuery("ArticleCategory.getAll", ArticleCategory.class).getResultList();
         assertEquals(0, books.size());
-    }*/
+    }*//*
+
 
 }
+*/
