@@ -13,7 +13,6 @@
         </element>
       </element>
       <element id="javaee-facet-resources" facet="Be-healthy/web/Web" />
-      <element id="javaee-facet-resources" facet="Be-healthy/web/Web3" />
     </root>
   </artifact>
 </component>
