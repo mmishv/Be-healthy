@@ -5,7 +5,7 @@
 -- Dumped from database version 14.5
 -- Dumped by pg_dump version 14.5
 
--- Started on 2023-05-14 14:58:53
+-- Started on 2023-05-16 17:36:23
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -32,7 +32,7 @@ CREATE TABLE public.article (
     title character varying(100) NOT NULL,
     publ_date timestamp without time zone DEFAULT CURRENT_DATE NOT NULL,
     full_text text NOT NULL,
-    author_id integer NOT NULL,
+    author_id integer,
     moderated boolean DEFAULT false NOT NULL
 );
 
@@ -362,7 +362,7 @@ CREATE TABLE public.recipe (
     publ_date timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     cooking_time integer NOT NULL,
     description text NOT NULL,
-    author_id integer NOT NULL,
+    author_id integer,
     photo bytea,
     moderated boolean DEFAULT false NOT NULL,
     CONSTRAINT recipe_cooking_time_check CHECK ((cooking_time >= 0))
@@ -724,12 +724,12 @@ ALTER TABLE ONLY public.role
 
 
 --
--- TOC entry 3288 (class 2606 OID 27259)
+-- TOC entry 3288 (class 2606 OID 28454)
 -- Name: article article_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.article
-    ADD CONSTRAINT article_author_id_fkey FOREIGN KEY (author_id) REFERENCES public.profile(id);
+    ADD CONSTRAINT article_author_id_fkey FOREIGN KEY (author_id) REFERENCES public.profile(id) ON UPDATE CASCADE ON DELETE SET NULL NOT VALID;
 
 
 --
@@ -823,15 +823,15 @@ ALTER TABLE ONLY public.profile
 
 
 --
--- TOC entry 3291 (class 2606 OID 27305)
+-- TOC entry 3291 (class 2606 OID 28449)
 -- Name: recipe recipe_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.recipe
-    ADD CONSTRAINT recipe_author_id_fkey FOREIGN KEY (author_id) REFERENCES public.profile(id);
+    ADD CONSTRAINT recipe_author_id_fkey FOREIGN KEY (author_id) REFERENCES public.profile(id) ON UPDATE CASCADE ON DELETE SET NULL NOT VALID;
 
 
--- Completed on 2023-05-14 14:58:53
+-- Completed on 2023-05-16 17:36:23
 
 --
 -- PostgreSQL database dump complete
