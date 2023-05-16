@@ -112,10 +112,10 @@ public class Recipe implements Serializable {
     public HashMap<String, BigDecimal> getKBJU(){
         HashMap<String, BigDecimal> kbju = getFullKBJU();
         BigDecimal coef = kbju.get("weight").divide(BigDecimal.valueOf(100));
-        kbju.replace("k", kbju.get("k").divide(coef,1, RoundingMode.HALF_UP));
-        kbju.replace("b", kbju.get("b").divide(coef,1, RoundingMode.HALF_UP));
-        kbju.replace("j", kbju.get("j").divide(coef,1, RoundingMode.HALF_UP));
-        kbju.replace("u", kbju.get("u").divide(coef,1, RoundingMode.HALF_UP));
+        kbju.replace("k", coef.compareTo(BigDecimal.ZERO) == 0? BigDecimal.valueOf(0) : kbju.get("k").divide(coef,1, RoundingMode.HALF_UP));
+        kbju.replace("b", coef.compareTo(BigDecimal.ZERO) == 0? BigDecimal.valueOf(0) :kbju.get("b").divide(coef,1, RoundingMode.HALF_UP));
+        kbju.replace("j", coef.compareTo(BigDecimal.ZERO) == 0? BigDecimal.valueOf(0) :kbju.get("j").divide(coef,1, RoundingMode.HALF_UP));
+        kbju.replace("u", coef.compareTo(BigDecimal.ZERO) == 0? BigDecimal.valueOf(0) :kbju.get("u").divide(coef,1, RoundingMode.HALF_UP));
         return kbju;
     }
     public HashMap<String, BigDecimal> getFullKBJU(){
