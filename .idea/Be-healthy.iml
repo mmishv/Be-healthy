@@ -118,7 +118,9 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="jbcrypt-0.4" level="project" />
     <orderEntry type="library" exported="" name="zaxxer.HikariCP" level="project" />
-    <orderEntry type="library" name="junit" level="application" />
-    <orderEntry type="library" name="h2database.h2" level="application" />
+    <orderEntry type="library" exported="" name="junit" level="application" />
+    <orderEntry type="library" exported="" name="h2database.h2" level="application" />
+    <orderEntry type="library" exported="" name="hibernate.testing" level="application" />
+    <orderEntry type="library" exported="" name="hibernate.entitymanager" level="application" />
   </component>
 </module>
