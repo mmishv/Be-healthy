@@ -31,12 +31,13 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
 
     @Override
     public ArticleCategory getEntityById(long id) {
-        ArticleCategory category = new ArticleCategory();
+        ArticleCategory category = null;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement =connection.prepareStatement("SELECT ID, NAME FROM ARTICLE_CATEGORY WHERE ID=?")){
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                category = new ArticleCategory();
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
             }
