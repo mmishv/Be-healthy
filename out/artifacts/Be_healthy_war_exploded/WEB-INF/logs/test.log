@@ -1,4 +1,12 @@
-16:32:22.438 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
-16:32:23.512 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
-16:32:23.626 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
-16:36:40.542 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
+16:48:09.697 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
+16:48:30.523 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
+16:48:46.915 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
+16:48:49.118 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
+16:49:00.346 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
+16:49:00.346 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
+16:49:00.348 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
+16:49:00.348 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
+17:19:15.835 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
+17:19:15.836 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
+17:19:15.885 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
+17:19:15.885 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
