@@ -2,7 +2,10 @@ package by.fpmibsu.be_healthy.servlets.recipes;
 
 import by.fpmibsu.be_healthy.services.ProfileService;
 import by.fpmibsu.be_healthy.services.RecipeService;
+import by.fpmibsu.be_healthy.servlets.profile.articles.CreateArticleServlet;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,9 +15,11 @@ import java.util.ArrayList;
 
 @WebServlet(name = "MyRecipesServlet", value = "/my_recipes/*")
 public class MyRecipesServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(MyRecipesServlet.class);
     final int RECIPES_PER_PAGE = 2;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to user's recipes page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);

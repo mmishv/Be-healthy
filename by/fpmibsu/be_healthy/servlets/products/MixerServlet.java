@@ -5,6 +5,8 @@ import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.services.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,8 +15,10 @@ import java.io.IOException;
 
 @WebServlet(name = "MixerServlet", value = "/mixer/*")
 public class MixerServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(MixerServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to mixer page");
         int cnt = 1;
         Recipe r = new Recipe();
         while (request.getParameter("quantity" + cnt) != null){

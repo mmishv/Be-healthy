@@ -1,6 +1,8 @@
 package by.fpmibsu.be_healthy.servlets.profile.authetication;
 
 import by.fpmibsu.be_healthy.services.ProfileService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.*;
@@ -10,7 +12,9 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(LoginServlet.class);
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition in order to log in");
         final HttpSession session = request.getSession();
         String password = request.getParameter("password"),
                 login = request.getParameter("login");
@@ -19,8 +23,10 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("login", login);
             session.setAttribute("id", new ProfileService().getIdByLogin(login));
             response.sendRedirect("/profile");
+            logger.debug("Log in successfully");
         }
         else{
+            logger.debug("Failed to log in");
             getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
         }
     }

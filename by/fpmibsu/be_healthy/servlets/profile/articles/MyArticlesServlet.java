@@ -1,6 +1,8 @@
 package by.fpmibsu.be_healthy.servlets.profile.articles;
 
 import by.fpmibsu.be_healthy.services.ArticleService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -9,9 +11,11 @@ import java.io.IOException;
 
 @WebServlet(name = "MyArticlesServlet", value = "/my_articles/*")
 public class MyArticlesServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(MyArticlesServlet.class);
     final int ARTICLES_PER_PAGE = 2;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to user's articles page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);

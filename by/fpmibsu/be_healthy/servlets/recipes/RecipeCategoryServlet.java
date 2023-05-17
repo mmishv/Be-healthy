@@ -2,6 +2,9 @@ package by.fpmibsu.be_healthy.servlets.recipes;
 
 import by.fpmibsu.be_healthy.services.RecipeCategoryService;
 import by.fpmibsu.be_healthy.services.RecipeService;
+import by.fpmibsu.be_healthy.servlets.profile.articles.CreateArticleServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,9 +15,11 @@ import static java.lang.String.valueOf;
 
 @WebServlet(name = "RecipeCategoryServlet", value = "/recipe_category/*")
 public class RecipeCategoryServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(RecipeCategoryServlet.class);
     final int RECIPES_PER_PAGE = 1;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to page with recipes in one category");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String[] parts = pathParts[pathParts.length-1].split("-");

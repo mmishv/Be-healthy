@@ -4,6 +4,8 @@ import by.fpmibsu.be_healthy.entity.Article;
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.services.ArticleCategoryService;
 import by.fpmibsu.be_healthy.services.ArticleService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -17,8 +19,10 @@ import java.util.stream.Collectors;
 
 @WebServlet(name = "EditArticleServlet", value = "/edit_article/*")
 public class EditArticleServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(EditArticleServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to edit article page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
         int article_id = Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]);
@@ -33,6 +37,7 @@ public class EditArticleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition in order edit article");
         List<ArticleCategory> categories = new ArrayList<>();
         var cats = request.getParameterValues("categories");
         if (cats!=null){

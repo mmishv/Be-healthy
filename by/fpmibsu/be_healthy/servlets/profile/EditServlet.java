@@ -2,6 +2,9 @@ package by.fpmibsu.be_healthy.servlets.profile;
 
 import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.services.ProfileService;
+import by.fpmibsu.be_healthy.servlets.profile.articles.CreateArticleServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,8 +15,10 @@ import java.util.Objects;
 
 @WebServlet(name = "EditServlet", value = "/edit_profile")
 public class EditServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(EditServlet.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition in order to edit user parameters");
         Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));;
         if (!Objects.equals(request.getParameter("sex"), ""))
             profile.setSex(Objects.equals(request.getParameter("sex"), "1") ? "женский":"мужской");

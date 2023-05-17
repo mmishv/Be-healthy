@@ -3,7 +3,10 @@ package by.fpmibsu.be_healthy.servlets.recipes;
 import by.fpmibsu.be_healthy.services.ProfileService;
 import by.fpmibsu.be_healthy.services.RecipeCategoryService;
 import by.fpmibsu.be_healthy.services.RecipeService;
+import by.fpmibsu.be_healthy.servlets.profile.articles.CreateArticleServlet;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +16,11 @@ import java.util.ArrayList;
 
 @WebServlet({"/recipes/*"})
 public class RecipesMainServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(RecipesMainServlet.class);
     final int RECIPES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to main recipes page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);

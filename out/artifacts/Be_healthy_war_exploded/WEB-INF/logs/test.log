@@ -1,45 +1,12 @@
-17:19:27.302 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
-17:19:27.318 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
-17:19:27.613 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
-17:19:27.835 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
-17:19:28.308 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
-17:19:28.308 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
-17:19:28.309 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
-17:19:28.309 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
-17:19:28.418 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
-17:19:28.419 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
-17:19:28.420 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
-17:19:28.420 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
-17:19:34.435 DEBUG by.fpmibsu.be_healthy.services.ProfileService 42 getPasswordByLogin - Get profile password by login
-17:19:34.875 DEBUG by.fpmibsu.be_healthy.services.ProfileService 62 getIdByLogin - Get profile id by login
-17:19:34.891 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:38.248 DEBUG by.fpmibsu.be_healthy.services.RecipeService 67 getNumberOfRecipes - Get number of recipes
-17:19:38.254 DEBUG by.fpmibsu.be_healthy.services.RecipeService 57 getPage - Get page of recipes
-17:19:38.402 DEBUG by.fpmibsu.be_healthy.services.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-17:19:38.402 DEBUG by.fpmibsu.be_healthy.services.RecipeCategoryService 15 getAll - Get all recipe categories
-17:19:38.407 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:38.428 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:38.447 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:38.476 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:38.512 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:38.513 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:41.493 DEBUG by.fpmibsu.be_healthy.services.RecipeService 62 getNumberOfRecipesInCategory - Get number of recipes in one category
-17:19:41.501 DEBUG by.fpmibsu.be_healthy.services.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-17:19:41.501 DEBUG by.fpmibsu.be_healthy.services.RecipeService 47 getCategoryPage - Get page of recipes in one category
-17:19:41.515 DEBUG by.fpmibsu.be_healthy.services.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-17:19:41.515 DEBUG by.fpmibsu.be_healthy.services.RecipeCategoryService 15 getAll - Get all recipe categories
-17:19:43.033 DEBUG by.fpmibsu.be_healthy.services.RecipeService 62 getNumberOfRecipesInCategory - Get number of recipes in one category
-17:19:43.035 DEBUG by.fpmibsu.be_healthy.services.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-17:19:43.035 DEBUG by.fpmibsu.be_healthy.services.RecipeService 47 getCategoryPage - Get page of recipes in one category
-17:19:43.047 DEBUG by.fpmibsu.be_healthy.services.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-17:19:43.047 DEBUG by.fpmibsu.be_healthy.services.RecipeCategoryService 15 getAll - Get all recipe categories
-17:19:44.953 DEBUG by.fpmibsu.be_healthy.services.ProductService 42 getAllJSON - Get all products in JSON format
-17:19:44.954 DEBUG by.fpmibsu.be_healthy.services.ProductService 15 getAll - Get all products
-17:19:46.465 DEBUG by.fpmibsu.be_healthy.services.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
-17:19:46.473 DEBUG by.fpmibsu.be_healthy.services.ProfileService 21 getEntityById - Get profile by entity id
-17:19:46.486 DEBUG by.fpmibsu.be_healthy.services.ProductService 42 getAllJSON - Get all products in JSON format
-17:19:46.487 DEBUG by.fpmibsu.be_healthy.services.ProductService 15 getAll - Get all products
-17:19:47.937 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
-17:19:47.937 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
-17:19:47.938 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
-17:19:47.938 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
+17:52:47.840 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
+17:52:47.847 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
+17:52:48.233 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
+17:52:48.424 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
+17:52:49.014 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
+17:52:49.016 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
+17:52:49.017 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
+17:52:49.017 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format
+17:52:49.127 DEBUG by.fpmibsu.be_healthy.servlets.main.MainServlet 19 doGet - Enter the vacancy page
+17:52:49.127 DEBUG by.fpmibsu.be_healthy.services.ArticleService 57 getNumberOfArticles - Get number of articles
+17:52:49.129 DEBUG by.fpmibsu.be_healthy.services.ArticleService 52 getPageJSON - Get page with articles in JSON format
+17:52:49.129 DEBUG by.fpmibsu.be_healthy.services.ArticleService 47 getPage - Get page with articles in JSON format

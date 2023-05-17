@@ -6,6 +6,9 @@ import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.services.ProductService;
 import by.fpmibsu.be_healthy.services.RecipeCategoryService;
 import by.fpmibsu.be_healthy.services.RecipeService;
+import by.fpmibsu.be_healthy.servlets.profile.articles.CreateArticleServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -19,8 +22,10 @@ import java.util.stream.Collectors;
 @MultipartConfig
 @WebServlet(name = "EditRecipeServlet", value = "/edit_recipe/*")
 public class EditRecipeServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(EditRecipeServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to edit recipe page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
         int recipe_id = Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]);
@@ -35,6 +40,7 @@ public class EditRecipeServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition in order save edited recipe");
         int cookingTime;
         byte[] image;
         List<Ingredient> ingredients = new ArrayList<>();

@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.servlets.profile.admin;
 
 import by.fpmibsu.be_healthy.services.ArticleService;
 import by.fpmibsu.be_healthy.services.RecipeCategoryService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -10,9 +12,11 @@ import java.io.IOException;
 
 @WebServlet(name = "ArticlesModerationServlet", value = "/articles_moderation/*")
 public class ArticlesModerationServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(ArticlesModerationServlet.class);
     final int RECIPES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to admin article moderation page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);
@@ -28,6 +32,7 @@ public class ArticlesModerationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition in order to update article moderation status");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String[] lastPart = pathParts[pathParts.length-1].split("-");

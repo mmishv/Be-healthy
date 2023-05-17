@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.servlets.profile.admin;
 
 import by.fpmibsu.be_healthy.services.ProfileService;
 import by.fpmibsu.be_healthy.services.RecipeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,9 +13,11 @@ import java.util.ArrayList;
 
 @WebServlet(name = "RecipesModerationServlet", value = "/recipes_moderation/*")
 public class RecipesModerationServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(RecipesModerationServlet.class);
     final int RECIPES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to admin recipe moderation page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int page = Integer.parseInt(pathParts[pathParts.length-1]);

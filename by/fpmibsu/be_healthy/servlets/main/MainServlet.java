@@ -16,11 +16,12 @@ public class MainServlet extends HttpServlet {
     final int ARTICLES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Enter the vacancy page");
+        logger.debug("Transition to main page");
         String sex = "";
         double weight = 0, height = 0, age = 0, activity = 0, goal = 0, result = 0;
         if (request.getParameter("age") != null && request.getParameter("weight") != null &&
                 request.getParameter("height") != null) {
+            logger.debug("Using calorie calculator on main page");
             sex = request.getParameter("sex");
             weight = Double.parseDouble(request.getParameter("weight"));
             height = Double.parseDouble(request.getParameter("height"));

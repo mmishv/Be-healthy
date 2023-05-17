@@ -3,6 +3,8 @@ package by.fpmibsu.be_healthy.servlets.diary;
 import by.fpmibsu.be_healthy.dao.MealDao;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.entity.MealProduct;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -16,8 +18,10 @@ import java.util.List;
 
 @WebServlet(name = "EditMealServlet", value = "/edit-meal/*")
 public class EditMealServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(DeleteMealServlet.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition in order to edit meal");
         List<MealProduct> products = new ArrayList<>();
         String title =  new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         String pathInfo = request.getPathInfo();

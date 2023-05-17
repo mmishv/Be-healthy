@@ -4,6 +4,9 @@ import by.fpmibsu.be_healthy.entity.Ingredient;
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.services.*;
+import by.fpmibsu.be_healthy.servlets.profile.articles.CreateArticleServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -16,14 +19,17 @@ import java.util.List;
 @WebServlet(name = "createRecipeServlet", value = "/create_recipe")
 @MultipartConfig
 public class CreateRecipeServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(CreateRecipeServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to create recipe page");
         request.setAttribute("products", new ProductService().getAllJSON());
         request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
         getServletContext().getRequestDispatcher("/jsp/recipes/new_recipe.jsp").forward(request, response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition in order to add recipe");
         int authorId, cookingTime;
         String title, text;
         byte[] image;

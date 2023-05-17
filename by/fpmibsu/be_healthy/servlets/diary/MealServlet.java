@@ -6,6 +6,8 @@ import by.fpmibsu.be_healthy.services.MealService;
 import by.fpmibsu.be_healthy.services.ProductService;
 import by.fpmibsu.be_healthy.services.ProfileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,8 +25,10 @@ import static java.sql.Date.valueOf;
 
 @WebServlet(name = "AddMealServlet", value = "/diary/*")
 public class MealServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(DeleteMealServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Transition to diary page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         ArrayList<Meal> meals;
@@ -55,6 +59,7 @@ public class MealServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("Adding new meal on diary page");
         List<MealProduct> products = new ArrayList<>();
         String title =  new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         String pathInfo = request.getPathInfo();
