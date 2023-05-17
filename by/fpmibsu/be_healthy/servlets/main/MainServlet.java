@@ -1,18 +1,18 @@
 package by.fpmibsu.be_healthy.servlets.main;
 
 import by.fpmibsu.be_healthy.services.ArticleService;
-import org.apache.logging.log4j.LogManager;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.Objects;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @WebServlet({"/main/*", ""})
 public class MainServlet extends HttpServlet {
-    static final Logger logger = LogManager.getLogger(MainServlet.class);
+    private static final Logger logger = LogManager.getLogger(MainServlet.class);
     final int ARTICLES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

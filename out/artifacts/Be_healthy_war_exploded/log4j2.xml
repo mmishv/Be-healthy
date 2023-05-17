@@ -11,13 +11,18 @@
     </Appenders>
 
     <Loggers>
-        <Logger name= "by.fpmibsu.be_healthy.Log4j2Example" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
+        <Logger name= "by.fpmibsu.be_healthy.services" level="debug" additivity="false">
+            <AppenderRef ref="file"/>
+        </Logger>
+        <Logger name= "by.fpmibsu.be_healthy.dao" level="debug" additivity="false">
+            <AppenderRef ref="file"/>
+        </Logger>
+        <Logger name= "by.fpmibsu.be_healthy.servlets" level="debug" additivity="false">
+            <AppenderRef ref="file"/>
         </Logger>
 
-        <!-- Root Logger -->
-        <Root level="all" additivity="false">
-            <AppenderRef ref="Console"/>
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="file"/>
         </Root>
     </Loggers>
 
