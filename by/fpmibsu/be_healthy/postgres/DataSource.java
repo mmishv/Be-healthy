@@ -22,7 +22,10 @@ public class DataSource {
     }
 
     private DataSource() {}
-
+    public static void makeTest(){
+        config.setJdbcUrl( "jdbc:postgresql://127.0.0.1:5432/be_healthy_test?useUnicode=true&amp;characterEncoding=utf8");
+        ds = new HikariDataSource( config );
+    }
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
     }
