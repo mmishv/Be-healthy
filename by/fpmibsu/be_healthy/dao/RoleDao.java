@@ -1,14 +1,17 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.entity.Role;
 import by.fpmibsu.be_healthy.postgres.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoleDao implements Dao<Role> {
+    private static final Logger logger = LogManager.getLogger(ProfileDao.class);
+
     @Override
     public List<Role> getAll() {
         List<Role> roles = new ArrayList<>();
@@ -21,6 +24,7 @@ public class RoleDao implements Dao<Role> {
                 roles.add(role);
             }
         } catch (SQLException e) {
+            logger.error("Error getting all user roles");
             e.printStackTrace();
         }
         return roles;
@@ -30,7 +34,7 @@ public class RoleDao implements Dao<Role> {
     public Role getEntityById(long id) {
         Role role = new Role();
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement =connection.prepareStatement("SELECT ID, NAME FROM ROLE WHERE ID=?")){
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM ROLE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -38,6 +42,7 @@ public class RoleDao implements Dao<Role> {
                 role.setName(resultSet.getString("NAME"));
             }
         } catch (SQLException e) {
+            logger.error("Error getting user role by id");
             e.printStackTrace();
         }
         return role;
@@ -46,11 +51,12 @@ public class RoleDao implements Dao<Role> {
     @Override
     public boolean update(Role entity) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement =connection.prepareStatement("UPDATE ROLE SET NAME=? WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ROLE SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating user role");
             e.printStackTrace();
             return false;
         }
@@ -60,10 +66,11 @@ public class RoleDao implements Dao<Role> {
     @Override
     public boolean delete(int id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ROLE WHERE ID=?");){
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ROLE WHERE ID=?");) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting user role");
             e.printStackTrace();
             return false;
         }
@@ -73,10 +80,11 @@ public class RoleDao implements Dao<Role> {
     @Override
     public boolean create(Role entity) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement =connection.prepareStatement("INSERT INTO ROLE (NAME) VALUES(?)")){
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ROLE (NAME) VALUES(?)")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error creating user role");
             e.printStackTrace();
             return false;
         }
@@ -85,13 +93,14 @@ public class RoleDao implements Dao<Role> {
 
     public Role getRoleByUserId(int id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT ROLE_ID AS ID FROM PROFILE WHERE ID=?")){
+             PreparedStatement statement = connection.prepareStatement("SELECT ROLE_ID AS ID FROM PROFILE WHERE ID=?")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-               return new RoleDao().getEntityById(resultSet.getInt("ID"));
+                return new RoleDao().getEntityById(resultSet.getInt("ID"));
             }
         } catch (SQLException e) {
+            logger.error("Error getting user role by user id");
             e.printStackTrace();
         }
         return null;

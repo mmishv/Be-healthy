@@ -3,12 +3,15 @@ package by.fpmibsu.be_healthy.dao;
 import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.entity.Meal;
 import by.fpmibsu.be_healthy.services.MealProductService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.*;
 import java.sql.Date;
 
 public class MealDao implements Dao<Meal> {
+    private static final Logger logger = LogManager.getLogger(MealDao.class);
 
     @Override
     public List<Meal> getAll() {
@@ -18,6 +21,7 @@ public class MealDao implements Dao<Meal> {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM MEAL");
             initMeal(meals, resultSet);
         } catch (SQLException e) {
+            logger.error("Error getting all meals");
             e.printStackTrace();
         }
         return meals;
@@ -39,6 +43,7 @@ public class MealDao implements Dao<Meal> {
                 meal.setProducts(new MealProductDao().getProductsByMealId(meal.getId()));
             }
         } catch (SQLException e) {
+            logger.error("Error getting meal by id");
             e.printStackTrace();
         }
         return meal;
@@ -58,6 +63,7 @@ public class MealDao implements Dao<Meal> {
                 new MealProductService().create(i);
             }
         } catch (SQLException e) {
+            logger.error("Error updating meal");
             e.printStackTrace();
             return false;
         }
@@ -71,6 +77,7 @@ public class MealDao implements Dao<Meal> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting meal");
             e.printStackTrace();
             return false;
         }
@@ -92,6 +99,7 @@ public class MealDao implements Dao<Meal> {
                 new MealProductService().create(i);
             }
         } catch (SQLException e) {
+            logger.error("Error creating meal");
             e.printStackTrace();
             return false;
         }
@@ -106,7 +114,8 @@ public class MealDao implements Dao<Meal> {
                 return resultSet.getInt("ID");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.error("Error getting max meal id");
+            e.printStackTrace();
         }
         return -1;
     }
@@ -120,6 +129,7 @@ public class MealDao implements Dao<Meal> {
             ResultSet resultSet = statement.executeQuery();
             initMeal(meals, resultSet);
         } catch (SQLException e) {
+            logger.error("Error getting all user's meals by date");
             e.printStackTrace();
         }
         return meals;

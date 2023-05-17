@@ -2,12 +2,15 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Article;
 import by.fpmibsu.be_healthy.postgres.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleDao implements Dao<Article> {
+    private static final Logger logger = LogManager.getLogger(ArticleDao.class);
 
     @Override
     public List<Article> getAll() {
@@ -17,6 +20,7 @@ public class ArticleDao implements Dao<Article> {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ARTICLE ORDER BY PUBL_DATE DESC");
             initArticles(articles, resultSet);
         } catch (SQLException e) {
+            logger.error("Error getting all articles");
             e.printStackTrace();
         }
         return articles;
@@ -32,6 +36,7 @@ public class ArticleDao implements Dao<Article> {
             ResultSet resultSet = statement.executeQuery();
             initArticles(recipes, resultSet);
         } catch (SQLException e) {
+            logger.error("Error getting page of articles");
             e.printStackTrace();
         }
         return recipes;
@@ -47,6 +52,7 @@ public class ArticleDao implements Dao<Article> {
             ResultSet resultSet = statement.executeQuery();
             initArticles(recipes, resultSet);
         } catch (SQLException e) {
+            logger.error("Error getting user's articles");
             e.printStackTrace();
         }
         return recipes;
@@ -79,6 +85,7 @@ public class ArticleDao implements Dao<Article> {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) setArticle(resultSet, article);
         } catch (SQLException e) {
+            logger.error("Error getting article by id");
             e.printStackTrace();
         }
         return article;
@@ -95,6 +102,7 @@ public class ArticleDao implements Dao<Article> {
             deleteFromMM(entity.getId());
             setCategories(entity, entity.getId());
         } catch (SQLException e) {
+            logger.error("Error updating article");
             e.printStackTrace();
             return false;
         }
@@ -108,6 +116,7 @@ public class ArticleDao implements Dao<Article> {
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating article moderation status");
             e.printStackTrace();
             return false;
         }
@@ -120,6 +129,7 @@ public class ArticleDao implements Dao<Article> {
             preparedStatement.setInt(1, article_id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting article categories");
             throw new RuntimeException(e);
         }
     }
@@ -132,6 +142,7 @@ public class ArticleDao implements Dao<Article> {
                 preparedStatement.executeUpdate();
             }
             catch (SQLException e){
+                logger.error("Error adding article categories");
                 e.printStackTrace();
             }
         }
@@ -144,6 +155,7 @@ public class ArticleDao implements Dao<Article> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting article");
             e.printStackTrace();
             return false;
         }
@@ -158,6 +170,7 @@ public class ArticleDao implements Dao<Article> {
                 return resultSet.getInt("ID");
             }
         } catch (SQLException e) {
+            logger.error("Error getting max article id");
             e.printStackTrace();
         }
         return -1;
@@ -175,6 +188,7 @@ public class ArticleDao implements Dao<Article> {
             preparedStatement.executeUpdate();
             setCategories(entity, getMaxId());
         } catch (SQLException e) {
+            logger.error("Error creating article");
             e.printStackTrace();
             return false;
         }
@@ -188,6 +202,7 @@ public class ArticleDao implements Dao<Article> {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) return resultSet.getInt("RES");
         } catch (SQLException e) {
+            logger.error("Error getting number of articles");
             e.printStackTrace();
         }
         return -1;
@@ -201,6 +216,7 @@ public class ArticleDao implements Dao<Article> {
                 return resultSet.getInt("ARTICLE_NUM");
             }
         } catch (SQLException e) {
+            logger.error("Error getting number of user's articles");
             e.printStackTrace();
         }
         return -1;

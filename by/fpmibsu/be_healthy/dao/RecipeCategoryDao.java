@@ -2,11 +2,15 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.*;
 
 public class RecipeCategoryDao implements Dao<RecipeCategory> {
+
+    private static final Logger logger = LogManager.getLogger(ProfileDao.class);
 
     @Override
     public List<RecipeCategory> getAll() {
@@ -21,6 +25,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
                 categories.add(category);
             }
         } catch (SQLException e) {
+            logger.error("Error getting all recipe categories");
             e.printStackTrace();
         }
         return categories;
@@ -38,6 +43,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
                 category.setName(resultSet.getString("NAME"));
             }
         } catch (SQLException e) {
+            logger.error("Error getting recipe category by id");
             e.printStackTrace();
         }
         return category;
@@ -51,6 +57,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
             preparedStatement.setLong(2, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating recipe category");
             e.printStackTrace();
             return false;
         }
@@ -64,6 +71,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting recipe category");
             e.printStackTrace();
             return false;
         }
@@ -77,6 +85,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error creating recipe category");
             e.printStackTrace();
             return false;
         }
@@ -93,6 +102,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
                 categories.add(new RecipeCategoryDao().getEntityById(categoriesIds.getInt("ID")));
             }
         } catch (SQLException e) {
+            logger.error("Error getting recipe categories by recipe id");
             e.printStackTrace();
         }
         return categories;

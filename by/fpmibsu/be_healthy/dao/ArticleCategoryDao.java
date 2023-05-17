@@ -2,12 +2,15 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.postgres.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleCategoryDao implements Dao<ArticleCategory> {
+    private static final Logger logger = LogManager.getLogger(ArticleCategoryDao.class);
     @Override
     public List<ArticleCategory> getAll() {
         List<ArticleCategory> categories = new ArrayList<>();
@@ -20,6 +23,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
                 categories.add(category);
             }
         } catch (SQLException e) {
+            logger.error("Error getting all article categories");
             e.printStackTrace();
         }
         return categories;
@@ -37,6 +41,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
                 category.setName(resultSet.getString("NAME"));
             }
         } catch (SQLException e) {
+            logger.error("Error getting article category by id");
             e.printStackTrace();
         }
         return category;
@@ -50,6 +55,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
             preparedStatement.setLong(2, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating article category");
             e.printStackTrace();
             return false;
         }
@@ -63,6 +69,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting article category");
             e.printStackTrace();
             return false;
         }
@@ -76,6 +83,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error creating article category");
             e.printStackTrace();
             return false;
         }
@@ -92,6 +100,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
                 categories.add(new ArticleCategoryDao().getEntityById(categoriesIds.getInt("ID")));
             }
         } catch (SQLException e) {
+            logger.error("Error getting article categories by article id");
             e.printStackTrace();
         }
         return categories;

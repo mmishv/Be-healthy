@@ -2,12 +2,15 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.entity.MealProduct;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MealProductDao implements Dao<MealProduct> {
+    private static final Logger logger = LogManager.getLogger(MealProductDao.class);
 
     @Override
     public List<MealProduct> getAll() {
@@ -23,6 +26,7 @@ public class MealProductDao implements Dao<MealProduct> {
                 products.add(product);
             }
         } catch (SQLException e) {
+            logger.error("Error getting all meal products");
             e.printStackTrace();
         }
         return products;
@@ -42,6 +46,7 @@ public class MealProductDao implements Dao<MealProduct> {
                 product.setMeal_id(resultSet.getInt("MEAL_ID"));
             }
         } catch (SQLException e) {
+            logger.error("Error getting meal product by id");
             e.printStackTrace();
         }
         return product;
@@ -57,6 +62,7 @@ public class MealProductDao implements Dao<MealProduct> {
             preparedStatement.setInt(4, entity.getMealProductId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating meal product");
             e.printStackTrace();
             return false;
         }
@@ -70,6 +76,7 @@ public class MealProductDao implements Dao<MealProduct> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting meal product");
             e.printStackTrace();
             return false;
         }
@@ -82,6 +89,7 @@ public class MealProductDao implements Dao<MealProduct> {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting meal product");
             e.printStackTrace();
             return false;
         }
@@ -97,6 +105,7 @@ public class MealProductDao implements Dao<MealProduct> {
             preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error creating meal product");
             e.printStackTrace();
             return false;
         }
@@ -113,6 +122,7 @@ public class MealProductDao implements Dao<MealProduct> {
                 products.add(new MealProductDao().getEntityById(productsIds.getInt("ID")));
             }
         } catch (SQLException e) {
+            logger.error("Error getting meal products by meal id");
             e.printStackTrace();
         }
         return products;

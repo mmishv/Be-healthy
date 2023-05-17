@@ -2,13 +2,15 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.postgres.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao implements Dao<Product> {
-
+    private static final Logger logger = LogManager.getLogger(ProductDao.class);
     @Override
     public List<Product> getAll() {
         List<Product> products = new ArrayList<>();
@@ -21,6 +23,7 @@ public class ProductDao implements Dao<Product> {
                 products.add(product);
             }
         } catch (SQLException e) {
+            logger.error("Error getting all products");
             e.printStackTrace();
         }
         return products;
@@ -47,6 +50,7 @@ public class ProductDao implements Dao<Product> {
                 setProduct(resultSet, product);
             }
         } catch (SQLException e) {
+            logger.error("Error getting product by id");
             e.printStackTrace();
         }
         return product;
@@ -60,6 +64,7 @@ public class ProductDao implements Dao<Product> {
             preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating product");
             e.printStackTrace();
             return false;
         }
@@ -73,6 +78,7 @@ public class ProductDao implements Dao<Product> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting product");
             e.printStackTrace();
             return false;
         }
@@ -87,6 +93,7 @@ public class ProductDao implements Dao<Product> {
             initCreateUpdate(entity, preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error creating product");
             e.printStackTrace();
             return false;
         }

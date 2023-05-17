@@ -3,6 +3,8 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.*;
 import by.fpmibsu.be_healthy.postgres.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ProfileDao implements Dao<Profile> {
+    private static final Logger logger = LogManager.getLogger(ProfileDao.class);
 
     @Override
     public List<Profile> getAll() {
@@ -27,6 +30,7 @@ public class ProfileDao implements Dao<Profile> {
                 profiles.add(profile);
             }
         } catch (SQLException e) {
+            logger.error("Error getting all profiles");
             e.printStackTrace();
         }
         return profiles;
@@ -70,6 +74,7 @@ public class ProfileDao implements Dao<Profile> {
                 initProfile(resultSet, profile);
             }
         } catch (SQLException e) {
+            logger.error("Error getting profile by id");
             e.printStackTrace();
         }
         return profile;
@@ -93,6 +98,7 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setInt(11, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating profile");
             e.printStackTrace();
             return false;
         }
@@ -106,6 +112,7 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setInt(2, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating profile role");
             e.printStackTrace();
             return false;
         }
@@ -119,6 +126,7 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setInt(3, entity.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating profile main info");
             e.printStackTrace();
             return false;
         }
@@ -132,6 +140,7 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting profile");
             e.printStackTrace();
             return false;
         }
@@ -163,6 +172,7 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setString(15, entity.getSex());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error creating profile");
             e.printStackTrace();
             return false;
         }
@@ -178,6 +188,7 @@ public class ProfileDao implements Dao<Profile> {
                 return resultSet.getString("PASSWORD");
             }
         } catch (SQLException e) {
+            logger.error("Error getting profile password");
             e.printStackTrace();
         }
         return "";
@@ -190,6 +201,7 @@ public class ProfileDao implements Dao<Profile> {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) return false;
         } catch (SQLException e) {
+            logger.error("Error checking is login for profile available");
             e.printStackTrace();
             return false;
         }
@@ -203,6 +215,7 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setString(2, password);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error during profile registration");
             e.printStackTrace();
             return false;
         }
@@ -218,6 +231,7 @@ public class ProfileDao implements Dao<Profile> {
                 return resultSet.getInt("ID");
             }
         } catch (SQLException e) {
+            logger.error("Error getting profile id by login");
             e.printStackTrace();
         }
         return -1;

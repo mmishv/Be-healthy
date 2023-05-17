@@ -2,12 +2,15 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Ingredient;
 import by.fpmibsu.be_healthy.postgres.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientDao implements Dao<Ingredient> {
+    private static final Logger logger = LogManager.getLogger(IngredientDao.class);
 
     @Override
     public List<Ingredient> getAll() {
@@ -23,6 +26,7 @@ public class IngredientDao implements Dao<Ingredient> {
                 ingredients.add(product);
             }
         } catch (SQLException e) {
+            logger.error("Error getting all ingredients");
             e.printStackTrace();
         }
         return ingredients;
@@ -42,6 +46,7 @@ public class IngredientDao implements Dao<Ingredient> {
                 ingredient.setRecipe_id(resultSet.getInt("RECIPE_ID"));
             }
         } catch (SQLException e) {
+            logger.error("Error getting ingredient by id");
             e.printStackTrace();
         }
         return ingredient;
@@ -57,6 +62,7 @@ public class IngredientDao implements Dao<Ingredient> {
             preparedStatement.setInt(4, entity.getIngredientId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error updating ingredient");
             e.printStackTrace();
             return false;
         }
@@ -70,6 +76,7 @@ public class IngredientDao implements Dao<Ingredient> {
             preparedStatement.setLong(1,id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting ingredient");
             e.printStackTrace();
             return false;
         }
@@ -85,6 +92,7 @@ public class IngredientDao implements Dao<Ingredient> {
             preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error creating ingredient");
             e.printStackTrace();
             return false;
         }
@@ -101,6 +109,7 @@ public class IngredientDao implements Dao<Ingredient> {
                 ingredients.add(new IngredientDao().getEntityById(ingredientsIds.getInt("ID")));
             }
         } catch (SQLException e) {
+            logger.error("Error getting ingredients by recipe id");
             e.printStackTrace();
         }
         return ingredients;
@@ -112,6 +121,7 @@ public class IngredientDao implements Dao<Ingredient> {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
+            logger.error("Error deleting recipe ingredients");
             e.printStackTrace();
             return false;
         }
