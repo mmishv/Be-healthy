@@ -97,7 +97,7 @@ public class RecipeDao implements Dao<Recipe> {
         byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
         String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
         recipe.setBase64image(base64encoded);
-        recipe.setCategories(new RecipeCategoryDao().getCategoriesByRecipeId(recipe.getId()));
+        recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByRecipeId(recipe.getId()));
         recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
     }
 

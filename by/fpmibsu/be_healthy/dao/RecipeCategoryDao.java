@@ -33,12 +33,13 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
 
     @Override
     public RecipeCategory getEntityById(long id) {
-        RecipeCategory category = new RecipeCategory();
+        RecipeCategory category = null;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM RECIPE_CATEGORY WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                category = new RecipeCategory();
                 category.setId(resultSet.getInt("ID"));
                 category.setName(resultSet.getString("NAME"));
             }
@@ -51,11 +52,14 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
 
     @Override
     public boolean update(RecipeCategory entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE RECIPE_CATEGORY SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating recipe category");
             e.printStackTrace();
@@ -69,7 +73,8 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE_CATEGORY WHERE ID=?")) {
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting recipe category");
             e.printStackTrace();
@@ -80,6 +85,8 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
 
     @Override
     public boolean create(RecipeCategory entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE_CATEGORY (NAME) VALUES(?)")) {
             preparedStatement.setString(1, entity.getName());
@@ -92,7 +99,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
         return true;
     }
 
-    public List<RecipeCategory> getCategoriesByRecipeId(int id) {
+    public List<RecipeCategory> getRecipeCategoriesByRecipeId(int id) {
         List<RecipeCategory> categories = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?")) {

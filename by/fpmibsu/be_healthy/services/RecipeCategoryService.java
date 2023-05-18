@@ -37,9 +37,9 @@ public class RecipeCategoryService {
         return new RecipeCategoryDao().create(entity);
     }
 
-    public List<RecipeCategory> getRecipeCategoriesByArticleId(int id) {
+    public List<RecipeCategory> getRecipeCategoriesByRecipeId(int id) {
         logger.debug("Get recipe categories by article id");
-        return new RecipeCategoryDao().getCategoriesByRecipeId(id);
+        return new RecipeCategoryDao().getRecipeCategoriesByRecipeId(id);
     }
 
     public String getAllJSON() throws JsonProcessingException {
