@@ -72,7 +72,7 @@ public class ArticleCategoryServiceTest extends ArticleCategoryService {
 
     @Test
     public void articleCategoryUpdatePositiveTest() {
-        assertTrue(new ArticleCategoryService().update(updateCategory));
+        assertTrue(update(updateCategory));
         assertEquals(updateCategory, getEntityById(updateCategory.getId()));
     }
     @Test
@@ -85,7 +85,7 @@ public class ArticleCategoryServiceTest extends ArticleCategoryService {
     }
     @Test
     public void articleCategoryCreatePositiveTest() {
-        assertTrue(new ArticleCategoryService().create(newCategory));
+        assertTrue(create(newCategory));
         newCategory = getLastAdded();
         assertEquals(newCategory, getEntityById(newCategory.getId()));
     }
