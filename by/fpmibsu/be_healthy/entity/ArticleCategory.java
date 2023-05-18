@@ -7,6 +7,7 @@ public class ArticleCategory implements Serializable {
     private String name;
 
     public ArticleCategory(){
+        name = null;
     }
     public ArticleCategory(int id, String name){
         this.name = name;
