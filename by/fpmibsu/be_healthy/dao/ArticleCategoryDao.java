@@ -50,11 +50,14 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
 
     @Override
     public boolean update(ArticleCategory entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement =connection.prepareStatement("UPDATE ARTICLE_CATEGORY SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating article category");
             e.printStackTrace();
@@ -68,7 +71,8 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ARTICLE_CATEGORY WHERE ID=?");){
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting article category");
             e.printStackTrace();
@@ -79,6 +83,8 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
 
     @Override
     public boolean create(ArticleCategory entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement =connection.prepareStatement("INSERT INTO ARTICLE_CATEGORY (NAME) VALUES(?)")){
             preparedStatement.setString(1, entity.getName());
