@@ -1,4 +1,4 @@
-package by.fpmibsu.be_healthy.services;
+package by.fpmibsu.be_healthy.service;
 
 import by.fpmibsu.be_healthy.dao.RoleDao;
 import by.fpmibsu.be_healthy.entity.Role;
