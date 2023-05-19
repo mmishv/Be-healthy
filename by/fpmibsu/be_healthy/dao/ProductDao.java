@@ -32,21 +32,22 @@ public class ProductDao implements Dao<Product> {
     private void setProduct(ResultSet resultSet, Product product) throws SQLException {
         product.setId(resultSet.getInt("ID"));
         product.setName(resultSet.getString("NAME"));
-        product.setCarbohydrates(resultSet.getInt("CARBOHYDRATES"));
-        product.setFats(resultSet.getInt("FATS"));
-        product.setProteins(resultSet.getInt("PROTEINS"));
+        product.setCarbohydrates(resultSet.getDouble("CARBOHYDRATES"));
+        product.setFats(resultSet.getDouble("FATS"));
+        product.setProteins(resultSet.getDouble("PROTEINS"));
         product.setCalories(resultSet.getInt("CALORIES"));
         product.setUnit(resultSet.getString("UNIT"));
     }
 
     @Override
     public Product getEntityById(long id) {
-        Product product = new Product();
+        Product product = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                product = new Product();
                 setProduct(resultSet, product);
             }
         } catch (SQLException e) {
@@ -58,11 +59,14 @@ public class ProductDao implements Dao<Product> {
 
     @Override
     public boolean update(Product entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PRODUCT SET NAME=?, CARBOHYDRATES=?, FATS=?, PROTEINS=?, CALORIES=?, UNIT=? WHERE ID=?")) {
             initCreateUpdate(entity, preparedStatement);
             preparedStatement.setInt(7, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating product");
             e.printStackTrace();
@@ -76,7 +80,8 @@ public class ProductDao implements Dao<Product> {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting product");
             e.printStackTrace();
@@ -87,11 +92,14 @@ public class ProductDao implements Dao<Product> {
 
     @Override
     public boolean create(Product entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "INSERT INTO PRODUCT (NAME, CARBOHYDRATES, FATS, PROTEINS, CALORIES, UNIT) VALUES( ?, ?, ?, ?, ?, ?)")) {
             initCreateUpdate(entity, preparedStatement);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error creating product");
             e.printStackTrace();
