@@ -14,26 +14,24 @@ import static org.junit.Assert.*;
 
 
 public class RecipeCategoryServiceTest extends RecipeCategoryService {
-    RecipeCategory updateCategory = new RecipeCategory(3, "Салаты"),
-            beforeUpdateCategory = new RecipeCategory(3, "Выпечка"),
-            newCategory = new RecipeCategory(6, "Диетическое"),
-            forDeleteCategory = new RecipeCategory(7, "Постное");
 
     @Before
     public void init() {
         DataSource.makeTest();
     }
 
-    public List<RecipeCategory> createPositiveInput() {
-        return Arrays.asList(new RecipeCategory(2, "Вторые блюда"),
+    public List<RecipeCategory> getExpectedGetAll() {
+        return Arrays.asList(
+                new RecipeCategory(2, "Вторые блюда"),
                 new RecipeCategory(3, "Выпечка"),
                 new RecipeCategory(1, "Десерты"),
                 new RecipeCategory(4, "Обед"),
                 new RecipeCategory(5, "Ужин"));
     }
 
-    public List<RecipeCategory> createNegativeInput() {
-        return Arrays.asList(new RecipeCategory(2, "Веганство"),
+    public List<RecipeCategory> getSomeEntities() {
+        return Arrays.asList(
+                new RecipeCategory(2, "Веганство"),
                 new RecipeCategory(1, "Десерты"),
                 new RecipeCategory(4, "Обед"),
                 new RecipeCategory(5, "Ужин"));
@@ -41,23 +39,23 @@ public class RecipeCategoryServiceTest extends RecipeCategoryService {
 
     @Test
     public void recipeCategoryGetAllSizePositiveTest() {
-        assertEquals(createPositiveInput().size(), getAll().size());
+        assertEquals(getExpectedGetAll().size(), getAll().size());
     }
 
     @Test
     public void recipeCategoryGetAllSizeNegativeTest() {
-        assertNotEquals(createNegativeInput().size(), getAll().size());
+        assertNotEquals(getSomeEntities().size(), getAll().size());
     }
 
     @Test
     public void recipeCategoryGetAllPositiveTest() {
         assertEquals("Категории должны быть лексикографически отсортированы",
-                createPositiveInput(), getAll());
+                getExpectedGetAll(), getAll());
     }
 
     @Test
     public void recipeCategoryGetAllNegativeTest() {
-        assertNotEquals(createNegativeInput(), getAll());
+        assertNotEquals(getSomeEntities(), getAll());
     }
 
     @Test
@@ -72,8 +70,11 @@ public class RecipeCategoryServiceTest extends RecipeCategoryService {
 
     @Test
     public void recipeCategoryUpdatePositiveTest() {
+        RecipeCategory updateCategory = new RecipeCategory(3, "Салаты"),
+                beforeUpdateCategory = new RecipeCategory(3, "Выпечка");
         assertTrue(update(updateCategory));
         assertEquals(updateCategory, getEntityById(updateCategory.getId()));
+        update(beforeUpdateCategory);
     }
     @Test
     public void recipeCategoryUpdateNonExistentNegativeTest() {
@@ -85,9 +86,11 @@ public class RecipeCategoryServiceTest extends RecipeCategoryService {
     }
     @Test
     public void recipeCategoryCreatePositiveTest() {
+        RecipeCategory newCategory = new RecipeCategory(6, "Диетическое");
         assertTrue(create(newCategory));
         newCategory = getLastAdded();
         assertEquals(newCategory, getEntityById(newCategory.getId()));
+        delete(newCategory.getId());
     }
 
     @Test
@@ -108,6 +111,7 @@ public class RecipeCategoryServiceTest extends RecipeCategoryService {
 
     @Test
     public void recipeCategoryDeletePositiveTest() {
+        RecipeCategory forDeleteCategory = new RecipeCategory(7, "Постное");
         create(forDeleteCategory);
         forDeleteCategory = getLastAdded();
         assertTrue(delete(forDeleteCategory.getId()));
@@ -131,14 +135,12 @@ public class RecipeCategoryServiceTest extends RecipeCategoryService {
 
     private RecipeCategory getLastAdded() {
         for (var t : getAll())
-            if (t.getId() > 5) return t;
+            if (t.getId() > getExpectedGetAll().size()) return t;
         return null;
     }
 
     @After
-    public void dataRecovery() {
-        update(beforeUpdateCategory);
-        delete(newCategory.getId());
+    public void tearDown() {
         DataSource.close();
     }
 }

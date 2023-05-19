@@ -14,50 +14,47 @@ import static org.junit.Assert.*;
 
 
 public class ArticleCategoryServiceTest extends ArticleCategoryService {
-    ArticleCategory updateCategory = new ArticleCategory(3, "Футбол"),
-            beforeUpdateCategory = new ArticleCategory(3, "Беременность"),
-            newCategory = new ArticleCategory(6, "Йога"),
-            forDeleteCategory = new ArticleCategory(7, "Вред курения");
 
     @Before
     public void init() {
         DataSource.makeTest();
     }
 
-    public List<ArticleCategory> createPositiveInput() {
-        return Arrays.asList(new ArticleCategory(3, "Беременность"),
+    public List<ArticleCategory> getExpectedGetAll() {
+        return Arrays.asList(
+                new ArticleCategory(3, "Беременность"),
                 new ArticleCategory(1, "Вегетерианство"),
                 new ArticleCategory(4, "Здоровое питание"),
                 new ArticleCategory(2, "Семейный отдых"),
                 new ArticleCategory(5, "Фитнес"));
     }
 
-    public List<ArticleCategory> createNegativeInput() {
-        return Arrays.asList(new ArticleCategory(1, "Веганство"),
+    public List<ArticleCategory> getSomeEntities() {
+        return Arrays.asList(
+                new ArticleCategory(1, "Веганство"),
                 new ArticleCategory(2, "Семейный отдых"),
                 new ArticleCategory(4, "Здоровое питание"),
                 new ArticleCategory(4, "Фитнес"));
     }
-
     @Test
     public void articleCategoryGetAllSizePositiveTest() {
-        assertEquals(createPositiveInput().size(), getAll().size());
+        assertEquals(getExpectedGetAll().size(), getAll().size());
     }
 
     @Test
     public void articleCategoryGetAllSizeNegativeTest() {
-        assertNotEquals(createNegativeInput().size(), getAll().size());
+        assertNotEquals(getSomeEntities().size(), getAll().size());
     }
 
     @Test
     public void articleCategoryGetAllPositiveTest() {
         assertEquals("Категории должны быть лексикографически отсортированы",
-                createPositiveInput(), getAll());
+                getExpectedGetAll(), getAll());
     }
 
     @Test
     public void articleCategoryGetAllNegativeTest() {
-        assertNotEquals(createNegativeInput(), getAll());
+        assertNotEquals(getSomeEntities(), getAll());
     }
 
     @Test
@@ -72,8 +69,12 @@ public class ArticleCategoryServiceTest extends ArticleCategoryService {
 
     @Test
     public void articleCategoryUpdatePositiveTest() {
+        ArticleCategory updateCategory = new ArticleCategory(3, "Футбол");
+        ArticleCategory beforeUpdateCategory = new ArticleCategory(3, "Беременность");
         assertTrue(update(updateCategory));
         assertEquals(updateCategory, getEntityById(updateCategory.getId()));
+        update(beforeUpdateCategory);
+
     }
     @Test
     public void articleCategoryUpdateNonExistentNegativeTest() {
@@ -85,9 +86,11 @@ public class ArticleCategoryServiceTest extends ArticleCategoryService {
     }
     @Test
     public void articleCategoryCreatePositiveTest() {
+        ArticleCategory newCategory = new ArticleCategory(6, "Йога");
         assertTrue(create(newCategory));
         newCategory = getLastAdded();
         assertEquals(newCategory, getEntityById(newCategory.getId()));
+        delete(newCategory.getId());
     }
 
     @Test
@@ -108,6 +111,7 @@ public class ArticleCategoryServiceTest extends ArticleCategoryService {
 
     @Test
     public void articleCategoryDeletePositiveTest() {
+        ArticleCategory forDeleteCategory = new ArticleCategory(7, "Вред курения");
         create(forDeleteCategory);
         forDeleteCategory = getLastAdded();
         assertTrue(delete(forDeleteCategory.getId()));
@@ -132,14 +136,13 @@ public class ArticleCategoryServiceTest extends ArticleCategoryService {
 
     private ArticleCategory getLastAdded() {
         for (var t : getAll())
-            if (t.getId() > 5) return t;
+            if (t.getId() > getExpectedGetAll().size())
+                return t;
         return null;
     }
 
     @After
-    public void dataRecovery() {
-        update(beforeUpdateCategory);
-        delete(newCategory.getId());
+    public void tearDown() {
         DataSource.close();
     }
 }

@@ -14,43 +14,40 @@ import static org.junit.Assert.*;
 
 
 public class RoleServiceTest extends RoleService {
-    Role updateRole = new Role(1, "обычный пользователь"),
-            beforeUpdateRole = new Role(1, "пользователь"),
-            newRole = new Role(3, "модератор"),
-            forDeleteRole = new Role(4, "премиум аккаунт");
 
     @Before
     public void init() {
         DataSource.makeTest();
     }
 
-    public List<Role> createPositiveInput() {
-        return Arrays.asList(new Role(2, "администратор"),
+    public List<Role> getExpectedGetAll() {
+        return Arrays.asList(
+                new Role(2, "администратор"),
                 new Role(1, "пользователь"));
     }
 
-    public List<Role> createNegativeInput() {
+    public List<Role> getSomeEntities() {
         return List.of(new Role(2, "обычный пользователь"));
     }
 
     @Test
     public void roleGetAllSizePositiveTest() {
-        assertEquals(createPositiveInput().size(), getAll().size());
+        assertEquals(getExpectedGetAll().size(), getAll().size());
     }
 
     @Test
     public void roleGetAllSizeNegativeTest() {
-        assertNotEquals(createNegativeInput().size(), getAll().size());
+        assertNotEquals(getSomeEntities().size(), getAll().size());
     }
 
     @Test
     public void roleGetAllPositiveTest() {
-        assertEquals(createPositiveInput(), getAll());
+        assertEquals(getExpectedGetAll(), getAll());
     }
 
     @Test
     public void roleGetAllNegativeTest() {
-        assertNotEquals(createNegativeInput(), getAll());
+        assertNotEquals(getSomeEntities(), getAll());
     }
 
     @Test
@@ -65,8 +62,11 @@ public class RoleServiceTest extends RoleService {
 
     @Test
     public void roleUpdatePositiveTest() {
+        Role updateRole = new Role(1, "обычный пользователь"),
+                beforeUpdateRole = new Role(1, "пользователь");
         assertTrue(update(updateRole));
         assertEquals(updateRole, getEntityById(updateRole.getId()));
+        update(beforeUpdateRole);
     }
 
     @Test
@@ -81,9 +81,11 @@ public class RoleServiceTest extends RoleService {
 
     @Test
     public void roleCreatePositiveTest() {
+        Role newRole = new Role(3, "модератор");
         assertTrue(create(newRole));
         newRole = getLastAdded();
         assertEquals(newRole, getEntityById(newRole.getId()));
+        delete(newRole.getId());
     }
 
     @Test
@@ -103,6 +105,7 @@ public class RoleServiceTest extends RoleService {
 
     @Test
     public void roleDeletePositiveTest() {
+        Role forDeleteRole = new Role(4, "премиум аккаунт");
         create(forDeleteRole);
         forDeleteRole = getLastAdded();
         assertTrue(delete(forDeleteRole.getId()));
@@ -121,14 +124,12 @@ public class RoleServiceTest extends RoleService {
 
     private Role getLastAdded() {
         for (var t : getAll())
-            if (t.getId() > 2) return t;
+            if (t.getId() > getExpectedGetAll().size()) return t;
         return null;
     }
 
     @After
-    public void dataRecovery() {
-        update(beforeUpdateRole);
-        delete(newRole.getId());
+    public void tearDown() {
         DataSource.close();
     }
 }
