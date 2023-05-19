@@ -2,7 +2,7 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.entity.Meal;
-import by.fpmibsu.be_healthy.services.MealProductService;
+import by.fpmibsu.be_healthy.service.MealProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

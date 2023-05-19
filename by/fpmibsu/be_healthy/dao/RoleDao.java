@@ -32,12 +32,13 @@ public class RoleDao implements Dao<Role> {
 
     @Override
     public Role getEntityById(long id) {
-        Role role = new Role();
+        Role role = null;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM ROLE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                role = new Role();
                 role.setId(resultSet.getInt("ID"));
                 role.setName(resultSet.getString("NAME"));
             }
@@ -50,11 +51,14 @@ public class RoleDao implements Dao<Role> {
 
     @Override
     public boolean update(Role entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ROLE SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating user role");
             e.printStackTrace();
@@ -68,7 +72,8 @@ public class RoleDao implements Dao<Role> {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ROLE WHERE ID=?");) {
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting user role");
             e.printStackTrace();
@@ -79,6 +84,8 @@ public class RoleDao implements Dao<Role> {
 
     @Override
     public boolean create(Role entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ROLE (NAME) VALUES(?)")) {
             preparedStatement.setString(1, entity.getName());

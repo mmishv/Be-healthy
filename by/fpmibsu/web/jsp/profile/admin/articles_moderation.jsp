@@ -1,4 +1,4 @@
-<%@ page import="by.fpmibsu.be_healthy.services.ProfileService" %><%--
+<%@ page import="by.fpmibsu.be_healthy.service.ProfileService" %><%--
   Created by IntelliJ IDEA.
   User: Masha
   Date: 13.05.2023
