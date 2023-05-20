@@ -2,7 +2,6 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.service.IngredientService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +29,9 @@ public class RecipeDao implements Dao<Recipe> {
 
     public List<Recipe> getPage(int page, int per_page, boolean moderated) {
         List<Recipe> recipes = new ArrayList<>();
-        try (Connection connection = DataSource.getConnection(); PreparedStatement statement = connection.prepareStatement("SELECT * FROM RECIPE WHERE moderated = ? ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT * FROM RECIPE WHERE moderated = ? ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?")) {
             statement.setBoolean(1, moderated);
             statement.setInt(2, per_page);
             statement.setInt(3, per_page * (page - 1));
@@ -45,12 +46,15 @@ public class RecipeDao implements Dao<Recipe> {
 
     public List<Recipe> getCategoryPage(int page, int per_page, int category_id) {
         List<Recipe> recipes = new ArrayList<>();
-        String sql = "SELECT * FROM RECIPE WHERE ID IN (SELECT RECIPE_ID ID " + "FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?) AND MODERATED = TRUE " + "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
+        String sql = "SELECT * FROM RECIPE WHERE ID IN (SELECT RECIPE_ID ID "
+                + "FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?) AND MODERATED = TRUE "
+                + "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
         return helpGetPage(page, per_page, category_id, recipes, sql);
     }
 
     private List<Recipe> helpGetPage(int page, int per_page, int category_id, List<Recipe> recipes, String sql) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, category_id);
             statement.setInt(2, per_page);
             statement.setInt(3, per_page * (page - 1));
@@ -65,17 +69,21 @@ public class RecipeDao implements Dao<Recipe> {
 
     public List<Recipe> getAuthorPage(int page, int per_page, int author_id) {
         List<Recipe> recipes = new ArrayList<>();
-        String sql = "SELECT * FROM RECIPE WHERE AUTHOR_ID = ?" + "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
+        String sql = "SELECT * FROM RECIPE WHERE AUTHOR_ID = ?"
+                + "ORDER BY PUBL_DATE DESC LIMIT ? OFFSET ?";
         return helpGetPage(page, per_page, author_id, recipes, sql);
     }
 
     @Override
     public Recipe getEntityById(long id) {
-        Recipe recipe = new Recipe();
-        try (Connection connection = DataSource.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM RECIPE WHERE ID=?")) {
+        Recipe recipe = null;
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM RECIPE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                recipe = new Recipe();
                 setRecipe(recipe, resultSet);
             }
         } catch (SQLException e) {
@@ -103,7 +111,12 @@ public class RecipeDao implements Dao<Recipe> {
 
     @Override
     public boolean update(Recipe entity) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE RECIPE SET TITLE=?, PUBL_DATE=?, COOKING_TIME=?, DESCRIPTION=?, PHOTO=?, AUTHOR_ID=? WHERE ID=?")) {
+        if (entity == null)
+            return false;
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE RECIPE SET TITLE=?, PUBL_DATE=?, COOKING_TIME=?," +
+                             " DESCRIPTION=?, PHOTO=?, AUTHOR_ID=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setDate(2, (Date) (entity.getDateOfPublication()));
             preparedStatement.setInt(3, entity.getCookingTime());
@@ -111,7 +124,8 @@ public class RecipeDao implements Dao<Recipe> {
             preparedStatement.setBytes(5, entity.getImage() != null ? entity.getImage() : null);
             preparedStatement.setInt(6, entity.getAuthorId());
             preparedStatement.setInt(7, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
             new IngredientDao().deleteRecipeIngredients(entity.getId());
             deleteFromMM(entity.getId());
             initCategoriesAndIngredients(entity, entity.getId());
@@ -124,10 +138,13 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     public boolean updateModerationStatus(int id, boolean moderated) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("UPDATE RECIPE SET MODERATED=? WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE RECIPE SET MODERATED=? WHERE ID=?")) {
             preparedStatement.setBoolean(1, moderated);
             preparedStatement.setInt(2, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating recipe moderation status");
             e.printStackTrace();
@@ -137,7 +154,9 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     private void deleteFromMM(int recipe_id) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement inner_statement1 = connection.prepareStatement("DELETE FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement inner_statement1 = connection.prepareStatement(
+                     "DELETE FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?")) {
             inner_statement1.setInt(1, recipe_id);
             inner_statement1.executeUpdate();
         } catch (SQLException e) {
@@ -148,7 +167,9 @@ public class RecipeDao implements Dao<Recipe> {
 
     private void initCategoriesAndIngredients(Recipe entity, int recipe_id) {
         for (var i : entity.getCategories()) {
-            try (Connection connection = DataSource.getConnection(); PreparedStatement inner_statement1 = connection.prepareStatement("INSERT INTO MM_CATEGORY_RECIPE (RECIPE_ID, CATEGORY_ID) VALUES(?, ?)")) {
+            try (Connection connection = DataSource.getConnection();
+                 PreparedStatement inner_statement1 = connection.prepareStatement(
+                         "INSERT INTO MM_CATEGORY_RECIPE (RECIPE_ID, CATEGORY_ID) VALUES(?, ?)")) {
                 inner_statement1.setInt(1, recipe_id);
                 inner_statement1.setInt(2, i.getId());
                 inner_statement1.executeUpdate();
@@ -165,9 +186,12 @@ public class RecipeDao implements Dao<Recipe> {
 
     @Override
     public boolean delete(int id) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE WHERE ID=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM RECIPE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting recipe category");
             e.printStackTrace();
@@ -178,13 +202,19 @@ public class RecipeDao implements Dao<Recipe> {
 
     @Override
     public boolean create(Recipe entity) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE (TITLE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID) VALUES(?, ?, ?, ?, ?)")) {
+        if (entity == null)
+            return false;
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO RECIPE (TITLE, COOKING_TIME, DESCRIPTION, PHOTO, AUTHOR_ID)" +
+                             " VALUES(?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setInt(2, entity.getCookingTime());
             preparedStatement.setString(3, entity.getText());
             preparedStatement.setBytes(4, entity.getImage() != null ? entity.getImage() : null);
             preparedStatement.setInt(5, entity.getAuthorId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
             int recipe_id = getMaxId();
             initCategoriesAndIngredients(entity, recipe_id);
         } catch (SQLException e) {
@@ -195,8 +225,9 @@ public class RecipeDao implements Dao<Recipe> {
         return true;
     }
 
-    public int getMaxId() {
-        try (Connection connection = DataSource.getConnection(); Statement statement = connection.createStatement()) {
+    private int getMaxId() {
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT MAX(id) AS max_id FROM RECIPE");
             if (resultSet.next()) {
                 return resultSet.getInt("max_id");
@@ -217,7 +248,9 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     public int getNumberOfRecipes(boolean moderated) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) RES FROM RECIPE WHERE MODERATED=?")) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT COUNT(*) RES FROM RECIPE WHERE MODERATED=?")) {
             statement.setBoolean(1, moderated);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) return resultSet.getInt("RES");
@@ -229,7 +262,8 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     public int getNumberOfRecipesInCategory(int id) {
-        String sql = "SELECT COUNT(*) RES FROM RECIPE WHERE MODERATED = TRUE AND ID IN " + "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)";
+        String sql = "SELECT COUNT(*) RES FROM RECIPE WHERE MODERATED = TRUE AND ID IN "
+                + "(SELECT RECIPE_ID ID FROM MM_CATEGORY_RECIPE WHERE CATEGORY_ID = ?)";
         return getAmount(id, sql);
     }
 
@@ -239,7 +273,8 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     private int getAmount(int id, String sql) {
-        try (Connection connection = DataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = DataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) return resultSet.getInt("RES");
