@@ -3,11 +3,9 @@ package by.fpmibsu.be_healthy;
 import by.fpmibsu.be_healthy.dao.*;
 import by.fpmibsu.be_healthy.entity.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -44,7 +42,7 @@ public class Runner {
         MealProduct temp_m_product = new MealProduct(temp_product);
         temp_m_product.setMealProductId(1);
         temp_m_product.setQuantity(300);
-        temp_m_product.setMeal_id(temp_meal.getId());
+        temp_m_product.setMealId(temp_meal.getId());
 
         var product_list = new ArrayList<MealProduct>();
         product_list.add(temp_m_product);
