@@ -92,7 +92,7 @@ public class Runner {
 
         Ingredient temp_ing = new Ingredient(temp_product);
         temp_ing.setIngredientId(2);
-        temp_ing.setRecipe_id(2);
+        temp_ing.setRecipeId(2);
         temp_ing.setQuantity(10);
 
         var ing_list = new ArrayList<Ingredient>();
