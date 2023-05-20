@@ -47,9 +47,4 @@ public class IngredientService {
         logger.debug("Get all ingredients in JSON format");
         return new ObjectMapper().writeValueAsString(new IngredientService().getAll());
     }
-
-    public boolean deleteRecipeIngredients(int id) {
-        logger.debug("Delete recipe ingredients");
-        return new IngredientDao().deleteRecipeIngredients(id);
-    }
 }

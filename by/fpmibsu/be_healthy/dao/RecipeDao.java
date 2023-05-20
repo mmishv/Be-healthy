@@ -112,7 +112,7 @@ public class RecipeDao implements Dao<Recipe> {
             preparedStatement.setInt(6, entity.getAuthorId());
             preparedStatement.setInt(7, entity.getId());
             preparedStatement.executeUpdate();
-            new IngredientService().deleteRecipeIngredients(entity.getId());
+            new IngredientDao().deleteRecipeIngredients(entity.getId());
             deleteFromMM(entity.getId());
             initCategoriesAndIngredients(entity, entity.getId());
         } catch (SQLException e) {
@@ -158,7 +158,7 @@ public class RecipeDao implements Dao<Recipe> {
             }
         }
         for (var i : entity.getIngredients()) {
-            i.setRecipe_id(recipe_id);
+            i.setRecipeId(recipe_id);
             new IngredientDao().create(i);
         }
     }

@@ -17,12 +17,13 @@ public class IngredientDao implements Dao<Ingredient> {
         List<Ingredient> ingredients = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM INGREDIENT");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM INGREDIENT ORDER BY ID");
             while (resultSet.next()) {
-                Ingredient product = new Ingredient(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
+                Ingredient product = new Ingredient(
+                        new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
                 product.setIngredientId(resultSet.getInt("ID"));
                 product.setQuantity(resultSet.getInt("QUANTITY"));
-                product.setRecipe_id(resultSet.getInt("RECIPE_ID"));
+                product.setRecipeId(resultSet.getInt("RECIPE_ID"));
                 ingredients.add(product);
             }
         } catch (SQLException e) {
@@ -43,7 +44,7 @@ public class IngredientDao implements Dao<Ingredient> {
                 ingredient = new Ingredient(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
                 ingredient.setIngredientId(resultSet.getInt("ID"));
                 ingredient.setQuantity(resultSet.getInt("QUANTITY"));
-                ingredient.setRecipe_id(resultSet.getInt("RECIPE_ID"));
+                ingredient.setRecipeId(resultSet.getInt("RECIPE_ID"));
             }
         } catch (SQLException e) {
             logger.error("Error getting ingredient by id");
@@ -54,13 +55,17 @@ public class IngredientDao implements Dao<Ingredient> {
 
     @Override
     public boolean update(Ingredient entity) {
+        if (entity == null || entity.getQuantity()<=0)
+            return false;
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE INGREDIENT SET RECIPE_ID=?, PRODUCT_ID=?, QUANTITY=? WHERE ID=?")) {
-            preparedStatement.setInt(1, entity.getRecipe_id());
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "UPDATE INGREDIENT SET RECIPE_ID=?, PRODUCT_ID=?, QUANTITY=? WHERE ID=?")) {
+            preparedStatement.setInt(1, entity.getRecipeId());
             preparedStatement.setInt(2, entity.getId());
             preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.setInt(4, entity.getIngredientId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating ingredient");
             e.printStackTrace();
@@ -74,7 +79,8 @@ public class IngredientDao implements Dao<Ingredient> {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM INGREDIENT WHERE ID=?")) {
             preparedStatement.setLong(1,id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting ingredient");
             e.printStackTrace();
@@ -85,12 +91,16 @@ public class IngredientDao implements Dao<Ingredient> {
 
     @Override
     public boolean create(Ingredient entity) {
+        if (entity == null || entity.getQuantity()<=0)
+            return false;
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO INGREDIENT (RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)")) {
-            preparedStatement.setInt(1, entity.getRecipe_id());
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "INSERT INTO INGREDIENT (RECIPE_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)")) {
+            preparedStatement.setInt(1, entity.getRecipeId());
             preparedStatement.setInt(2, entity.getId());
             preparedStatement.setInt(3, entity.getQuantity());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error creating ingredient");
             e.printStackTrace();
@@ -102,7 +112,8 @@ public class IngredientDao implements Dao<Ingredient> {
     public List<Ingredient> getIngredientsByRecipeId(int id) {
         List<Ingredient> ingredients = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement statement = connection.prepareStatement("SELECT ID FROM INGREDIENT WHERE RECIPE_ID=?")) {
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT ID FROM INGREDIENT WHERE RECIPE_ID=? ORDER BY ID")) {
             statement.setInt(1, id);
             ResultSet ingredientsIds = statement.executeQuery();
             while (ingredientsIds.next()) {
@@ -115,7 +126,7 @@ public class IngredientDao implements Dao<Ingredient> {
         return ingredients;
     }
 
-    public boolean deleteRecipeIngredients(int id) {
+    boolean deleteRecipeIngredients(int id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM INGREDIENT WHERE RECIPE_ID=?")) {
             preparedStatement.setInt(1, id);
