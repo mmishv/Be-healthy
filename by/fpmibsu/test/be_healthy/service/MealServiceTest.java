@@ -37,7 +37,6 @@ public class MealServiceTest extends MealService {
     }
     public List<Meal> getExpectedGetAll() {
         var products = getAllProductsList();
-        var t = getAll();
         try {
             return Arrays.asList(
                     new Meal(2, "обед",
