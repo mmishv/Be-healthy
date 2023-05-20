@@ -1,5 +1,7 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
+import java.util.Objects;
+
 public class Ingredient extends Product implements Serializable{
     private int recipe_id;
     private int IngredientId;
@@ -9,17 +11,28 @@ public class Ingredient extends Product implements Serializable{
     public Ingredient(Product p) {
         super(p.getId(), p.getName(), p.getProteins(), p.getFats(), p.getCarbohydrates(), p.getCalories(),p.getUnit());
     }
+    public Ingredient(int id, Product p, int quantity, int recipe_id) {
+        super(p.getId(), p.getName(), p.getProteins(), p.getFats(), p.getCarbohydrates(), p.getCalories(),p.getUnit());
+        this.recipe_id = recipe_id;
+        this.quantity = quantity;
+        this.IngredientId = id;
+    }
+    public Ingredient(Product p, int quantity, int recipe_id) {
+        super(p.getId(), p.getName(), p.getProteins(), p.getFats(), p.getCarbohydrates(), p.getCalories(),p.getUnit());
+        this.recipe_id = recipe_id;
+        this.quantity = quantity;
+    }
     public int getQuantity() {
         return quantity;
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public int getRecipe_id() {
+    public int getRecipeId() {
         return recipe_id;
     }
-    public void setRecipe_id(int recipe_id) {
-        this.recipe_id = recipe_id;
+    public void setRecipeId(int recipeId) {
+        this.recipe_id = recipeId;
     }
 
     public int getIngredientId() {
@@ -33,5 +46,18 @@ public class Ingredient extends Product implements Serializable{
     @Override
     public String toString() {
         return "Name: " + getName() + ", quantity: " + quantity+", recipe: "+recipe_id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient that)) return false;
+        if (!super.equals(o)) return false;
+        return getRecipeId() == that.getRecipeId() && getIngredientId() == that.getIngredientId() && getQuantity() == that.getQuantity();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRecipeId(), getIngredientId(), getQuantity());
     }
 }
