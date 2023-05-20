@@ -17,12 +17,12 @@ public class MealProductDao implements Dao<MealProduct> {
         List<MealProduct> products = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM MEAL_PRODUCT");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM MEAL_PRODUCT ORDER BY ID");
             while (resultSet.next()) {
                 MealProduct product = new MealProduct(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
                 product.setMealProductId(resultSet.getInt("ID"));
                 product.setQuantity(resultSet.getInt("QUANTITY"));
-                product.setMeal_id(resultSet.getInt("MEAL_ID"));
+                product.setMealId(resultSet.getInt("MEAL_ID"));
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -34,7 +34,7 @@ public class MealProductDao implements Dao<MealProduct> {
 
     @Override
     public MealProduct getEntityById(long id) {
-        MealProduct product = new MealProduct();
+        MealProduct product = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MEAL_PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);
@@ -43,7 +43,7 @@ public class MealProductDao implements Dao<MealProduct> {
                 product = new MealProduct(new ProductDao().getEntityById(resultSet.getInt("PRODUCT_ID")));
                 product.setMealProductId(resultSet.getInt("ID"));
                 product.setQuantity(resultSet.getInt("QUANTITY"));
-                product.setMeal_id(resultSet.getInt("MEAL_ID"));
+                product.setMealId(resultSet.getInt("MEAL_ID"));
             }
         } catch (SQLException e) {
             logger.error("Error getting meal product by id");
@@ -54,13 +54,16 @@ public class MealProductDao implements Dao<MealProduct> {
 
     @Override
     public boolean update(MealProduct entity) {
+        if (entity == null || entity.getQuantity()<=0)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE MEAL_PRODUCT SET MEAL_ID=?, PRODUCT_ID=?, QUANTITY=? WHERE ID=?")) {
-            preparedStatement.setInt(1, entity.getMeal_id());
+            preparedStatement.setInt(1, entity.getMealId());
             preparedStatement.setInt(2, entity.getId());
             preparedStatement.setInt(3, entity.getQuantity());
             preparedStatement.setInt(4, entity.getMealProductId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating meal product");
             e.printStackTrace();
@@ -74,7 +77,8 @@ public class MealProductDao implements Dao<MealProduct> {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL_PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting meal product");
             e.printStackTrace();
@@ -98,12 +102,15 @@ public class MealProductDao implements Dao<MealProduct> {
 
     @Override
     public boolean create(MealProduct entity) {
+        if (entity == null || entity.getQuantity()<=0)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO MEAL_PRODUCT (MEAL_ID, PRODUCT_ID, QUANTITY) VALUES(?, ?, ?)")) {
-            preparedStatement.setInt(1, entity.getMeal_id());
+            preparedStatement.setInt(1, entity.getMealId());
             preparedStatement.setInt(2, entity.getId());
             preparedStatement.setInt(3, entity.getQuantity());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error creating meal product");
             e.printStackTrace();
@@ -115,7 +122,7 @@ public class MealProductDao implements Dao<MealProduct> {
     public List<MealProduct> getProductsByMealId(int id) {
         List<MealProduct> products = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement statement = connection.prepareStatement("SELECT ID FROM MEAL_PRODUCT WHERE MEAL_ID=?")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT ID FROM MEAL_PRODUCT WHERE MEAL_ID=? ORDER BY PRODUCT_ID")) {
             statement.setInt(1, id);
             ResultSet productsIds = statement.executeQuery();
             while (productsIds.next()) {

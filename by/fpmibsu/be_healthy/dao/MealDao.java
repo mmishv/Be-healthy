@@ -49,7 +49,7 @@ public class MealDao implements Dao<Meal> {
 
     @Override
     public boolean update(Meal entity) {
-        if (entity == null)
+        if (entity == null || entity.getProducts().isEmpty())
             return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE MEAL SET NAME=?, TIME=?  WHERE ID=?")) {
