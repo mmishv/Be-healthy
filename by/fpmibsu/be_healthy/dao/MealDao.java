@@ -7,8 +7,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.sql.Date;
+import java.util.Date;
 
 public class MealDao implements Dao<Meal> {
     private static final Logger logger = LogManager.getLogger(MealDao.class);
@@ -18,9 +20,9 @@ public class MealDao implements Dao<Meal> {
         List<Meal> meals = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM MEAL");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM MEAL ORDER BY DATE, TIME");
             initMeal(meals, resultSet);
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             logger.error("Error getting all meals");
             e.printStackTrace();
         }
@@ -29,20 +31,16 @@ public class MealDao implements Dao<Meal> {
 
     @Override
     public Meal getEntityById(long id) {
-        Meal meal = new Meal();
+        Meal meal = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MEAL WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                meal.setId(resultSet.getInt("ID"));
-                meal.setUser_id(resultSet.getInt("USER_ID"));
-                meal.setName(resultSet.getString("NAME"));
-                meal.setTimeOfMeal(resultSet.getTime("TIME"));
-                meal.setDateOfMeal(resultSet.getTime("DATE"));
-                meal.setProducts(new MealProductDao().getProductsByMealId(meal.getId()));
+                meal = new Meal();
+                setMeal(resultSet, meal);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             logger.error("Error getting meal by id");
             e.printStackTrace();
         }
@@ -51,15 +49,18 @@ public class MealDao implements Dao<Meal> {
 
     @Override
     public boolean update(Meal entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE MEAL SET NAME=?, TIME=?  WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setTime(2, entity.getTimeOfMeal());
             preparedStatement.setLong(3, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
             new MealProductDao().deleteMealProducts(entity.getId());
             for (var i : entity.getProducts()) {
-                i.setMeal_id(entity.getId());
+                i.setMealId(entity.getId());
                 new MealProductService().create(i);
             }
         } catch (SQLException e) {
@@ -75,7 +76,8 @@ public class MealDao implements Dao<Meal> {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL WHERE ID=?")) {
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting meal");
             e.printStackTrace();
@@ -86,16 +88,19 @@ public class MealDao implements Dao<Meal> {
 
     @Override
     public boolean create(Meal entity) {
+        if (entity == null || entity.getProducts().isEmpty())
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO MEAL (USER_ID, NAME, TIME, DATE) VALUES(?, ?, ?, ?)")) {
             preparedStatement.setInt(1, entity.getUser_id());
             preparedStatement.setString(2, entity.getName());
             preparedStatement.setTime(3, entity.getTimeOfMeal());
-            preparedStatement.setDate(4, (Date) entity.getDateOfMeal());
-            preparedStatement.executeUpdate();
+            preparedStatement.setDate(4, new java.sql.Date(entity.getDateOfMeal().getDate()));
+            if (preparedStatement.executeUpdate()==0)
+                return false;
             int id = getMaxId();
             for (var i : entity.getProducts()) {
-                i.setMeal_id(id);
+                i.setMealId(id);
                 new MealProductService().create(i);
             }
         } catch (SQLException e) {
@@ -106,7 +111,7 @@ public class MealDao implements Dao<Meal> {
         return true;
     }
 
-    public int getMaxId() {
+    private int getMaxId() {
         try (Connection connection = DataSource.getConnection();
              Statement statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery("SELECT MAX(id) AS id FROM MEAL");
@@ -123,28 +128,34 @@ public class MealDao implements Dao<Meal> {
     public List<Meal> getAllByDateAndUserId(Date date, int id) {
         List<Meal> meals = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM MEAL WHERE DATE = ? AND USER_ID = ?")) {
-            statement.setDate(1, date);
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT * FROM MEAL WHERE DATE = ? AND USER_ID = ? ORDER BY DATE, TIME")) {
+            statement.setDate(1, (java.sql.Date) date);
             statement.setInt(2, id);
             ResultSet resultSet = statement.executeQuery();
             initMeal(meals, resultSet);
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             logger.error("Error getting all user's meals by date");
             e.printStackTrace();
         }
         return meals;
     }
 
-    private void initMeal(List<Meal> meals, ResultSet resultSet) throws SQLException {
+    private void initMeal(List<Meal> meals, ResultSet resultSet) throws SQLException, ParseException {
         while (resultSet.next()) {
             Meal meal = new Meal();
-            meal.setId(resultSet.getInt("ID"));
-            meal.setUser_id(resultSet.getInt("USER_ID"));
-            meal.setName(resultSet.getString("NAME"));
-            meal.setTimeOfMeal(resultSet.getTime("TIME"));
-            meal.setDateOfMeal(resultSet.getDate("DATE"));
-            meal.setProducts(new MealProductDao().getProductsByMealId(meal.getId()));
+            setMeal(resultSet, meal);
             meals.add(meal);
         }
+    }
+
+    private void setMeal(ResultSet resultSet, Meal meal) throws SQLException, ParseException {
+        meal.setId(resultSet.getInt("ID"));
+        meal.setUser_id(resultSet.getInt("USER_ID"));
+        meal.setName(resultSet.getString("NAME"));
+        meal.setTimeOfMeal(new Time(new SimpleDateFormat("HH:mm:ss").
+                parse(resultSet.getTime("TIME").toString()).getTime()));
+        meal.setDateOfMeal(new SimpleDateFormat("y-M-d").parse(resultSet.getDate("DATE").toString()));
+        meal.setProducts(new MealProductDao().getProductsByMealId(meal.getId()));
     }
 }
