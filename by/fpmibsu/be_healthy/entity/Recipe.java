@@ -5,10 +5,7 @@ import javax.persistence.Lob;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Recipe implements Serializable {
     private int id;
@@ -24,6 +21,26 @@ public class Recipe implements Serializable {
     boolean moderated;
     private List<Ingredient> ingredients = new ArrayList<>();
     private List<RecipeCategory> categories = new ArrayList<>();
+
+    public Recipe() {
+    }
+
+    public Recipe(int id, int authorId, String title, Date dateOfPublication,
+                  int cookingTime, String text, byte[] image,
+                  boolean moderated, List<Ingredient> ingredients,
+                  List<RecipeCategory> categories) {
+        this.id = id;
+        this.authorId = authorId;
+        this.title = title;
+        this.dateOfPublication = dateOfPublication;
+        this.cookingTime = cookingTime;
+        this.text = text;
+        this.image = image;
+        this.moderated = moderated;
+        this.ingredients = ingredients;
+        this.categories = categories;
+    }
+
     public int getId() {
         return id;
     }
@@ -148,5 +165,26 @@ public class Recipe implements Serializable {
 
     public void setModerated(boolean moderated) {
         this.moderated = moderated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recipe recipe)) return false;
+        return getId() == recipe.getId() && getAuthorId() == recipe.getAuthorId()
+                && getCookingTime() == recipe.getCookingTime() && isModerated() == recipe.isModerated()
+                && Objects.equals(getTitle(), recipe.getTitle()) && Objects.equals(getDateOfPublication(),
+                recipe.getDateOfPublication()) && Objects.equals(getText(), recipe.getText()) &&
+                Arrays.equals(getImage(), recipe.getImage())
+                && Objects.equals(getIngredients(), recipe.getIngredients())
+                && Objects.equals(getCategories(), recipe.getCategories());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getId(), getAuthorId(),
+                getTitle(), getDateOfPublication(), getCookingTime(), getText(), isModerated(), getIngredients(), getCategories());
+        result = 31 * result + Arrays.hashCode(getImage());
+        return result;
     }
 }
