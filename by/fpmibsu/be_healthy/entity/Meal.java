@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Time;
 import java.util.*;
+
 public class Meal implements Serializable {
     private int id;
     private String name;
@@ -11,6 +12,20 @@ public class Meal implements Serializable {
     private Date dateOfMeal;
     private List<MealProduct> products;
     private int user_id;
+
+    public Meal() {
+        products = new ArrayList<>();
+    }
+
+    public Meal(int id, String name, Time timeOfMeal, Date dateOfMeal, List<MealProduct> products, int user_id) {
+        this.id = id;
+        this.name = name;
+        this.timeOfMeal = timeOfMeal;
+        this.dateOfMeal = dateOfMeal;
+        this.products = products;
+        this.user_id = user_id;
+    }
+
     public int getId() {
         return id;
     }
@@ -80,5 +95,20 @@ public class Meal implements Serializable {
         kbju.put("u", BigDecimal.valueOf(u).setScale(1, RoundingMode.HALF_UP));
         kbju.put("weight", BigDecimal.valueOf(((int) weight)));
         return kbju;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Meal meal)) return false;
+        return getId() == meal.getId() && getUser_id() == meal.getUser_id()
+                && Objects.equals(getName(), meal.getName()) && Objects.equals(getTimeOfMeal(),
+                meal.getTimeOfMeal()) && Objects.equals(getDateOfMeal(), meal.getDateOfMeal())
+                && getProducts().equals(meal.getProducts());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getTimeOfMeal(), getDateOfMeal(), getProducts(), getUser_id());
     }
 }
