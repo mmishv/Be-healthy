@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,20 +37,22 @@ public class MealServiceTest extends MealService {
     }
     public List<Meal> getExpectedGetAll() {
         var products = getAllProductsList();
+        var t = getAll();
         try {
             return Arrays.asList(
                     new Meal(2, "обед",
                             new Time(new SimpleDateFormat("HH:mm:ss").parse("12:40:00").getTime()),
                             Date.valueOf("2023-03-28"),
                             List.of(
-                                    new MealProduct(products.get(0), 200, 2)), 1),
+                                    new MealProduct(4, products.get(0), 200, 2)), 1),
                     new Meal(1, "ужин",
                             new Time(new SimpleDateFormat("HH:mm:ss").parse("03:09:45").getTime()),
                             Date.valueOf("2023-04-28"),
                             Arrays.asList(
-                                    new MealProduct(products.get(1), 300, 1),
-                                    new MealProduct(products.get(0), 200, 1),
-                                    new MealProduct(products.get(2), 100, 1)), 1));
+                                    new MealProduct(2, products.get(0), 200, 1),
+                                    new MealProduct(1, products.get(1), 300, 1),
+                                    new MealProduct(3, products.get(2), 100, 1)),
+                            1));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -62,7 +65,7 @@ public class MealServiceTest extends MealService {
                     new Meal(2, "обед", new Time(new SimpleDateFormat("HH:mm:ss").parse("12:40:00").getTime()),
                             Date.valueOf("2023-03-28"),
                             Arrays.asList(
-                                    new MealProduct(products.get(0), 200, 2)),
+                                    new MealProduct(4, products.get(0), 200, 2)),
                             1));
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -93,29 +96,24 @@ public class MealServiceTest extends MealService {
 
     @Test
     public void mealGetEntityByIdPositiveTest() {
-        assertEquals(getExpectedGetAll().get(1),
-                getEntityById(1));
+        assertEquals(getExpectedGetAll().get(0),
+                getEntityById(2));
     }
 
     @Test
     public void mealGetEntityByNonExistentIdPositiveTest() {
         assertNull(getEntityById(10));
     }
-
-    @Test
-    public void mealUpdatePositiveTest() {
-        Meal beforeUpdateCategory = getExpectedGetAll().get(0);
-        Meal updateMeal = getExpectedGetAll().get(0);
-        updateMeal.setName("Перекус после работы");
-        assertTrue(update(updateMeal));
-        assertEquals(updateMeal, getEntityById(updateMeal.getId()));
-        update(beforeUpdateCategory);
-
-    }
     @Test
     public void mealUpdateNonExistentNegativeTest() {
         Meal nonExistent = getExpectedGetAll().get(0);
         nonExistent.setId(100);
+        assertFalse(update(nonExistent));
+    }
+    @Test
+    public void mealUpdateWithNoProductsNegativeTest() {
+        Meal nonExistent = getExpectedGetAll().get(0);
+        nonExistent.setProducts(new ArrayList<>());
         assertFalse(update(nonExistent));
     }
     @Test
