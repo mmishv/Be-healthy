@@ -1,16 +1,29 @@
 package by.fpmibsu.be_healthy.entity;
 import java.io.Serializable;
+import java.util.Objects;
+
 public class MealProduct extends Product implements Serializable {
     private int mealProductId;
-    private int meal_id;
-    public int quantity;
+
+    private int mealId;
+    private int quantity;
 
     public MealProduct(){
     }
     public MealProduct(Product p) {
         super(p.getId(), p.getName(), p.getProteins(), p.getFats(), p.getCarbohydrates(), p.getCalories(),p.getUnit());
     }
-
+    public MealProduct(int id, Product p, int q, int mealId) {
+        super(p.getId(), p.getName(), p.getProteins(), p.getFats(), p.getCarbohydrates(), p.getCalories(),p.getUnit());
+        this.mealProductId = id;
+        quantity = q;
+        this.mealId = mealId;
+    }
+    public MealProduct(Product p, int q, int mealId) {
+        super(p.getId(), p.getName(), p.getProteins(), p.getFats(), p.getCarbohydrates(), p.getCalories(),p.getUnit());
+        quantity = q;
+        this.mealId = mealId;
+    }
     public int getQuantity() {
         return quantity;
     }
@@ -26,16 +39,29 @@ public class MealProduct extends Product implements Serializable {
         this.mealProductId = mealProductId;
     }
 
-    public int getMeal_id() {
-        return meal_id;
+    public int getMealId() {
+        return mealId;
     }
 
-    public void setMeal_id(int meal_id) {
-        this.meal_id = meal_id;
+    public void setMealId(int meal_id) {
+        this.mealId = meal_id;
     }
 
     @Override
     public String toString() {
-        return "Name: " + getName() + ", quantity: " +quantity + ", meal: "+meal_id;
+        return "Name: " + getName() + ", quantity: " +quantity + ", meal: "+ mealId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MealProduct that)) return false;
+        if (!super.equals(o)) return false;
+        return getMealProductId() == that.getMealProductId() && getId() == that.getId() && getMealId() == that.getMealId() && getQuantity() == that.getQuantity();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getMealProductId(), getId(), getMealId(), getQuantity());
     }
 }
