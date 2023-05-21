@@ -65,12 +65,13 @@ public class ProfileDao implements Dao<Profile> {
 
     @Override
     public Profile getEntityById(long id) {
-        Profile profile = new Profile();
+        Profile profile = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                profile = new Profile();
                 initProfile(resultSet, profile);
             }
         } catch (SQLException e) {
@@ -82,6 +83,8 @@ public class ProfileDao implements Dao<Profile> {
 
     @Override
     public boolean update(Profile entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " + " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?")) {
             preparedStatement.setDouble(1, entity.getWeight());
@@ -96,7 +99,8 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setInt(9, entity.getHeight());
             preparedStatement.setInt(10, entity.getAge());
             preparedStatement.setInt(11, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating profile");
             e.printStackTrace();
@@ -106,11 +110,14 @@ public class ProfileDao implements Dao<Profile> {
     }
 
     public boolean updateRole(Profile entity){
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET ROLE_ID=? WHERE ID=?")) {
             preparedStatement.setInt(1, entity.getRole().getId());
             preparedStatement.setInt(2, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating profile role");
             e.printStackTrace();
@@ -119,12 +126,15 @@ public class ProfileDao implements Dao<Profile> {
         return true;
     }
     public boolean updateMainInfo(Profile entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setBytes(2, entity.getAvatar() != null ? entity.getAvatar() : null);
             preparedStatement.setInt(3, entity.getId());
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error updating profile main info");
             e.printStackTrace();
@@ -138,7 +148,8 @@ public class ProfileDao implements Dao<Profile> {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error deleting profile");
             e.printStackTrace();
@@ -149,6 +160,8 @@ public class ProfileDao implements Dao<Profile> {
 
     @Override
     public boolean create(Profile entity) {
+        if (entity == null)
+            return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "INSERT INTO PROFILE (NAME, EMAIL, LOGIN, PASSWORD, AGE, HEIGHT, ACTIVITY_COEF,"
@@ -164,13 +177,14 @@ public class ProfileDao implements Dao<Profile> {
             preparedStatement.setBytes(8, entity.getAvatar() != null ? entity.getAvatar() : null);
             preparedStatement.setDouble(9, entity.getWeight());
             var norm = entity.getKBJU_norm();
-            preparedStatement.setDouble(10, norm.get("c").doubleValue());
+            preparedStatement.setDouble(10, norm.get("k").doubleValue());
             preparedStatement.setDouble(11, norm.get("u").doubleValue());
             preparedStatement.setDouble(12, norm.get("j").doubleValue());
             preparedStatement.setDouble(13, norm.get("b").doubleValue());
-            preparedStatement.setDouble(14, entity.getGoal());
-            preparedStatement.setString(15, entity.getSex());
-            preparedStatement.executeUpdate();
+            preparedStatement.setString(14, entity.getSex());
+            preparedStatement.setDouble(15, entity.getGoal());
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error creating profile");
             e.printStackTrace();
@@ -191,7 +205,7 @@ public class ProfileDao implements Dao<Profile> {
             logger.error("Error getting profile password");
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 
     public boolean isLoginAvailable(String login) {
@@ -213,7 +227,8 @@ public class ProfileDao implements Dao<Profile> {
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)")) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
-            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate()==0)
+                return false;
         } catch (SQLException e) {
             logger.error("Error during profile registration");
             e.printStackTrace();
