@@ -5,6 +5,7 @@ import javax.persistence.Lob;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -26,6 +27,34 @@ public class Profile implements Serializable {
     private String sex;
     private double goal;
     private Role role;
+
+    public Profile() {
+    }
+
+    public Profile(int id, String name, String email, String login, String password,
+                   double weight, int height, int age, double activity,
+                   String sex, double goal, Role role,
+                   double k, double b,
+                   double j, double u) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.weight = weight;
+        this.height = height;
+        this.age = age;
+        this.activity = activity;
+        this.sex = sex;
+        this.goal = goal;
+        this.role = role;
+        this.KBJU_norm = new HashMap<>();
+        KBJU_norm.put("k", BigDecimal.valueOf(k));
+        KBJU_norm.put("b", BigDecimal.valueOf(b));
+        KBJU_norm.put("j", BigDecimal.valueOf(j));
+        KBJU_norm.put("u", BigDecimal.valueOf(u));
+    }
+
     private HashMap<String, BigDecimal> KBJU_norm;
     public String getLogin() {
         return login;
@@ -171,5 +200,29 @@ public class Profile implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Profile profile)) return false;
+        return getId() == profile.getId() && Double.compare(profile.getWeight(),
+                getWeight()) == 0 && getHeight() == profile.getHeight() &&
+                getAge() == profile.getAge() && Double.compare(profile.getActivity(),
+                getActivity()) == 0 && Double.compare(profile.getGoal(), getGoal()) == 0
+                && Objects.equals(getName(), profile.getName()) && Objects.equals(getEmail(),
+                profile.getEmail()) && Objects.equals(getLogin(), profile.getLogin()) &&
+                Objects.equals(getPassword(), profile.getPassword()) && Arrays.equals(getAvatar(),
+                profile.getAvatar()) && Objects.equals(getSex(), profile.getSex()) && Objects.equals(getRole(),
+                profile.getRole()) && Objects.equals(getKBJU_norm(), profile.getKBJU_norm());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getId(), getName(), getEmail(), getLogin(),
+                getPassword(), getWeight(), getHeight(),
+                getAge(), getActivity(), getSex(), getGoal(), getRole(), getKBJU_norm());
+        result = 31 * result + Arrays.hashCode(getAvatar());
+        return result;
     }
 }
