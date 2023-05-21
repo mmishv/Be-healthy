@@ -102,8 +102,6 @@ public class RecipeServiceTest extends RecipeService {
 
     @Test
     public void recipeGetAllSizePositiveTest() {
-        var t1 = getExpectedGetAll();
-        var t2 = getAll();
         assertEquals(getExpectedGetAll().size(), getAll().size());
     }
 
@@ -145,12 +143,12 @@ public class RecipeServiceTest extends RecipeService {
     }
     @Test
     public void recipeCreatePositiveTest() {
-        Recipe newMeal = getExpectedGetAll().get(0);
-        newMeal.setId(5);
-        assertTrue(create(newMeal));
-        newMeal = getLastAdded();
-        assertEquals(newMeal, getEntityById(newMeal.getId()));
-        delete(newMeal.getId());
+        Recipe newRecipe = getExpectedGetAll().get(0);
+        newRecipe.setId(5);
+        assertTrue(create(newRecipe));
+        newRecipe = getLastAdded();
+        assertEquals(newRecipe, getEntityById(newRecipe.getId()));
+        delete(newRecipe.getId());
     }
 
     @Test
@@ -160,12 +158,12 @@ public class RecipeServiceTest extends RecipeService {
 
     @Test
     public void recipeDeletePositiveTest() {
-        Recipe forDeleteMeal = getExpectedGetAll().get(0);
-        forDeleteMeal.setId(3);
-        create(forDeleteMeal);
-        forDeleteMeal = getLastAdded();
-        assertTrue(delete(forDeleteMeal.getId()));
-        assertNull(getEntityById(forDeleteMeal.getId()));
+        Recipe forDeleteRecipe = getExpectedGetAll().get(0);
+        forDeleteRecipe.setId(3);
+        create(forDeleteRecipe);
+        forDeleteRecipe = getLastAdded();
+        assertTrue(delete(forDeleteRecipe.getId()));
+        assertNull(getEntityById(forDeleteRecipe.getId()));
     }
 
     @Test
