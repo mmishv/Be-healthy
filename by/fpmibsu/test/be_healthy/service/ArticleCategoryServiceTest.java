@@ -124,13 +124,15 @@ public class ArticleCategoryServiceTest extends ArticleCategoryService {
     }
     @Test
     public void articleCategoryGetCategoriesByArticleIdSizePositiveTest() {
-        assertEquals(2, getArticleCategoriesByArticleId(2).size());
+        assertEquals(3, getArticleCategoriesByArticleId(2).size());
     }
 
     @Test
     public void articleCategoryGetCategoriesByArticleIdPositiveTest() {
-        assertEquals(Arrays.asList(new ArticleCategory(2, "Семейный отдых"),
-                new ArticleCategory(3, "Беременность")),
+        assertEquals(Arrays.asList(
+                new ArticleCategory(2, "Семейный отдых"),
+                new ArticleCategory(3, "Беременность"),
+                        new ArticleCategory(1, "Вегетерианство")),
                 getArticleCategoriesByArticleId(2));
     }
 
