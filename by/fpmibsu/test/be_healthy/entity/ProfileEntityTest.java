@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class ProfileTest {
+public class ProfileEntityTest {
     Profile femaleProfile, maleProfile;
     @Before
     public void init() {
@@ -59,7 +59,7 @@ public class ProfileTest {
         assertEquals("Male carbohydrates intake is calculated according to the formula", 287,  maleProfile.getCarbRec());
     }
     @Test
-    public void notEnoughDataRecommendationTest(){
+    public void profileNotEnoughDataRecommendationTest(){
         Profile profile =  new Profile();
         femaleProfile.setWeight(80);
         femaleProfile.setActivity(1.55);

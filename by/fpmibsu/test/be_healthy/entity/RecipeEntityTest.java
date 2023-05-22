@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class RecipeTest {
+public class RecipeEntityTest {
     Recipe recipe = new Recipe();
     @Test
     public void recipeWithOneProductsWithZeroQuantityKBJUTest(){
