@@ -1,41 +1,50 @@
-00:40:05.891 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-00:40:06.754 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-00:40:06.757 DEBUG by.fpmibsu.be_healthy.service.ArticleService 57 getNumberOfArticles - Get number of articles
-00:40:07.173 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPageJSON - Get page with articles in JSON format
-00:40:07.398 DEBUG by.fpmibsu.be_healthy.service.ArticleService 47 getPage - Get page with articles in JSON format
-00:40:07.963 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-00:40:07.964 DEBUG by.fpmibsu.be_healthy.service.ArticleService 57 getNumberOfArticles - Get number of articles
-00:40:07.965 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPageJSON - Get page with articles in JSON format
-00:40:07.965 DEBUG by.fpmibsu.be_healthy.service.ArticleService 47 getPage - Get page with articles in JSON format
-00:40:08.073 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-00:40:08.073 DEBUG by.fpmibsu.be_healthy.service.ArticleService 57 getNumberOfArticles - Get number of articles
-00:40:08.074 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPageJSON - Get page with articles in JSON format
-00:40:08.074 DEBUG by.fpmibsu.be_healthy.service.ArticleService 47 getPage - Get page with articles in JSON format
-00:40:09.743 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:40:09.743 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:40:09.749 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:40:33.866 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:40:33.866 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:40:33.874 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:40:34.399 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:40:34.399 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:40:34.403 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:40:34.428 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:40:34.428 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:40:34.432 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:40:50.196 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:40:50.197 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:40:50.203 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:40:54.058 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:40:54.058 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:40:54.074 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:41:14.457 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:41:14.458 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:41:14.463 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:41:27.767 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:41:27.768 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:41:27.772 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-00:41:50.177 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 20 doGet - Open article
-00:41:50.178 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-00:41:50.183 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-10:26:05.261 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+17:35:45.198 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+17:35:46.046 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+17:35:46.048 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+17:35:46.349 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+17:35:46.569 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+17:35:47.132 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+17:35:47.133 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+17:35:47.133 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+17:35:47.134 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+17:35:47.266 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+17:35:47.267 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+17:35:47.268 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+17:35:47.268 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+17:35:48.424 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+17:35:48.424 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
+17:35:51.764 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 17 doPost - Transition in order to log in
+17:35:51.765 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
+17:35:52.052 DEBUG by.fpmibsu.be_healthy.service.ProfileService 68 getIdByLogin - Get profile id by login
+17:35:52.063 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 26 doPost - Log in successfully
+17:35:52.068 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+17:35:52.069 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+17:35:52.069 DEBUG by.fpmibsu.be_healthy.servlet.profile.AboutMeServlet 22 doGet - Transition to main profile page
+17:35:52.069 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:35:55.228 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
+17:35:55.229 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
+17:35:55.233 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
+17:35:55.271 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:35:55.293 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:35:57.574 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
+17:36:41.297 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
+17:36:41.297 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
+17:36:41.298 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
+17:36:41.308 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:36:41.326 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:36:42.125 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
+17:36:42.125 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
+17:36:42.126 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
+17:36:42.135 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:36:42.141 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:36:42.725 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
+17:36:42.725 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
+17:36:42.726 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
+17:36:42.729 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:36:43.848 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
+17:36:43.848 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
+17:36:43.849 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
+17:36:43.858 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:36:43.866 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+17:36:44.219 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
+17:36:54.651 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed

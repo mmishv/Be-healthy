@@ -32,7 +32,7 @@ public class RecipesMainServlet extends HttpServlet {
         request.setAttribute("categories", new RecipeCategoryService().getAllJSON());
         ArrayList<String> authors = new ArrayList<>();
         for (var r : recipes){
-            authors.add(new ProfileService().getEntityById(r.getAuthorId()).getLogin());
+            authors.add(r==null? null : new ProfileService().getEntityById(r.getAuthorId()).getLogin());
         }
         request.setAttribute("authors", authors);
         getServletContext().getRequestDispatcher("/jsp/recipes/recipe.jsp").forward(request, response);
