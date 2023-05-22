@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.service;
 
 import by.fpmibsu.be_healthy.dao.RoleDao;
 import by.fpmibsu.be_healthy.entity.Role;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,5 +38,15 @@ public class RoleService {
     public Role getRoleByUserId(int id) {
         logger.debug("Get role by user id");
         return new RoleDao().getRoleByUserId(id);
+    }
+
+    public String getAllJSON() throws JsonProcessingException {
+        logger.debug("Get all user roles on JSON format");
+        return new ObjectMapper().writeValueAsString(getAll());
+    }
+
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get user role by id in JSON format");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
     }
 }

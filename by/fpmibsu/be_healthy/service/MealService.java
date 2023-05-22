@@ -53,4 +53,9 @@ public class MealService {
         logger.debug("Get all user's meals on a specific day in JSON format");
         return new ObjectMapper().writeValueAsString(getAllByDateAndUserId(date, id));
     }
+
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get meal by id in JSON format");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
 }

@@ -52,4 +52,14 @@ public class MealProductService {
         logger.debug("Get all meal products in JSON format");
         return new ObjectMapper().writeValueAsString(new MealProductService().getAll());
     }
+
+    public String getProductsByMealIdJSON(int id) throws JsonProcessingException {
+        logger.debug("Get all meal products in meal by meal id in JSON format");
+        return new ObjectMapper().writeValueAsString(getProductsByMealId(id));
+    }
+
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get meal product by id in JSON format");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
 }

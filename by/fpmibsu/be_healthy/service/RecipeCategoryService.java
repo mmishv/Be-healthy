@@ -46,4 +46,13 @@ public class RecipeCategoryService {
         logger.debug("Get all recipe categories in JSON format");
         return new ObjectMapper().writeValueAsString(new RecipeCategoryService().getAll());
     }
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get recipe category by id in JSON format");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
+
+    public String getRecipeCategoriesByRecipeIdJSON(int id) throws JsonProcessingException {
+        logger.debug("Get recipe categories by article id in JSON format");
+        return new ObjectMapper().writeValueAsString(getRecipeCategoriesByRecipeId(id));
+    }
 }

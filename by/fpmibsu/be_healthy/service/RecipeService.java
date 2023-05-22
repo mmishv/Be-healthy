@@ -52,11 +52,25 @@ public class RecipeService {
         logger.debug("Get page of recipes in one category in JSON format");
         return new ObjectMapper().writeValueAsString((getCategoryPage(page, per_page, category_id)));
     }
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get recipe by id in JSON format");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
 
+    public String getPageJSON(int page, int per_page, boolean moderated) throws JsonProcessingException {
+        logger.debug("Get page of recipes in JSON format");
+        return new ObjectMapper().writeValueAsString(getPage(page, per_page, moderated));
+    }
+
+    public String getAuthorPagJSON(int page, int per_page, int id) throws JsonProcessingException {
+        logger.debug("Get page of user's recipes in JSON format");
+        return  new ObjectMapper().writeValueAsString(getAuthorPage(page, per_page, id));
+    }
     public List<Recipe> getPage(int page, int per_page, boolean moderated) {
         logger.debug("Get page of recipes");
         return new RecipeDao().getPage(page, per_page, moderated);
     }
+
 
     public int getNumberOfRecipesInCategory(int id) {
         logger.debug("Get number of recipes in one category");

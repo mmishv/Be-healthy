@@ -47,4 +47,15 @@ public class IngredientService {
         logger.debug("Get all ingredients in JSON format");
         return new ObjectMapper().writeValueAsString(new IngredientService().getAll());
     }
+
+    public String getIngredientsByRecipeIdJSON(int id) throws JsonProcessingException {
+        logger.debug("Get ingredients by recipe id in JSON format");
+        return new ObjectMapper().writeValueAsString(getIngredientsByRecipeId(id));
+    }
+
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get ingredient by id in JSON format");
+        return new ObjectMapper().writeValueAsString((getEntityById(id)));
+    }
+
 }

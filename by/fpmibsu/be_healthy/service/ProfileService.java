@@ -58,6 +58,12 @@ public class ProfileService {
         return new ObjectMapper().writeValueAsString(new ProfileService().getAll());
     }
 
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get profile by entity id");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
+
+
     public int getIdByLogin(String login) {
         logger.debug("Get profile id by login");
         return new ProfileDao().getIdByLogin(login);

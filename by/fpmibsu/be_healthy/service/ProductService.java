@@ -42,4 +42,10 @@ public class ProductService {
         logger.debug("Get all products in JSON format");
         return new ObjectMapper().writeValueAsString(new ProductService().getAll());
     }
+
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get product by id in JSON format");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
+
 }

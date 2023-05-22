@@ -22,7 +22,6 @@ public class ArticleService {
         return new ArticleDao().getEntityById(id);
     }
 
-
     public boolean update(Article entity) {
         logger.debug("Update article");
         return new ArticleDao().update(entity);
@@ -76,4 +75,10 @@ public class ArticleService {
         logger.debug("Update article moderation status");
         return new ArticleDao().updateModerationStatus(id, moderated);
     }
+
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get article by id in JSON format");
+        return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
+
 }
