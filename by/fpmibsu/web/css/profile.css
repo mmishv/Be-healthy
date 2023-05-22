@@ -164,3 +164,9 @@ select.form-control {
 .back-btn svg {
     vertical-align: text-bottom;
 }
+
+/*modal*/
+#editModal {
+    margin-left: 17% !important;
+    width: 83% !important;
+}

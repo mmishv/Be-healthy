@@ -229,7 +229,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-black btn-primary">Сохранить</button>
                 </div>
             </form>
         </div>
