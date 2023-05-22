@@ -92,18 +92,20 @@
                                         </svg>
                                     </button>
                                     <c:if test="${cl == 'recipecategory' or cl == 'articlecategory'}">
-                                    <button type="submit" title="Удалить" name="delete" onclick="deleteCategory('${cl.charAt(0)}', '${item.id}')">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
-                                             class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                                        </svg>
-                                    </button>
+                                        <button type="submit" title="Удалить" name="delete"
+                                                onclick="deleteCategory('${cl.charAt(0)}', '${item.id}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
+                                                 class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                            </svg>
+                                        </button>
                                     </c:if>
                                     <c:if test="${cl == 'product'}">
                                         <form method="post" action="/products_management/delete-${item.id}">
                                             <button type="submit" title="Удалить" name="delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     fill="black"
                                                      class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                                                     <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
@@ -114,30 +116,39 @@
                                 </div>
                             </td>
                         </tr>
-                        <div class="modal fade col-sm-10" id="editModal${item.id}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal fade col-sm-10" id="editModal${item.id}" tabindex="-1" role="dialog"
+                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <c:if test="${cl == 'recipecategory' or cl == 'articlecategory'}">
-                                    <form method="post" action="/edit_category/${cl.charAt(0)}-${item.id}">
-                                        <div class="modal-body">
-                                            <input name="name" class="form-control" value="${item.name}" placeholder="Новое название" required>
-                                            <button type="submit" class="btn btn-primary save-btn">Сохранить</button>
-                                        </div>
-                                    </form>
+                                        <form method="post" action="/edit_category/${cl.charAt(0)}-${item.id}">
+                                            <div class="modal-body">
+                                                <input name="name" class="form-control" value="${item.name}"
+                                                       placeholder="Новое название" required>
+                                                <button type="submit" class="btn btn-primary save-btn">Сохранить
+                                                </button>
+                                            </div>
+                                        </form>
                                     </c:if>
                                     <c:if test="${cl == 'product'}">
                                         <form method="post" action="/products_management/edit-${item.id}">
-                                            <div class="modal-body">
-                                                <input name="name" class="form-control" value="${item.name}" placeholder="Новое название" required>
-                                                <label for="c">Калории: </label>
-                                                <input name="c" class="form-control" value="${item.calories}" id="c" required>
-                                                <label for="b">Белки: </label>
-                                                    <input name="b" class="form-control" value="${item.proteins}" id="b" required>
-                                                <label for="j">Жиры: </label>
-                                                    <input name="j" class="form-control" value="${item.fats}" id="j" required>
-                                                <label for="u">Углеводы: </label>
-                                                    <input name="u" class="form-control" value="${item.carbohydrates}" id="u" required>
-                                                <button type="submit" class="btn btn-primary save-btn">Сохранить</button>
+                                            <div class="modal-body row">
+                                                <input name="name" class="form-control" value="${item.name}"
+                                                       placeholder="Новое название" required>
+                                                <label for="c" class="col-sm-6">Калории: </label>
+                                                <input name="c" class="form-control col-sm-6" type="number" step="0.01"
+                                                       value="${item.calories}" id="c" required>
+                                                <label for="b" class="col-sm-6">Белки: </label>
+                                                <input name="b" class="form-control col-sm-6" type="number" step="0.01"
+                                                       value="${item.proteins}" id="b" required>
+                                                <label for="j" class="col-sm-6">Жиры: </label>
+                                                <input name="j" class="form-control col-sm-6" type="number" step="0.01"
+                                                       value="${item.fats}" id="j" required>
+                                                <label for="u" class="col-sm-6">Углеводы: </label>
+                                                <input name="u" class="form-control col-sm-6" type="number" step="0.01"
+                                                       value="${item.carbohydrates}" id="u" required>
+                                                <button type="submit" class="btn btn-primary save-btn">Сохранить
+                                                </button>
                                             </div>
                                         </form>
                                     </c:if>
@@ -153,18 +164,18 @@
     </div>
 </div>
 <c:if test="${cl == 'recipecategory' or cl == 'articlecategory'}">
-<div class="modal fade col-sm-10" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <form method="post">
-                <div class="modal-body">
-                    <input name="name" class="form-control" placeholder="Название" required>
-                    <button type="submit" class="btn btn-primary save-btn">Сохранить</button>
-                </div>
-            </form>
+    <div class="modal fade col-sm-10" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form method="post">
+                    <div class="modal-body">
+                        <input name="name" class="form-control" placeholder="Название" required>
+                        <button type="submit" class="btn btn-primary save-btn">Сохранить</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </c:if>
 <c:if test="${cl == 'product'}">
     <div class="modal fade col-sm-10" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -174,13 +185,13 @@
                     <div class="modal-body">
                         <input name="name" class="form-control" placeholder="Название" required>
                         <label for="cal">Калории: </label>
-                            <input name="c" class="form-control"  id="cal" required>
+                        <input name="c" class="form-control" id="cal" required>
                         <label for="p">Белки: </label>
-                            <input name="b" class="form-control" id="p" required>
+                        <input name="b" class="form-control" id="p" required>
                         <label for="f">Жиры: </label>
-                            <input name="j" class="form-control"  id="f" required>
+                        <input name="j" class="form-control" id="f" required>
                         <label for="carb">Углеводы: </label>
-                            <input name="u" class="form-control" id="carb" required>
+                        <input name="u" class="form-control" id="carb" required>
                         <button type="submit" class="btn btn-primary save-btn">Сохранить</button>
                     </div>
                 </form>
@@ -191,7 +202,7 @@
 <script src="../../../js/tableSearch.js"></script>
 <script>
     function deleteCategory(entity, id) {
-        window.location.href = '/delete_category/'+entity+'-'+parseInt(id);
+        window.location.href = '/delete_category/' + entity + '-' + parseInt(id);
     }
 </script>
 </body>
