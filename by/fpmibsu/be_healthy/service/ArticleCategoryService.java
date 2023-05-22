@@ -22,6 +22,10 @@ public class ArticleCategoryService {
         return new ArticleCategoryDao().getEntityById(id);
     }
 
+    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+        logger.debug("Get article category by id in JSON format");
+        return  new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
 
     public boolean update(ArticleCategory entity) {
         logger.debug("Update article category");
@@ -41,6 +45,11 @@ public class ArticleCategoryService {
     public List<ArticleCategory> getArticleCategoriesByArticleId(int id) {
         logger.debug("Get article category by article id");
         return new ArticleCategoryDao().getArticleCategoriesByArticleId(id);
+    }
+
+    public String getArticleCategoriesByArticleIdJSON(int id) throws JsonProcessingException {
+        logger.debug("Get article category by article id");
+        return new ObjectMapper().writeValueAsString(getArticleCategoriesByArticleId(id));
     }
 
     public String getAllJSON() throws JsonProcessingException {
