@@ -102,7 +102,8 @@
                                         </button>
                                     </c:if>
                                     <c:if test="${cl == 'product'}">
-                                        <form method="post" action="/products_management/delete-${item.id}">
+                                        <form method="post" action="/products_management/delete-${item.id}"
+                                              style="margin-bottom: 0;">
                                             <button type="submit" title="Удалить" name="delete">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                      fill="black"
@@ -182,16 +183,16 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form method="post" action="/products_management/create">
-                    <div class="modal-body">
+                    <div class="modal-body row">
                         <input name="name" class="form-control" placeholder="Название" required>
-                        <label for="cal">Калории: </label>
-                        <input name="c" class="form-control" id="cal" required>
-                        <label for="p">Белки: </label>
-                        <input name="b" class="form-control" id="p" required>
-                        <label for="f">Жиры: </label>
-                        <input name="j" class="form-control" id="f" required>
-                        <label for="carb">Углеводы: </label>
-                        <input name="u" class="form-control" id="carb" required>
+                        <label for="cal" class="col-sm-6">Калории: </label>
+                        <input name="c" class="form-control col-sm-6" id="cal" type="number" step="0.01" required>
+                        <label for="p" class="col-sm-6">Белки: </label>
+                        <input name="b" class="form-control col-sm-6" type="number" step="0.01" id="p" required>
+                        <label for="f" class="col-sm-6">Жиры: </label>
+                        <input name="j" class="form-control col-sm-6" type="number" step="0.01" id="f" required>
+                        <label for="carb" class="col-sm-6">Углеводы: </label>
+                        <input name="u" class="form-control col-sm-6" type="number" step="0.01" id="carb" required>
                         <button type="submit" class="btn btn-primary save-btn">Сохранить</button>
                     </div>
                 </form>
