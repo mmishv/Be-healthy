@@ -15,6 +15,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public class MealServlet extends HttpServlet {
         meal.setProducts(products);
         meal.setUser_id(user_id);
         meal.setName(title);
-        meal.setDateOfMeal(valueOf(pathParts[pathParts.length-1]));
+        meal.setDateOfMeal(Date.valueOf(pathParts[pathParts.length-1]));
         meal.setTimeOfMeal(Time.valueOf(LocalTime.now()));
         new MealDao().create(meal);
         response.sendRedirect(request.getContextPath()+"/diary/"+pathParts[pathParts.length-1]);

@@ -95,7 +95,7 @@ public class MealDao implements Dao<Meal> {
             preparedStatement.setInt(1, entity.getUser_id());
             preparedStatement.setString(2, entity.getName());
             preparedStatement.setTime(3, entity.getTimeOfMeal());
-            preparedStatement.setDate(4, new java.sql.Date(entity.getDateOfMeal().getDate()));
+            preparedStatement.setDate(4, new java.sql.Date(entity.getDateOfMeal().getTime()));
             if (preparedStatement.executeUpdate()==0)
                 return false;
             int id = getMaxId();
