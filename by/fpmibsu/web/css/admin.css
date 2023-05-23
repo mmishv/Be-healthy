@@ -155,7 +155,11 @@ button {
 }
 
 /*modal*/
-/*.modal.fade{*/
-/*    margin-left: 17% !important;*/
-/*    width: 83% !important;*/
-/*}*/
+.modal.fade {
+    margin-left: 17% !important;
+    width: 83% !important;
+}
+
+input.form-control, label {
+    margin-bottom: 1rem !important;
+}

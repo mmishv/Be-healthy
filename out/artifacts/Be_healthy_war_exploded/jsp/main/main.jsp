@@ -71,7 +71,8 @@
             <div class="form-group row">
                 <label for="weight" class="col-sm-3 col-form-label">Вес:</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control" id="weight" placeholder="Вес" name="weight" required>
+                    <input type="number" step="0.1" class="form-control" id="weight" placeholder="Вес" name="weight"
+                           required>
                 </div>
             </div>
             <div class="form-group row">
