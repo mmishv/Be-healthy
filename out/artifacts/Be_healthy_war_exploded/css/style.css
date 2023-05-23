@@ -109,3 +109,8 @@ h4 {
     transform: scale(1.05);
 }
 
+/*for registration*/
+.error-message {
+    color: red;
+    margin-right: 3%;
+}

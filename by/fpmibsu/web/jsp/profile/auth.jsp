@@ -58,6 +58,7 @@
                 </div>
             </fieldset>
             <div style="display: flex; justify-content: flex-end;">
+                <span class="error-message">${error_login}</span>
                 <button type="submit" class="btn btn-primary btn-black scaled">Войти</button>
             </div>
         </form>
@@ -79,6 +80,7 @@
                            id="DropdownFormPassword2-repeat" required>
                 </div>
                 <div style="display: flex; justify-content: flex-end;">
+                    <span class="error-message">${error_reg}</span>
                     <button type="submit" class="btn btn-primary btn-black scaled">Зарегистрироваться</button>
                 </div>
             </fieldset>
