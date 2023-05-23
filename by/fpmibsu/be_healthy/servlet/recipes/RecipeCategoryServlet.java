@@ -15,7 +15,7 @@ import static java.lang.String.valueOf;
 @WebServlet(name = "RecipeCategoryServlet", value = "/recipe_category/*")
 public class RecipeCategoryServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(RecipeCategoryServlet.class);
-    final int RECIPES_PER_PAGE = 1;
+    final int RECIPES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("Transition to page with recipes in one category");
