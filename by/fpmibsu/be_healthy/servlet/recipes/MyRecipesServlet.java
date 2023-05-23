@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @WebServlet(name = "MyRecipesServlet", value = "/my_recipes/*")
 public class MyRecipesServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(MyRecipesServlet.class);
-    final int RECIPES_PER_PAGE = 2;
+    final int RECIPES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("Transition to user's recipes page");

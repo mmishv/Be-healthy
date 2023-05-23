@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebServlet(name = "MyArticlesServlet", value = "/my_articles/*")
 public class MyArticlesServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(MyArticlesServlet.class);
-    final int ARTICLES_PER_PAGE = 2;
+    final int ARTICLES_PER_PAGE = 6;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("Transition to user's articles page");
