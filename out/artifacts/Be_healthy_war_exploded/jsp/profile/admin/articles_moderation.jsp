@@ -80,20 +80,20 @@
                 <ul class="pagination justify-content-center">
                     <c:if test="${cur_page>1}">
                         <li class="page-item">
-                            <a class="page-link" href="main/${cur_page-1}" aria-label="Previous">
+                            <a class="page-link" href="${cur_page-1}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
                         </li>
                     </c:if>
                     <c:forEach begin="1" end="${page_cnt}" varStatus="i">
-                        <li class="page-item"><a class="page-link" href="main/${i.count}">${i.count}
+                        <li class="page-item"><a class="page-link" href="${i.count}">${i.count}
                         </a></li>
                     </c:forEach>
                     <c:if test="${cur_page < page_cnt}">
 
                         <li class="page-item">
-                            <a class="page-link" href="main/${cur_page+1}" aria-label="Next">
+                            <a class="page-link" href="${cur_page+1}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>

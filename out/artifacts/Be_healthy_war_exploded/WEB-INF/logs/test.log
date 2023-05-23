@@ -1,72 +1,14 @@
-14:37:10.549 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-14:37:11.825 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-14:37:11.829 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-14:37:12.223 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-14:37:12.422 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-14:37:12.976 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-14:37:12.977 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-14:37:12.977 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-14:37:12.978 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-14:37:13.096 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-14:37:13.096 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-14:37:13.098 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-14:37:13.098 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-14:37:15.345 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-14:37:15.345 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
-14:37:18.831 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 17 doPost - Transition in order to log in
-14:37:18.832 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
-14:37:19.296 DEBUG by.fpmibsu.be_healthy.service.ProfileService 68 getIdByLogin - Get profile id by login
-14:37:19.306 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 26 doPost - Log in successfully
-14:37:19.312 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-14:37:19.312 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
-14:37:19.312 DEBUG by.fpmibsu.be_healthy.servlet.profile.AboutMeServlet 22 doGet - Transition to main profile page
-14:37:19.312 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:23.079 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
-14:37:23.081 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
-14:37:23.085 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
-14:37:23.134 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:23.156 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:26.595 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
-14:37:26.595 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
-14:37:26.597 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
-14:37:26.610 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:26.631 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:27.318 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
-14:37:27.318 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
-14:37:27.319 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
-14:37:27.329 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:27.337 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:27.866 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
-14:37:27.866 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
-14:37:27.867 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
-14:37:27.874 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:27.880 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:29.496 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
-14:37:29.497 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
-14:37:29.498 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
-14:37:29.506 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:29.512 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:30.219 DEBUG by.fpmibsu.be_healthy.servlet.recipes.MyRecipesServlet 20 doGet - Transition to user's recipes page
-14:37:30.219 DEBUG by.fpmibsu.be_healthy.service.RecipeService 86 getNumberOfRecipesWrittenBy - Get number of user's recipes
-14:37:30.220 DEBUG by.fpmibsu.be_healthy.service.RecipeService 91 getAuthorPage - Get page of user's recipes
-14:37:30.243 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:30.249 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-14:37:31.543 DEBUG by.fpmibsu.be_healthy.servlet.profile.articles.MyArticlesServlet 18 doGet - Transition to user's articles page
-14:37:31.543 DEBUG by.fpmibsu.be_healthy.service.ArticleService 71 getNumberOfArticlesWrittenBy - Get number of articles by a specific author
-14:37:31.544 DEBUG by.fpmibsu.be_healthy.service.ArticleService 66 getAuthorPageJSON - Get page with articles by a specific author in JSON format
-14:37:31.544 DEBUG by.fpmibsu.be_healthy.service.ArticleService 61 getAuthorPage - Get page with articles by a specific author
-14:37:33.551 DEBUG by.fpmibsu.be_healthy.servlet.profile.articles.MyArticlesServlet 18 doGet - Transition to user's articles page
-14:37:33.551 DEBUG by.fpmibsu.be_healthy.service.ArticleService 71 getNumberOfArticlesWrittenBy - Get number of articles by a specific author
-14:37:33.552 DEBUG by.fpmibsu.be_healthy.service.ArticleService 66 getAuthorPageJSON - Get page with articles by a specific author in JSON format
-14:37:33.552 DEBUG by.fpmibsu.be_healthy.service.ArticleService 61 getAuthorPage - Get page with articles by a specific author
-14:37:35.930 DEBUG by.fpmibsu.be_healthy.servlet.profile.articles.MyArticlesServlet 18 doGet - Transition to user's articles page
-14:37:35.931 DEBUG by.fpmibsu.be_healthy.service.ArticleService 71 getNumberOfArticlesWrittenBy - Get number of articles by a specific author
-14:37:35.932 DEBUG by.fpmibsu.be_healthy.service.ArticleService 66 getAuthorPageJSON - Get page with articles by a specific author in JSON format
-14:37:35.932 DEBUG by.fpmibsu.be_healthy.service.ArticleService 61 getAuthorPage - Get page with articles by a specific author
-14:37:37.718 DEBUG by.fpmibsu.be_healthy.servlet.profile.articles.MyArticlesServlet 18 doGet - Transition to user's articles page
-14:37:37.719 DEBUG by.fpmibsu.be_healthy.service.ArticleService 71 getNumberOfArticlesWrittenBy - Get number of articles by a specific author
-14:37:37.720 DEBUG by.fpmibsu.be_healthy.service.ArticleService 66 getAuthorPageJSON - Get page with articles by a specific author in JSON format
-14:37:37.720 DEBUG by.fpmibsu.be_healthy.service.ArticleService 61 getAuthorPage - Get page with articles by a specific author
-14:37:37.750 DEBUG by.fpmibsu.be_healthy.servlet.profile.articles.MyArticlesServlet 18 doGet - Transition to user's articles page
-14:37:37.750 DEBUG by.fpmibsu.be_healthy.servlet.profile.articles.MyArticlesServlet 18 doGet - Transition to user's articles page
-14:37:50.392 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+14:47:16.108 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+14:47:16.961 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+14:47:16.963 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+14:47:17.239 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+14:47:17.454 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+14:47:17.634 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+14:47:17.634 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+14:47:17.635 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+14:47:17.635 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+14:47:17.754 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+14:47:17.754 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+14:47:17.755 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+14:47:17.756 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+14:47:50.729 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
