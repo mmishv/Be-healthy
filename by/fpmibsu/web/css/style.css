@@ -109,8 +109,15 @@ h4 {
     transform: scale(1.05);
 }
 
+.btn:hover, .btn:focus, .btn:focus-visible, .btn:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 /*for registration*/
 .error-message {
     color: red;
     margin-right: 3%;
 }
+

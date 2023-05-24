@@ -9,6 +9,7 @@ h3.header {
 .back-btn#admin-btn {
     position: relative !important;
     margin: auto !important;
+    border: none !important;
     width: 100%;
     right: 0;
 }
