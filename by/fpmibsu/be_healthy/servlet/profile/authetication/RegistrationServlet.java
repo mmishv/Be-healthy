@@ -1,4 +1,5 @@
 package by.fpmibsu.be_healthy.servlet.profile.authetication;
+
 import by.fpmibsu.be_healthy.service.ProfileService;
 
 import java.io.IOException;
@@ -23,19 +24,19 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("Transition in order to register");
         final HttpSession session = request.getSession();
-        String password = BCrypt.hashpw(request.getParameter("reg_password1"),BCrypt.gensalt()),
+        String password = BCrypt.hashpw(request.getParameter("reg_password1"), BCrypt.gensalt()),
                 login = request.getParameter("reg_login");
         if (Objects.equals(request.getParameter("reg_password1"), request.getParameter("reg_password2")) &&
-                new ProfileService().isLoginAvailable(login)){
+                new ProfileService().isLoginAvailable(login)) {
             logger.debug("Registered successfully");
             session.setAttribute("password", password);
             session.setAttribute("login", login);
             new ProfileService().register(login, password);
             session.setAttribute("id", new ProfileService().getIdByLogin(login));
             response.sendRedirect("/profile");
-        }
-        else{
+        } else {
             logger.debug("Failed to register");
+            request.setAttribute("error_reg", "Ошибка регистрации. Попробуйте ещё раз");
             getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
         }
     }
