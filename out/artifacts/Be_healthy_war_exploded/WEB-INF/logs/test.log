@@ -1,25 +1,61 @@
-08:14:06.427 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-08:14:08.279 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-08:14:08.280 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-08:14:08.652 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-08:14:08.959 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-08:14:09.662 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-08:14:09.662 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-08:14:09.663 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-08:14:09.663 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-08:14:09.842 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-08:14:09.843 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-08:14:09.844 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-08:14:09.845 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-08:14:11.503 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-08:14:11.503 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
-08:14:15.626 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
-08:14:15.627 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
-08:14:16.788 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 30 doPost - Failed to log in
-08:14:27.916 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
-08:14:27.917 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
-08:14:29.006 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 30 doPost - Failed to log in
-08:14:37.368 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
-08:14:37.369 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
-08:14:37.372 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 36 doPost - Failed to log in
-08:14:57.208 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+09:09:18.254 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+09:09:19.913 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+09:09:19.915 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+09:09:20.226 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+09:09:20.492 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+09:09:21.111 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+09:09:21.111 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+09:09:21.113 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+09:09:21.113 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+09:09:21.277 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+09:09:21.277 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+09:09:21.279 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+09:09:21.279 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+09:09:22.345 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:22.346 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
+09:09:26.607 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
+09:09:26.608 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
+09:09:27.732 DEBUG by.fpmibsu.be_healthy.service.ProfileService 68 getIdByLogin - Get profile id by login
+09:09:27.748 INFO  by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 28 doPost - Log in successfully
+09:09:27.758 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:27.758 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+09:09:27.759 DEBUG by.fpmibsu.be_healthy.servlet.profile.AboutMeServlet 22 doGet - Transition to main profile page
+09:09:27.759 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+09:09:33.242 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:33.242 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+09:09:33.243 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+09:09:33.248 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+09:09:33.259 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+09:09:33.337 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+09:09:33.338 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+09:09:39.856 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:39.857 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+09:09:39.857 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 63 doPost - Adding new meal on diary page
+09:09:39.898 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+09:09:39.922 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:39.923 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+09:09:39.923 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+09:09:39.923 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+09:09:39.985 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+09:09:40.049 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+09:09:40.049 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+09:09:46.581 DEBUG by.fpmibsu.be_healthy.servlet.diary.EditMealServlet 24 doPost - Transition in order to edit meal
+09:09:46.587 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+09:09:46.597 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:46.597 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+09:09:46.597 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+09:09:46.597 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+09:09:46.615 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+09:09:46.664 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+09:09:46.664 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+09:09:57.040 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:57.041 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+09:09:57.041 DEBUG by.fpmibsu.be_healthy.servlet.profile.AboutMeServlet 22 doGet - Transition to main profile page
+09:09:57.041 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+09:09:58.831 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LogoutServlet 20 doGet - User logout
+09:09:58.842 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+09:09:58.842 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
+09:10:05.193 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
+09:10:05.193 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
+09:10:06.254 WARN  by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 30 doPost - Failed to log in
+09:10:16.809 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed

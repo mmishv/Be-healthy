@@ -25,17 +25,17 @@ public class MealService {
 
 
     public boolean update(Meal entity) {
-        logger.debug("Update meal");
+        logger.info("Update meal");
         return new MealDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete meal");
+        logger.warn("Delete meal");
         return new MealDao().delete(id);
     }
 
     public boolean create(Meal entity) {
-        logger.debug("Create meal");
+        logger.info("Create meal");
         return new MealDao().create(entity);
     }
 

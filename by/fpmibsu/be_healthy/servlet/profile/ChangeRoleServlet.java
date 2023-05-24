@@ -16,7 +16,7 @@ public class ChangeRoleServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(ChangeRoleServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to change user role");
+        logger.info("Transition in order to change user role");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         Profile profile = new ProfileService().getEntityById(Integer.parseInt(pathParts[pathParts.length-1]));

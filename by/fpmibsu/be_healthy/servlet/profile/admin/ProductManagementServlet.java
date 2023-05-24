@@ -23,7 +23,7 @@ public class ProductManagementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to edit product base");
+        logger.info("Transition in order to edit product base");
         String pathInfo = request.getPathInfo();
         String[] path = pathInfo.split("/");
         String[] pathParts = path[path.length-1].split("-");

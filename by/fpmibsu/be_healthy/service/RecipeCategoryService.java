@@ -23,17 +23,17 @@ public class RecipeCategoryService {
     }
 
     public boolean update(RecipeCategory entity) {
-        logger.debug("Update recipe category");
+        logger.info("Update recipe category");
         return new RecipeCategoryDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete recipe category");
+        logger.warn("Delete recipe category");
         return new RecipeCategoryDao().delete(id);
     }
 
     public boolean create(RecipeCategory entity) {
-        logger.debug("Create recipe category");
+        logger.info("Create recipe category");
         return new RecipeCategoryDao().create(entity);
     }
 

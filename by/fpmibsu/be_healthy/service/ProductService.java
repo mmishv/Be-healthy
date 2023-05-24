@@ -24,17 +24,17 @@ public class ProductService {
 
 
     public boolean update(Product entity) {
-        logger.debug("Update product");
+        logger.info("Update product");
         return new ProductDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete product");
+        logger.warn("Delete product");
         return new ProductDao().delete(id);
     }
 
     public boolean create(Product entity) {
-        logger.debug("Create product");
+        logger.info("Create product");
         return new ProductDao().create(entity);
     }
 

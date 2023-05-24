@@ -32,7 +32,7 @@ public class ArticlesModerationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to update article moderation status");
+        logger.info("Transition in order to update article moderation status");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String[] lastPart = pathParts[pathParts.length-1].split("-");

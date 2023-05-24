@@ -27,7 +27,7 @@ public class AboutMeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to change profile information");
+        logger.info("Transition in order to change profile information");
         Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
         if (!Objects.equals(request.getParameter("avatar"), "")){
             Part filePart = request.getPart("avatar");

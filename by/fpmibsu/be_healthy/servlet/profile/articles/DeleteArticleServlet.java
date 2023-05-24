@@ -14,7 +14,7 @@ public class DeleteArticleServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(DeleteArticleServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to delete article");
+        logger.warn("Transition in order to delete article");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         new ArticleService().delete(Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]));

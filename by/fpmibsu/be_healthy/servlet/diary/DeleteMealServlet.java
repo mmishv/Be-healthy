@@ -14,7 +14,7 @@ public class DeleteMealServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(DeleteMealServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to remove meal");
+        logger.warn("Transition in order to remove meal");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String[] part =pathParts[pathParts.length-1].split("_");

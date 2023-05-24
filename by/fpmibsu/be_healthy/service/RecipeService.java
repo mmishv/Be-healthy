@@ -24,17 +24,17 @@ public class RecipeService {
 
 
     public boolean update(Recipe entity) {
-        logger.debug("Update recipe");
+        logger.info("Update recipe");
         return new RecipeDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete recipe");
+        logger.warn("Delete recipe");
         return new RecipeDao().delete(id);
     }
 
     public boolean create(Recipe entity) {
-        logger.debug("Create recipe");
+        logger.info("Create recipe");
         return new RecipeDao().create(entity);
     }
 
@@ -92,7 +92,7 @@ public class RecipeService {
         return new RecipeDao().getAuthorPage(page, per_page, id);
     }
     public boolean updateModerationStatus(int id, boolean moderated){
-        logger.debug("Update recipe moderation status");
+        logger.info("Update recipe moderation status");
         return new RecipeDao().updateModerationStatus(id, moderated);
     }
 }

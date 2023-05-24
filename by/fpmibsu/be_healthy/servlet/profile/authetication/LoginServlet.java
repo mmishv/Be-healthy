@@ -25,15 +25,15 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("login", login);
                 session.setAttribute("id", new ProfileService().getIdByLogin(login));
                 response.sendRedirect("/profile");
-                logger.debug("Log in successfully");
+                logger.info("Log in successfully");
             } else {
-                logger.debug("Failed to log in");
+                logger.warn("Failed to log in");
                 request.setAttribute("error_login", "Пароль неверный");
                 getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
             }
         }
         else{
-            logger.debug("Failed to log in");
+            logger.warn("Failed to log in");
             request.setAttribute("error_login", "Такого пользователя не существует");
             getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
         }

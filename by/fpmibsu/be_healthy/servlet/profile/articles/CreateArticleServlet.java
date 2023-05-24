@@ -27,7 +27,7 @@ public class CreateArticleServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to add article");
+        logger.info("Transition in order to add article");
         int authorId;
         String title, text;
         List<ArticleCategory> categories = new ArrayList<>();

@@ -22,7 +22,7 @@ public class EditArticleServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(EditArticleServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition to edit article page");
+        logger.info("Transition to edit article page");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");;
         int article_id = Integer.parseInt(pathParts[pathParts.length-1].split("_")[0]);

@@ -24,17 +24,17 @@ public class ProfileService {
 
 
     public boolean update(Profile entity) {
-        logger.debug("Update profile");
+        logger.info("Update profile");
         return new ProfileDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete profile");
+        logger.warn("Delete profile");
         return new ProfileDao().delete(id);
     }
 
     public boolean create(Profile entity) {
-        logger.debug("Create profile");
+        logger.info("Create profile");
         return new ProfileDao().create(entity);
     }
 
@@ -44,7 +44,7 @@ public class ProfileService {
     }
 
     public boolean register(String login, String password) {
-        logger.debug("Register profile");
+        logger.info("Register profile");
         return new ProfileDao().register(login, password);
     }
 
@@ -70,11 +70,11 @@ public class ProfileService {
     }
 
     public boolean updateMainInfo(Profile entity) {
-        logger.debug("Update profile main info");
+        logger.info("Update profile main info");
         return new ProfileDao().updateMainInfo(entity);
     }
     public boolean updateRole(Profile entity){
-        logger.debug("Update profile role");
+        logger.info("Update profile role");
         return new ProfileDao().updateRole(entity);
     }
 }

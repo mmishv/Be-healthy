@@ -24,17 +24,17 @@ public class IngredientService {
 
 
     public boolean update(Ingredient entity) {
-        logger.debug("Update ingredient");
+        logger.info("Update ingredient");
         return new IngredientDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete ingredient");
+        logger.warn("Delete ingredient");
         return new IngredientDao().delete(id);
     }
 
     public boolean create(Ingredient entity) {
-        logger.debug("Create ingredient");
+        logger.info("Create ingredient");
         return new IngredientDao().create(entity);
     }
 

@@ -28,17 +28,17 @@ public class ArticleCategoryService {
     }
 
     public boolean update(ArticleCategory entity) {
-        logger.debug("Update article category");
+        logger.info("Update article category");
         return new ArticleCategoryDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete article category");
+        logger.warn("Delete article category");
         return new ArticleCategoryDao().delete(id);
     }
 
     public boolean create(ArticleCategory entity) {
-        logger.debug("Create article category");
+        logger.info("Create article category");
         return new ArticleCategoryDao().create(entity);
     }
 

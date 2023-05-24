@@ -30,7 +30,7 @@ public class CategoriesManagementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Admin transition in order to create new category");
+        logger.info("Admin transition in order to create new category");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String name = new String(request.getParameter("name").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);

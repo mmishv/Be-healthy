@@ -21,7 +21,7 @@ public class EditMealServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(DeleteMealServlet.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition in order to edit meal");
+        logger.info("Transition in order to edit meal");
         List<MealProduct> products = new ArrayList<>();
         String title =  new String(request.getParameter("title").getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         String pathInfo = request.getPathInfo();

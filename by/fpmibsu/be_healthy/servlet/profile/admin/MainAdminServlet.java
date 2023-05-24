@@ -14,7 +14,7 @@ public class MainAdminServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(MainAdminServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Transition to admin main page");
+        logger.info("Transition to admin main page");
         request.setAttribute("profiles", new ProfileService().getAll());
         request.setAttribute("my_id", request.getSession().getAttribute("id"));
         getServletContext().getRequestDispatcher("/jsp/profile/admin/admin-users.jsp").forward(request, response);

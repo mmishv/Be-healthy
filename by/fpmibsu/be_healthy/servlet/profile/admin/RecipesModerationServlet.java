@@ -37,6 +37,7 @@ public class RecipesModerationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("Change recipe moderation status");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         String[] lastPart = pathParts[pathParts.length-1].split("-");

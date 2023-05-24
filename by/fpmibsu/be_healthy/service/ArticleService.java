@@ -23,17 +23,17 @@ public class ArticleService {
     }
 
     public boolean update(Article entity) {
-        logger.debug("Update article");
+        logger.info("Update article");
         return new ArticleDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Debug article");
+        logger.warn("Debug article");
         return new ArticleDao().delete(id);
     }
 
     public boolean create(Article entity) {
-        logger.debug("Create article");
+        logger.info("Create article");
         return new ArticleDao().create(entity);
     }
 

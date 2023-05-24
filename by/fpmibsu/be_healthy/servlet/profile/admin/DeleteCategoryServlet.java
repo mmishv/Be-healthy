@@ -15,7 +15,7 @@ public class DeleteCategoryServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(DeleteCategoryServlet.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("Admin transition in order to delete category");
+        logger.warn("Admin transition in order to delete category");
         String pathInfo = request.getPathInfo();
         String[] pathParts = pathInfo.split("/");
         int id =  Integer.parseInt(pathParts[pathParts.length-1].split("-")[1]);

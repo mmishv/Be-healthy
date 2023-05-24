@@ -22,17 +22,17 @@ public class RoleService {
     }
 
     public boolean update(Role entity) {
-        logger.debug("Update user role");
+        logger.info("Update user role");
         return new RoleDao().update(entity);
     }
 
     public boolean delete(int id) {
-        logger.debug("Delete user role");
+        logger.warn("Delete user role");
         return new RoleDao().delete(id);
     }
 
     public boolean create(Role entity) {
-        logger.debug("Create user role");
+        logger.info("Create user role");
         return new RoleDao().create(entity);
     }
     public Role getRoleByUserId(int id) {

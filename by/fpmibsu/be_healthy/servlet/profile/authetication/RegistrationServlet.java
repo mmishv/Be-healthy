@@ -28,14 +28,14 @@ public class RegistrationServlet extends HttpServlet {
                 login = request.getParameter("reg_login");
         if (Objects.equals(request.getParameter("reg_password1"), request.getParameter("reg_password2")) &&
                 new ProfileService().isLoginAvailable(login)) {
-            logger.debug("Registered successfully");
+            logger.info("Registered successfully");
             session.setAttribute("password", password);
             session.setAttribute("login", login);
             new ProfileService().register(login, password);
             session.setAttribute("id", new ProfileService().getIdByLogin(login));
             response.sendRedirect("/profile");
         } else {
-            logger.debug("Failed to register");
+            logger.info("Failed to register");
             request.setAttribute("error_reg", "Ошибка регистрации. Попробуйте ещё раз");
             getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
         }
