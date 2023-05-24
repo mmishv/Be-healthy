@@ -72,8 +72,8 @@
                 <td><fmt:formatNumber value="${p.calories * p.quantity / 100}" maxFractionDigits="1"/></td>
             </tr>
         </c:forEach>
-        <tr>
-            <td style=" background-color: #87CEFA; text-align: left; padding-left: 2%;">Итого</td>
+        <tr class="result">
+            <td style="text-align: left; padding-left: 2%;">Итого</td>
             <td>${b}</td>
             <td>${j}</td>
             <td>${u}</td>

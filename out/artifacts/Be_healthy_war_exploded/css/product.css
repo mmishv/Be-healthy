@@ -108,6 +108,11 @@ input {
     border: solid 1px #cfd4d9;
 }
 
+.table-wrapper table .result {
+    background-color: #4bc1794a;
+    font-weight: 500;
+}
+
 .row {
     margin: 0 !important;
 }
@@ -119,6 +124,6 @@ input {
     display: inline;
 }
 
-#table1 {
+#table-search {
     background-color: white;
 }

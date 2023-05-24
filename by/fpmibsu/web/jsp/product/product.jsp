@@ -70,7 +70,11 @@
     </div>
     <div class="product-table">
         <h4 style="opacity: 0.8; margin-top: 0 !important;">База продуктов</h4>
-        <table class="table" id="table1">
+        <div class="form-group">
+            <input class="form-control" id="search" placeholder="Поиск по названию ..." autocomplete="off"
+                   name="search" type="text" oninput="tableSearch();">
+        </div>
+        <table class="table" id="table-search">
             <thead>
             <tr>
                 <th scope="col" style="width: 40%;">Продукт</th>
@@ -83,7 +87,7 @@
             <tbody>
             <c:forEach items="${products}" var="p">
                 <tr>
-                    <td style="text-align: left; padding-left: 2%;">${p.name}</td>
+                    <td style="text-align: left; padding-left: 2%;" class="searchable">${p.name}</td>
                     <td>${p.proteins}</td>
                     <td>${p.fats}</td>
                     <td>${p.carbohydrates}</td>
@@ -102,5 +106,6 @@
     </div>
 </div>
 <script src="../../js/addRow.js"></script>
+<script src="../../js/tableSearch.js"></script>
 </body>
 </html>
