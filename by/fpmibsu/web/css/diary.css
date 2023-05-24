@@ -191,6 +191,10 @@
     padding: 1.5% 5% !important;
 }
 
+.modal-footer .btn.btn-primary:hover {
+    background-color: #114630 !important;
+}
+
 .modal-footer {
     justify-content: center !important;
 }

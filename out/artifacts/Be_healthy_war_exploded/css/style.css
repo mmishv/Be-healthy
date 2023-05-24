@@ -110,7 +110,6 @@ h4 {
 }
 
 .btn:hover, .btn:focus, .btn:focus-visible, .btn:active {
-    border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }

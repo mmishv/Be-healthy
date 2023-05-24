@@ -134,14 +134,14 @@
                             <form method="post" action="/edit-meal/${meal.id}_${date}" accept-charset="utf-8">
                                 <div class="modal-header">
                                     <input class="modal-title" name="title" placeholder="Название приёма пищи"
-                                           value="${meal.name}"></input>
+                                           value="${meal.name}">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body" id="cur-products_additional${meal.id}">
                                     <c:forEach items="${meal.products}" var="p" varStatus="loop">
-                                        <div class="row cur-prod-option${meal.id}-"
+                                        <div class="row cur-prod-option${meal.id}- prod-option"
                                              id="cur-prod-option${meal.id}-${loop.count}">
                                             <select name="add_product${meal.id}_${loop.count}"
                                                     id="add_product${meal.id}_${loop.count}"
