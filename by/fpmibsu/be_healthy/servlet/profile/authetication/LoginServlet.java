@@ -20,14 +20,21 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password"),
                 login = request.getParameter("login");
         String stored_password = new ProfileService().getPasswordByLogin(login);
-        if (stored_password != null && BCrypt.checkpw(password, stored_password)){
-            session.setAttribute("login", login);
-            session.setAttribute("id", new ProfileService().getIdByLogin(login));
-            response.sendRedirect("/profile");
-            logger.debug("Log in successfully");
-        } else {
+        if (stored_password != null){
+            if (BCrypt.checkpw(password, stored_password)){
+                session.setAttribute("login", login);
+                session.setAttribute("id", new ProfileService().getIdByLogin(login));
+                response.sendRedirect("/profile");
+                logger.debug("Log in successfully");
+            } else {
+                logger.debug("Failed to log in");
+                request.setAttribute("error_login", "Пароль неверный");
+                getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
+            }
+        }
+        else{
             logger.debug("Failed to log in");
-            request.setAttribute("error_login", "Пароль неверный");
+            request.setAttribute("error_login", "Такого пользователя не существует");
             getServletContext().getRequestDispatcher("/jsp/profile/auth.jsp").forward(request, response);
         }
     }
