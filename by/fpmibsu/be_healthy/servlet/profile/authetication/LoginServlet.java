@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password"),
                 login = request.getParameter("login");
         String stored_password = new ProfileService().getPasswordByLogin(login);
-        if (BCrypt.checkpw(password, stored_password)){
+        if (stored_password != null && BCrypt.checkpw(password, stored_password)){
             session.setAttribute("login", login);
             session.setAttribute("id", new ProfileService().getIdByLogin(login));
             response.sendRedirect("/profile");

@@ -1,79 +1,19 @@
-15:35:16.387 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-15:35:17.697 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-15:35:17.700 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-15:35:17.974 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-15:35:18.195 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-15:35:18.689 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-15:35:18.689 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-15:35:18.690 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-15:35:18.690 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-15:35:18.806 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-15:35:18.806 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-15:35:18.807 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-15:35:18.807 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-15:35:25.908 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipesMainServlet 22 doGet - Transition to main recipes page
-15:35:25.911 DEBUG by.fpmibsu.be_healthy.service.RecipeService 81 getNumberOfRecipes - Get number of recipes
-15:35:25.917 DEBUG by.fpmibsu.be_healthy.service.RecipeService 70 getPage - Get page of recipes
-15:35:26.076 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:26.077 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:26.082 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-15:35:26.127 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-15:35:26.159 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-15:35:26.182 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-15:35:26.208 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-15:35:26.234 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-15:35:28.543 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:28.543 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:28.546 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:28.547 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:28.575 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:28.575 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:29.356 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:29.356 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:29.357 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:29.358 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:29.378 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:29.378 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:31.003 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:31.004 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:31.005 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:31.005 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:31.006 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:31.006 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:31.628 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:31.628 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:31.630 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:31.630 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:31.631 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:31.631 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:32.421 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:32.421 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:32.422 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:32.422 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:32.435 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:32.435 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:33.103 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:33.103 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:33.104 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:33.104 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:33.119 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:33.119 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:33.737 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:33.737 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:33.738 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:33.738 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:33.758 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:33.758 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:35.380 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:35.380 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:35.381 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:35.382 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:35.389 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:35.389 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:39.451 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipeCategoryServlet 21 doGet - Transition to page with recipes in one category
-15:35:39.451 DEBUG by.fpmibsu.be_healthy.service.RecipeService 76 getNumberOfRecipesInCategory - Get number of recipes in one category
-15:35:39.452 DEBUG by.fpmibsu.be_healthy.service.RecipeService 52 getCategoryPageJSON - Get page of recipes in one category in JSON format
-15:35:39.452 DEBUG by.fpmibsu.be_healthy.service.RecipeService 47 getCategoryPage - Get page of recipes in one category
-15:35:39.453 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-15:35:39.453 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-15:35:42.338 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+08:01:34.915 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+08:01:36.161 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+08:01:36.163 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+08:01:36.665 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+08:01:36.935 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+08:01:37.777 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+08:01:37.777 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+08:01:37.778 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+08:01:37.779 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+08:01:37.939 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+08:01:37.940 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+08:01:37.941 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+08:01:37.941 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+08:01:40.184 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+08:01:40.184 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
+08:01:44.707 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 17 doPost - Transition in order to log in
+08:01:44.710 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
+08:01:44.720 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 29 doPost - Failed to log in
+08:01:55.607 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
