@@ -24,6 +24,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
             }
         } catch (SQLException e) {
             logger.error("Error getting all article categories");
+            logger.trace(e);
             e.printStackTrace();
         }
         return categories;
@@ -43,6 +44,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
             }
         } catch (SQLException e) {
             logger.error("Error getting article category by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return category;
@@ -60,6 +62,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating article category");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -75,7 +78,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting article category");
-            e.printStackTrace();
+            logger.trace(e);
             return false;
         }
         return true;
@@ -91,7 +94,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error creating article category");
-            e.printStackTrace();
+            logger.trace(e);
             return false;
         }
         return true;
@@ -108,6 +111,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
             }
         } catch (SQLException e) {
             logger.error("Error getting article categories by article id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return categories;

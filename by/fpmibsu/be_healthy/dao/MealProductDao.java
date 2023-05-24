@@ -27,6 +27,7 @@ public class MealProductDao implements Dao<MealProduct> {
             }
         } catch (SQLException e) {
             logger.error("Error getting all meal products");
+            logger.trace(e);
             e.printStackTrace();
         }
         return products;
@@ -47,6 +48,7 @@ public class MealProductDao implements Dao<MealProduct> {
             }
         } catch (SQLException e) {
             logger.error("Error getting meal product by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return product;
@@ -66,6 +68,7 @@ public class MealProductDao implements Dao<MealProduct> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating meal product");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -81,6 +84,7 @@ public class MealProductDao implements Dao<MealProduct> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting meal product");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -94,6 +98,7 @@ public class MealProductDao implements Dao<MealProduct> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error deleting meal product");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -113,6 +118,7 @@ public class MealProductDao implements Dao<MealProduct> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error creating meal product");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -130,6 +136,7 @@ public class MealProductDao implements Dao<MealProduct> {
             }
         } catch (SQLException e) {
             logger.error("Error getting meal products by meal id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return products;

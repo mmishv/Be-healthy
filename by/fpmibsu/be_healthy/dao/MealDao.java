@@ -24,6 +24,7 @@ public class MealDao implements Dao<Meal> {
             initMeal(meals, resultSet);
         } catch (SQLException | ParseException e) {
             logger.error("Error getting all meals");
+            logger.trace(e);
             e.printStackTrace();
         }
         return meals;
@@ -42,6 +43,7 @@ public class MealDao implements Dao<Meal> {
             }
         } catch (SQLException | ParseException e) {
             logger.error("Error getting meal by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return meal;
@@ -65,6 +67,7 @@ public class MealDao implements Dao<Meal> {
             }
         } catch (SQLException e) {
             logger.error("Error updating meal");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -80,6 +83,7 @@ public class MealDao implements Dao<Meal> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting meal");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -105,6 +109,7 @@ public class MealDao implements Dao<Meal> {
             }
         } catch (SQLException e) {
             logger.error("Error creating meal");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -120,6 +125,7 @@ public class MealDao implements Dao<Meal> {
             }
         } catch (SQLException e) {
             logger.error("Error getting max meal id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;
@@ -136,6 +142,7 @@ public class MealDao implements Dao<Meal> {
             initMeal(meals, resultSet);
         } catch (SQLException | ParseException e) {
             logger.error("Error getting all user's meals by date");
+            logger.trace(e);
             e.printStackTrace();
         }
         return meals;

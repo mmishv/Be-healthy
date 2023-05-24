@@ -26,6 +26,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
             }
         } catch (SQLException e) {
             logger.error("Error getting all recipe categories");
+            logger.trace(e);
             e.printStackTrace();
         }
         return categories;
@@ -45,6 +46,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
             }
         } catch (SQLException e) {
             logger.error("Error getting recipe category by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return category;
@@ -62,6 +64,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating recipe category");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -77,6 +80,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting recipe category");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -93,6 +97,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error creating recipe category");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -110,6 +115,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
             }
         } catch (SQLException e) {
             logger.error("Error getting recipe categories by recipe id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return categories;

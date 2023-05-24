@@ -25,6 +25,7 @@ public class RoleDao implements Dao<Role> {
             }
         } catch (SQLException e) {
             logger.error("Error getting all user roles");
+            logger.trace(e);
             e.printStackTrace();
         }
         return roles;
@@ -44,6 +45,7 @@ public class RoleDao implements Dao<Role> {
             }
         } catch (SQLException e) {
             logger.error("Error getting user role by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return role;
@@ -61,6 +63,7 @@ public class RoleDao implements Dao<Role> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating user role");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -76,6 +79,7 @@ public class RoleDao implements Dao<Role> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting user role");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -92,6 +96,7 @@ public class RoleDao implements Dao<Role> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error creating user role");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -108,6 +113,7 @@ public class RoleDao implements Dao<Role> {
             }
         } catch (SQLException e) {
             logger.error("Error getting user role by user id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return null;

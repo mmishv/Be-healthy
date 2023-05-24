@@ -28,6 +28,7 @@ public class IngredientDao implements Dao<Ingredient> {
             }
         } catch (SQLException e) {
             logger.error("Error getting all ingredients");
+            logger.trace(e);
             e.printStackTrace();
         }
         return ingredients;
@@ -48,6 +49,7 @@ public class IngredientDao implements Dao<Ingredient> {
             }
         } catch (SQLException e) {
             logger.error("Error getting ingredient by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return ingredient;
@@ -68,6 +70,7 @@ public class IngredientDao implements Dao<Ingredient> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating ingredient");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -83,6 +86,7 @@ public class IngredientDao implements Dao<Ingredient> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting ingredient");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -103,6 +107,7 @@ public class IngredientDao implements Dao<Ingredient> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error creating ingredient");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -121,6 +126,7 @@ public class IngredientDao implements Dao<Ingredient> {
             }
         } catch (SQLException e) {
             logger.error("Error getting ingredients by recipe id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return ingredients;
@@ -133,6 +139,7 @@ public class IngredientDao implements Dao<Ingredient> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error deleting recipe ingredients");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }

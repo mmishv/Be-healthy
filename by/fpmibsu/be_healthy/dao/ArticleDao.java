@@ -22,6 +22,7 @@ public class ArticleDao implements Dao<Article> {
             initArticles(articles, resultSet);
         } catch (SQLException e) {
             logger.error("Error getting all articles");
+            logger.trace(e);
             e.printStackTrace();
         }
         return articles;
@@ -39,6 +40,7 @@ public class ArticleDao implements Dao<Article> {
             initArticles(recipes, resultSet);
         } catch (SQLException e) {
             logger.error("Error getting page of articles");
+            logger.trace(e);
             e.printStackTrace();
         }
         return recipes;
@@ -56,6 +58,7 @@ public class ArticleDao implements Dao<Article> {
             initArticles(recipes, resultSet);
         } catch (SQLException e) {
             logger.error("Error getting user's articles");
+            logger.trace(e);
             e.printStackTrace();
         }
         return recipes;
@@ -93,6 +96,7 @@ public class ArticleDao implements Dao<Article> {
             }
         } catch (SQLException e) {
             logger.error("Error getting article by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return article;
@@ -114,6 +118,7 @@ public class ArticleDao implements Dao<Article> {
             setCategories(entity, entity.getId());
         } catch (SQLException e) {
             logger.error("Error updating article");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -130,6 +135,7 @@ public class ArticleDao implements Dao<Article> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating article moderation status");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -144,6 +150,7 @@ public class ArticleDao implements Dao<Article> {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error deleting article categories");
+            logger.trace(e);
             throw new RuntimeException(e);
         }
     }
@@ -158,6 +165,7 @@ public class ArticleDao implements Dao<Article> {
             }
             catch (SQLException e){
                 logger.error("Error adding article categories");
+                logger.trace(e);
                 e.printStackTrace();
             }
         }
@@ -173,6 +181,7 @@ public class ArticleDao implements Dao<Article> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting article");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -189,6 +198,7 @@ public class ArticleDao implements Dao<Article> {
             }
         } catch (SQLException e) {
             logger.error("Error getting max article id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;
@@ -210,6 +220,7 @@ public class ArticleDao implements Dao<Article> {
             setCategories(entity, getMaxId());
         } catch (SQLException e) {
             logger.error("Error creating article");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -225,6 +236,7 @@ public class ArticleDao implements Dao<Article> {
             if (resultSet.next()) return resultSet.getInt("RES");
         } catch (SQLException e) {
             logger.error("Error getting number of articles");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;
@@ -240,6 +252,7 @@ public class ArticleDao implements Dao<Article> {
             }
         } catch (SQLException e) {
             logger.error("Error getting number of user's articles");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;

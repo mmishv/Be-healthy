@@ -24,6 +24,7 @@ public class ProductDao implements Dao<Product> {
             }
         } catch (SQLException e) {
             logger.error("Error getting all products");
+            logger.trace(e);
             e.printStackTrace();
         }
         return products;
@@ -52,6 +53,7 @@ public class ProductDao implements Dao<Product> {
             }
         } catch (SQLException e) {
             logger.error("Error getting product by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return product;
@@ -69,6 +71,7 @@ public class ProductDao implements Dao<Product> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating product");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -84,6 +87,7 @@ public class ProductDao implements Dao<Product> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting product");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -102,6 +106,7 @@ public class ProductDao implements Dao<Product> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error creating product");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }

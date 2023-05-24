@@ -22,6 +22,7 @@ public class RecipeDao implements Dao<Recipe> {
             initRecipe(recipes, resultSet);
         } catch (SQLException e) {
             logger.error("Error getting all recipes");
+            logger.trace(e);
             e.printStackTrace();
         }
         return recipes;
@@ -39,6 +40,7 @@ public class RecipeDao implements Dao<Recipe> {
             initRecipe(recipes, resultSet);
         } catch (SQLException e) {
             logger.error("Error getting page of recipes");
+            logger.trace(e);
             e.printStackTrace();
         }
         return recipes;
@@ -62,6 +64,7 @@ public class RecipeDao implements Dao<Recipe> {
             initRecipe(recipes, resultSet);
         } catch (SQLException e) {
             logger.error("Error getting page of recipes");
+            logger.trace(e);
             e.printStackTrace();
         }
         return recipes;
@@ -88,6 +91,7 @@ public class RecipeDao implements Dao<Recipe> {
             }
         } catch (SQLException e) {
             logger.error("Error getting recipe by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return recipe;
@@ -131,6 +135,7 @@ public class RecipeDao implements Dao<Recipe> {
             initCategoriesAndIngredients(entity, entity.getId());
         } catch (SQLException e) {
             logger.error("Error updating recipe");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -147,6 +152,7 @@ public class RecipeDao implements Dao<Recipe> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating recipe moderation status");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -161,6 +167,7 @@ public class RecipeDao implements Dao<Recipe> {
             inner_statement1.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error deleting recipe categories");
+            logger.trace(e);
             e.printStackTrace();
         }
     }
@@ -175,6 +182,7 @@ public class RecipeDao implements Dao<Recipe> {
                 inner_statement1.executeUpdate();
             } catch (SQLException e) {
                 logger.error("Error adding recipe categories");
+                logger.trace(e);
                 e.printStackTrace();
             }
         }
@@ -194,6 +202,7 @@ public class RecipeDao implements Dao<Recipe> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting recipe category");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -219,6 +228,7 @@ public class RecipeDao implements Dao<Recipe> {
             initCategoriesAndIngredients(entity, recipe_id);
         } catch (SQLException e) {
             logger.error("Error creating recipe category");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -234,6 +244,7 @@ public class RecipeDao implements Dao<Recipe> {
             }
         } catch (SQLException e) {
             logger.error("Error getting max recipe category id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;
@@ -256,6 +267,7 @@ public class RecipeDao implements Dao<Recipe> {
             if (resultSet.next()) return resultSet.getInt("RES");
         } catch (SQLException e) {
             logger.error("Error getting number of recipes");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;
@@ -280,6 +292,7 @@ public class RecipeDao implements Dao<Recipe> {
             if (resultSet.next()) return resultSet.getInt("RES");
         } catch (SQLException e) {
             logger.error("Error getting number of recipes with condition");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;

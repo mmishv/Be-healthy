@@ -31,6 +31,7 @@ public class ProfileDao implements Dao<Profile> {
             }
         } catch (SQLException e) {
             logger.error("Error getting all profiles");
+            logger.trace(e);
             e.printStackTrace();
         }
         return profiles;
@@ -76,6 +77,7 @@ public class ProfileDao implements Dao<Profile> {
             }
         } catch (SQLException e) {
             logger.error("Error getting profile by id");
+            logger.trace(e);
             e.printStackTrace();
         }
         return profile;
@@ -103,6 +105,7 @@ public class ProfileDao implements Dao<Profile> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating profile");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -120,6 +123,7 @@ public class ProfileDao implements Dao<Profile> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating profile role");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -137,6 +141,7 @@ public class ProfileDao implements Dao<Profile> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error updating profile main info");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -152,6 +157,7 @@ public class ProfileDao implements Dao<Profile> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error deleting profile");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -187,6 +193,7 @@ public class ProfileDao implements Dao<Profile> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error creating profile");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -203,6 +210,7 @@ public class ProfileDao implements Dao<Profile> {
             }
         } catch (SQLException e) {
             logger.error("Error getting profile password");
+            logger.trace(e);
             e.printStackTrace();
         }
         return null;
@@ -216,6 +224,7 @@ public class ProfileDao implements Dao<Profile> {
             if (resultSet.next()) return false;
         } catch (SQLException e) {
             logger.error("Error checking is login for profile available");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -231,6 +240,7 @@ public class ProfileDao implements Dao<Profile> {
                 return false;
         } catch (SQLException e) {
             logger.error("Error during profile registration");
+            logger.trace(e);
             e.printStackTrace();
             return false;
         }
@@ -247,6 +257,7 @@ public class ProfileDao implements Dao<Profile> {
             }
         } catch (SQLException e) {
             logger.error("Error getting profile id by login");
+            logger.trace(e);
             e.printStackTrace();
         }
         return -1;
