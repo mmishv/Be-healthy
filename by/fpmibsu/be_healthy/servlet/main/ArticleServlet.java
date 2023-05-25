@@ -22,7 +22,8 @@ public class ArticleServlet extends HttpServlet {
         Article article = new ArticleService().
                 getEntityById(Integer.parseInt(pathParts[pathParts.length-1]));
         request.setAttribute("article", article);
-        request.setAttribute("author", new ProfileService().getEntityById(article.getAuthorId()).getLogin());
+        var author = new ProfileService().getEntityById(article.getAuthorId());
+        request.setAttribute("author", author==null? null : author.getLogin());
         getServletContext().getRequestDispatcher("/jsp/main/article.jsp").forward(request, response);
     }
 }
