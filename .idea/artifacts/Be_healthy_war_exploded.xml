@@ -5,7 +5,6 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="Be-healthy" />
-          <element id="javaee-facet-classes" facet="Be-healthy/web/Web3" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="application" name="jstl" />

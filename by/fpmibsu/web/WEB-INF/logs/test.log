@@ -1,17 +1,13 @@
-2023-05-25 20:04:25.340 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-2023-05-25 20:04:26.613 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-25 20:04:26.615 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-25 20:04:26.880 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-25 20:04:27.083 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-25 20:04:27.643 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-25 20:04:27.643 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-25 20:04:27.644 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-25 20:04:27.644 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-25 20:04:27.761 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-25 20:04:27.762 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-25 20:04:27.763 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-25 20:04:27.763 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-25 20:04:40.371 DEBUG by.fpmibsu.be_healthy.servlet.main.ArticleServlet 19 doGet - Open article
-2023-05-25 20:04:40.372 DEBUG by.fpmibsu.be_healthy.service.ArticleService 21 getEntityById - Get article by id
-2023-05-25 20:04:40.375 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-25 20:04:43.852 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+2023-05-26 23:06:38.583 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+2023-05-26 23:06:39.776 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-26 23:06:39.778 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-26 23:06:40.060 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-26 23:06:40.311 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-26 23:06:40.820 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-26 23:06:40.820 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-26 23:06:40.822 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-26 23:06:40.822 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-26 23:06:40.953 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-26 23:06:40.953 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-26 23:06:40.954 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-26 23:06:40.954 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format

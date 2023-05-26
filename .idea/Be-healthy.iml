@@ -11,7 +11,7 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$" />
-          <root url="file://$MODULE_DIR$/by/fpmibsu/be_healthy/resources" />
+          <root url="file://$MODULE_DIR$/by/fpmibsu/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -142,5 +142,21 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="junit.jupiter.api" level="application" />
+    <orderEntry type="library" exported="" name="io.swagger.annotations" level="application" />
+    <orderEntry type="library" exported="" name="io.swagger.core" level="application" />
+    <orderEntry type="module-library" exported="" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/javax.ws.rs-api-2.1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/javax.ws.rs-api-2.1.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/javax.ws.rs-api-2.1.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="javax.ws.rs.api" level="project" />
   </component>
 </module>
