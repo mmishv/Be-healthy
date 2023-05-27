@@ -112,7 +112,7 @@
                 </div>
             </div>
             <c:if test="${not empty result}">
-                <h5> Результат: ${result} </h5>
+                <h5> Результат: <fmt:formatNumber value="${result}" maxFractionDigits="1"/></h5>
             </c:if>
         </form>
     </div>
