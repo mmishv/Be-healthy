@@ -1,14 +1,2 @@
-2023-05-27 17:45:08.164 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-2023-05-27 17:45:10.986 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-27 17:45:10.988 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-27 17:45:11.390 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-27 17:45:11.592 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-27 17:45:12.099 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-27 17:45:12.099 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-27 17:45:12.101 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-27 17:45:12.101 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-27 17:45:12.222 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-27 17:45:12.224 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-27 17:45:12.226 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-27 17:45:12.226 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-27 17:45:16.951 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+2023-05-27 17:51:32.573 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+2023-05-27 17:51:34.523 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
