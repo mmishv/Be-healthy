@@ -83,9 +83,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="javax.servlet.jsp.jstl.api" level="application" />
-    <orderEntry type="library" exported="" name="taglibs.standard" level="application" />
-    <orderEntry type="library" exported="" name="jstl" level="application" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
@@ -125,7 +122,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
+    <orderEntry type="module-library" exported="" scope="TEST">
       <library name="JUnit5.8.1">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
@@ -141,12 +138,17 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="junit.jupiter.api" level="application" />
+    <orderEntry type="library" exported="" name="junit.jupiter.api" level="application" />
     <orderEntry type="library" exported="" name="io.swagger.annotations" level="application" />
     <orderEntry type="library" exported="" name="io.swagger.core" level="application" />
-    <orderEntry type="library" name="glassfish.jersey.containers.container.servlet" level="application" />
-    <orderEntry type="library" name="glassfish.jersey.core.server" level="application" />
-    <orderEntry type="library" name="glassfish.jersey.inject.hk2" level="application" />
-    <orderEntry type="library" name="glassfish.jaxb.core" level="application" />
+    <orderEntry type="library" exported="" name="glassfish.jersey.containers.container.servlet" level="application" />
+    <orderEntry type="library" exported="" name="glassfish.jersey.core.server" level="application" />
+    <orderEntry type="library" exported="" name="glassfish.jersey.inject.hk2" level="application" />
+    <orderEntry type="library" exported="" name="glassfish.jaxb.core" level="application" />
+    <orderEntry type="library" exported="" name="javax.activation" level="application" />
+    <orderEntry type="library" exported="" name="sun.mail.javax" level="application" />
+    <orderEntry type="library" exported="" name="jstl" level="project" />
+    <orderEntry type="library" exported="" name="taglibs.standard" level="project" />
+    <orderEntry type="library" exported="" name="javax.servlet.jstl" level="application" />
   </component>
 </module>
