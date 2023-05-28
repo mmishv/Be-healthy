@@ -88,7 +88,9 @@ public class ProfileDao implements Dao<Profile> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, " + " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "UPDATE PROFILE SET WEIGHT=?, ACTIVITY_COEF=?,  SEX=?, "
+                        + " CAL_NORM=?, CARB_NORM=?, FATS_NORM=?, PROT_NORM=?, GOAL = ?, HEIGHT=?, AGE=? WHERE ID=?")) {
             preparedStatement.setDouble(1, entity.getWeight());
             preparedStatement.setDouble(2, entity.getActivity());
             preparedStatement.setString(3, entity.getSex());

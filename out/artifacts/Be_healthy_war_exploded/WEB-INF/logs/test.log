@@ -1,20 +1,20 @@
-2023-05-28 20:48:41.691 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-2023-05-28 20:48:43.186 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-28 20:48:43.189 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-28 20:48:43.479 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-28 20:48:43.742 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-28 20:48:44.258 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-28 20:48:44.259 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-28 20:48:44.260 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-28 20:48:44.260 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-28 20:48:44.389 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-28 20:48:44.389 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-28 20:48:44.390 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-28 20:48:44.391 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-28 20:48:52.979 INFO  by.fpmibsu.be_healthy.service.ProfileService 37 create - Create profile
-2023-05-28 20:48:52.995 ERROR by.fpmibsu.be_healthy.dao.ProfileDao 195 create - Error creating profile
-2023-05-28 20:48:52.996 TRACE by.fpmibsu.be_healthy.dao.ProfileDao 196 create - org.postgresql.util.PSQLException: ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности "profile_login_key"
-  Подробности: Ключ "(login)=(new_user2)" уже существует.
-2023-05-28 20:48:57.023 INFO  by.fpmibsu.be_healthy.service.ProfileService 37 create - Create profile
-2023-05-28 20:51:15.942 WARN  by.fpmibsu.be_healthy.service.ProfileService 32 delete - Delete profile
-2023-05-28 20:51:27.963 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+2023-05-28 20:52:01.267 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+2023-05-28 20:52:02.806 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-28 20:52:02.808 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-28 20:52:03.075 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-28 20:52:03.272 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-28 20:52:03.852 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-28 20:52:03.853 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-28 20:52:03.853 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-28 20:52:03.854 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-28 20:52:03.989 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-28 20:52:03.989 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-28 20:52:03.990 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-28 20:52:03.991 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-28 20:52:47.405 WARN  by.fpmibsu.be_healthy.service.ProfileService 32 delete - Delete profile
+2023-05-28 20:53:00.485 WARN  by.fpmibsu.be_healthy.service.ProfileService 32 delete - Delete profile
+2023-05-28 20:53:03.521 WARN  by.fpmibsu.be_healthy.service.ProfileService 32 delete - Delete profile
+2023-05-28 20:53:12.061 WARN  by.fpmibsu.be_healthy.service.ProfileService 32 delete - Delete profile
+2023-05-28 20:53:33.801 INFO  by.fpmibsu.be_healthy.service.ProfileService 37 create - Create profile
+2023-05-28 20:53:48.091 WARN  by.fpmibsu.be_healthy.service.ProfileService 32 delete - Delete profile
+2023-05-28 20:53:50.259 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed

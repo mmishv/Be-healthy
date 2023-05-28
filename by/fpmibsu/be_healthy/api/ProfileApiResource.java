@@ -19,36 +19,22 @@ import java.util.Objects;
 @Consumes(MediaType.APPLICATION_JSON)
 
 public class ProfileApiResource extends ProfileService{
-/*
     @PUT
-    @Path("/{user_id}")
-    @ApiOperation(value = "Update a user", notes = "Updates a user")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully updated schema"),
+    @ApiOperation(value = "Updates a user")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 404, message = "User not found"),
-            @ApiResponse(code = 400, message = "Missing or invalid request body"),
+            @ApiResponse(code = 400, message = "Bad Request. " +
+                    "Probably, this username is already taken"),
             @ApiResponse(code = 500, message = "Internal error")})
-    public String updateProfile(
-            @ApiParam(value = "User id", required = true) @PathParam("user_id") Integer user_id,
-            FormDataMultiPart multiPart) {
-        if (null != movie) {
-            EntityTag movieTag = getMovieTag(movie);
-            Response.ResponseBuilder responseBuilder
-                    = request.evaluatePreconditions(
-                    movieTag);
-            if (null == responseBuilder) {
-                responseBuilder = Response.ok(movie)
-                        .tag(movieTag);
-            }
-            return responseBuilder.build();
-        } else {
-            throw new WebApplicationException(
-                    Response.Status.NOT_FOUND);
+    public Response updateUser(@ApiParam(value = "User", required = true) @RequestBody Profile profile){
+        if (update(profile)){
+            return Response.ok("User successfully updated").build();
         }
-        return update(user_id, multiPart);
+        else{
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 
-
-*/
     @DELETE
     @Path("/{id}")
     @ApiOperation(value = "Deletes a user")
@@ -107,6 +93,7 @@ public class ProfileApiResource extends ProfileService{
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 500, message = "Internal error")
     })
+
     public Response getAllUsers(){
         try {
             String profiles = getAllJSON();
