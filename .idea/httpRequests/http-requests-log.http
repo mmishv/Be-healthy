@@ -1,3 +1,157 @@
+DELETE http://localhost:8081/api/users/36
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-28T211954.200.json
+
+###
+
+DELETE http://localhost:8081/api/users/35
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-28T211950.404.html
+
+###
+
+PATCH http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 36
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 36,
+  "name": "NEW USER"
+}
+
+<> 2023-05-28T211935.200.json
+
+###
+
+PATCH http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 36
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "id": 34,
+  "name": "NEW USER"
+}
+
+<> 2023-05-28T211910.400.html
+
+###
+
+GET http://localhost:8081/api/users/2
+Accept: application/json, */*; q=0.01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-28T211817.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 241
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user2",
+  "password": "1111",
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+<> 2023-05-28T211749.200.json
+
+###
+
+GET http://localhost:8081/api/users/2
+Accept: application/json, */*; q=0.01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-28T211552.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 241
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user2",
+  "password": "1111",
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+<> 2023-05-28T211534.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Content-Type: application/json
+Content-Length: 241
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user2",
+  "password": "1111",
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+<> 2023-05-28T211502.500.html
+
+###
+
 DELETE http://localhost:8081/api/users/35
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
@@ -686,87 +840,6 @@ User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-05-27T185532.200.json
-
-###
-
-GET http://localhost:8081/api/users/1
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T185425.200.json
-
-###
-
-GET http://localhost:8081/api/users/3
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T185422.404.html
-
-###
-
-GET http://localhost:8081/api/users/33333
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T185419.404.html
-
-###
-
-GET http://localhost:8081/api/users/33333
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T185241.200.json
-
-###
-
-GET http://localhost:8081/api/users/33333
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T184958.200.json
-
-###
-
-GET http://localhost:8081/api/users/33333
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T184953.200.json
-
-###
-
-GET http://localhost:8081/api/users/11
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T184942.200.json
-
-###
-
-GET http://localhost:8081/api/users/2
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T184843.200.json
-
-###
-
-GET http://localhost:8081/api/users/2
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-05-27T184807.200.json
 
 ###
 

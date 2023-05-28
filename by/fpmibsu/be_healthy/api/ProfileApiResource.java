@@ -21,10 +21,11 @@ import java.util.Objects;
 public class ProfileApiResource extends ProfileService{
     @PUT
     @ApiOperation(value = "Updates a user")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 404, message = "User not found"),
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 400, message = "Bad Request. " +
                     "Probably, this username is already taken"),
+            @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Internal error")})
     public Response updateUser(@ApiParam(value = "User", required = true) @RequestBody Profile profile){
         if (update(profile)){
@@ -100,6 +101,21 @@ public class ProfileApiResource extends ProfileService{
             return Response.ok(profiles).build();
         } catch (JsonProcessingException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PATCH
+    @ApiOperation(value = "Updates user's main info (name and avatar)")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 404, message = "User not found"),
+            @ApiResponse(code = 500, message = "Internal error")})
+    public Response updateUserRole(@ApiParam(value = "User", required = true) @RequestBody Profile profile){
+        if (updateMainInfo(profile)){
+            return Response.ok("User's role successfully updated").build();
+        }
+        else{
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 }
