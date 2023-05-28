@@ -41,22 +41,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="library" exported="" name="hibernate.core" level="project" />
     <orderEntry type="module-library" exported="">
-      <library name="fasterxml.jackson.core.databind" type="repository">
-        <properties maven-id="com.fasterxml.jackson.core:jackson-databind:2.15.0" />
-        <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar!/" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0-javadoc.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0-javadoc.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0-javadoc.jar!/" />
-        </JAVADOC>
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/by/fpmibsu/web/WEB-INF/lib/jackson-databind-2.15.0.jar!/" />
@@ -150,5 +134,6 @@
     <orderEntry type="library" exported="" name="jstl" level="project" />
     <orderEntry type="library" exported="" name="taglibs.standard" level="project" />
     <orderEntry type="library" exported="" name="javax.servlet.jstl" level="application" />
+    <orderEntry type="library" name="glassfish.jersey.media.json.jackson" level="application" />
   </component>
 </module>

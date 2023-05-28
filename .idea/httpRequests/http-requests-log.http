@@ -1,3 +1,305 @@
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 310
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user2",
+  "password": "1111",
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "role": {
+    "id": 1,
+    "name": "пользователь"
+  },
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+<> 2023-05-28T203749.400.html
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 310
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user2",
+  "password": "1111",
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "role": {
+    "id": 1,
+    "name": "пользователь"
+  },
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+<> 2023-05-28T203745.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 310
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user1",
+  "password": "1111",
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "role": {
+    "id": 1,
+    "name": "пользователь"
+  },
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+<> 2023-05-28T203555.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 309
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user",
+  "password": "1111",
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "role": {
+    "id": 1,
+    "name": "пользователь"
+  },
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 131
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "new_user",
+  "password": "1111",
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
+
+<> 2023-05-28T202835.400.html
+
+###
+
+GET http://localhost:8081/api/users/2
+Accept: application/json, */*; q=0.01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-28T202658.200.json
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 43
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "1111",
+  "password": "1111"
+}
+
+<> 2023-05-28T202642.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 43
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "1111",
+  "password": "1111"
+}
+
+<> 2023-05-28T202506.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 43
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "1111",
+  "password": "1111"
+}
+
+<> 2023-05-28T202329.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 43
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "1111",
+  "password": "1111"
+}
+
+<> 2023-05-28T202216.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 43
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "1111",
+  "password": "1111"
+}
+
+<> 2023-05-28T201318.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 43
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "1111",
+  "password": "1111"
+}
+
+<> 2023-05-28T201114.500.html
+
+###
+
+POST http://localhost:8081/api/users
+Accept: application/json
+Content-Type: application/json
+Content-Length: 43
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "1111",
+  "password": "1111"
+}
+
+<> 2023-05-28T200217.415.html
+
+###
+
+GET http://localhost:8081/api/users/2
+Accept: application/json, */*; q=0.01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-28T200210.200.json
+
+###
+
+GET http://localhost:8081/api/users
+Accept: application/json, */*; q=0.01
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-05-28T200156.200.json
+
+###
+
 GET http://localhost:8081/api/users
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)

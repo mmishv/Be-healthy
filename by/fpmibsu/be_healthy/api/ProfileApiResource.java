@@ -1,11 +1,13 @@
 package by.fpmibsu.be_healthy.api;
 
+import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.service.ProfileService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.oas.annotations.parameters.RequestBody;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -58,7 +60,21 @@ public class ProfileApiResource extends ProfileService{
     }
 */
 
-
+    @POST
+    @ApiOperation(value = "Creates new user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 400, message = "Bad Request"),
+    })
+    public Response createUser(
+            @ApiParam(value = "User", required = true) @RequestBody Profile profile) {
+        if (create(profile)){
+            return Response.ok(profile).build();
+        }
+        else{
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
     @GET
     @Path("/{id}")
     @ApiOperation(value = "Gets user by id")

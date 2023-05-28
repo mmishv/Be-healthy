@@ -125,10 +125,6 @@ public class Profile implements Serializable {
         return activity;
     }
 
-    public void setActivity(int activity) {
-        this.activity = activity;
-    }
-
     public String getName() {
         return name;
     }
