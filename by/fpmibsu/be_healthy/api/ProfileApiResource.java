@@ -47,29 +47,36 @@ public class ProfileApiResource extends ProfileService{
         return update(user_id, multiPart);
     }
 
-    @DELETE
-    @Path("/users/{user_id}")
-    @ApiOperation(value = "Delete a user", notes = "Deletes a user by id")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully deleted user"),
-            @ApiResponse(code = 404, message = "User not found"),
-            @ApiResponse(code = 500, message = "Error deleting user")})
-    public SuccessResponse deleteSchema(
-            @ApiParam(value = "user id", required = true) @PathParam("user_id") Integer user_id) {
-        deleteSchemaInternal(schemaName);
-        return new SuccessResponse("Schema " + schemaName + " deleted");
-    }
-*/
 
-    @POST
-    @ApiOperation(value = "Creates new user")
+*/
+    @DELETE
+    @Path("/{id}")
+    @ApiOperation(value = "Deletes a user")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 404, message = "User not found"),
+            @ApiResponse(code = 500, message = "Internal error")})
+    public Response deleteUser(
+            @ApiParam(value = "User id", required = true) @PathParam("id") Integer id) {
+        if (delete(id)){
+            return Response.ok("User successfully deleted").build();
+        }
+        else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+    @POST
+    @ApiOperation(value = "Creates a new user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 400, message = "Bad Request. " +
+                    "Probably, this username is already taken"),
+            @ApiResponse(code = 500, message = "Internal error")
     })
     public Response createUser(
             @ApiParam(value = "User", required = true) @RequestBody Profile profile) {
         if (create(profile)){
-            return Response.ok(profile).build();
+            return Response.ok("User successfully created").build();
         }
         else{
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -77,7 +84,7 @@ public class ProfileApiResource extends ProfileService{
     }
     @GET
     @Path("/{id}")
-    @ApiOperation(value = "Gets user by id")
+    @ApiOperation(value = "Gets a user by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 404, message = "User not found"),
@@ -95,7 +102,7 @@ public class ProfileApiResource extends ProfileService{
     }
 
     @GET
-    @ApiOperation(value = "Gets list of all users")
+    @ApiOperation(value = "Gets the list of all users")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 500, message = "Internal error")
