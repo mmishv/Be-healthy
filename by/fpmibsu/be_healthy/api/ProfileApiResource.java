@@ -65,14 +65,29 @@ public class ProfileApiResource extends ProfileService{
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 404, message = "User not found"),
-            @ApiResponse(code = 500, message = "Error reading user list")
+            @ApiResponse(code = 500, message = "Internal error")
             })
-    public Response getEntityById(
+    public Response getUserById(
             @ApiParam(value = "User ID", required = true) @PathParam("id") Integer id) {
         try {
             String profile = getEntityByIdJSON(id);
             return Objects.equals(profile, "null") ? Response.status(Response.Status.NOT_FOUND).build() :
                     Response.ok(profile).build();
+        } catch (JsonProcessingException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GET
+    @ApiOperation(value = "Gets list of all users")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 500, message = "Internal error")
+    })
+    public Response getAllUsers(){
+        try {
+            String profiles = getAllJSON();
+            return Response.ok(profiles).build();
         } catch (JsonProcessingException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }

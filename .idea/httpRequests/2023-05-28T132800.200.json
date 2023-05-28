@@ -1,0 +1,30 @@
+{
+  "id": 2,
+  "name": "Adam",
+  "email": "adamsmith@gmail.com",
+  "login": "adamsmith",
+  "password": "$2a$12$YY2Egf4m6x5ET2l5.AnlAuQA1JkEZpMbCC/8DjbdHbDp4ZomqgU12",
+  "avatar": null,
+  "base64image": null,
+  "weight": 80.0,
+  "height": 180,
+  "age": 30,
+  "activity": 1.1,
+  "sex": "женский",
+  "goal": 1.0,
+  "role": {
+    "id": 1,
+    "name": "пользователь"
+  },
+  "firstName": "Adam",
+  "calorieRec": 1773,
+  "fatRec": 59,
+  "proteinRec": 132,
+  "carbRec": 177,
+  "kbju_norm": {
+    "b": 90.0,
+    "u": 250.0,
+    "j": 60.0,
+    "k": 2000.0
+  }
+}
