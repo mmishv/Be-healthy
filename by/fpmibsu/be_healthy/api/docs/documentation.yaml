@@ -1,0 +1,192 @@
+openapi: "3.0.3"
+info:
+  title: "Be_healthy API"
+  description: "Be_healthy API"
+  version: "1.0.0"
+servers:
+  - url: "https://Be_healthy"
+# - url: "https://localhost:8081"
+paths:
+  /api/users:
+    get:
+      summary: Метод получения списка пользователей
+      operationId: "getAllUsers"
+      responses:
+        "200":
+          description: Успешный ответ со списком пользователей
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "default":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод создания пользователя
+      operationId: "createUser"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Успешное добавление
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "default":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Метод обновления пользователя
+      operationId: "updateUser"
+      responses:
+        "200":
+          description: Успешное обновление
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "default":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /api/users/{id}:
+    get:
+      summary: Метод получения пользователя
+      operationId: "getUserById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор пользователя
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешный ответ с информацией о пользователе
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "default":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления пользователя
+      operationId: "deleteUser"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор пользователя
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешное удаление
+          content:
+            application/json: { }
+        "default":
+          description: Ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 2
+        name:
+          type: string
+          example: Adam
+        email:
+          type: string
+          example: adamsmith@gmail.com
+        login:
+          type: string
+          example: adamsmith
+        password:
+          type: string
+          example: $2a$12$YY2Egf4m6x5ET2l5.AnlAuQA1JkEZpMbCC/8DjbdHbDp4ZomqgU12
+        avatar:
+          type: string
+          example: null
+        base64image:
+          type: string
+          example: null
+        weight:
+          type: number
+          example: 80.0
+        height:
+          type: number
+          example: 180
+        age:
+          type: number
+          example: 30
+        activity:
+          type: number
+          example: 1.1
+        sex:
+          type: string
+          enum:
+            - женский
+            - мужской
+        goal:
+          type: number
+        role:
+          example: { "id": 1,"name": "пользователь" }
+        calorieRec:
+          type: number
+          example: 1773
+        carbRec:
+          type: number
+          example: 177
+        kbju_norm:
+          example: { "b": 90.0,"u": 250.0,"j": 60.0,"k": 2000.0 }
+        firstName:
+          type: string
+          example: Adam
+        proteinRec:
+          type: number
+          example: 132
+        fatRec:
+          type: number
+          example: 59
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+
+
