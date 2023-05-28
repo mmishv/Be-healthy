@@ -4,7 +4,7 @@ info:
   description: "Be_healthy API"
   version: "1.0.0"
 servers:
-  - url: "https://Be_healthy"
+  - url: "https://be_healthy"
 # - url: "https://localhost:8081"
 paths:
   /api/users:
@@ -18,8 +18,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Users"
-        "default":
-          description: Ошибка
+        "500":
+          description: Внутренняя ошибка сервера
           content:
             application/json:
               schema:
@@ -35,19 +35,25 @@ paths:
               $ref: "#/components/schemas/User"
       responses:
         "200":
-          description: Успешное добавление
+          description: Успешное добавление пользователя
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-        "default":
-          description: Ошибка
+        "400":
+          description: Пользователь с таким логином уже существует
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
     put:
-      summary: Метод обновления пользователя
+      summary: Метод обновления параметров пользователя
       operationId: "updateUser"
       responses:
         "200":
@@ -56,8 +62,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-        "default":
-          description: Ошибка
+        "404":
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      summary: Метод обновления основной информации о пользователе
+      operationId: "updateUserRole"
+      responses:
+        "200":
+          description: Успешное обновление
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера
           content:
             application/json:
               schema:
@@ -81,8 +115,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
-        "default":
-          description: Ошибка
+        "404":
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера
           content:
             application/json:
               schema:
@@ -102,13 +142,18 @@ paths:
           description: Успешное удаление
           content:
             application/json: { }
-        "default":
-          description: Ошибка
+        "404":
+          description: Пользователь не найден
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
@@ -122,6 +167,30 @@ components:
           type: integer
         message:
           type: string
+    Role:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: администратор
+    kbju_norm:
+      type: object
+      properties:
+        b:
+          type: number
+          example: 90.8
+        u:
+          type: number
+          example: 250.1
+        j:
+          type: number
+          example: 60.4
+        k:
+          type: number
+          example: 2000.6
     User:
       type: object
       properties:
@@ -166,7 +235,7 @@ components:
         goal:
           type: number
         role:
-          example: { "id": 1,"name": "пользователь" }
+          $ref: "#/components/schemas/Role"
         calorieRec:
           type: number
           example: 1773
@@ -174,7 +243,7 @@ components:
           type: number
           example: 177
         kbju_norm:
-          example: { "b": 90.0,"u": 250.0,"j": 60.0,"k": 2000.0 }
+          $ref: "#/components/schemas/kbju_norm"
         firstName:
           type: string
           example: Adam

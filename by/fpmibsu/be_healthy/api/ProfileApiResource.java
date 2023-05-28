@@ -23,8 +23,6 @@ public class ProfileApiResource extends ProfileService{
     @ApiOperation(value = "Updates a user")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 400, message = "Bad Request. " +
-                    "Probably, this username is already taken"),
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Internal error")})
     public Response updateUser(@ApiParam(value = "User", required = true) @RequestBody Profile profile){
