@@ -102,14 +102,6 @@ button {
     background-color: #c1e45cc4;
 }
 
-.rec .scroll-table th {
-    background-color: #61dbb6c4;
-}
-
-.simple .scroll-table th {
-    background-color: #d7ea52c4;
-}
-
 /*scroll*/
 .scroll-table-body {
     max-height: 60vh;

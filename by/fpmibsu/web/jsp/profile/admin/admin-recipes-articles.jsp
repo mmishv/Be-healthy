@@ -50,7 +50,7 @@
         </div>
         <div class="scroll-table">
             <table class="table table-striped recipes">
-                <thead>
+                <thead style="background-color:${color}">
                 <tr>
                     <th scope="col" style="width: 10%;">№</th>
                     <th scope="col" style="width: 32%;">Название</th>
