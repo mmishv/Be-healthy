@@ -40,7 +40,7 @@
     <jsp:include page="navbar.html"/>
     <div class="col-sm-10 us">
         <h3 class="header">На модерации</h3>
-        <div class="articles-wrapper col-sm-5">
+        <div class="articles-wrapper col-sm-5" style="max-width: 90%; margin-top: 1%;">
             <c:forEach items="${articles}" var="article" varStatus="loop">
                 <div class="art-back">
                     <div class="article">
