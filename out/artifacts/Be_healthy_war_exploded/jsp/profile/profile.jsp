@@ -63,11 +63,11 @@
         <div class="inf">
             <form method="post" action="edit_profile">
                 <div class="row general-inf">
-                    <c:if test="${profile.getAvatar()==null}">
-                        <img src="./assets/profile.jpg" class="photo">
-                    </c:if>
                     <c:if test="${profile.getAvatar()!=null}">
                         <img src="data:image/jpeg;base64,${profile.getBase64image()}" class="photo">
+                    </c:if>
+                    <c:if test="${profile.getAvatar()==null}">
+                        <img src="../../assets/profile.png" class="photo">
                     </c:if>
                     <div class="col-sm-7"
                          style="display: inline-flex; justify-content: space-between; padding-right: 0">
