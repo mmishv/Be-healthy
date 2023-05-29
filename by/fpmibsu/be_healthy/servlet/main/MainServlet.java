@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 @WebServlet({"/main/*", ""})
 public class MainServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(MainServlet.class);
-    final int ARTICLES_PER_PAGE = 6;
+    final int ARTICLES_PER_PAGE = 3;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("Transition to main page");
