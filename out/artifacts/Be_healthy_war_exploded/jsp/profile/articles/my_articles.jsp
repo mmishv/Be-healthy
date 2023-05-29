@@ -67,7 +67,7 @@
                     new TypeReference<ArrayList<Article>>() {});
             request.setAttribute("articles", articles);
         %>
-        <div class="articles-wrapper col-sm-5">
+        <div class="articles-wrapper col-sm-5" style="max-width: 90%; margin-top: 1%;">
             <c:forEach items="${articles}" var="article" varStatus="loop">
                 <div class="art-back">
                     <div class="article">
