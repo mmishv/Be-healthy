@@ -113,7 +113,8 @@
                 <div class="form-group row">
                     <label for="weight" class="col-sm-5 col-form-label">Вес:</label>
                     <div class="col-sm-7">
-                        <input name="weight" class="form-control" id="weight" placeholder="Вес" type="number"
+                        <input name="weight" class="form-control" step="any"
+                               id="weight" placeholder="Вес" type="number"
                         <c:if test="${profile.getWeight()!=0}"> value="${profile.getWeight()}"</c:if>>
                     </div>
                 </div>
@@ -166,22 +167,22 @@
                     <label for="j" class="col-sm-3 col-form-label center">Жиры, г</label>
                     <label for="u" class="col-sm-3 col-form-label center">Углеводы, г</label>
                     <div class="col-sm-3">
-                        <input name="k" class="form-control" id="k" type="number"
+                        <input name="k" class="form-control" id="k" type="number" step="any"
                                placeholder="${profile.getCalorieRec()}" value="${kbju.get('k')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input name="b" class="form-control" id="b" type="number"
+                        <input name="b" class="form-control" id="b" type="number" step="any"
                                placeholder="${profile.getProteinRec()}" value="${kbju.get('b')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input name="j" class="form-control" id="j" type="number"
+                        <input name="j" class="form-control" id="j" type="number" step="any"
                                placeholder="${profile.getFatRec()}" value="${kbju.get('j')}">
                     </div>
 
                     <div class="col-sm-3">
-                        <input name="u" class="form-control" id="u" type="number"
+                        <input name="u" class="form-control" id="u" type="number" step="any"
                                placeholder="${profile.getCarbRec()}" value="${kbju.get('u')}">
                     </div>
                 </div>
