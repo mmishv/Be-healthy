@@ -29,7 +29,8 @@ public class RecipesModerationServlet extends HttpServlet {
         request.setAttribute("recipes", recipes);
         ArrayList<String> authors = new ArrayList<>();
         for (var r : recipes){
-            authors.add(new ProfileService().getEntityById(r.getAuthorId()).getLogin());
+            var t = new ProfileService().getEntityById(r.getAuthorId());
+            authors.add(t==null? null : t.getLogin());
         }
         request.setAttribute("authors", authors);
         getServletContext().getRequestDispatcher("/jsp/profile/admin/recipes_moderation.jsp").forward(request, response);

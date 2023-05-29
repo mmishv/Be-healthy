@@ -57,7 +57,7 @@
         </div>
         <div class="scroll-table">
             <table class="table table-striped simple-table">
-                <thead>
+                <thead style="background-color:${color}">
                 <tr>
                     <th scope="col" style="width: 10%;">№</th>
                     <th scope="col" style="width: 60%;">Название</th>
