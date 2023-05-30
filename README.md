@@ -68,6 +68,14 @@
 ![deployment](https://github.com/mmishv/Be-healthy/assets/108868223/abdd1f67-3176-415e-86ee-9f0008747405)
 
 **[Вернуться к содержанию](#содержание)**
+## Package Diagram
+![package](https://github.com/mmishv/Be-healthy/assets/108416605/a2ec4567-66fa-43e1-96e1-c85c18570638)
+
+**[Вернуться к содержанию](#содержание)**
+## Component Diagram
+![components](https://github.com/mmishv/Be-healthy/assets/108416605/21ced2f1-a3e4-4b5c-9d43-e6b74c9ee999)
+
+**[Вернуться к содержанию](#содержание)**
 ## Use Case Diagram
 ![роли](https://github.com/mmishv/Be-healthy/assets/108868223/101b1853-8ecc-422d-969d-84a8401acbf2)
 
