@@ -15,6 +15,8 @@
 - [Диаграмма классов](#диаграмма-классов)
 - [ER-модель](#er-модель)
 - [Deployment Diagram](#deployment-diagram)
+- [Package Diagram](#package-diagram)
+- [Component Diagram](#component-diagram)
 - [Use Case Diagram](#use-case-diagram)
 - [Sequence Diagrams examples](#sequence-diagrams-examples)
 
