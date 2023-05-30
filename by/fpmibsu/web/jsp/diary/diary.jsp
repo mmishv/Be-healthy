@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="modal-body" id="cur-products_additional${meal.id}">
                                     <c:forEach items="${meal.products}" var="p" varStatus="loop">
-                                        <div class="row cur-prod-option${meal.id}- prod-option"
+                                        <div class="row cur-prod-option${meal.id}- cur-prod-option"
                                              id="cur-prod-option${meal.id}-${loop.count}">
                                             <select name="add_product${meal.id}_${loop.count}"
                                                     id="add_product${meal.id}_${loop.count}"
