@@ -15,6 +15,7 @@
 - [Диаграмма классов](#диаграмма-классов)
 - [ER-модель](#er-модель)
 - [Use Case Diagram](#use-case-diagram)
+- [Deployment Diagram](#deployment-diagram)
 - [Sequence Diagrams examples](#sequence-diagrams-examples)
 
 ## Технологии
@@ -45,16 +46,24 @@
 * 7\. Страница профиля для авторизованного пользователя.
 * 8\. Страница профиля в режиме администратора.
 * 9\. Страница статьи.
-
+ 
+**[Вернуться к содержанию](#содержание)**
 ## Диаграмма классов
 ![graphviz](https://github.com/mmishv/Be-healthy/assets/108868223/4fe4d417-3ff1-4a95-b5cc-abe08a157946)
 
+**[Вернуться к содержанию](#содержание)**
 ## ER-модель
 ![бд](https://github.com/mmishv/Be-healthy/assets/108868223/15b26bc8-2951-4358-8681-cc8ba7956fa3)
 
+**[Вернуться к содержанию](#содержание)**
 ## Use Case Diagram
 ![роли](https://github.com/mmishv/Be-healthy/assets/108868223/101b1853-8ecc-422d-969d-84a8401acbf2)
 
+**[Вернуться к содержанию](#содержание)**
+## Deployment Diagram
+![deployment](https://github.com/mmishv/Be-healthy/assets/108868223/abdd1f67-3176-415e-86ee-9f0008747405)
+
+**[Вернуться к содержанию](#содержание)**
 ## Sequence Diagrams examples
 ![recipe](https://github.com/mmishv/Be-healthy/assets/108868223/e6026a7e-81e5-40e4-a1e8-ac5bc0c337ac)
 ![meal](https://github.com/mmishv/Be-healthy/assets/108868223/deaccfae-56b7-4597-bfe9-bad683a35bc1)
