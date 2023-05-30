@@ -1,117 +1,85 @@
-2023-05-29 22:24:01.287 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-2023-05-29 22:24:03.469 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-29 22:24:03.471 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-29 22:24:03.777 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-29 22:24:04.036 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-29 22:24:04.585 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-29 22:24:04.585 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-29 22:24:04.586 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-29 22:24:04.586 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-29 22:24:04.700 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-05-29 22:24:04.702 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-29 22:24:04.703 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
-2023-05-29 22:24:04.703 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-29 22:24:06.324 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipesMainServlet 22 doGet - Transition to main recipes page
-2023-05-29 22:24:06.331 DEBUG by.fpmibsu.be_healthy.service.RecipeService 81 getNumberOfRecipes - Get number of recipes
-2023-05-29 22:24:06.340 DEBUG by.fpmibsu.be_healthy.service.RecipeService 70 getPage - Get page of recipes
-2023-05-29 22:24:06.552 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-2023-05-29 22:24:06.552 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-2023-05-29 22:24:06.557 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:06.567 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:06.568 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:06.569 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:06.570 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:06.571 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:07.846 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-2023-05-29 22:24:07.847 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
-2023-05-29 22:24:09.162 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipesMainServlet 22 doGet - Transition to main recipes page
-2023-05-29 22:24:09.162 DEBUG by.fpmibsu.be_healthy.service.RecipeService 81 getNumberOfRecipes - Get number of recipes
-2023-05-29 22:24:09.165 DEBUG by.fpmibsu.be_healthy.service.RecipeService 70 getPage - Get page of recipes
-2023-05-29 22:24:09.245 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-2023-05-29 22:24:09.245 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-2023-05-29 22:24:09.247 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:09.248 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:09.249 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:09.250 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:09.251 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:09.252 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:11.513 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-2023-05-29 22:24:11.513 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
-2023-05-29 22:24:14.799 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
-2023-05-29 22:24:14.805 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
-2023-05-29 22:24:15.134 WARN  by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 30 doPost - Failed to log in
-2023-05-29 22:24:20.485 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
-2023-05-29 22:24:20.485 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
-2023-05-29 22:24:20.755 DEBUG by.fpmibsu.be_healthy.service.ProfileService 68 getIdByLogin - Get profile id by login
-2023-05-29 22:24:20.755 INFO  by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 28 doPost - Log in successfully
-2023-05-29 22:24:20.762 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-2023-05-29 22:24:20.762 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
-2023-05-29 22:24:20.762 DEBUG by.fpmibsu.be_healthy.servlet.profile.AboutMeServlet 22 doGet - Transition to main profile page
-2023-05-29 22:24:20.770 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:24.822 INFO  by.fpmibsu.be_healthy.servlet.profile.admin.MainAdminServlet 17 doGet - Transition to admin main page
-2023-05-29 22:24:24.822 DEBUG by.fpmibsu.be_healthy.service.ProfileService 15 getAll - Get all profiles
-2023-05-29 22:24:26.591 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.RecipesModerationServlet 20 doGet - Transition to admin recipe moderation page
-2023-05-29 22:24:26.591 DEBUG by.fpmibsu.be_healthy.service.RecipeService 81 getNumberOfRecipes - Get number of recipes
-2023-05-29 22:24:26.591 DEBUG by.fpmibsu.be_healthy.service.RecipeService 70 getPage - Get page of recipes
-2023-05-29 22:24:26.599 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:24:31.343 DEBUG by.fpmibsu.be_healthy.servlet.recipes.DeleteRecipeServlet 17 doGet - Transition in order to delete recipe
-2023-05-29 22:24:31.343 WARN  by.fpmibsu.be_healthy.service.RecipeService 32 delete - Delete recipe
-2023-05-29 22:24:31.364 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.RecipesModerationServlet 20 doGet - Transition to admin recipe moderation page
-2023-05-29 22:24:31.364 DEBUG by.fpmibsu.be_healthy.service.RecipeService 81 getNumberOfRecipes - Get number of recipes
-2023-05-29 22:24:31.373 DEBUG by.fpmibsu.be_healthy.service.RecipeService 70 getPage - Get page of recipes
-2023-05-29 22:24:32.121 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.ArticlesModerationServlet 19 doGet - Transition to admin article moderation page
-2023-05-29 22:24:32.124 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-29 22:24:32.127 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-29 22:24:32.129 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-2023-05-29 22:24:33.984 WARN  by.fpmibsu.be_healthy.servlet.profile.articles.DeleteArticleServlet 17 doGet - Transition in order to delete article
-2023-05-29 22:24:33.984 WARN  by.fpmibsu.be_healthy.service.ArticleService 31 delete - Debug article
-2023-05-29 22:24:33.997 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.ArticlesModerationServlet 19 doGet - Transition to admin article moderation page
-2023-05-29 22:24:33.997 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-29 22:24:34.005 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-29 22:24:34.005 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-2023-05-29 22:24:34.955 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.CategoriesManagementServlet 22 doGet - Transition to admin categories management page
-2023-05-29 22:24:34.963 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 15 getAll - Get all article categories
-2023-05-29 22:24:37.166 INFO  by.fpmibsu.be_healthy.servlet.profile.admin.ArticleManagementServlet 18 doGet - Transition to admin article management page
-2023-05-29 22:24:37.166 DEBUG by.fpmibsu.be_healthy.service.ArticleService 15 getAll - Get all articles
-2023-05-29 22:24:45.221 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.RecipeManagementServlet 18 doGet - Transition to admin recipe management page
-2023-05-29 22:24:45.221 DEBUG by.fpmibsu.be_healthy.service.RecipeService 15 getAll - Get all recipes
-2023-05-29 22:24:49.115 DEBUG by.fpmibsu.be_healthy.servlet.recipes.DeleteRecipeServlet 17 doGet - Transition in order to delete recipe
-2023-05-29 22:24:49.117 WARN  by.fpmibsu.be_healthy.service.RecipeService 32 delete - Delete recipe
-2023-05-29 22:24:49.132 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.RecipeManagementServlet 18 doGet - Transition to admin recipe management page
-2023-05-29 22:24:49.132 DEBUG by.fpmibsu.be_healthy.service.RecipeService 15 getAll - Get all recipes
-2023-05-29 22:24:51.422 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.ArticlesModerationServlet 19 doGet - Transition to admin article moderation page
-2023-05-29 22:24:51.422 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
-2023-05-29 22:24:51.422 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
-2023-05-29 22:24:51.428 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-2023-05-29 22:24:53.259 DEBUG by.fpmibsu.be_healthy.servlet.profile.admin.RecipeManagementServlet 18 doGet - Transition to admin recipe management page
-2023-05-29 22:24:53.259 DEBUG by.fpmibsu.be_healthy.service.RecipeService 15 getAll - Get all recipes
-2023-05-29 22:24:56.152 INFO  by.fpmibsu.be_healthy.servlet.profile.admin.ArticleManagementServlet 18 doGet - Transition to admin article management page
-2023-05-29 22:24:56.159 DEBUG by.fpmibsu.be_healthy.service.ArticleService 15 getAll - Get all articles
-2023-05-29 22:25:03.387 WARN  by.fpmibsu.be_healthy.servlet.profile.articles.DeleteArticleServlet 17 doGet - Transition in order to delete article
-2023-05-29 22:25:03.387 WARN  by.fpmibsu.be_healthy.service.ArticleService 31 delete - Debug article
-2023-05-29 22:25:03.401 INFO  by.fpmibsu.be_healthy.servlet.profile.admin.ArticleManagementServlet 18 doGet - Transition to admin article management page
-2023-05-29 22:25:03.401 DEBUG by.fpmibsu.be_healthy.service.ArticleService 15 getAll - Get all articles
-2023-05-29 22:25:05.767 DEBUG by.fpmibsu.be_healthy.servlet.recipes.RecipesMainServlet 22 doGet - Transition to main recipes page
-2023-05-29 22:25:05.768 DEBUG by.fpmibsu.be_healthy.service.RecipeService 81 getNumberOfRecipes - Get number of recipes
-2023-05-29 22:25:05.769 DEBUG by.fpmibsu.be_healthy.service.RecipeService 70 getPage - Get page of recipes
-2023-05-29 22:25:05.864 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 46 getAllJSON - Get all recipe categories in JSON format
-2023-05-29 22:25:05.864 DEBUG by.fpmibsu.be_healthy.service.RecipeCategoryService 15 getAll - Get all recipe categories
-2023-05-29 22:25:05.872 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:25:05.877 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:25:05.877 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:25:05.880 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:25:05.880 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:25:05.880 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:25:07.810 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-2023-05-29 22:25:07.811 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
-2023-05-29 22:25:07.811 DEBUG by.fpmibsu.be_healthy.servlet.profile.AboutMeServlet 22 doGet - Transition to main profile page
-2023-05-29 22:25:07.811 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
-2023-05-29 22:25:10.046 INFO  by.fpmibsu.be_healthy.servlet.profile.admin.MainAdminServlet 17 doGet - Transition to admin main page
-2023-05-29 22:25:10.046 DEBUG by.fpmibsu.be_healthy.service.ProfileService 15 getAll - Get all profiles
-2023-05-29 22:25:12.698 INFO  by.fpmibsu.be_healthy.servlet.profile.admin.MainAdminServlet 17 doGet - Transition to admin main page
-2023-05-29 22:25:12.698 DEBUG by.fpmibsu.be_healthy.service.ProfileService 15 getAll - Get all profiles
-2023-05-29 22:25:14.546 WARN  by.fpmibsu.be_healthy.servlet.profile.DeleteProfileServlet 17 doGet - Transition in order to delete user
-2023-05-29 22:25:14.546 WARN  by.fpmibsu.be_healthy.service.ProfileService 32 delete - Delete profile
-2023-05-29 22:25:14.562 INFO  by.fpmibsu.be_healthy.servlet.profile.admin.MainAdminServlet 17 doGet - Transition to admin main page
-2023-05-29 22:25:14.562 DEBUG by.fpmibsu.be_healthy.service.ProfileService 15 getAll - Get all profiles
-2023-05-29 22:25:17.713 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+2023-05-30 19:06:02.614 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+2023-05-30 19:06:04.355 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-30 19:06:04.358 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-30 19:06:04.626 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-30 19:06:04.801 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-30 19:06:05.403 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-30 19:06:05.403 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-30 19:06:05.404 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-30 19:06:05.404 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-30 19:06:05.509 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-05-30 19:06:05.510 DEBUG by.fpmibsu.be_healthy.service.ArticleService 56 getNumberOfArticles - Get number of articles
+2023-05-30 19:06:05.511 DEBUG by.fpmibsu.be_healthy.service.ArticleService 51 getPageJSON - Get page with articles in JSON format
+2023-05-30 19:06:05.512 DEBUG by.fpmibsu.be_healthy.service.ArticleService 46 getPage - Get page with articles in JSON format
+2023-05-30 19:06:51.250 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:06:51.250 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
+2023-05-30 19:07:04.915 DEBUG by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 18 doPost - Transition in order to log in
+2023-05-30 19:07:04.916 DEBUG by.fpmibsu.be_healthy.service.ProfileService 42 getPasswordByLogin - Get profile password by login
+2023-05-30 19:07:05.051 DEBUG by.fpmibsu.be_healthy.service.ProfileService 68 getIdByLogin - Get profile id by login
+2023-05-30 19:07:05.052 INFO  by.fpmibsu.be_healthy.servlet.profile.authetication.LoginServlet 28 doPost - Log in successfully
+2023-05-30 19:07:05.057 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:07:05.057 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:07:05.058 DEBUG by.fpmibsu.be_healthy.servlet.profile.AboutMeServlet 22 doGet - Transition to main profile page
+2023-05-30 19:07:05.058 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+2023-05-30 19:07:51.881 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:07:51.881 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:07:51.881 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+2023-05-30 19:07:51.883 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+2023-05-30 19:07:51.917 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+2023-05-30 19:07:51.920 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+2023-05-30 19:07:51.920 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+2023-05-30 19:08:04.194 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:04.194 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:04.194 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 63 doPost - Adding new meal on diary page
+2023-05-30 19:08:04.219 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+2023-05-30 19:08:04.221 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+2023-05-30 19:08:04.227 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:04.227 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:04.227 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+2023-05-30 19:08:04.228 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+2023-05-30 19:08:04.236 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+2023-05-30 19:08:04.239 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+2023-05-30 19:08:04.239 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+2023-05-30 19:08:06.255 WARN  by.fpmibsu.be_healthy.servlet.diary.DeleteMealServlet 17 doGet - Transition in order to remove meal
+2023-05-30 19:08:06.255 WARN  by.fpmibsu.be_healthy.service.MealService 33 delete - Delete meal
+2023-05-30 19:08:06.263 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:06.264 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:06.264 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+2023-05-30 19:08:06.264 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+2023-05-30 19:08:06.270 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+2023-05-30 19:08:06.272 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+2023-05-30 19:08:06.272 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+2023-05-30 19:08:07.606 WARN  by.fpmibsu.be_healthy.servlet.diary.DeleteMealServlet 17 doGet - Transition in order to remove meal
+2023-05-30 19:08:07.606 WARN  by.fpmibsu.be_healthy.service.MealService 33 delete - Delete meal
+2023-05-30 19:08:07.613 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:07.613 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:07.613 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+2023-05-30 19:08:07.613 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+2023-05-30 19:08:07.614 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+2023-05-30 19:08:07.616 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+2023-05-30 19:08:07.616 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+2023-05-30 19:08:19.396 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:19.396 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:19.396 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 63 doPost - Adding new meal on diary page
+2023-05-30 19:08:19.401 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+2023-05-30 19:08:19.407 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:19.407 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:19.407 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+2023-05-30 19:08:19.407 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+2023-05-30 19:08:19.424 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+2023-05-30 19:08:19.426 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+2023-05-30 19:08:19.426 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+2023-05-30 19:08:59.916 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:59.916 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:59.916 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 63 doPost - Adding new meal on diary page
+2023-05-30 19:08:59.921 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+2023-05-30 19:08:59.922 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+2023-05-30 19:08:59.924 INFO  by.fpmibsu.be_healthy.service.MealProductService 42 create - Create meal product
+2023-05-30 19:08:59.929 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
+2023-05-30 19:08:59.929 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 29 doFilter - User is authorized
+2023-05-30 19:08:59.929 DEBUG by.fpmibsu.be_healthy.servlet.diary.MealServlet 32 doGet - Transition to diary page
+2023-05-30 19:08:59.929 DEBUG by.fpmibsu.be_healthy.service.MealService 48 getAllByDateAndUserId - Get all user's meals on a specific day
+2023-05-30 19:08:59.937 DEBUG by.fpmibsu.be_healthy.service.ProfileService 21 getEntityById - Get profile by entity id
+2023-05-30 19:08:59.939 DEBUG by.fpmibsu.be_healthy.service.ProductService 42 getAllJSON - Get all products in JSON format
+2023-05-30 19:08:59.939 DEBUG by.fpmibsu.be_healthy.service.ProductService 15 getAll - Get all products
+2023-05-30 19:09:04.989 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
