@@ -15,6 +15,7 @@
 - [Диаграмма классов](#диаграмма-классов)
 - [ER-модель](#er-модель)
 - [Use Case Diagram](#use-case-diagram)
+- [Sequence Diagrams examples](#sequence-diagrams-examples)
 
 ## Технологии
 - Java 19
@@ -53,6 +54,14 @@
 
 ## Use Case Diagram
 ![роли](https://github.com/mmishv/Be-healthy/assets/108868223/101b1853-8ecc-422d-969d-84a8401acbf2)
+
+## Sequence Diagrams examples
+![recipe](https://github.com/mmishv/Be-healthy/assets/108868223/e6026a7e-81e5-40e4-a1e8-ac5bc0c337ac)
+![meal](https://github.com/mmishv/Be-healthy/assets/108868223/deaccfae-56b7-4597-bfe9-bad683a35bc1)
+![reg](https://github.com/mmishv/Be-healthy/assets/108868223/a84deb22-c9a0-40a7-b8d5-e84f10f3a1e6)
+
+
+
 
 
 
