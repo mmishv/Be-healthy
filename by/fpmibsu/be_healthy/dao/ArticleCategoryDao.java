@@ -14,8 +14,10 @@ public class ArticleCategoryDao implements Dao<Integer, ArticleCategory> {
     @Override
     public List<ArticleCategory> getAll() {
         List<ArticleCategory> categories = new ArrayList<>();
-        try (Connection connection = DataSource.getConnection(); Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT ID, NAME FROM ARTICLE_CATEGORY ORDER BY NAME");
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT ID, NAME FROM ARTICLE_CATEGORY ORDER BY NAME");
             while (resultSet.next()) {
                 ArticleCategory category = new ArticleCategory();
                 category.setId(resultSet.getInt("ID"));
@@ -34,7 +36,8 @@ public class ArticleCategoryDao implements Dao<Integer, ArticleCategory> {
     public ArticleCategory getEntityById(Integer id) {
         ArticleCategory category = null;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement =connection.prepareStatement("SELECT ID, NAME FROM ARTICLE_CATEGORY WHERE ID=?")){
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT ID, NAME FROM ARTICLE_CATEGORY WHERE ID=?")){
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -55,7 +58,8 @@ public class ArticleCategoryDao implements Dao<Integer, ArticleCategory> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement =connection.prepareStatement("UPDATE ARTICLE_CATEGORY SET NAME=? WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE ARTICLE_CATEGORY SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
             if (preparedStatement.executeUpdate()==0)
@@ -72,7 +76,8 @@ public class ArticleCategoryDao implements Dao<Integer, ArticleCategory> {
     @Override
     public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ARTICLE_CATEGORY WHERE ID=?");){
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM ARTICLE_CATEGORY WHERE ID=?");){
             preparedStatement.setLong(1, id);
             if (preparedStatement.executeUpdate()==0)
                 return false;
@@ -89,7 +94,8 @@ public class ArticleCategoryDao implements Dao<Integer, ArticleCategory> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement =connection.prepareStatement("INSERT INTO ARTICLE_CATEGORY (NAME) VALUES(?)")){
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "INSERT INTO ARTICLE_CATEGORY (NAME) VALUES(?)")){
             preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -103,11 +109,13 @@ public class ArticleCategoryDao implements Dao<Integer, ArticleCategory> {
     public List<ArticleCategory> getArticleCategoriesByArticleId(int id) {
         List<ArticleCategory> categories = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement statement = connection.prepareStatement("SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?")){
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_ARTICLE WHERE ARTICLE_ID=?")){
             statement.setInt(1, id);
             ResultSet categoriesIds = statement.executeQuery();
             while (categoriesIds.next()) {
-                categories.add(new ArticleCategoryDao().getEntityById(categoriesIds.getInt("ID")));
+                categories.add(new ArticleCategoryDao().getEntityById(
+                        categoriesIds.getInt("ID")));
             }
         } catch (SQLException e) {
             logger.error("Error getting article categories by article id");

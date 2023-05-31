@@ -79,7 +79,6 @@ public class ArticleDao implements Dao<Integer, Article> {
         article.setFulltext(resultSet.getString("FULL_TEXT"));
         article.setDateOfPublication(resultSet.getDate("PUBL_DATE"));
         article.setModerated(resultSet.getBoolean("MODERATED"));
-        article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getId()));
     }
 
     @Override

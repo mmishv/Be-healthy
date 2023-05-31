@@ -1,5 +1,6 @@
 package by.fpmibsu.be_healthy.service;
 
+import by.fpmibsu.be_healthy.dao.ArticleCategoryDao;
 import by.fpmibsu.be_healthy.dao.ArticleDao;
 import by.fpmibsu.be_healthy.entity.Article;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,13 +14,18 @@ public class ArticleService {
     private static final Logger logger = LogManager.getLogger(ArticleService.class);
     public List<Article> getAll() {
         logger.debug("Get all articles");
-        return new ArticleDao().getAll();
+        var articles = new ArticleDao().getAll();
+        for (var article: articles)
+            article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getId()));
+        return articles;
     }
 
 
     public Article getEntityById(Integer id) {
         logger.debug("Get article by id");
-        return new ArticleDao().getEntityById(id);
+        var article = new ArticleDao().getEntityById(id);
+        article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getId()));
+        return article;
     }
 
     public boolean update(Article entity) {
