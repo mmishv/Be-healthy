@@ -1,6 +1,7 @@
 package by.fpmibsu.be_healthy.service;
 
 import by.fpmibsu.be_healthy.dao.IngredientDao;
+import by.fpmibsu.be_healthy.dao.ProductDao;
 import by.fpmibsu.be_healthy.entity.Ingredient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,13 +14,27 @@ public class IngredientService {
     private static final Logger logger = LogManager.getLogger(IngredientService.class);
     public List<Ingredient> getAll() {
         logger.debug("Get all ingredients");
-        return new IngredientDao().getAll();
+        List<Ingredient> ingredients = new java.util.ArrayList<>(List.of());
+        for (var full_ingredient : new IngredientDao().getAll()){
+            var ingredient = full_ingredient;
+            full_ingredient = new Ingredient(new ProductDao().getEntityById(ingredient.getId()));
+            full_ingredient.setIngredientId(ingredient.getIngredientId());
+            full_ingredient.setQuantity(ingredient.getQuantity());
+            full_ingredient.setRecipeId(ingredient.getRecipeId());
+            ingredients.add(full_ingredient);
+        }
+        return ingredients;
     }
 
 
     public Ingredient getEntityById(Integer id) {
         logger.debug("Get ingredient by id");
-        return new IngredientDao().getEntityById(id);
+        var ingredient = new IngredientDao().getEntityById(id);
+        var full_ingredient = new Ingredient(new ProductDao().getEntityById(ingredient.getId()));
+        full_ingredient.setIngredientId(ingredient.getIngredientId());
+        full_ingredient.setQuantity(ingredient.getQuantity());
+        full_ingredient.setRecipeId(ingredient.getRecipeId());
+        return full_ingredient;
     }
 
 

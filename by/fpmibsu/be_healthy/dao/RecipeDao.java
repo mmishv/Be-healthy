@@ -2,6 +2,8 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.postgres.DataSource;
+import by.fpmibsu.be_healthy.service.IngredientService;
+import by.fpmibsu.be_healthy.service.RecipeCategoryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -109,8 +111,8 @@ public class RecipeDao implements Dao<Integer, Recipe> {
         byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
         String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
         recipe.setBase64image(base64encoded);
-        recipe.setCategories(new RecipeCategoryDao().getRecipeCategoriesByRecipeId(recipe.getId()));
-        recipe.setIngredients(new IngredientDao().getIngredientsByRecipeId(recipe.getId()));
+        recipe.setCategories(new RecipeCategoryService().getRecipeCategoriesByRecipeId(recipe.getId()));
+        recipe.setIngredients(new IngredientService().getIngredientsByRecipeId(recipe.getId()));
     }
 
     @Override
