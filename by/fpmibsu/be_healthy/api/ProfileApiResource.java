@@ -2,7 +2,6 @@ package by.fpmibsu.be_healthy.api;
 
 import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.service.ProfileService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -18,7 +17,7 @@ import java.util.Objects;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
-public class ProfileApiResource extends ProfileService{
+public class ProfileApiResource  {
     @PUT
     @ApiOperation(value = "Updates a user")
     @ApiResponses(value = {
@@ -26,7 +25,7 @@ public class ProfileApiResource extends ProfileService{
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Internal error")})
     public Response updateUser(@ApiParam(value = "User", required = true) @RequestBody Profile profile){
-        if (update(profile)){
+        if (new ProfileService().update(profile)){
             return Response.ok("User successfully updated").build();
         }
         else{
@@ -43,7 +42,7 @@ public class ProfileApiResource extends ProfileService{
             @ApiResponse(code = 500, message = "Internal error")})
     public Response deleteUser(
             @ApiParam(value = "User id", required = true) @PathParam("id") Integer id) {
-        if (delete(id)){
+        if (new ProfileService().delete(id)){
             return Response.ok("User successfully deleted").build();
         }
         else{
@@ -60,7 +59,7 @@ public class ProfileApiResource extends ProfileService{
     })
     public Response createUser(
             @ApiParam(value = "User", required = true) @RequestBody Profile profile) {
-        if (create(profile)){
+        if (new ProfileService().create(profile)){
             return Response.ok("User successfully created").build();
         }
         else{
@@ -77,13 +76,9 @@ public class ProfileApiResource extends ProfileService{
             })
     public Response getUserById(
             @ApiParam(value = "User ID", required = true) @PathParam("id") Integer id) {
-        try {
-            String profile = getEntityByIdJSON(id);
-            return Objects.equals(profile, "null") ? Response.status(Response.Status.NOT_FOUND).build() :
-                    Response.ok(profile).build();
-        } catch (JsonProcessingException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
+        var profile = new ProfileService().getEntityById(id);
+        return Objects.equals(profile, "null") ? Response.status(Response.Status.NOT_FOUND).build() :
+                Response.ok(profile).build();
     }
 
     @GET
@@ -94,12 +89,8 @@ public class ProfileApiResource extends ProfileService{
     })
 
     public Response getAllUsers(){
-        try {
-            String profiles = getAllJSON();
-            return Response.ok(profiles).build();
-        } catch (JsonProcessingException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
+        var profiles = new ProfileService().getAll();
+        return Response.ok(profiles).build();
     }
 
     @PATCH
@@ -109,7 +100,7 @@ public class ProfileApiResource extends ProfileService{
             @ApiResponse(code = 404, message = "User not found"),
             @ApiResponse(code = 500, message = "Internal error")})
     public Response updateUserRole(@ApiParam(value = "User", required = true) @RequestBody Profile profile){
-        if (updateMainInfo(profile)){
+        if (new ProfileService().updateMainInfo(profile)){
             return Response.ok("User's role successfully updated").build();
         }
         else{
