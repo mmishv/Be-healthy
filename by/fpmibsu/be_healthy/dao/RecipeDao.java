@@ -2,8 +2,6 @@ package by.fpmibsu.be_healthy.dao;
 
 import by.fpmibsu.be_healthy.entity.Recipe;
 import by.fpmibsu.be_healthy.postgres.DataSource;
-import by.fpmibsu.be_healthy.service.IngredientService;
-import by.fpmibsu.be_healthy.service.RecipeCategoryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +17,8 @@ public class RecipeDao implements Dao<Integer, Recipe> {
     @Override
     public List<Recipe> getAll() {
         List<Recipe> recipes = new ArrayList<>();
-        try (Connection connection = DataSource.getConnection(); Statement statement = connection.createStatement()) {
+        try (Connection connection = DataSource.getConnection();
+             Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM RECIPE ORDER BY PUBL_DATE DESC");
             initRecipe(recipes, resultSet);
         } catch (SQLException e) {
@@ -111,8 +110,6 @@ public class RecipeDao implements Dao<Integer, Recipe> {
         byte[] encodeBase64 = Base64.getEncoder().encode(resultSet.getBytes("PHOTO"));
         String base64encoded = new String(encodeBase64, StandardCharsets.UTF_8);
         recipe.setBase64image(base64encoded);
-        recipe.setCategories(new RecipeCategoryService().getRecipeCategoriesByRecipeId(recipe.getId()));
-        recipe.setIngredients(new IngredientService().getIngredientsByRecipeId(recipe.getId()));
     }
 
     @Override
@@ -132,7 +129,6 @@ public class RecipeDao implements Dao<Integer, Recipe> {
             preparedStatement.setInt(7, entity.getId());
             if (preparedStatement.executeUpdate()==0)
                 return false;
-            new IngredientDao().deleteRecipeIngredients(entity.getId());
             deleteFromMM(entity.getId());
             initCategoriesAndIngredients(entity, entity.getId());
         } catch (SQLException e) {
@@ -190,7 +186,6 @@ public class RecipeDao implements Dao<Integer, Recipe> {
         }
         for (var i : entity.getIngredients()) {
             i.setRecipeId(recipe_id);
-            new IngredientDao().create(i);
         }
     }
 
@@ -237,7 +232,7 @@ public class RecipeDao implements Dao<Integer, Recipe> {
         return true;
     }
 
-    private int getMaxId() {
+    public int getMaxId() {
         try (Connection connection = DataSource.getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT MAX(id) AS max_id FROM RECIPE");
@@ -266,7 +261,8 @@ public class RecipeDao implements Dao<Integer, Recipe> {
                      "SELECT COUNT(*) RES FROM RECIPE WHERE MODERATED=?")) {
             statement.setBoolean(1, moderated);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) return resultSet.getInt("RES");
+            if (resultSet.next())
+                return resultSet.getInt("RES");
         } catch (SQLException e) {
             logger.error("Error getting number of recipes");
             logger.trace(e);
@@ -291,7 +287,8 @@ public class RecipeDao implements Dao<Integer, Recipe> {
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) return resultSet.getInt("RES");
+            if (resultSet.next())
+                return resultSet.getInt("RES");
         } catch (SQLException e) {
             logger.error("Error getting number of recipes with condition");
             logger.trace(e);

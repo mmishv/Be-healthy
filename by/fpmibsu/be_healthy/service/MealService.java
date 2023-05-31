@@ -14,19 +14,34 @@ public class MealService {
     private static final Logger logger = LogManager.getLogger(MealService.class);
     public List<Meal> getAll() {
         logger.debug("Get all meals");
-        return new MealDao().getAll();
+        var meals = new MealDao().getAll();
+        for (var meal: meals){
+            meal.setProducts(new MealProductService().getProductsByMealId(meal.getId()));
+        }
+        return meals;
     }
 
 
     public Meal getEntityById(Integer id) {
         logger.debug("Get meal by id");
-        return new MealDao().getEntityById(id);
+        var meal = new MealDao().getEntityById(id);
+        if (meal!=null)
+             meal.setProducts(new MealProductService().getProductsByMealId(id));
+        return meal;
     }
 
 
     public boolean update(Meal entity) {
         logger.info("Update meal");
-        return new MealDao().update(entity);
+        var res = new MealDao().update(entity);
+        if (res){
+            new MealProductService().deleteMealProducts(entity.getId());
+            for (var i : entity.getProducts()) {
+                i.setMealId(entity.getId());
+                new MealProductService().create(i);
+            }
+        }
+        return res;
     }
 
     public boolean delete(int id) {
@@ -36,7 +51,15 @@ public class MealService {
 
     public boolean create(Meal entity) {
         logger.info("Create meal");
-        return new MealDao().create(entity);
+        var res = new MealDao().create(entity);
+        if (res){
+            int id = getMaxId();
+            for (var i : entity.getProducts()) {
+                i.setMealId(id);
+                new MealProductService().create(i);
+            }
+        }
+        return res;
     }
 
     public String getAllJSON() throws JsonProcessingException {
@@ -46,7 +69,11 @@ public class MealService {
 
     public List<Meal> getAllByDateAndUserId(Date date, int id) {
         logger.debug("Get all user's meals on a specific day");
-        return new MealDao().getAllByDateAndUserId(date, id);
+        var meals = new MealDao().getAllByDateAndUserId(date, id);
+        for (var meal: meals){
+            meal.setProducts(new MealProductService().getProductsByMealId(meal.getId()));
+        }
+        return meals;
     }
 
     public String getAllByDateAndUserIdJSON(Date date, int id) throws JsonProcessingException {
@@ -57,5 +84,8 @@ public class MealService {
     public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get meal by id in JSON format");
         return new ObjectMapper().writeValueAsString(getEntityById(id));
+    }
+    public int getMaxId() {
+        return new MealDao().getMaxId();
     }
 }

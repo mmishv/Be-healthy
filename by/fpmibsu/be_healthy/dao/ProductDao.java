@@ -44,7 +44,8 @@ public class ProductDao implements Dao<Integer, Product> {
     public Product getEntityById(Integer id) {
         Product product = null;
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PRODUCT WHERE ID=?")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -64,7 +65,9 @@ public class ProductDao implements Dao<Integer, Product> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PRODUCT SET NAME=?, CARBOHYDRATES=?, FATS=?, PROTEINS=?, CALORIES=?, UNIT=? WHERE ID=?")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "UPDATE PRODUCT SET NAME=?, CARBOHYDRATES=?, FATS=?, PROTEINS=?, " +
+                                "CALORIES=?, UNIT=? WHERE ID=?")) {
             initCreateUpdate(entity, preparedStatement);
             preparedStatement.setInt(7, entity.getId());
             if (preparedStatement.executeUpdate()==0)
@@ -81,7 +84,8 @@ public class ProductDao implements Dao<Integer, Product> {
     @Override
     public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PRODUCT WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             if (preparedStatement.executeUpdate()==0)
                 return false;
@@ -100,7 +104,8 @@ public class ProductDao implements Dao<Integer, Product> {
             return false;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO PRODUCT (NAME, CARBOHYDRATES, FATS, PROTEINS, CALORIES, UNIT) VALUES( ?, ?, ?, ?, ?, ?)")) {
+                        "INSERT INTO PRODUCT (NAME, CARBOHYDRATES, FATS, PROTEINS, CALORIES, UNIT) " +
+                                "VALUES( ?, ?, ?, ?, ?, ?)")) {
             initCreateUpdate(entity, preparedStatement);
             if (preparedStatement.executeUpdate()==0)
                 return false;

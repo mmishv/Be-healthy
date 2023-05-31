@@ -18,7 +18,8 @@ public class RecipeCategoryDao implements Dao<Integer, RecipeCategory> {
         List<RecipeCategory> categories = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT ID, NAME FROM RECIPE_CATEGORY ORDER BY NAME");
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT ID, NAME FROM RECIPE_CATEGORY ORDER BY NAME");
             while (resultSet.next()) {
                 RecipeCategory category = new RecipeCategory();
                 category.setId(resultSet.getInt("ID"));
@@ -37,7 +38,8 @@ public class RecipeCategoryDao implements Dao<Integer, RecipeCategory> {
     public RecipeCategory getEntityById(Integer id) {
         RecipeCategory category = null;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM RECIPE_CATEGORY WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT ID, NAME FROM RECIPE_CATEGORY WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -58,7 +60,8 @@ public class RecipeCategoryDao implements Dao<Integer, RecipeCategory> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("UPDATE RECIPE_CATEGORY SET NAME=? WHERE ID=?")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "UPDATE RECIPE_CATEGORY SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
             if (preparedStatement.executeUpdate()==0)
@@ -75,7 +78,8 @@ public class RecipeCategoryDao implements Dao<Integer, RecipeCategory> {
     @Override
     public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE_CATEGORY WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM RECIPE_CATEGORY WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             if (preparedStatement.executeUpdate()==0)
                 return false;
@@ -93,7 +97,8 @@ public class RecipeCategoryDao implements Dao<Integer, RecipeCategory> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO RECIPE_CATEGORY (NAME) VALUES(?)")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO RECIPE_CATEGORY (NAME) VALUES(?)")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -108,11 +113,12 @@ public class RecipeCategoryDao implements Dao<Integer, RecipeCategory> {
     public List<RecipeCategory> getRecipeCategoriesByRecipeId(int id) {
         List<RecipeCategory> categories = new ArrayList<>();
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?")) {
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT CATEGORY_ID AS ID FROM MM_CATEGORY_RECIPE WHERE RECIPE_ID=?")) {
             statement.setInt(1, id);
             ResultSet categoriesIds = statement.executeQuery();
             while (categoriesIds.next()) {
-                categories.add(new RecipeCategoryDao().getEntityById(categoriesIds.getInt("ID")));
+                categories.add(getEntityById(categoriesIds.getInt("ID")));
             }
         } catch (SQLException e) {
             logger.error("Error getting recipe categories by recipe id");

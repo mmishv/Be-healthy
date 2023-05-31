@@ -35,7 +35,8 @@ public class RoleDao implements Dao<Integer, Role> {
     public Role getEntityById(Integer id) {
         Role role = null;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM ROLE WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT ID, NAME FROM ROLE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -56,7 +57,8 @@ public class RoleDao implements Dao<Integer, Role> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE ROLE SET NAME=? WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE ROLE SET NAME=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setLong(2, entity.getId());
             if (preparedStatement.executeUpdate()==0)
@@ -73,7 +75,8 @@ public class RoleDao implements Dao<Integer, Role> {
     @Override
     public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ROLE WHERE ID=?");) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM ROLE WHERE ID=?");) {
             preparedStatement.setLong(1, id);
             if (preparedStatement.executeUpdate()==0)
                 return false;
@@ -91,7 +94,8 @@ public class RoleDao implements Dao<Integer, Role> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ROLE (NAME) VALUES(?)")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO ROLE (NAME) VALUES(?)")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -105,7 +109,8 @@ public class RoleDao implements Dao<Integer, Role> {
 
     public Role getRoleByUserId(int id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT ROLE_ID AS ID FROM PROFILE WHERE ID=?")) {
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT ROLE_ID AS ID FROM PROFILE WHERE ID=?")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {

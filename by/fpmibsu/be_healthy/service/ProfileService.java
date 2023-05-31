@@ -13,13 +13,20 @@ public class ProfileService {
     private static final Logger logger = LogManager.getLogger(ProfileService.class);
     public List<Profile> getAll() {
         logger.debug("Get all profiles");
-        return new ProfileDao().getAll();
+        var profiles = new ProfileDao().getAll();
+        for (var profile : profiles){
+            profile.setRole(new RoleService().getEntityById(profile.getRole().getId()));
+        }
+        return profiles;
     }
 
 
     public Profile getEntityById(Integer id) {
         logger.debug("Get profile by entity id");
-        return new ProfileDao().getEntityById(id);
+        var profile = new ProfileDao().getEntityById(id);
+        if (profile != null)
+            profile.setRole(new RoleService().getEntityById(profile.getRole().getId()));
+        return profile;
     }
 
 

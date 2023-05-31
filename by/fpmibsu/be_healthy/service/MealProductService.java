@@ -13,13 +13,30 @@ public class MealProductService {
     private static final Logger logger = LogManager.getLogger(MealProductService.class);
     public List<MealProduct> getAll() {
         logger.debug("Get all meal products");
-        return new MealProductDao().getAll();
+        List<MealProduct> products = new java.util.ArrayList<>(List.of());
+        for (var full_product : new MealProductDao().getAll()){
+            var product = full_product;
+            full_product = new MealProduct(new ProductService().getEntityById(product.getId()));
+            full_product.setMealProductId(product.getMealProductId());
+            full_product.setQuantity(product.getQuantity());
+            full_product.setMealId(product.getMealId());
+            products.add(full_product);
+        }
+        return products;
     }
 
 
     public MealProduct getEntityById(Integer id) {
         logger.debug("Get meal product by id");
-        return new MealProductDao().getEntityById(id);
+        var product = new MealProductDao().getEntityById(id);
+        if (product!=null){
+            var full_product = new MealProduct(new ProductService().getEntityById(product.getId()));
+            full_product.setMealProductId(product.getMealProductId());
+            full_product.setQuantity(product.getQuantity());
+            full_product.setMealId(product.getMealId());
+            return full_product;
+        }
+        return null;
     }
 
 
@@ -45,7 +62,16 @@ public class MealProductService {
 
     public List<MealProduct> getProductsByMealId(int id) {
         logger.debug("Get all meal products in meal by meal id");
-        return new MealProductDao().getProductsByMealId(id);
+        List<MealProduct> products = new java.util.ArrayList<>(List.of());
+        for (var full_product : new MealProductDao().getProductsByMealId(id)){
+            var product = full_product;
+            full_product = new MealProduct(new ProductService().getEntityById(product.getId()));
+            full_product.setMealProductId(product.getMealProductId());
+            full_product.setQuantity(product.getQuantity());
+            full_product.setMealId(product.getMealId());
+            products.add(full_product);
+        }
+        return products;
     }
 
     public String getAllJSON() throws JsonProcessingException {

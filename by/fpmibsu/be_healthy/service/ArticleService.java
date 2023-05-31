@@ -1,6 +1,5 @@
 package by.fpmibsu.be_healthy.service;
 
-import by.fpmibsu.be_healthy.dao.ArticleCategoryDao;
 import by.fpmibsu.be_healthy.dao.ArticleDao;
 import by.fpmibsu.be_healthy.entity.Article;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,7 +15,7 @@ public class ArticleService {
         logger.debug("Get all articles");
         var articles = new ArticleDao().getAll();
         for (var article: articles)
-            article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getId()));
+            article.setCategories(new ArticleCategoryService().getArticleCategoriesByArticleId(article.getId()));
         return articles;
     }
 
@@ -24,7 +23,8 @@ public class ArticleService {
     public Article getEntityById(Integer id) {
         logger.debug("Get article by id");
         var article = new ArticleDao().getEntityById(id);
-        article.setCategories(new ArticleCategoryDao().getArticleCategoriesByArticleId(article.getId()));
+        if (article!=null)
+            article.setCategories(new ArticleCategoryService().getArticleCategoriesByArticleId(article.getId()));
         return article;
     }
 
@@ -50,7 +50,10 @@ public class ArticleService {
 
     public List<Article> getPage(int page, int per_page, boolean moderated) {
         logger.debug("Get page with articles in JSON format");
-        return new ArticleDao().getPage(page, per_page, moderated);
+        var articles = new ArticleDao().getPage(page, per_page, moderated);
+        for (var article: articles)
+            article.setCategories(new ArticleCategoryService().getArticleCategoriesByArticleId(article.getId()));
+        return articles;
     }
 
     public String getPageJSON(int page, int per_page, boolean moderated) throws JsonProcessingException {
@@ -65,7 +68,10 @@ public class ArticleService {
 
     public List<Article> getAuthorPage(int page, int per_page, int id) {
         logger.debug("Get page with articles by a specific author");
-        return new ArticleDao().getAuthorPage(page, per_page, id);
+        var articles = new ArticleDao().getAuthorPage(page, per_page, id);
+        for (var article: articles)
+            article.setCategories(new ArticleCategoryService().getArticleCategoriesByArticleId(article.getId()));
+        return articles;
     }
 
     public String getAuthorPageJSON(int page, int per_page, int id) throws JsonProcessingException {

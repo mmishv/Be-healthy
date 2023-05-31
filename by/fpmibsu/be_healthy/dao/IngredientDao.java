@@ -134,7 +134,7 @@ public class IngredientDao implements Dao<Integer, Ingredient> {
         return ingredients;
     }
 
-    void deleteRecipeIngredients(int id) {
+    public void deleteRecipeIngredients(int id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "DELETE FROM INGREDIENT WHERE RECIPE_ID=?")) {

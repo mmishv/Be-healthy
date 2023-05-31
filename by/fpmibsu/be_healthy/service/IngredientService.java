@@ -1,7 +1,6 @@
 package by.fpmibsu.be_healthy.service;
 
 import by.fpmibsu.be_healthy.dao.IngredientDao;
-import by.fpmibsu.be_healthy.dao.ProductDao;
 import by.fpmibsu.be_healthy.entity.Ingredient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +16,7 @@ public class IngredientService {
         List<Ingredient> ingredients = new java.util.ArrayList<>(List.of());
         for (var full_ingredient : new IngredientDao().getAll()){
             var ingredient = full_ingredient;
-            full_ingredient = new Ingredient(new ProductDao().getEntityById(ingredient.getId()));
+            full_ingredient = new Ingredient(new ProductService().getEntityById(ingredient.getId()));
             full_ingredient.setIngredientId(ingredient.getIngredientId());
             full_ingredient.setQuantity(ingredient.getQuantity());
             full_ingredient.setRecipeId(ingredient.getRecipeId());
@@ -30,11 +29,14 @@ public class IngredientService {
     public Ingredient getEntityById(Integer id) {
         logger.debug("Get ingredient by id");
         var ingredient = new IngredientDao().getEntityById(id);
-        var full_ingredient = new Ingredient(new ProductDao().getEntityById(ingredient.getId()));
-        full_ingredient.setIngredientId(ingredient.getIngredientId());
-        full_ingredient.setQuantity(ingredient.getQuantity());
-        full_ingredient.setRecipeId(ingredient.getRecipeId());
-        return full_ingredient;
+        if (ingredient!=null){
+            var full_ingredient = new Ingredient(new ProductService().getEntityById(ingredient.getId()));
+            full_ingredient.setIngredientId(ingredient.getIngredientId());
+            full_ingredient.setQuantity(ingredient.getQuantity());
+            full_ingredient.setRecipeId(ingredient.getRecipeId());
+            return full_ingredient;
+        }
+        return null;
     }
 
 
@@ -55,7 +57,16 @@ public class IngredientService {
 
     public List<Ingredient> getIngredientsByRecipeId(int id) {
         logger.debug("Get ingredients by recipe id");
-        return new IngredientDao().getIngredientsByRecipeId(id);
+        List<Ingredient> ingredients = new java.util.ArrayList<>(List.of());
+        for (var full_ingredient : new IngredientDao().getIngredientsByRecipeId(id)){
+            var ingredient = full_ingredient;
+            full_ingredient = new Ingredient(new ProductService().getEntityById(ingredient.getId()));
+            full_ingredient.setIngredientId(ingredient.getIngredientId());
+            full_ingredient.setQuantity(ingredient.getQuantity());
+            full_ingredient.setRecipeId(ingredient.getRecipeId());
+            ingredients.add(full_ingredient);
+        }
+        return ingredients;
     }
 
     public String getAllJSON() throws JsonProcessingException {
@@ -72,5 +83,7 @@ public class IngredientService {
         logger.debug("Get ingredient by id in JSON format");
         return new ObjectMapper().writeValueAsString((getEntityById(id)));
     }
-
+    public void deleteRecipeIngredients(int id) {
+        new IngredientDao().deleteRecipeIngredients(id);
+    }
 }

@@ -2,6 +2,7 @@ package by.fpmibsu.be_healthy.dao;
 
 
 import by.fpmibsu.be_healthy.entity.Profile;
+import by.fpmibsu.be_healthy.entity.Role;
 import by.fpmibsu.be_healthy.postgres.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,7 +57,9 @@ public class ProfileDao implements Dao<Integer, Profile> {
         KBJU_norm.put("j", BigDecimal.valueOf(resultSet.getDouble("FATS_NORM")).setScale(1, RoundingMode.HALF_UP));
         KBJU_norm.put("u", BigDecimal.valueOf(resultSet.getDouble("CARB_NORM")).setScale(1, RoundingMode.HALF_UP));
         profile.setKBJU_norm(KBJU_norm);
-        profile.setRole(new RoleDao().getEntityById(resultSet.getInt("ROLE_ID")));
+        Role role = new Role();
+        role.setId(resultSet.getInt("ROLE_ID"));
+        profile.setRole(role);
         profile.setAge(resultSet.getInt("AGE"));
         profile.setHeight(resultSet.getInt("HEIGHT"));
         profile.setWeight(resultSet.getDouble("WEIGHT"));
@@ -118,7 +121,8 @@ public class ProfileDao implements Dao<Integer, Profile> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET ROLE_ID=? WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE PROFILE SET ROLE_ID=? WHERE ID=?")) {
             preparedStatement.setInt(1, entity.getRole().getId());
             preparedStatement.setInt(2, entity.getId());
             if (preparedStatement.executeUpdate()==0)
@@ -135,7 +139,8 @@ public class ProfileDao implements Dao<Integer, Profile> {
         if (entity == null)
             return false;
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE PROFILE SET NAME=?, AVATAR=? WHERE ID=?")) {
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setBytes(2, entity.getAvatar() != null ? entity.getAvatar() : null);
             preparedStatement.setInt(3, entity.getId());
@@ -153,7 +158,8 @@ public class ProfileDao implements Dao<Integer, Profile> {
     @Override
     public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PROFILE WHERE ID=?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, id);
             if (preparedStatement.executeUpdate()==0)
                 return false;
@@ -204,7 +210,8 @@ public class ProfileDao implements Dao<Integer, Profile> {
 
     public String getPasswordByLogin(String login) {
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT PASSWORD FROM PROFILE WHERE LOGIN=?")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT PASSWORD FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -220,7 +227,8 @@ public class ProfileDao implements Dao<Integer, Profile> {
 
     public boolean isLoginAvailable(String login) {
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) return false;
@@ -235,7 +243,8 @@ public class ProfileDao implements Dao<Integer, Profile> {
 
     public boolean register(String login, String password) {
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "INSERT INTO PROFILE (LOGIN, PASSWORD) VALUES(?, ?)")) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             if (preparedStatement.executeUpdate()==0)
@@ -251,7 +260,8 @@ public class ProfileDao implements Dao<Integer, Profile> {
 
     public int getIdByLogin(String login) {
         try (Connection connection = DataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE LOGIN=?")) {
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM PROFILE WHERE LOGIN=?")) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
