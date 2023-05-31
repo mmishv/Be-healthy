@@ -1,16 +1,14 @@
 package by.fpmibsu.be_healthy.entity;
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Lob;
-import java.io.File;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
-public class Profile implements Serializable {
+public class Profile extends Entity {
     private int id;
     private String name;
     private String email;

@@ -1,8 +1,8 @@
 package by.fpmibsu.be_healthy.entity;
-import java.io.Serializable;
+
 import java.util.Objects;
 
-public class MealProduct extends Product implements Serializable {
+public class MealProduct extends Product {
     private int mealProductId;
 
     private int mealId;

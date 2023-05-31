@@ -1,8 +1,8 @@
 package by.fpmibsu.be_healthy.entity;
-import java.io.Serializable;
+
 import java.util.Objects;
 
-public class RecipeCategory implements Serializable {
+public class RecipeCategory extends Entity {
     private int id;
     private String name;
     public RecipeCategory(){

@@ -1,8 +1,8 @@
 package by.fpmibsu.be_healthy.entity;
-import java.io.Serializable;
+
 import java.util.Objects;
 
-public class ArticleCategory implements Serializable {
+public class ArticleCategory extends Entity {
     private int id;
     private String name;
 

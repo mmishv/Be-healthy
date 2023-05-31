@@ -1,0 +1,6 @@
+package by.fpmibsu.be_healthy.entity;
+
+import java.io.Serializable;
+
+public abstract class Entity implements Serializable, Cloneable {
+}

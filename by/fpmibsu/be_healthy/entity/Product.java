@@ -1,8 +1,8 @@
 package by.fpmibsu.be_healthy.entity;
-import java.io.Serializable;
+
 import java.util.Objects;
 
-public class Product implements Serializable {
+public class Product extends Entity {
     private int id;
     private String name;
     private double proteins;

@@ -1,11 +1,11 @@
 package by.fpmibsu.be_healthy.entity;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Article implements Serializable {
+public class Article extends Entity {
     private int id;
     private int authorId;
     private String title;

@@ -1,8 +1,8 @@
 package by.fpmibsu.be_healthy.entity;
-import java.io.Serializable;
+
 import java.util.Objects;
 
-public class Ingredient extends Product implements Serializable{
+public class Ingredient extends Product {
     private int recipe_id;
     private int IngredientId;
     public int quantity;

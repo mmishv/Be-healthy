@@ -1,11 +1,11 @@
 package by.fpmibsu.be_healthy.entity;
-import java.io.Serializable;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Time;
 import java.util.*;
 
-public class Meal implements Serializable {
+public class Meal extends Entity {
     private int id;
     private String name;
     private Time timeOfMeal;

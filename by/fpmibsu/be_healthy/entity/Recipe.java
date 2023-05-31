@@ -1,13 +1,13 @@
 package by.fpmibsu.be_healthy.entity;
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Lob;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
-public class Recipe implements Serializable {
+public class Recipe extends Entity {
     private int id;
     private int authorId;
     private String title;

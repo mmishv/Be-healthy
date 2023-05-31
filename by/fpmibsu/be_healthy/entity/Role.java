@@ -2,7 +2,7 @@ package by.fpmibsu.be_healthy.entity;
 
 import java.util.Objects;
 
-public class Role {
+public class Role extends Entity{
     private Integer id;
     private String name;
 
