@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.service;
 
-import by.fpmibsu.be_healthy.entity.Product;
 import by.fpmibsu.be_healthy.dao.ProductDao;
+import by.fpmibsu.be_healthy.entity.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ public class ProductService {
     }
 
 
-    public Product getEntityById(long id) {
+    public Product getEntityById(Integer id) {
         logger.debug("Get product by id");
         return new ProductDao().getEntityById(id);
     }
@@ -28,7 +28,7 @@ public class ProductService {
         return new ProductDao().update(entity);
     }
 
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         logger.warn("Delete product");
         return new ProductDao().delete(id);
     }
@@ -43,7 +43,7 @@ public class ProductService {
         return new ObjectMapper().writeValueAsString(new ProductService().getAll());
     }
 
-    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+    public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get product by id in JSON format");
         return new ObjectMapper().writeValueAsString(getEntityById(id));
     }

@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.service;
 
-import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.dao.ProfileDao;
+import by.fpmibsu.be_healthy.entity.Profile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ public class ProfileService {
     }
 
 
-    public Profile getEntityById(long id) {
+    public Profile getEntityById(Integer id) {
         logger.debug("Get profile by entity id");
         return new ProfileDao().getEntityById(id);
     }
@@ -28,7 +28,7 @@ public class ProfileService {
         return new ProfileDao().update(entity);
     }
 
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         logger.warn("Delete profile");
         return new ProfileDao().delete(id);
     }
@@ -58,7 +58,7 @@ public class ProfileService {
         return new ObjectMapper().writeValueAsString(new ProfileService().getAll());
     }
 
-    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+    public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get profile by entity id");
         return new ObjectMapper().writeValueAsString(getEntityById(id));
     }

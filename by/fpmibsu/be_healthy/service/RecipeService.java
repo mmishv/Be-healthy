@@ -17,7 +17,7 @@ public class RecipeService {
     }
 
 
-    public Recipe getEntityById(long id) {
+    public Recipe getEntityById(Integer id) {
         logger.debug("Get recipe by id");
         return new RecipeDao().getEntityById(id);
     }
@@ -52,7 +52,7 @@ public class RecipeService {
         logger.debug("Get page of recipes in one category in JSON format");
         return new ObjectMapper().writeValueAsString((getCategoryPage(page, per_page, category_id)));
     }
-    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+    public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get recipe by id in JSON format");
         return new ObjectMapper().writeValueAsString(getEntityById(id));
     }

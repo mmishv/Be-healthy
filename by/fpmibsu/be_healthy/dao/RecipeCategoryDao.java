@@ -1,14 +1,15 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.entity.RecipeCategory;
+import by.fpmibsu.be_healthy.postgres.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class RecipeCategoryDao implements Dao<RecipeCategory> {
+public class RecipeCategoryDao implements Dao<Integer, RecipeCategory> {
 
     private static final Logger logger = LogManager.getLogger(ProfileDao.class);
 
@@ -33,7 +34,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
     }
 
     @Override
-    public RecipeCategory getEntityById(long id) {
+    public RecipeCategory getEntityById(Integer id) {
         RecipeCategory category = null;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM RECIPE_CATEGORY WHERE ID=?")) {
@@ -72,7 +73,7 @@ public class RecipeCategoryDao implements Dao<RecipeCategory> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM RECIPE_CATEGORY WHERE ID=?")) {
             preparedStatement.setLong(1, id);

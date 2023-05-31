@@ -16,7 +16,7 @@ public class RoleService {
         return new RoleDao().getAll();
     }
 
-    public Role getEntityById(long id) {
+    public Role getEntityById(Integer id) {
         logger.debug("Get user role by id");
         return new RoleDao().getEntityById(id);
     }
@@ -45,7 +45,7 @@ public class RoleService {
         return new ObjectMapper().writeValueAsString(getAll());
     }
 
-    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+    public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get user role by id in JSON format");
         return new ObjectMapper().writeValueAsString(getEntityById(id));
     }

@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.entity.MealProduct;
+import by.fpmibsu.be_healthy.postgres.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealProductDao implements Dao<MealProduct> {
+public class MealProductDao implements Dao<Integer, MealProduct> {
     private static final Logger logger = LogManager.getLogger(MealProductDao.class);
 
     @Override
@@ -34,7 +34,7 @@ public class MealProductDao implements Dao<MealProduct> {
     }
 
     @Override
-    public MealProduct getEntityById(long id) {
+    public MealProduct getEntityById(Integer id) {
         MealProduct product = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MEAL_PRODUCT WHERE ID=?")) {
@@ -76,7 +76,7 @@ public class MealProductDao implements Dao<MealProduct> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL_PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);

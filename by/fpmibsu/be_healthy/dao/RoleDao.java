@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleDao implements Dao<Role> {
+public class RoleDao implements Dao<Integer, Role> {
     private static final Logger logger = LogManager.getLogger(ProfileDao.class);
 
     @Override
@@ -32,7 +32,7 @@ public class RoleDao implements Dao<Role> {
     }
 
     @Override
-    public Role getEntityById(long id) {
+    public Role getEntityById(Integer id) {
         Role role = null;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID, NAME FROM ROLE WHERE ID=?")) {
@@ -71,7 +71,7 @@ public class RoleDao implements Dao<Role> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ROLE WHERE ID=?");) {
             preparedStatement.setLong(1, id);

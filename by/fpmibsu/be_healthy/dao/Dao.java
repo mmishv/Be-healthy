@@ -1,10 +1,12 @@
 package by.fpmibsu.be_healthy.dao;
 
-import java.util.*;
-public interface Dao<E> {
+import by.fpmibsu.be_healthy.entity.Entity;
+
+import java.util.List;
+public interface Dao<K, E extends Entity> {
     public abstract List<E> getAll();
-    public abstract E getEntityById(long id);
+    public abstract E getEntityById(K id);
     public abstract boolean update(E entity);
-    public abstract boolean delete(int id);
+    public abstract boolean delete(K id);
     public abstract boolean create(E entity);
 }

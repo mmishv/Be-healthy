@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
 
-import by.fpmibsu.be_healthy.entity.*;
+import by.fpmibsu.be_healthy.entity.Profile;
 import by.fpmibsu.be_healthy.postgres.DataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +15,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
-public class ProfileDao implements Dao<Profile> {
+public class ProfileDao implements Dao<Integer, Profile> {
     private static final Logger logger = LogManager.getLogger(ProfileDao.class);
 
     @Override
@@ -65,7 +65,7 @@ public class ProfileDao implements Dao<Profile> {
     }
 
     @Override
-    public Profile getEntityById(long id) {
+    public Profile getEntityById(Integer id) {
         Profile profile = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PROFILE WHERE ID=?")) {
@@ -151,7 +151,7 @@ public class ProfileDao implements Dao<Profile> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PROFILE WHERE ID=?")) {
             preparedStatement.setLong(1, id);

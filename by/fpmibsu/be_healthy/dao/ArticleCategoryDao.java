@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleCategoryDao implements Dao<ArticleCategory> {
+public class ArticleCategoryDao implements Dao<Integer, ArticleCategory> {
     private static final Logger logger = LogManager.getLogger(ArticleCategoryDao.class);
     @Override
     public List<ArticleCategory> getAll() {
@@ -31,7 +31,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
     }
 
     @Override
-    public ArticleCategory getEntityById(long id) {
+    public ArticleCategory getEntityById(Integer id) {
         ArticleCategory category = null;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement =connection.prepareStatement("SELECT ID, NAME FROM ARTICLE_CATEGORY WHERE ID=?")){
@@ -70,7 +70,7 @@ public class ArticleCategoryDao implements Dao<ArticleCategory> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ARTICLE_CATEGORY WHERE ID=?");){
             preparedStatement.setLong(1, id);

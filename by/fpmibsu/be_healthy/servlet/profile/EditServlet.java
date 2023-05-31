@@ -5,9 +5,11 @@ import by.fpmibsu.be_healthy.service.ProfileService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -18,7 +20,7 @@ public class EditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("Transition in order to edit user parameters");
-        Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));;
+        Profile  profile = new ProfileService().getEntityById((Integer.parseInt(request.getSession().getAttribute("id").toString())));;
         if (!Objects.equals(request.getParameter("sex"), ""))
             profile.setSex(Objects.equals(request.getParameter("sex"), "1") ? "женский":"мужской");
         if (!Objects.equals(request.getParameter("height"), ""))

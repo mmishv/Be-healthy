@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.service;
 
-import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import by.fpmibsu.be_healthy.dao.ArticleCategoryDao;
+import by.fpmibsu.be_healthy.entity.ArticleCategory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -17,12 +17,12 @@ public class ArticleCategoryService {
     }
 
 
-    public ArticleCategory getEntityById(long id) {
+    public ArticleCategory getEntityById(Integer id) {
         logger.debug("Get article category by id");
         return new ArticleCategoryDao().getEntityById(id);
     }
 
-    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+    public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get article category by id in JSON format");
         return  new ObjectMapper().writeValueAsString(getEntityById(id));
     }

@@ -17,7 +17,7 @@ public class ArticleService {
     }
 
 
-    public Article getEntityById(long id) {
+    public Article getEntityById(Integer id) {
         logger.debug("Get article by id");
         return new ArticleDao().getEntityById(id);
     }
@@ -76,7 +76,7 @@ public class ArticleService {
         return new ArticleDao().updateModerationStatus(id, moderated);
     }
 
-    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+    public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get article by id in JSON format");
         return new ObjectMapper().writeValueAsString(getEntityById(id));
     }

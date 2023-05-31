@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.service;
 
-import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import by.fpmibsu.be_healthy.dao.RecipeCategoryDao;
+import by.fpmibsu.be_healthy.entity.RecipeCategory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ public class RecipeCategoryService {
     }
 
 
-    public RecipeCategory getEntityById(long id) {
+    public RecipeCategory getEntityById(Integer id) {
         logger.debug("Get recipe category by id");
         return new RecipeCategoryDao().getEntityById(id);
     }
@@ -46,7 +46,7 @@ public class RecipeCategoryService {
         logger.debug("Get all recipe categories in JSON format");
         return new ObjectMapper().writeValueAsString(new RecipeCategoryService().getAll());
     }
-    public String getEntityByIdJSON(long id) throws JsonProcessingException {
+    public String getEntityByIdJSON(Integer id) throws JsonProcessingException {
         logger.debug("Get recipe category by id in JSON format");
         return new ObjectMapper().writeValueAsString(getEntityById(id));
     }

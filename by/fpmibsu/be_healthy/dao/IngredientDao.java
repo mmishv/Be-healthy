@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientDao implements Dao<Ingredient> {
+public class IngredientDao implements Dao<Integer, Ingredient> {
     private static final Logger logger = LogManager.getLogger(IngredientDao.class);
 
     @Override
@@ -35,7 +35,7 @@ public class IngredientDao implements Dao<Ingredient> {
     }
 
     @Override
-    public Ingredient getEntityById(long id) {
+    public Ingredient getEntityById(Integer id) {
         Ingredient ingredient = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM INGREDIENT WHERE ID=?")) {
@@ -78,7 +78,7 @@ public class IngredientDao implements Dao<Ingredient> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM INGREDIENT WHERE ID=?")) {
             preparedStatement.setLong(1,id);

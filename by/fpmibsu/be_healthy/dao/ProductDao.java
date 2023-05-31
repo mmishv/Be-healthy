@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao implements Dao<Product> {
+public class ProductDao implements Dao<Integer, Product> {
     private static final Logger logger = LogManager.getLogger(ProductDao.class);
     @Override
     public List<Product> getAll() {
@@ -41,7 +41,7 @@ public class ProductDao implements Dao<Product> {
     }
 
     @Override
-    public Product getEntityById(long id) {
+    public Product getEntityById(Integer id) {
         Product product = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PRODUCT WHERE ID=?")) {
@@ -79,7 +79,7 @@ public class ProductDao implements Dao<Product> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM PRODUCT WHERE ID=?")) {
             preparedStatement.setLong(1, id);

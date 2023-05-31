@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Base64;
+import java.util.List;
 
-public class RecipeDao implements Dao<Recipe> {
+public class RecipeDao implements Dao<Integer, Recipe> {
     private static final Logger logger = LogManager.getLogger(ProfileDao.class);
 
     @Override
@@ -78,7 +78,7 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     @Override
-    public Recipe getEntityById(long id) {
+    public Recipe getEntityById(Integer id) {
         Recipe recipe = null;
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -193,7 +193,7 @@ public class RecipeDao implements Dao<Recipe> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "DELETE FROM RECIPE WHERE ID=?")) {

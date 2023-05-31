@@ -5,9 +5,13 @@ import by.fpmibsu.be_healthy.service.ProfileService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +24,7 @@ public class AboutMeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("Transition to main profile page");
-        Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
+        Profile  profile = new ProfileService().getEntityById((Integer.parseInt(request.getSession().getAttribute("id").toString())));
         request.setAttribute("profile", profile);
         getServletContext().getRequestDispatcher("/jsp/profile/profile.jsp").forward(request, response);
     }
@@ -28,7 +32,7 @@ public class AboutMeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("Transition in order to change profile information");
-        Profile  profile = new ProfileService().getEntityById((Long.parseLong(request.getSession().getAttribute("id").toString())));
+        Profile  profile = new ProfileService().getEntityById((Integer.parseInt(request.getSession().getAttribute("id").toString())));
         if (!Objects.equals(request.getParameter("avatar"), "")){
             Part filePart = request.getPart("avatar");
             InputStream fileContent = filePart.getInputStream();

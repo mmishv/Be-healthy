@@ -1,7 +1,7 @@
 package by.fpmibsu.be_healthy.dao;
 
-import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.entity.Meal;
+import by.fpmibsu.be_healthy.postgres.DataSource;
 import by.fpmibsu.be_healthy.service.MealProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,10 +9,11 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class MealDao implements Dao<Meal> {
+public class MealDao implements Dao<Integer, Meal> {
     private static final Logger logger = LogManager.getLogger(MealDao.class);
 
     @Override
@@ -31,7 +32,7 @@ public class MealDao implements Dao<Meal> {
     }
 
     @Override
-    public Meal getEntityById(long id) {
+    public Meal getEntityById(Integer id) {
         Meal meal = null;
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MEAL WHERE ID=?")) {
@@ -75,7 +76,7 @@ public class MealDao implements Dao<Meal> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(Integer id) {
         try (Connection connection = DataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM MEAL WHERE ID=?")) {
             preparedStatement.setLong(1, id);
