@@ -21,7 +21,10 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/profile</url-pattern>
         <url-pattern>/diary/*</url-pattern>
+        <url-pattern>/my_recipes/*</url-pattern>
+        <url-pattern>/my_articles/*</url-pattern>
         <url-pattern>/create_recipe</url-pattern>
+        <url-pattern>/create_article</url-pattern>
     </filter-mapping>
 
     <servlet>
