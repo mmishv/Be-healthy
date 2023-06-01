@@ -1,27 +1,23 @@
-2023-06-01 16:28:17.309 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
-2023-06-01 16:28:19.103 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-06-01 16:28:19.104 DEBUG by.fpmibsu.be_healthy.service.ArticleService 65 getNumberOfArticles - Get number of articles
-2023-06-01 16:28:19.371 DEBUG by.fpmibsu.be_healthy.service.ArticleService 60 getPageJSON - Get page with articles in JSON format
-2023-06-01 16:28:19.547 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPage - Get page with articles in JSON format
-2023-06-01 16:28:19.551 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:19.600 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:19.603 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:20.089 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-06-01 16:28:20.089 DEBUG by.fpmibsu.be_healthy.service.ArticleService 65 getNumberOfArticles - Get number of articles
-2023-06-01 16:28:20.089 DEBUG by.fpmibsu.be_healthy.service.ArticleService 60 getPageJSON - Get page with articles in JSON format
-2023-06-01 16:28:20.090 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPage - Get page with articles in JSON format
-2023-06-01 16:28:20.091 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:20.093 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:20.095 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:20.196 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
-2023-06-01 16:28:20.197 DEBUG by.fpmibsu.be_healthy.service.ArticleService 65 getNumberOfArticles - Get number of articles
-2023-06-01 16:28:20.200 DEBUG by.fpmibsu.be_healthy.service.ArticleService 60 getPageJSON - Get page with articles in JSON format
-2023-06-01 16:28:20.200 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPage - Get page with articles in JSON format
-2023-06-01 16:28:20.203 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:20.204 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:20.205 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
-2023-06-01 16:28:21.772 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-2023-06-01 16:28:21.772 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
-2023-06-01 16:28:36.143 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 21 doFilter - User authorization check
-2023-06-01 16:28:36.144 DEBUG by.fpmibsu.be_healthy.servlet.filters.AuthFilter 32 doFilter - User is not authorized, redirection to register/log in page
-2023-06-01 16:28:40.306 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed
+2023-06-01 16:36:45.324 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 21 contextInitialized - Context listener initialized
+2023-06-01 16:36:46.709 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-06-01 16:36:46.711 DEBUG by.fpmibsu.be_healthy.service.ArticleService 65 getNumberOfArticles - Get number of articles
+2023-06-01 16:36:46.967 DEBUG by.fpmibsu.be_healthy.service.ArticleService 60 getPageJSON - Get page with articles in JSON format
+2023-06-01 16:36:47.152 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPage - Get page with articles in JSON format
+2023-06-01 16:36:47.157 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.163 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.165 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.630 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-06-01 16:36:47.631 DEBUG by.fpmibsu.be_healthy.service.ArticleService 65 getNumberOfArticles - Get number of articles
+2023-06-01 16:36:47.631 DEBUG by.fpmibsu.be_healthy.service.ArticleService 60 getPageJSON - Get page with articles in JSON format
+2023-06-01 16:36:47.632 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPage - Get page with articles in JSON format
+2023-06-01 16:36:47.633 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.634 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.637 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.730 DEBUG by.fpmibsu.be_healthy.servlet.main.MainServlet 19 doGet - Transition to main page
+2023-06-01 16:36:47.731 DEBUG by.fpmibsu.be_healthy.service.ArticleService 65 getNumberOfArticles - Get number of articles
+2023-06-01 16:36:47.732 DEBUG by.fpmibsu.be_healthy.service.ArticleService 60 getPageJSON - Get page with articles in JSON format
+2023-06-01 16:36:47.732 DEBUG by.fpmibsu.be_healthy.service.ArticleService 52 getPage - Get page with articles in JSON format
+2023-06-01 16:36:47.734 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.735 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:36:47.738 DEBUG by.fpmibsu.be_healthy.service.ArticleCategoryService 46 getArticleCategoriesByArticleId - Get article category by article id
+2023-06-01 16:37:37.016 DEBUG by.fpmibsu.be_healthy.servlet.listeners.ServletContextListener 26 contextDestroyed - Context listener destroyed

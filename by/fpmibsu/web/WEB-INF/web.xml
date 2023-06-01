@@ -3,30 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <filter>
-        <filter-name>EncodingFilter</filter-name>
-        <filter-class>by.fpmibsu.be_healthy.servlet.filters.EncodingFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>EncodingFilter</filter-name>
-        <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
-
-    <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>by.fpmibsu.be_healthy.servlet.filters.AuthFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
-        <url-pattern>/profile</url-pattern>
-        <url-pattern>/diary/*</url-pattern>
-        <url-pattern>/my_recipes/*</url-pattern>
-        <url-pattern>/my_articles/*</url-pattern>
-        <url-pattern>/create_recipe</url-pattern>
-        <url-pattern>/create_article</url-pattern>
-    </filter-mapping>
-
     <servlet>
         <servlet-name>auth</servlet-name>
         <jsp-file>/jsp/profile/auth.jsp</jsp-file>

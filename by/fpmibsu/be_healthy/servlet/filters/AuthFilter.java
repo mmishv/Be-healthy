@@ -4,12 +4,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import static java.util.Objects.nonNull;
 
+import static java.util.Objects.nonNull;
+@WebFilter({"/profile", "/diary/*", "/my_recipes/*", "/my_articles/*", "/create_recipe", "/create_article"})
 public class AuthFilter implements Filter {
     private static final Logger logger = LogManager.getLogger(AuthFilter.class);
     @Override
